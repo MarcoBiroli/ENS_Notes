@@ -11,6 +11,7 @@
 \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
 \usepackage{physics}
 \usepackage{multicol}
+\usepackage{stmaryrd}
 \usepackage{caption}
 \usepackage{subcaption}
 \author{Marco Biroli}
@@ -74,6 +75,36 @@ There are two type of stress that can act on an elongated structure. The first a
 We define $R(\sigma)$ and $M(\sigma)$ the resultant (total force) and moment through the cut $\sigma$ applied by the right side on the left side. It is the opposite of what is applied by the left on the right side.
 
 \section{Equilibrium Equations.}
+We look at the system in between $x(\sigma_1)$ and $x(\sigma_2)$. Making a balance of the forces we get that:
+\[
+\sum \mathcal{F} + \int f_\sigma \dd \sigma + \sum \eta R = \dv{\vec{p}}{t} = 0
+\]
+We also have to do the same for the moment:
+\[
+\vec{M}_O = \sum \vec{Ox} \times \vec{F}(x) = \sum \vec{OO'} \times F(x) + \sum \vec{O'x} \times \vec{F}(x) = M_{O'} + \vec{OO'} \times \sum F(x)
+\]
+For internal forces we have that $\sum F(x) = R(x)$ hence we get that:
+\[
+\vec{M}(\sigma_1) = \vec{M}(\sigma) + (\vec{x}_\sigma - \vec{x}_{\sigma_1}) \vec{R}_\sigma
+\]
+Now the kinetic momentum theorem applied in $\vec{x}(\sigma_1)$ gives:
+\[
+\sum M(\sigma) + ((\vec{x}(\sigma) - \vec{x}(\sigma_{1})) \vec{R}_\sigma) \vec{e}_z + \int m_\sigma + ((x_\sigma - x_{\sigma_1}) f_\sigma) \vec{e}_z \dd \sigma + \sum (\eta M _ ((\vec{x}(\sigma) - \vec{x}(\sigma_1) ) \eta \vec{R}(\sigma)) \vec{e_z} = \dv{\vec{L}}{t} = 0
+\]
 
+\subsection{Border case.}
+When we apply a force to a border we have $\mathcal{F} = R$ and $\mathcal{M} = M$.
 
+\subsection{Discontinuity in a medium.}
+For a discontinuity we get: $\mathcal{F} + R(\sigma^+) - R(\sigma^-) = 0$. We sometimes denote $\llbracket R \rrbracket = R(\sigma^+) - R(\sigma^-)$. Then we have $\mathcal{F} + \llbracket R \rrbracket = 0$ and similarly we have $\mathcal{M} + \llbracket  M \rrbracket = 0$.
+
+\subsection{Internal point with no discontinuity.}
+When we have an internal point with no discontinuity we get: $f_\sigma \dd \sigma + R(\sigma + \dd \sigma) - R(\sigma) \rightarrow f_\sigma + \dv{R}{\sigma} = 0$. Then for the moment we get: $m_\sigma \dd \sigma + (\dd \sigma)^2 + M(\sigma + \dd \sigma) - M(\sigma) + ((\vec{x}(\sigma + \dd \sigma) + \vec{x}(\sigma)) R(\sigma + \dd \sigma)) \vec{e}_z = 0$. Which simplifies to the following: $m_\sigma + \dv{M}{\sigma} + (\dv{\vec{x}}{\sigma} \times \vec{R}) \cdot \vec{e}_z = 0$. We now decompose $\vec{R} = N \vec{T} + T \vec{n}$. We know that $\dv{\vec{x}}{\sigma} = \lambda \vec{t}$ hence the previous equation simplifies to:
+\[
+m_\sigma + \dv{M}{\sigma} + \lambda T = 0, f_\sigma + \dv{R}{\sigma} = 0
+\]
+An equivalent notation that uses $s$ instead of $\sigma$ gives:
+\[
+m_s + \dv{M}{s} + T = 0, f_s + \dv{R}{s} = 0
+\]
 \end{document}
