@@ -1,6 +1,0 @@
-\babel@toc {english}{}
-\contentsline {chapter}{\numberline {1}...}{5}% 
-\contentsline {section}{\numberline {1.1}Beyond linear elasticity.}{5}% 
-\contentsline {subsection}{\numberline {1.1.1}Fragile Materials.}{5}% 
-\contentsline {subsubsection}{Griffith Criterion.}{5}% 
-\contentsline {subsection}{\numberline {1.1.2}Plastic Materials (ductile).}{6}% 
