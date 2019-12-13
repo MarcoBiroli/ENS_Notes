@@ -1,0 +1,6 @@
+\babel@toc {english}{}
+\contentsline {chapter}{\numberline {1}Hydrogen Atom.}{5}% 
+\contentsline {section}{\numberline {1.1}Two Body problem and quantum mechanics.}{5}% 
+\contentsline {section}{\numberline {1.2}Central force movement.}{5}% 
+\contentsline {subsection}{\numberline {1.2.1}Behavior close to the origin.}{6}% 
+\contentsline {section}{\numberline {1.3}Hydrogen Atom.}{6}% 
