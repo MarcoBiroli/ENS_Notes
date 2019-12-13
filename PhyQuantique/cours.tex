@@ -124,5 +124,24 @@ Now note that the degeneracy of a given energy is given by the amount of ways we
 \[
 g_n = \sum_{l = 0}^{n-1} (2l + 1) = n^2
 \]
+Then the first eigenstates are given by:
+\[
+R_{n = 1, l =0} = 2(a_0)^{-3/2} e^{-r/a_0}, R_{n = 2, l = 0} = r (a_0)^{-3/2} (1 - \frac{r}{2 a_0})e^{-r/2a_0}, R_{n = 2, l = 1} = (2 a_0)^{-3/2} \frac{1}{\sqrt{3}} \frac{r}{a_0}e^{-r/2a_0}
+\]
+Which look like:
+\begin{figure}[h!]
+\centering
+\includegraphics[width = 0.6 \textwidth]{graphs/hydrogen_atom_R_Plots}
+\end{figure}
+
+Now note that:
+\[
+\bra{\psi_{n,l,m}} \frac{1}{r} \ket{\psi_{n,l,m}} \Rightarrow [H, \vec{r} \cdot \vec{p}] = - i\hbar \left[\frac{p^2}{m} + \frac{e^2}{r}\right] \Rightarrow \bra{\psi_{n, l, m}} [H, A] \ket{\psi_{n,l,m}} = 0\, \forall A 
+\]
+So we get that:
+\[
+\langle \frac{p^2}{m} \rangle + \langle \frac{e^2}{r} \rangle = 0, \langle \frac{p^2}{2m} - \frac{e^2}{r} \rangle = E \Rightarrow \langle \frac{e^2}{r} \rangle = -2 E, \langle \frac{p^2}{2m} \rangle = - E
+\]
+....
 
 \end{document}
