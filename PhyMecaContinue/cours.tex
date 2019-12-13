@@ -53,5 +53,27 @@ a_c = 10^4 \frac{\Gamma}{E} \approx 1 \, \mu\text{m} = \text{ typical defect siz
 [INCLUDE GRAPHIC]
 When we augment $\varepsilon$ we pass from an elastic to a plastic regime. When we release the constraint we will get an elastic regime that has the same parameters as the initial one with the exception of the plasticity threshold having become higher. However the material will be permanently deformed. In this regime the deformation can be very significant with respect to the elastic regime (for example of the order of 50\%). The microscopic origin of this is a shifting of the microscopic planes of the solid. So if we pass the plasticity threshold the planes slide, the material gets deformed plasticly, the volume is conserved. It goes back to a shifted equilibrium position when the constraint is released and when it reaches it we find the same elastic properties. It is a good qualitative explanation however less so quantitatively. Once again we have an experimental sliding threshold much lower than the theoretical one. Once again to account for this we have to include the imperfections of the lattice in the model, those are called dislocations. The movement of these dislocations in the solid is very easy, hence it propagates the elastic deformation into the plastic regime. When we pull on the material in the plastic regime we are creating dislocations and these dislocations are going to be trapped either by the defects or by other dislocations. At low temperatures the dislocations tend to be trapped making the material fragile while at higher temperatures the dislocations move making the material plastic. For most elastic solids the elastic regime stops for deformation lower then $1\%$. However there are some exceptions like caoutchou for example. Because the internal potential of the material is not due to coulomb forces but to entropic forces since it is made of a number of long polymers.
 
+\chapter{Beams and rods, elongated structures.}
+The whole point of elongated structures is basically to reduce a 3D problem to a 1D problem by making the approximation that the object can be reduced to its long axis.
+
+\section{Geometric description of a beam.}
+We start from an initial state said 'of reference'. When we deform the structure we then describe it by a curve called 'actual curve'. We denote by $s$ the curvilinear abscissa. Then the curve is parametrically described by $(x(s), y(s))$ and $\dd s = \sqrt{\dd x^2 + \dd y^2}$. We also define $\lambda = \dv{s}{\sigma}$ called the elongation. The unitary tangent vector to the curve is defined by:
+\[
+\vec{t} = \dv{\vec{x}}{s} = \frac{\dv{\vec{x}}{\sigma}}{\dv{s}{\sigma}} = \frac{1}{\lambda} \dv{\vec{x}}{\sigma}
+\]
+The normal unitary vector is defined such that $(\vec{t}, \vec{n})$ is a direct orthonormal basis. We denote by $\theta$ the angle in between $\vec{t}$ and $(Ox)$. Then we have:
+\[
+\vec{t} = \cos\theta \vec{e}_x + \sin \theta \vec{e}_y \quad \land \quad \vec{n} = -\sin \theta \vec{e}_x + \cos \theta \vec{e}_y 
+\]
+
+\section{The stresses.}
+\subsection{External stress.}
+There are two type of stress that can act on an elongated structure. The first are ponctual stresses. They are localized in a point, for example a mass attached to a point. Then the force is denoted by $\vec{F}$, the moment $\vec{M}$ which is in principle 3D but here is only along $\vec{e}_r$. The second type of stress are distributed stress. They act along a section of the structure and the force is given by the force per unit length $f_\sigma$ s.t. $F = \int f_\sigma \dd \sigma$ and identically for the moment. We can index both by $\sigma$ or $s$.
+
+\subsection{Internal stress.}
+We define $R(\sigma)$ and $M(\sigma)$ the resultant (total force) and moment through the cut $\sigma$ applied by the right side on the left side. It is the opposite of what is applied by the left on the right side.
+
+\section{Equilibrium Equations.}
+
 
 \end{document}
