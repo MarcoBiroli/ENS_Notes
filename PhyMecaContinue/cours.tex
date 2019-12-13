@@ -1,0 +1,31 @@
+\documentclass[10pt,a4paper]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{wrapfig}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{cancel}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{physics}
+\usepackage{multicol}
+\usepackage{caption}
+\usepackage{subcaption}
+\author{Marco Biroli}
+\title{Mechanics of continuous media.}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\chapter{...}
+\section{Beyond linear elasticity.}
+At the microscopical level the internal forces are caused by the interactions in between the particles and by an external applied force $f$ where we have: $f \approx \sigma r_0^2$. The interaction potential is usually given by something of the following form:
+....
+
+Then for $\frac{r - r_0}{r_0} \ll 1$, $f$ is linear in $r - r_0$ it is the elastic regime, but what happens if we pull harder? Two behaviors are possible:
+\subsection{Fragile Materials.}
+Fragile materials will stay elastic until a breaking point which happens for deformations that are still quite low $\varepsilon \sim \frac{1}{1000}$. Examples of such materials are glass, ceramic, plexiglas, graphite etc... The atomic model explains quite well this phenomenon from a qualitative point of view. We know that there exists a $\sigma_\text{max}$ such that $\frac{f}{r_0^2} > \sigma_\text{max}$. Knowing $V(r)$ we can therefore deduce $\sigma_\text{max}$. It is determined by the microscopic properties, and a scale reasoning done to estimate the Young modulus $E$ is valid to estimate $\sigma_\text{max}$ as well. For example for glass we have that: $E = 70 \text{ GPa}$ and the theoretical $\sigma_\text{max} = 20 \text{ GPa}$. From which we would deduce a deformation $\varepsilon = \frac{\sigma}{E} \sim 30\%$, which is way too high. In truth the experimental value is $\sigma_\text{max} = 0.1 \text{ GPa}$ which gives a deformation of $\varepsilon = \frac{1}{700} \sim 0.14 \%$. The reason for this considerable difference between theory and reality is that nothing is perfect in nature. Hence the crystal lattice will contain errors which lead to a much lower breaking point. Griffith in 1920 postulated the existence of superficial or volumic fissures where the constraints are concentrated. For example in 2D for an elliptical fissure where we would have $\frac{a}{b} = 10$ then we would get $\sigma_\text{summit} = 20 \sigma_\text{external}$.
+
+\end{document}
