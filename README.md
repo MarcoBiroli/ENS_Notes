@@ -1,7 +1,7 @@
 # ENS_Notes
 
 Git commands:
-  - git clone url
+  - git clone https://github.com/MarcoBiroli/ENS_Notes.git
   - git pull (download any updates)
   - git add . (add all new files)
   - git commit -a -m "message" (commit all changes)
