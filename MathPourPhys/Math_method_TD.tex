@@ -1,0 +1,99 @@
+\documentclass[10pt,a4paper]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{wrapfig}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{cancel}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{physics}
+\usepackage{multicol}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{braket} %\braket{a|b|c..}
+
+%main sets:
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+%math shortcuts
+\newcommand{\p}{\partial}
+\newcommand{\w}{\omega}
+\newcommand{\res}{\text{Res}}
+
+
+\author{Alessandro Pacco}
+\title{Math methods solutions}
+\begin{document} 
+\maketitle
+
+
+\chapter*{Chapter 4}
+\section*{4.24}
+
+$f(z)=\frac{1}{z^4\sin(\pi z)}$. We have poles in all of $\mathbb{Z}$. In particular we have a simple pole in $z\neq 0$ and a pole of order 5 in $z=0$, to see this just multiply by $(z-a) (\text{ resp } (z-a)^5)\,\,, a\in\mathbb{Z}$ and use that $\sin(x)/x=1$ for $x\to 0$. Then we want to use the residue theorem. In particular consider the circle $\gamma_N$ of radius $N+\frac{1}{2}$ (notice that we want to avoid passing through a pole), which will be our loop.
+Then for $k\neq 0$, performing a simple first order Taylor expansion, we have that $\sin(\pi z)\underset{z\to k}{\sim} (z-k)\frac{\partial }{\partial z}\sin(\pi z)|_{z=k}=(z-k)\pi\cos(\pi k)=(z-k)\pi(-1)^k$. Hence $\res(f;k)=\lim_{z\to k }(z-k)f(z)=\lim_{z\to k} \frac{(z-k)}{z^4(z-k)\pi(-1)^k} =\frac{(-1)^k}{\pi k^4}$. \\\\
+For $k=0$ we have $\res(f;0)=\frac{1}{4!}\lim_{z\to 0}\frac{\p^4}{\p z^4}(z^5 f(z))$. Now we need to express $\sin$ with its Taylor series up to the 5-th order: we have that $\sin(\epsilon)=\epsilon -\frac{\epsilon^3}{3!}+\frac{\epsilon^5}{5!}+o(\epsilon^7)$ so that $\frac{1}{\sin(\epsilon)}=\frac{1}{\epsilon}(1-\frac{\epsilon^2}{3!}+\frac{\epsilon^4}{5!}+o(\epsilon^6))^{-1}=\frac{1}{\epsilon}(1+\frac{\epsilon^2}{3!}-\frac{\epsilon^4}{5!}+\frac{\epsilon^4}{3!^2}+o(\epsilon^6))$ (here we used that $1/(1-x)\sim 1+x+x^2$ and pay attention to keep all of the orders up to the 5-th one). Hence 
+\[
+f(z)=\frac{1}{z^4\sin(\pi z)}\underset{z\to 0}{\sim}\frac{1}{\pi z^5}\bigg(1+\frac{\pi^2 z^2}{3!}+\pi^4 z^4(\frac{1}{3!^2}-\frac{1}{5!})+o(z^6)\bigg)
+\]
+and so we get $\res(f;0)=\frac{1}{4!}\lim_{z\to0}\frac{\partial^4}{\partial z^4} (z^5f(z))=\pi^3(\frac{1}{3!^2}-\frac{1}{5!})=\frac{7\pi^3}{360}$.\\\\
+Now we use the residue theorem on $\gamma_N$ . On a
+$$\int_{\gamma_N}f(z)dz=\frac{7\pi^3}{360}+\sum_{n=1}^{N} \frac{(-1)^n}{\pi n^4}+\sum_{n=1}^N\frac{(-1)^n}{\pi n^4}=\frac{7\pi^3}{360}+\frac{2}{\pi}\sum_{n=1}^N \frac{(-1)^n}{ n^4}$$
+On $\gamma_n$ we have that $|\sin(\pi z)|\geq \delta >0$. Hence for any $z\in\gamma_n$ we get that $|f(z)|\leq \frac{1}{\delta(N+1/2)^4}$ so that for $N\to \infty$ we get that 
+$$\bigg|\int_{\gamma_N}f(z)dz\bigg|\leq \frac{2\pi}{\delta(N+\frac{1}{2})^3}\to 0$$
+Finally for $N\to \infty$ we get that $\sum_{n=1}^{\infty}\frac{(-1)^n}{n^2}=-\frac{7\pi^4}{720}$. 
+
+
+\section*{4.28}
+
+\subsection*{1)}We have that $\Gamma(0)=\int_0^{\infty} du\cdot  e^{-u}= 1$. Then we have that $\Gamma(1/2)=\int_0^{\infty} \frac{du}{\sqrt{u}}e^{-u}=\int_{0}^{\infty} \frac{2t dt}{t} e^{-t^2}=2\int_0^{\infty} dt e^{-t^2}=\sqrt{(\pi)}$, with the substitution $t=\sqrt{u}$. 
+\subsection*{2)}
+We have that $\Gamma(x+1)=\int_0^{\infty} e^{-u} u^x=0+x\int_0^{\infty} du u^{x-1} e^{-u}=x\Gamma(x)$, where we did an integration by parts.
+
+\subsection*{3)}
+
+$\Gamma(n)=n!\Gamma(1)=n!$ and 
+$$
+\Gamma(n+1/2)=(n-1/2)\Gamma(n-1/2)=\Gamma(1/2)\prod_{k=0}^{n-1}(k+1/2)=\sqrt{\pi}\prod_{k=0}^{n-1} (2k+1)/2=\frac{\sqrt{\pi}}{2^n}1\cdot3\cdots(2n-1)$$
+$$=\frac{\sqrt{\pi}}{2^n}\cdot\frac{n!}{2\cdot 4\cdots (2n)}=\frac{\sqrt{\pi}(2n)!}{2^{2n}n!}
+$$
+
+\section*{4.29}
+
+\subsection*{1)}
+On a $F(x)=\int_a^b e^{xf(t)g(t)}dt$, with $f$ having a maximum in $t=t_0$. THen we have that $F(x)=e^{xf(t_0)}\int_a^b e^{x|f(t)-f(t_0)|}g(t)dt$. The idea is that when $x\to\infty$, $e^{x|f(t)-f(t_0)|}$ is 1 in $t_0$ and goes exponentially to zero in all of the other values.  Hence all of the values of $t$ that contribute to the integral exponentially concentrate near $t_0$ . Therefore we can write 
+$$F(x)\sim_{x\to\infty} e^{xf(t_0)}g(t_0)\int_a^b e^{x|f(t)-f(t_0)|}dt$$ If we do an expansion we have that $f(t)=f(t_0)+1/2f''(t_0)(t-t_0)^2+O((t-t_0)^3)$, with $f''(t_0)<0$. Hence 
+$$F(x)\sim e^{xf(t_0)}g(t_0)\int_a^b e^{1/2(f''(t_0)x(t-t_0)^2}$$, when $x\to\infty$ the integral in nonzero only near $t_0$. Hence we can replace $a\to +\infty$ and $b\to\infty$. Then $F(x)\sim_{x\to\infty} e^{xf(t_0)}g(t_0)\sqrt{\frac{2\pi}{-f''(t_0)}}\frac{1}{\sqrt{x}}$
+
+\subsection*{2)}
+
+Let's take again the gamma function, we have that 
+$$\Gamma(x+1)=\int_0^{\infty}du\cdot e^{-u} u^x=\int du e^{-u+x\ln(u)}$$
+and $f(u)=-u+x\ln(u)$ is maximal in $u_0=x$ and $f(u_0)=-x+x\ln(x)$. Then with $t=u/x$ we have that 
+$$\Gamma(x+1)=\int_0^{\infty}(dt xx?)e^{-xt}x^xt^x=xx^x\int_0^{\infty} dt e^{-xt+x\ln(t)}=xx^x\int_0^{\infty} dt e^{xg(t)}$$ with $g(t)=-t+\ln(t)$. Notice that $g$ has a maximum which is unique and is located at $1$, so that we can apply Laplace method:\\
+$g''(t)=-\frac{1}{t^2}\Rightarrow g''(1)=-1$. Therefore $\Gamma(x+1)\sim_{x\to\infty} xx^xe^{-x}\frac{1}{\sqrt{x}}\sqrt{\frac{2\pi}{-(-1)}}$ so that $\Gamma(x+1)\sim_{x\to \infty} (x/e)^x\sqrt{2\pi x}$. If $x=n$, $\Gamma(n+1)=n!\sim_{n\to\infty} (n/e)^n\sqrt{2\pi n}$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
