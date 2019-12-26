@@ -6,6 +6,7 @@
 \usepackage{amssymb}
 \usepackage{wrapfig}
 \usepackage{mathtools}
+\usepackage[makeroom]{cancel}
 \usepackage{graphicx}
 \usepackage{cancel}
 \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
@@ -24,6 +25,7 @@
 %math shortcuts
 \newcommand{\p}{\partial}
 \newcommand{\w}{\omega}
+\newcommand{\tf}{\text{TF}}
 
 
 
@@ -34,6 +36,144 @@
 
 
 \chapter*{Chapter 6}
+\section*{Exercise 6.3)}
+
+
+
+
+Remark: diffraction and diffusion.
+
+Send a laser on a lens $D1$. We have $A(x)=0$ if the light doens't pass, 1 otherwise. Introduce the angle $\theta$. Then $r(x,z)\approx r_0(z)-x\sin(\theta)$. This approximation is valid only if $x<<d$. The spherical wave coming out of a hole is $E(r)=\frac{E_0}{r}e^{i\frac{2\pi}{\lambda}(r-ct)}$. Then $$E_{tot}(z)=\int dxA(x)\frac{E_0}{r(x,z)}e^{i\frac{2\pi}{\lambda}r(x,z)}\underset{\underset{\text{varie lentement}}{x\to x}}{\approx} \frac{E_0}{r_0(z)}e^{i\frac{2\pi}{\lambda}r_0(z)}\int dxA(x)e^{i2\pi\frac{\sin\theta}{\lambda}x}=\frac{E_0}{r_0(z)}e^{i\frac{2\pi}{\lambda}r_0(z)}TF(A)\frac{\sin\theta}{\lambda}$$
+if we mesure the light on the screen, we get that
+$$I(z)=|E_{tot}(z)|^2\approx |TF(A)|^2\approx |S|^2$$.
+
+
+\subsection*{1)}
+We have $\rho^{(l)}(\vec{x}_1,\cdots,\vec{x}_l)=\mathbb{P}($particella 1 at $\vec{x}_1\pm d^3\vec{r}\cap\cdots\cap$ particella $l$ at $\vec{x}_l\pm d^3\vec{r}).$
+Moreover $E_p=\sum_{i>j} U(\vec{r}_i-\vec{r}_j)$.
+
+\subsection*{2)}
+The kinetic energy is given by $E_c=\sum_{i}\frac{p_i^2}{2m}$.
+
+\subsection*{3)}
+As always
+$$Z=\frac{1}{h^{3N}\cdot N!}\int d\Gamma e^{-\beta (E_c+E_p)(\Gamma)}=\frac{1}{h^{3N}\cdot N!}\bigg(\sqrt{\frac{2\pi m}{\beta}}\bigg)^{3N}\int \prod d^{3}\vec{r}_i e^{-\beta E_p(\Gamma)}=\frac{\lambda^{-3N}}{N!}Q$$
+with $\lambda=\sqrt{\frac{h^{2}\beta}{2\pi m}}$
+
+\subsection*{4)}
+In order to have a classical description we need to have that (average distance between particles)$>>\lambda$. Hence since the average particle distance is $(V/N)^{1/3}$ we get that we must have$(V/N)^{1/3}=n^{-1/3}>>\lambda$.
+
+
+\subsection*{5)}
+We proved that 
+$$\frac{1}{V}g(\vec{r})d^3\vec{r}=\mathbb{P}(\text{ 1 particle in }\vec{r}\pm d^3\vec{r}|\text{1 part in 0})\underset{GP}{=}\mathbb{P}(\text{1 part in }\vec{r}\pm d^3\vec{r})=\frac{d^3\vec{r}}{V}$$
+and so $g_{GP}(\vec{r})=1$. 
+
+\subsection*{6)}
+Benzene is non-polar, hence it is better than water for the diffraction. Difficulty to obtein some data for small $\vec{r}$? If $\vec{ r}$ is too small with respect to the wavelength we don't get diffraction.\\
+Estimation of the diamater:
+
+
+
+\subsection*{7)}
+For diffraction we need that the $\sigma$ is almost the same as the wavelenght of the incoming light. Hence We have resolution$\sim\sigma\sim 500nm$ since we want $\lambda\sim\sigma$. Hence we need a laser of $\lambda \sim 514  nm$.
+
+
+\subsection*{8)}
+
+$$n=\frac{\text{number of particles}}{V}=\frac{\text{densite massique}}{\text{masse 1 particule}}=\frac{5\cdot 39\cdot 10^{-2}}{8\cdot 10^{-15}}\approx 10^{19}m^{-3}$$
+minimal volume $\sim\sigma^3$.
+We have that
+$$n\sigma^3=10^{19}(5\cdot 10^{-7})^3=125\cdot 10^{19-21}\approx 1.25\text{ particles/elementar volume}$$
+Hence it is not at all dilute, but mainly dense.
+
+\subsection*{9)}
+
+We work on the LHS:
+
+\begin{align*}
+\rho^{(2)}=\sum_{i_1\neq i_2}
+<\delta(\vec{r}_{i_1}-\vec{x})\delta(\vec{r}_{i_2}-\vec{y})>
+&=\frac{1}{Z}\int\prod_{i=1}^n\frac{d\vec{r}_i d\vec{p}_i}{h^3}e^{-\beta H(..)}
+\cdot \sum_{i_1\neq i_2} 
+\underset{Q3}{=}\frac{1}{Q_N}\sum_{i_1\neq i_2}\int\prod_{i=1}^N d^3\vec{r}_i e^{-\beta E_p\{r_i\}}
+\delta(\vec{r}_{i_1}-\vec{x})\delta(\vec{r}_{i_2}-\vec{y})\\
+&=
+\frac{1}{Q_N}N(N-1)\int\prod_{i=1}^N d^3\vec{r}_i
+e^{-\beta\sum_{i<j}U(r_i-r_j)}\delta(\vec{r}_1-\vec{x})\delta(\vec{r}_2-\vec{y})\\
+&=\frac{N(N-1)}{Q_N}
+\int\prod_{i=3}^Nd^3\vec{r}_i
+e^{-\beta\big[U(x-y)+\sum_{i=3}^N(U(x-r_i)+U(y-r_i))+\sum_{i>j=3}^N U(r_i-r_j)\big]}
+\end{align*}
+
+Now we attack the gradient 
+
+\begin{align*}
+\vec{\nabla}_{\vec{x}}\rho^{(2)}(x,y)=
+\frac{N(N-1)}{Q_N}\int\prod_{i=3}^Nd^3\vec{r}_i(-\beta\nabla U(x-y)-\beta\sum_{i=3}^N\nabla U(x-r_i))\cdot e^{-\beta(..)}
+=\frac{N(N-1)}{Q_N}(-\beta\nabla U(x-y))\int\prod_{i=3}^Nd^3r_ie^{-\beta(..)}-\frac{N(N-1)}{Q_N}\beta\int\prod_{i=3}^Nd^3r_i\big[\sum_{i=3}^N\nabla U(x-r_i)\big]e^{-\beta E_p}
+\end{align*}
+
+Then we introduce $\sum_{i=3}^Nf(r_i)=\int dzf(z)\sum_{i=3}^N\delta(z-r_i)$. With that decomposition we get
+
+$$\nabla_{vec{x}}\rho^{(2)}(x,y)=-\beta(\nabla U(x-y))\rho^{(2)}(x,y)-\beta\int dz\nabla U(x-z)\frac{N(N-1)}{Q_N\int \prod_{i=3}^Ndr_ie^{-\beta E_p(x,y,r_{i>3})}}\sum_{i=3}^N\delta(r_i-z)
+$$
+
+where $<>$ is the canonical average.
+
+\subsection{10)}
+
+
+Born-Green is general.
+
+$\nabla\rho^2\approx f(\rho^2,\rho^3)$ and $\nabla \rho^3=f(\rho^3,\rho^4)$, it doens't stop. 
+
+$$\rho^{(l)}(\vec{x}_1,\vec{x}_2,..,\vec{x}_n)=\sum_{i_1\neq..\neq i_l}<\delta(\vec{x}_{i_1}-vec{x}_{1})..\delta(\vec{x}_{i_l}-\vec{x}_l)>\underset{dilue}{\approx}\sum<\delta(\vec{x}_{i_1}-\vec{x}_{i_1})..\delta(..)>\approx n\sigma^3)^l$$
+IN practice, if we suppose dilute then $n\sigma^3<<1$ implies that $\rho^{(1)}>>\rho^{(2)}>>...$.
+
+In our case we have 
+
+$$merda da fare$$
+
+By symmetry $\rho^{(2)}(x,y)=\rho^{(2)}(x-y)$. If we rewrite Born-Green at order 2 we get
+
+$$\frac{d}{dr}\rho^{(2)}=-\beta(\frac{d}{dr}U(r))\rho^{(2)}(r)\Rightarrow \rho^{(2)}(r)=Ae^{-\beta U(r)}$$ We determine $A$ with $\rho^{(2)}\underset{r\to\infty}{=}n^{-2}$ and $U(r)\underset{r\to\infty}{\to 0}$, so that $A=n^{-2}$.
+
+
+\subsection*{11)}
+
+
+on paper
+
+\subsection*{12)}
+
+
+Computing the TF of $g(\vec{r})-1$. Hors $g(\vec{r})=g(r,\xcancel{\theta},\xcancel{\phi})$.
+
+$$TF(g-1)(\vec{q})=\int d^3\vec{r} e^{i\vec{q}\cdot\vec{r}}(g(\vec{r})-1)=(coord spher z aligne \vec{q})=\int 4\pi r^2dr\int_0^{\pi}d\theta \sin\theta e^{iqr\cos\theta}(g(r)-1)
+=4\pi\int r^2dr(g(r)-1)\int_{-1}^1 du\cdot e^{iqru} u=\cos(\theta)$$
+with $\int(merda -1 1)=2\frac{\sin(qr)}{qr}$.
+
+Hence $$TF(g-1)(q)=\frac{8\pi}{q}\int dr\cdot r(g(r)-1)\sin(qr)=\frac{4\pi}{q^3}\bigg((e^{\beta\epsilon}-1)(\sin\alpha\sigma q-\alpha q\cos \alpha\sigma q)+e^{\beta\epsilon}(\sigma q \cos(\sigma q)-\sin(\sigma q))$$
+pseudoperiod $\sim\frac{2\pi}{\sigma},\frac{2\pi}{\alpha\sigma}$. $\rho^2\sim$ period $\sigma,\alpha\sigma$. Then we get 
+$$S(q)=1+nTF(g-1)(q)$$ and so $S(0)=1+n+4\pi(-(e^{\beta\epsilon})(\alpha\sigma)^3+e^{\beta\epsilon}\sigma^3)$ since $\sin(x)-x\cos(x)=x-x^3/6-x(1-x^2/2)=x^3/3+o(x^3)$ (S behaves well in 0).
+
+\subsection*{14)}
+Fig. 6.3, we can read $S(0)$ and know $n,\beta$: for $\alpha$, we take $o(1)$, $\alpha=2$ for example. THen $\beta\epsilon_{exp}\underset{\alpha^3>>1}{\approx}\frac{1-S(0)}{4\pi n\sigma^3/3}\alpha^{-3}\approx 10^{-2}$, $\frac{\epsilon}{k_B}\sim 3K$ (on the paper 70K). $\epsilon_{exp}<<k_BT$ implies that the thermic agitation dominates.
+
+\subsection*{15)}
+
+Experimentally, we have that $S(q)\to_{\tf^{-1}exact }g(r)\sim e^{-\beta U(r)}(approximation diluee)$. We can determine experimentally the approxiative interactions $U(r)$
+$$U_{exp}(r)=-k_BT\ln(g_{exp}(r))$$
+
+FIg 6.3 $\Phi(r)=-\ln g_{exp}(r)$. 
+
+
+
+
+
+\chapter*{Chapter 11}
+
 
 
 
