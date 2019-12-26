@@ -1,0 +1,198 @@
+\documentclass[10pt,a4paper]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{wrapfig}
+\usepackage{mathtools}
+\usepackage[makeroom]{cancel}
+\usepackage{graphicx}
+\usepackage{cancel}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{physics}
+\usepackage{multicol}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{braket} %\braket{a|b|c..}
+
+%main sets:
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+%math shortcuts
+\newcommand{\p}{\partial}
+\newcommand{\w}{\omega}
+\newcommand{\tf}{\text{TF}}
+
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+
+
+\author{Alessandro Pacco}
+\title{DM Quantum Mechanics 2019}
+\begin{document} 
+\maketitle
+
+\section*{Problem 1}
+
+
+\subsection*{1)}
+
+The evolution operator is 
+$$\hat{U}(t,0)=e^{-\frac{i}{\hbar}\hat{H}t}=\sum_{k=0}^{\infty} \frac{(-\frac{i}{\hbar}t)^k}{k!}\hat{H}^k$$
+
+
+\subsection*{2)}
+
+We have that since the Hamiltonian $\hat{H}=\frac{\hat{P}^2}{2m}+U(\hat{X})+V(\hat{X})=\hat{H_0}+V(\hat{X})$ is time independent then:
+$$\ket{\psi(\tau)}=\hat{U}(\tau,0)\ket{\psi_0}=\sum_{k=0}^{\infty}\frac{(\frac{-i}{\hbar}\tau)^k}{k!}(\hat{H}_0+\hat{V})^k\ket{\psi_0}\underset{\text{ordre }1}{\approx} \ket{\psi_0}-\frac{i}{\hbar}\tau(\hat{H_0}+V_0\cos(q\hat{X}))\ket{\psi_0}=(1-\frac{i}{\hbar}\tau( E_0+V_0\cos(q\hat{X}))\ket{\psi_0}$$
+
+\subsection*{3)}
+
+In position representation we have 
+$$\braket{\mathbf{r_0}|\mathbf{p_0}}=(2\pi \hbar)^{-3/2}e^{\frac{i}{\hbar}\mathbf{p_0}\cdot\mathbf{r_0}}$$
+Now in the basis $\ket{\mathbf{p}}$ we have
+\begin{align*}
+\cos(q\hat{X})\ket{\mathbf{p_0}}&=
+\int d^3\mathbf{p}\ket{\mathbf{p}}\braket{\mathbf{p}|\cos(q\hat{X})|\mathbf{p_0}}
+\end{align*}
+
+
+\subsection*{4)}
+
+
+
+\section*{Problem 3}
+
+
+\subsection*{1)}
+
+Since all the operators involving the $z$-component are not composed with operators including the $x,y$-components, then we can write $\hat{H}=\hat{H}_{x,y}\otimes I+I\otimes\hat{H}_z$. Therefore if we call $\ket{\psi_{\perp}}$( reps. $\ket{\psi_z}$) the eigenstates of $\hat{H}_z$ (resp. $\hat{H}_{x,y}$ ) with energy $E_z$ (resp. $E_{\perp}$), then the eigenstate $\ket{\psi}=\ket{\psi_{\perp}}\otimes\ket{\psi_z}$ satisfies
+$$\hat{H}\ket{\psi}=(\hat{H}_{x,y}\otimes I)\ket{\psi}+(I\otimes\hat{H}_z)\ket{\psi}=E_{\perp}\ket{\psi}+E_z\ket{\psi}=(E_{\perp}+E_{z})\ket{\psi}$$
+Hence $\ket{\psi}$ is an eigenstate of $\hat{H}$ with eigenvalues $E_z+E_{\perp}$. 
+
+\subsection*{2)}
+Since the operators including the component $x$ are not composed with those involving the component $y$, we can write that $\hat{H}_{x,y}=\hat{H}_x\otimes I+I\otimes\hat{H}_y$, with $\hat{H}_x$ and $\hat{H}_y$ the Hamiltonians for two harmonic oscillators of pulsations $\omega_{\perp}$. Hence the spectrum of $\hat{H}_x$ (resp. $\hat{H}_y$) is given by $E_{n_x}=\hbar \omega_{\perp}(n_x+1/2)$ (reps. $E_{n_y}=\hbar\omega_{\perp}(n_y+1/2)$). If we denote by $\ket{\psi_{n_x}}$ and $\ket{\psi_{n_y}}$ the two respective eigenstates, then we get that
+$$\hat{H}_{x,y}\ket{\psi_{n_x}}\otimes\ket{\psi_{n_y}}=(\hat{H}_x\otimes I)\ket{\psi_{n_x}}\otimes\ket{\psi_{n_y}}+(I\otimes\hat{H}_y)\ket{\psi_{n_x}}\otimes\ket{\psi_{n_y}}=(E_{n_x}+E_{n_y})\ket{\psi_{n_x}}\otimes\ket{\psi_{n_y}}$$
+i.e. the eigenstates of $\hat{H}_{x,y}$ are the $\ket{\psi_{n_x}}\otimes\ket{\psi_{n_y}}$, with eigenvalues $E_n=(E_{n_x}+E_{n_y})=\hbar\omega_{\perp}(n_x+n_y+1)=\hbar\omega_{\perp}(n+1)$. Then for a given $n$ (which we recall being a non-negative integer) the degeneracy of the eigenspace associated to $E_n$ is $n+1$ (since we can take $n_x\in [0,n]$ with $n_x\in\mathbb{N}$ and $n_y$ is automatically chosen).
+
+\subsection*{3)}
+
+We have that in any isolated system the total angular momentum and the Hamiltonian commute (which is equivalent to the conservation of the total angular momentum). Hence we have that $$[\hat{H},\hat{L}_z\otimes I]=0$$
+However, since we have that $\hat{L}_z$ acts on the same Hilbert space as $\hat{H}_{x,y}$, i.e. we have that $\hat{H}=\hat{H}_{x,y}\otimes I$, then it directly follows that 
+$$[\hat{H}_{x,y}\otimes I,\hat{L}_z\otimes I]=0\Rightarrow [\hat{H}_{x,y},\hat{L}_z]=0$$
+
+
+\subsection*{4)}
+
+\subsubsection*{a)}
+
+We have that 
+$$\hat{a}_x=\frac{\hat{x}\sqrt{\frac{m\omega_{\perp}}{\hbar}}+i\hat{p_x}\frac{1}{\sqrt{m\hbar\omega_{\perp}}}}{\sqrt{2}}=\frac{\frac{\hat{x}}{a_0}+i\frac{\hat{p}_x}{p_0}}{\sqrt{2}}$$
+
+$$\hat{a}_y=\frac{\hat{y}\sqrt{\frac{m\omega_{\perp}}{\hbar}}+i\hat{p_y}\frac{1}{\sqrt{m\hbar\omega_{\perp}}}}{\sqrt{2}}=\frac{\frac{\hat{y}}{a_0}+i\frac{\hat{p}_y}{p_0}}{\sqrt{2}}$$
+
+$$\hat{a}_{x,y}=\hat{a}_x\otimes\hat{a}_y$$
+
+\subsubsection*{b)}
+From $[\hat{a}_x,\hat{a}^{\dagger}_x]=1$ (and same for $y$), we get that 
+$$[\hat{a}_{x,y},\hat{a}^{\dagger}_{x,y}]=[\hat{a}_x\otimes\hat{a}_y,\hat{a}^{\dagger}_x\otimes \hat{a}^{\dagger}_y]=1$$
+
+\subsubsection*{c)}
+
+From $\hat{x}=\frac{a_0}{\sqrt{2}}(\hat{a}_x+\hat{a}^{\dagger}_x)$ and $\hat{p}_x=\frac{p_0}{i\sqrt{2}}(\hat{a}_x-\hat{a}^{\dagger}_x)$ (and similarly for $y$) we get that
+\begin{align*}
+\hat{L}_z&=\frac{a_0}{\sqrt{2}}(\hat{a}_x+\hat{a}^{\dagger}_x)\otimes \frac{p_0}{i\sqrt{2}}(\hat{a}_y-\hat{a}^{\dagger}_y)-\frac{a_0}{\sqrt{2}}(\hat{a}_y+\hat{a}^{\dagger}_y)\otimes \frac{p_0}{i\sqrt{2}}(\hat{a}_x-\hat{a}^{\dagger}_x)\\
+&=\frac{a_0p_0}{2i}(\hat{a}_x\otimes \hat{a}_y-\hat{a}_x\otimes \hat{a}_y^{\dagger}+\hat{a}_x^{\dagger}\otimes \hat{a}_y-\hat{a}_x^{\dagger}\otimes \hat{a}_y^{\dagger}-\hat{a}_y\otimes \hat{a}_x+\hat{a}_y\otimes \hat{a}_x^{\dagger}-\hat{a}_y^{\dagger}\otimes \hat{a}_x+\hat{a}_y^{\dagger}\otimes \hat{a}_x^{\dagger})\\
+&=i\hbar(\hat{a}_x\otimes \hat{a}_y^{\dagger}-\hat{a}^{\dagger}_x\otimes \hat{a}_y)
+\end{align*}
+where we simplified the terms $\hat{a}_x\otimes \hat{a}_y$ with $\hat{a}_y\otimes \hat{a}_x$ since both $\hat{x},\hat{p}_x$ commute with $\hat{y},\hat{p}_y$ (same for $\hat{a}_x^{\dagger}\otimes \hat{a}_y^{\dagger}$).
+
+Similarly using that we already know tha Hamiltonian for a one dimensional harmonic oscillator we get
+\begin{align*}
+\hat{H}_{x,y}=\hat{H}_x\otimes I+I\otimes\hat{H}_y=\hbar\omega_{\perp}(\hat{N}_x\otimes I+\frac{1}{2}I\otimes I)+\hbar\omega_{\perp}(I\otimes \hat{N}_y+\frac{1}{2} I\otimes I)=\hbar\omega_{\perp}(\hat{a}_x^{\dagger}\hat{a}_x\otimes I+I\otimes \hat{a}_y^{\dagger}\hat{a}_y +I\otimes I)
+\end{align*}
+
+\subsubsection{d)}
+By using again the fact that $\hat{x},\hat{p}_x$ commute with $\hat{y},\hat{p}_y$ we get 
+$$[\hat{a}_+,\hat{a}_+^{\dagger}]=\frac{1}{2}[\hat{a}_x+i\hat{a}_y,\hat{a}_x^{\dagger}-i\hat{a}^{\dagger}_y]=\frac{1}{2}([\hat{a}_x,\hat{a}_x^{\dagger}]+[\hat{a}_y,\hat{a}_y^{\dagger}])=1$$
+
+$$[\hat{a}_-,\hat{a}_-^{\dagger}]=\frac{1}{2}[\hat{a}_x-i\hat{a}_y,\hat{a}_x^{\dagger}+i\hat{a}^{\dagger}_y]=\frac{1}{2}([\hat{a}_x,\hat{a}_x^{\dagger}]+[\hat{a}_y,\hat{a}_y^{\dagger}])=1$$
+
+
+$$[\hat{a}_+,\hat{a}_-^{\dagger}]=\frac{1}{2}[\hat{a}_x+i\hat{a}_y,\hat{a}_x^{\dagger}+i\hat{a}^{\dagger}_y]=\frac{1}{2}([\hat{a}_x,\hat{a}_x^{\dagger}]-[\hat{a}_y,\hat{a}_y^{\dagger}]=0$$
+
+$$[\hat{a}_-,\hat{a}_+^{\dagger}]=\frac{1}{2}[\hat{a}_x-i\hat{a}_y,\hat{a}_x^{\dagger}-i\hat{a}^{\dagger}_y]=\frac{1}{2}([\hat{a}_x,\hat{a}_x^{\dagger}]-[\hat{a}_y,\hat{a}_y^{\dagger}])=0$$
+
+$$[\hat{a}_+,\hat{a}_-]=\frac{1}{2}[\hat{a}_x+i\hat{a}_y,\hat{a}_x-i\hat{a}_y]=0\Rightarrow [\hat{a}_+^{\dagger},\hat{a}_-^{\dagger}]=0$$
+From now on I will omit the tensor products not to make the text too lengthy.
+
+\subsubsection*{e)}
+If two operators commute then they are diagonalizable in the same basis. Here we have, by decomposing the commutator with the well known relations to decompose a commutator which contains a  composition of operators
+
+$$[\hat{N}_{+},\hat{N}_-]=[\hat{a}_+^{\dagger}\hat{a}_+,\hat{a}_-^{\dagger}\hat{a}_-]=\hat{a}_+^{\dagger}[\hat{a}_+,\hat{a}_-^{\dagger}]\hat{a}_-+
+\hat{a}_+^{\dagger}\hat{a}_-^{\dagger}[\hat{a}_+,\hat{a}_-]+[\hat{a}_+^{\dagger},\hat{a}_-^{\dagger}]\hat{a}_-\hat{a}_++\hat{a}_-^{\dagger}[\hat{a}_+^{\dagger},\hat{a}_-]\hat{a}_+=0
+$$
+Hence they are diagonalizable in the same basis.
+Now notice that from $[\hat{a}_x,\hat{a}_x^{\dagger}]=1$ (and same for $y$) and from the fact that $\hat{a}_x$ commutes with $\hat{a}_y$, we have $[\hat{a}_{\pm},\hat{a}_{\pm}^{\dagger}]=\frac{1}{2}[\hat{a}_x\pm i\hat{a}_y,\hat{a}_x^{\dagger}\mp i\hat{a}_y^{\dagger}]=1$.
+Therefore if we denote by $\ket{n_{\sigma}}$ ($\sigma\in\{+,-\}$) an eigenstate of $\hat{N}_{\sigma}$ of eigenvalue $n_{\sigma}$, we have that:
+$$\hat{N}_{\sigma}\hat{a}_{\sigma}\ket{n_{\sigma}}=\hat{a}_{\sigma}^{\dagger}\hat{a}_{\sigma}\hat{a}_{\sigma}\ket{n_{\sigma}}=(\hat{a}_{\sigma}\hat{a}_{\sigma}^{\dagger}\hat{a}_{\sigma}-1)\ket{n_{\sigma}}=(n_{\sigma}-1)\hat{a}_{\sigma}\ket{n_{\sigma}}$$
+
+$$\hat{N}_{\sigma}\hat{a}_{\sigma}^{\dagger}\ket{n_{\sigma}}=\hat{a}_{\sigma}^{\dagger}\hat{a}_{\sigma}\hat{a}_{\sigma}^{\dagger}\ket{n_{\sigma}}=\hat{a}_{\sigma}^{\dagger}(\hat{a}_{\sigma}^{\dagger}\hat{a}_{\sigma}+1)\ket{n_{\sigma}}=(n_{\sigma}+1)\hat{a}_{\sigma}^{\dagger}\ket{n_{\sigma}}$$
+
+which means that if $\hat{a}_{\sigma}\ket{n_{\sigma}}\neq 0$ then it is an eigenstate of $\hat{N}_{\sigma}$ of eigenvalue $(n_{\sigma}-1)$ and that $\hat{a}_{\sigma}^{\dagger}\ket{n_{\sigma}}$ is an eigenstate of $\hat{N}_{\sigma}$ of eigenvalue $(n_{\sigma}+1)$. Moreover we have that the eigenvalues of $\hat{N}_{\sigma}$ are non-negative, indeed we have that $0\leq ||\hat{N}_{\sigma}\ket{n_{\sigma}}||^2=\braket{n_{\sigma}|\hat{a}_{\sigma}^{\dagger}\hat{a}_{\sigma}|n_{\sigma}}=n_{\sigma}$. Therefore if any of the eigenvalues of $\hat{N}_{\sigma}$, say $s_{\sigma}>0$, were not a natural integer, then we could apply $\hat{a}_{\sigma}$ on $\ket{s_{\sigma}}$ $\ceil*{s_{\sigma}}$ times, getting then a negative eigenvalue, which we know being impossible. Hence the spectrum of $\hat{N}_{\sigma}$ belongs to $\mathbb{N}$.
+
+
+\subsubsection{f)}
+
+We have that $\hat{N}_-=\hat{a}_-^{\dagger}\hat{a}_-=\frac{1}{2}(\hat{a}_x^{\dagger}+i\hat{a}_y^{\dagger})(\hat{a}_x-i\hat{a}_y)=\frac{1}{2}(\hat{a}_x^{\dagger}\hat{a}_x-i\hat{a}_x^{\dagger}\hat{a}_y+i\hat{a}_y^{\dagger}\hat{a}_x+\hat{a}_y^{\dagger}\hat{a}_y)$ and
+$\hat{N}_+=\hat{a}_+^{\dagger}\hat{a}_+=\frac{1}{2}(\hat{a}_x^{\dagger}-i\hat{a}_y^{\dagger})(\hat{a}_x+i\hat{a}_y)=\frac{1}{2}(\hat{a}_x^{\dagger}\hat{a}_x+i\hat{a}_x^{\dagger}\hat{a}_y-i\hat{a}_y^{\dagger}\hat{a}_x+\hat{a}_y^{\dagger}\hat{a}_y)$.
+Hence notice that $\hat{N}_--\hat{N}_+=i(\hat{a}_x\hat{a}_y^{\dagger}-\hat{a}_x^{\dagger}\hat{a}_y)$, from which it directly follows that $\hat{L}_z=\hbar(\hat{N}_--\hat{N}_+)$. Then we have that $\hat{N}_-+\hat{N}_+=\hat{a}_x^{\dagger}\hat{a}_x+\hat{a}_y^{\dagger}\hat{a}_y$ which implies that $\hat{H}_{x,y}=\hbar\omega(\hat{N}_-+\hat{N}_++I)$.
+
+\subsubsection*{g)}
+First of all we study the action of $\hat{N}_{\pm}$ on $\hat{a}_{\mp}^{\dagger}\ket{n_{\pm}}$.  Now, if we use the commutation relations found in question $4.d$ we have:
+
+$$\hat{N}_{+}\hat{a}_{-}^{\dagger}\ket{n_{+}}=\hat{a}_+^{\dagger}\hat{a}_+\hat{a}_-^{\dagger}\ket{n_+}=\hat{a}_-^{\dagger}\hat{a}_+^{\dagger}\hat{a}_+\ket{n_+}=n_+\hat{a}^{\dagger}_-\ket{n_+}$$
+
+and 
+
+
+$$\hat{N}_{-}\hat{a}_{+}^{\dagger}\ket{n_{-}}=\hat{a}_-^{\dagger}\hat{a}_-\hat{a}_+^{\dagger}\ket{n_-}=\hat{a}_+^{\dagger}\hat{a}_-^{\dagger}\hat{a}_-\ket{n_-}=n_-\hat{a}^{\dagger}_+\ket{n_-}$$
+
+
+
+
+
+
+The eigenvalues of $\hat{H}_{x,y}$ are given by
+
+\subsection*{5)}
+
+\subsubsection*{a)}
+
+If we denote by $\ket{0}$ the state for which $\hat{a}_+\ket{0}=0$ and $\hat{a}_-\ket{0}=0$ then we have that 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
