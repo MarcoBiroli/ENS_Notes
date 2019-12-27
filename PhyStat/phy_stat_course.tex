@@ -4,6 +4,7 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{adjustbox}
+\usepackage{stmaryrd}
 
 \usepackage{amssymb}
 \usepackage{wrapfig}
@@ -1492,7 +1493,10 @@ We start by a few definitions to set the vocabulary we are going to work with:
 \]
 Where $\vec{G}$ is the vector of the reciprocal lattice of the solid (i.e. $\vec{r_i}\cdot \vec{G} = 2\pi k$), then $\rho_G$ is going to be 0 for a liquid and 1 for a solid. And for the liquid/gaz transition the density is an order parameter.
 \item \textbf{State function}: a state function is a function of state variables.
-\item \textbf{Reversible transformation}: A transformation that can be done both ways.
+\item \textbf{Reversible transformation}: A transformation that can be done both ways, i.e. it is a process whose direction can be "reversed" by inducing infinitesimal changes to some property of the system via its surroundings. Throughout the entire reversible process, the system is in thermodynamic equilibrium with its surroundings. Having been reversed, it leaves no change in either the system or the surroundings. An alternative definition of a reversible process is a process that, after it has taken place, can be reversed and, when reversed, returns the system and its surroundings to their initial states. 
+\item 
+\textbf{Intensive parameters:} it is any physical property that doesn't depend on the system size or amount of matte (ex. $T,\mu,\rho,P,$).
+\item\textbf{Extensive parameters:} It is any physical property that is proportional to the size of the system or the quantity of matter in it (ex. $E,S,F,G,H,V$).
 \end{itemize}
 
 \subsection{Principles.}
@@ -1583,13 +1587,13 @@ So we see that we have an upper bound on efficiency, it is impossible to have a 
 We have:
 \begin{center}
 \begin{tabular}{c | c | c |}
-isolated system & $N, V, E$ & $S(E,V, N)$\\
+isolated system & $N, V, E$ & $S(N,V,E)$\\
 \hline
-fixed temperature system & $N, V, T$ & $F(N, V, T)$\\
+fixed temperature system & $N, V, T$ & $F(N, V, T)=E-TS$\\
 \hline
-$T, \mu$ fixed system & $\mu, V, T$ & $\Omega(\mu, V, T)$\\
+$T, \mu$ fixed system & $\mu, V, T$ & $\Omega(\mu, V, T)=F-\mu N$\\
 \hline
-$T, P$ fixed system & $N, P, T$ & $G(N, P, T)$\\
+$T, P$ fixed system & $N, P, T$ & $G(N, P, T)=F+PV$\\
 \hline
 \end{tabular}
 \end{center}
@@ -1703,7 +1707,7 @@ Note that this is compatible with:
 \begin{wrapfigure}{r}{0.25\textwidth}
     \includegraphics[width=0.25\textwidth]{graphs/critpoint}
 \end{wrapfigure}
-We are now going to interest ourselves with a system that starts in a point $A$ in the gas phase and end at $B$ in a liquid phase. The questions we want to answer are what are the characteristics of this transition and what are the signatures on the thermodynamic potential.
+We are now going to interest ourselves with a system that starts in a point $A$ in the gas phase and endsd at $B$ in a liquid phase. The questions we want to answer are what are the characteristics of this transition and what are the signatures on the thermodynamic potential.
 
 \subsection{Order parameters and transitions orders.}
 We have already discussed order parameters. To refresh your memory we will give 2 examples. When we want to differentiate liquid from gas we consider the density $\rho$ as an order parameter. If we consider a spin polarity we would consider the mean polarity: $m = \frac{1}{N}\sum_i S_i$.
@@ -1877,7 +1881,7 @@ What is remarkable is that these exponents $(\alpha, \beta, \gamma, \cdots)$ are
 \end{wrapfigure}
 Up to now we have considered only perfect systems that had no interactions. This approximation is more or less valid so long as $\rho \to 0$. More generally two interacting molecules would influence each other with a potential that has probably a shape like the following. A common example is the Lennard-Jones potential:
 \[
-V(r) = 4 E \left[ \left(\frac{\sigma}{r}\right)^R - \left(\frac{\sigma}{r}\right)^6 \right]
+V(r) = 4 E \left[ \left(\frac{\sigma}{r}\right)^{12} - \left(\frac{\sigma}{r}\right)^6 \right]
 \]
 Another simpler example is the hard spheres example:
 \[
@@ -1890,7 +1894,7 @@ e^{-\beta V(r)} = H(r - \sigma)
 \]
 Then the Hamiltonian will be written (assuming the particles interact only by pairs):
 \[
-\mathcal{H} = \sum_i = \frac{\vec{p}_i^2}{2m} + \sum_{i < j} V(|\vec{r}_i - \vec{r}_j|)
+\mathcal{H} = \sum_i  \frac{\vec{p}_i^2}{2m} + \sum_{i < j} V(|\vec{r}_i - \vec{r}_j|)
 \]
 And usually the goal will be to compute or approximate the partition function:
 \[
@@ -1902,22 +1906,26 @@ A particular system for which we will solve this problem is the one of spins in 
 \]
 Heisenberg's model says something similar:
 \[
-\mathcal{H} = - \frac{4 J_{ij}}{h^2} \vec{s}_i \cdot \vec{s}_j - \gamma \vec{B} \cdot \sum_i \vec{s}_i
+\mathcal{H} = - \frac{4}{h^2}\sum_{i<j}J_{ij} \vec{s}_i \cdot \vec{s}_j - \gamma \vec{B} \cdot \sum_i \vec{s}_i
 \]
-Finally Ising's model simply restricts the value of the spin to being only $\pm\frac{\hbar}{2}$ and restricts interactions to only nearest neighbors. Then we have:
+Finally Ising's model simply restricts the value of the spin to being only $\pm\frac{\hbar}{2}$ and restricts interactions to only nearest neighbors. Then by using $\vec{s}_i=\frac{\hbar}{2}S_i$, $S_i=\pm 1$ we have:
 \[
 \mathcal{H} = - J \sum_{i < j, |i - j| \leq 1} S_i S_j - \mu B \sum_i S_i 
 \]
+so that the partition function in the canonical ensemble is given by
+$$Z=\sum_{\{S_i\in(\pm 1)\}}e^{-\beta H(\{S_i\})}$$
 
 \section{Interactions and partition functions.}
 \section{Magnetic systems.}
 \subsection{Exact Results in 1D and 2D.}
 For the general culture of the reader we include here known exact results in 1D and 2D. 
 \subsubsection{1D.}
-In 1 dimension if we introduce $\bar{S} = \langle \frac{1}{N} \sum_{i = 1}^N S_i \rangle$ will behave as follows, i.e. there is no phase transition. And the exact result is given by:
+In 1 dimension if we introduce $\bar{S} = \langle \frac{1}{N} \sum_{i = 1}^N S_i \rangle$, it will behave as follows, i.e. there is no phase transition. And the exact result is given by:
 \[
 \bar{S}  = \frac{\sinh(\frac{\mu B}{k_B T})}{\sqrt{\sinh^2(\frac{\mu B}{k_B T}) + \exp(-\frac{4J}{k_B T})}}
 \]
+where we have defined the average as 
+$$\bar{S}=\frac{1}{Z}\sum_{\{S_i\}}\bigg(\frac{1}{N}\sum S_i e^{-\beta H(\{S_i\})}\bigg)$$
 
 \subsubsection{2D.}
 Onsager in 1944 computed the partition function in 2 dimensions and Yang computed the mean polarization 8 years later. The results are as follows:
@@ -1930,8 +1938,16 @@ So there is a phase transition (when $B = 0$) which is the $T_C$ such that:
 \]
 And close to the transition we have that:
 \[
-\bar{S}(T) = \left(1 - \frac{1}{\sinh^4(\frac{2J}{k_B T})}\right)^{1/8} \Rightarrow S(T \sim T_C) \sim |T - T_C|^{1/8}
+\bar{S}(T) =
+\begin{cases} \left(1 - \frac{1}{\sinh^4(\frac{2J}{k_B T})}\right)^{1/8}\,\,\,\text{ for }T<T_c\\
+0\,\,\,\,\,\text{ for }T>T_c
+\end{cases} \Rightarrow S(T \sim T_C) \sim |T - T_C|^{1/8}
 \]
+
+This means that after $T_c$ the average spin is zero, i.e. all the particles tend to have "the same opinion".
+We can see it from the graph:\\
+
+\includegraphics[scale=0.16]{graphs/ising2}
 
 \subsection{Ising model in one and two dimensions: exact results.}
 \subsection{Mean field approximation.}
@@ -1943,35 +1959,44 @@ And the mean polarization is given by:
 \[
 \bar{S} = \frac{\sum_{\{S_i\}} \frac{1}{N} \sum_i S_i e^{\mu B \beta \sum_i S_i}}{\sum_{\{S_i\}} e^{\mu B \beta \sum_i S_i}} =  \frac{1}{N} \pdv{}{x} \log Z = \pdv{}{x} \log(2 \cosh x) = \tanh(\frac{\mu B}{k_B T}) \quad \text{ with } \quad x = \mu \beta B
 \]
-Now we want to add the interactions. So we get:
+Hence the graph is \\
+\includegraphics[scale=0.1]{graphs/tanh}\\
+Now we want to add the interactions to the 2D Ising model. So if we introduce the notation $<i,j>=1$ iff the particles at $i,j$ are neighbors, then by summing over all the neighboring couples we get that the interaction Hamiltonian is given by:
 \[
-\mathcal{H} = - J \sum_{|i - j| = 1} S_i S_j
+\mathcal{H}_0 = - J \sum_{<i,j> = 1} S_i S_j
 \]
-A way to apply the approximation is to write $S_i = \bar S + \delta S_i$ then the Hamiltonian becomes:
+A way to apply the approximation is to write $S_i = \bar S + \delta S_i$, with $\delta S_i<<S_i$, then the Hamiltonian becomes:
 \[
-\mathcal{H} = - \frac{J}{2} \sum_{i,j} (\bar{S} + \delta S_i)(\bar{S} + \delta S_j) - \mu B \sum_i S_i = -\frac{J}{2}N^2 \bar{S} - \frac{J}{2}\sum_{i,j}(\bar{S} + \delta S_i + \bar{S} \delta S_j) - \cancelto{\text{negligeable}}{\frac{J}{2}\sum_{i,j} \delta S_i \delta S_j} - \mu B \sum_i S_i
+\mathcal{H} = - \frac{J}{2} \sum_{i,j\text{ neighbors}} (\bar{S} + \delta S_i)(\bar{S} + \delta S_j) - \mu B \sum_i S_i = -\frac{J}{2}qN \bar{S}^2 - \frac{J}{2}\sum_{i,j}(\bar{S}  \delta S_i + \bar{S} \delta S_j) - \cancelto{\text{negligeable}}{\frac{J}{2}\sum_{i,j} \delta S_i \delta S_j} - \mu B \sum_i S_i
 \]
-We the mean field approximation is equivalent to saying that we allowed to cancel that 3rd term. Further developing we get that:
+Where $q$ is a a factor of no particular importance. We see that the mean field approximation is equivalent to saying that we allowed to cancel that 3rd term. By using that $\delta S_I=S_i-\bar{S}$ and further developing we get that:
 \[
-\mathcal{H} = \frac{J}{2} q N \bar{S}^2 - (q J \bar{S} + \mu B)\sum_i S_i
+\mathcal{H} = -\frac{J}{2}qN\bar{S}^2+JqN\bar{S}^2-qJ\bar{S}\sum_i S_i-\mu B\sum_i S_i=
+\frac{J}{2} q N \bar{S}^2 - (q J \bar{S} + \mu B)\sum_i S_i=\frac{J}{2}qN\bar{S}^2 -\mu B_{\text{eff}}\sum_i S_i
 \]
-So we get that:
+with 
 \[
-\mu_{B_\text{eff}} = \mu B + q J \bar{S}
+\mu B_\text{eff} = \mu B + q J \bar{S}
 \]
-Then finally we obtain for the mean polarization:
+Then by recalling the result for the presence of the magnetic field only, finally we obtain for the mean polarization:
 \[
 \bar{S} = \tanh\left[\frac{\mu B_\text{eff}(\bar{S})}{k_B T}\right]= \tanh\left[\frac{\mu B + q J \bar{S}}{k_B T}\right]
 \]
-Which can be re-written as:
+where the term $\frac{J}{2}qN\bar{S}^2$ cancels when computing the average in the canonical ensemble.
+Then if we choose $B=0$ we can write:
 \[
 \frac{k_B T}{q J} x = \tanh x
 \]
+with $x=\frac{qJ}{k_BT}\bar{S}$. We can further call $\alpha =\frac{k_B T}{qJ}$, so that $\alpha x=\tanh{x}$.
 Now this equation can be numerically solved and we obtain the figure plotted below.
-So that when $\alpha > 1$ we have that the only possible solution is $\bar{S} = 0$. When $\alpha < 1$ then we have 3 possible solutions, and the solution in 0 is unstable. Now for $T \sim T_C$ we know that we can approximate $\tanh$ with:
+So that when $\alpha > 1$ we have that the only possible solution is $\bar{S} = 0$. When $\alpha < 1$ then we have 3 possible solutions, and the solution in 0 is unstable.Hence the critical temperature is $T_c=\frac{qJ}{k_B}$. We have that for $T>T_c$ there is only one solution, i.e. $\bar{S}=0$, which measn that the material is in paramagnetic state: in pure paramagnetism, the dipoles do not interact with one another and are randomly oriented in the absence of an external field due to thermal agitation, resulting in zero net magnetic moment. When a magnetic field is applied, the dipoles will tend to align with the applied field, resulting in a net magnetic moment in the direction of the applied field. Instead when we have that $T<T_c$, we are in a ferromagnetic state, i.e. the system is magnetized, either at positive or negative $\bar{S}$. Ferromagnetic materials are permanent magnets, independently on whether we have or not applied an external magentic field.
+
+
+Now for $T \sim T_C$ we know that we can approximate $\tanh$ with:
 \[
 \tanh x \approx x - \frac{x^3}{3} \Rightarrow \alpha x = x - \frac{x^3}{3} \Leftrightarrow x^2 = 3(1 - \alpha) \Rightarrow S(T) \propto |T - T_C|^{1/2}
 \]
+The magnetic susceptibility is a measure of how much a material will become magnetized in an applied magnetic field.
 Then if we compute the susceptibility we get:
 \[
 \chi = \dv{\bar{S}}{B}\Bigg|_{B = 0} \sim \frac{1}{|T_c - T|} \stackrel{T = T_c}{\longrightarrow} \infty
@@ -1981,24 +2006,27 @@ Then if we compute the susceptibility we get:
 \includegraphics[width = 0.6\textwidth]{graphs/TanhLin_Cut}
 \end{figure}
 
+Finally notice that if we choose $B\neq 0$ then there is always a phase transition since the two curves above will always interesect at a point different from 0.
 \subsection{Alternative method.}
-Another way to get to this result is to pass through the free-energy. We know that for independent spins we have:
+Another way to get to this result is to pass through the free-energy. We know that for non-interacting spins we have:
 \[
-H = -\mu B S, \quad Z = \left(2 \cosh \frac{\mu B}{k_B T}\right)^N, \quad F = -k_B T N \log(2\cosh\frac{\mu B}{k_B T})
+H = -\mu B \sum_i S_i, \quad Z = \left(2 \cosh \frac{\mu B}{k_B T}\right)^N, \quad F = -k_B T N \log(2\cosh\frac{\mu B}{k_B T})
 \]
 Now when we take into account the interactions we need to compute:
 \[
-H = H_{MF} = \underbrace{\frac{J q N \bar{S}^2}{2}}_{\text{cst}} - \mu B_\text{eff} \sum_i S_i, \quad Z_{MF} = \sum_{\{S_i\}} e^{-\beta H_{MF}(S_i)} = e^{-\frac{Jq N \bar{S}^2}{2 k_B T}} \left(2 \cosh \frac{\mu B_\text{eff}}{k_B T}\right)^N 
+H = H_{MF} = \underbrace{\frac{J q N \bar{S}^2}{2}}_{\text{cst}} - \mu B_\text{eff} \sum_i S_i, \quad Z_{MF} = \sum_{\{S_i\}} e^{-\beta H_{MF}(\{S_i\})} = e^{-\frac{Jq N \bar{S}^2}{2 k_B T}} \left(2 \cosh \frac{\mu B_\text{eff}}{k_B T}\right)^N 
 \]
 This then gives:
 \[
-F_{MF}  = -k_B T\log Z = ...
+F_{MF}  = -k_B T\log Z_{MF} = JqN\bar{S}^2-Nk_BT\log \bigg(2\cosh\bigg(\frac{\mu B+Jq\bar{S}}{k_BT}\bigg)\bigg)=F_{MF}(\bar{S})
 \]
-Note that this can simply be viewed as a free-energy that considers $\bar{S}$ as a constraint. Then we have $F_{MF}(\bar{S})$. Hence to get the equilibrium we have to try and minimize $F$ for $\bar{S}$ which gives:
+Note that this can simply be viewed as a free-energy that considers $\bar{S}$ as a constraint. Then we have $F_{MF}(\bar{S})$. At equilibrium, with constant temperature and volume, we have that the free-energy is minimized. Hence to get the equilibrium we have to try and minimize $F$ for $\bar{S}$ which gives:
 \[
-\pdv{F_{MF}}{\bar{S}} = 0 = N\left(J q \bar{S} - k_B T \frac{J q}{k_B T} \tanh(\frac{J q \bar{S}}{k_B T}) \Rightarrow \bar{S} = \tanh (\frac{J q \bar{S}}{k_B T})\right)
+\pdv{F_{MF}}{\bar{S}} = 0 = N\bigg(J q \bar{S} - k_B T \frac{J q}{k_B T} \tanh(\frac{J q \bar{S}}{k_B T})\bigg) \Rightarrow \bar{S} = \tanh (\frac{J q \bar{S}}{k_B T})
 \]
-Note that if we plot the free energy as a function we will see that for $T > T_C$ we have something that looks like a polynomial and when $T < T_C$ two minima will appear. What happens is that when $T$ varies the 'courbure' smoothely changes with it as well. Remark that this is a characteristic of transitions of the second order. At the first order instead there is a discontinuity of the minima at the transition.
+Note that if we plot the free energy as a function of $\bar{S}$ we will see that for $T > T_C$ we have something that looks like a polynomial and when $T < T_C$ two minima for $\bar{S}$ will appear. What happens is that when $T$ varies the 'courbure' of $F_{MF}$ smoothely changes with it as well. Remark that this is a characteristic of transitions of the second order. At the first order instead there is a discontinuity of the minima at the transition:
+
+\includegraphics[scale=0.1]{graphs/free_en}
 
 \subsection{Description of Landau}
 Landau tried to generalize the description of any phase change, we will summarize here briefly some of the results. First when we are close to the transition the assumption is that we get:
@@ -2012,17 +2040,17 @@ F_{MF}(\phi) = \frac{1}{2} \alpha(T) \phi^2 + \frac{1}{3} \beta(T) (T - T^*) \ph
 What fixes the powers in the expansion are the microscopical symmetries. Take for example the spin system we studied previously. Note that there is an up/down symmetry, i.e if we switch all the spins the system would be characterized in the same way. In contrast, for example, with the transition from liquid to gas where it is clear that switching from $\rho_L$ to $\rho_G$ clearly does not give the same system. The applications of this are numerous but a few examples are supra-conductivity, liquid crystals, super fluidity. In fact De Gennes first noticed that what Landau derived for supra-conductors could be adapted and applied to liquid crystals. For more details on this we refer to Chaikin-Lubensky.
 
 \subsection{Alternative approach.}
-We now present an alternative approach to the mean field approximation, called Bragg-William. We will see that this will not give the same free-energy for example, but one has to remember that the mean field is only an approximation. Hence according to when, or on what, we make an approximation we might get slightly different results but in the end they should turn out to be equivalent. The idea of Bragg-William is to try and quantify the entropy of the system. So we know:
+We now present an alternative approach to the mean field approximation, called Bragg-William. We will see that this will not give the same free-energy for example, but one has to remember that the mean field is only an approximation. Hence according to when, or on what, we make an approximation we might get slightly different results but in the end they should turn out to be equivalent. The idea of Bragg-William is to try and quantify the entropy of the system. From now on we will use the following conventions: $i,j\, n.n$ indicates that we are summing over all the couples $i,j$ of particles that are nearest neighbors, i.e. each couple is counted once. $<i,j>$ indicates that for every $i$ we are summing over all the $j$ such that $i,j$ are nearest neighbors, this means that any couple of nearest neighbors is counted twice, once when summing for $i$ and once when summing for $j$. Now we have:
 \[
-E = \langle H \rangle = - J \langle \sum_{i, j} S_i S_j \rangle = - J \frac{1}{2} \langle \sum_{|i - j| = 1} S_i S_j \rangle \approx - J \frac{N q}{2} \bar{S}^2
+E = \langle H \rangle = - J \langle \sum_{i,j\, n.n} S_i S_j \rangle = - J \frac{1}{2} \langle \sum_{<i,j>} S_i S_j \rangle \approx - J \frac{N q}{2} \bar{S}^2
 \]
 Then the entropy should be given as:
 \[
 \mathcal{S}(\bar{S}) = k_B \log \Omega = k_B \log(\#\{\text{configurations } x | \bar{S}(x) = \bar{S}\})
 \]
-So the problem is reduced to counting how many ways there are to generate $\bar{S}$. Now if we write:
+So the problem is reduced to counting how many ways there are to generate $\bar{S}$. Now if we introduce $N_+$ and $N_-$ the number of spins up and down we can write:
 \[
-\bar{S} = \frac{N_+ - N_-}{N}, \quad \text{ where } \quad N_+ = N\left(\frac{1 + \bar{S}}{2}\right), \quad N_- = N\left(\frac{•}{•}\right)
+\bar{S} = \frac{N_+ - N_-}{N}, \quad \text{ where } \quad N_+ = N\left(\frac{1 + \bar{S}}{2}\right), \quad N_- = N\left(\frac{1-\bar{S}}{2}\right)
 \]
 Now the number of possible configurations is simply given by:
 \[
@@ -2043,7 +2071,7 @@ F_{BW}(\bar{S}) = -\frac{JqN\bar{S}^2}{2} + Nk_B T\left(\frac{1 + \bar{S}}{2}\lo
 \]
 As we said earlier, remark that this expression of the free-energy is not the same as the one we found previously, however the minima will be the same. We will now compute these minima:
 \[
-- = \pdv{F_{BW}}{\bar{S}} = - J N q \bar{S} + \frac{N k_B T}{2} \log \frac{1 + \bar{S}}{1 - \bar{S}}
+04 = \pdv{F_{BW}}{\bar{S}} = - J N q \bar{S} + \frac{N k_B T}{2} \log \frac{1 + \bar{S}}{1 - \bar{S}}
 \]
 Now note that $\frac{1 + \bar{S}}{1 - \bar{S}} = \exp(\frac{2 J q \bar{S}}{k_B T})$ so plugging this back in we get that:
 \[
@@ -2059,7 +2087,7 @@ Where $\mathcal{S}_0$ is the entropy of a 'reference' system. What this means is
 \subsection{Application to a 1D model of capillary condensation.}
 A lattice model for a liquid is simply to consider a square lattice where each square either contains a particle ($S_i = 1$)  or does not contain a particle ($S_i = 0$). We also assume that the interactions in between particles are only effective over short lengths, hence we consider only nearest neighbors. We denote the energy of interaction by $-\epsilon_\times$. Then the Hamiltonian is given by:
 \[
-H = H(\{S_i\}) = -\epsilon_\times \sum_{|i - j| = 1} S_i S_j
+H = H(\{S_i\}) = -\epsilon_\times \sum_{i,j\, n.n.} S_i S_j
 \]
 We can also put the whole system in an outside potential of energy $-\epsilon_0$ which acts on all the particles in the same way. This gives an extra term to the Hamiltonian:
 \[
@@ -2075,13 +2103,13 @@ Note that this model is a very rich model that can be used in numerous situation
 \begin{wrapfigure}{r}{0.2\textwidth}
 \includegraphics[width = 0.2\textwidth]{graphs/ExampleCappillary}
 \end{wrapfigure}
-To show an example of the use of this model we will apply it to a 1D capillary condensation model. The idea is that we have two surfaces facing each other at a distance $D$ and a bulk of gas on the side connected to the space in between the surfaces. The surfaces prefer to have a dense liquid in between them while the bulk prefers having a gaseous phase in it. We therefore have a competition in between these two phenomenons and we get the intuition that we will have a phase transition for a certain $D_C$ where for $D > D_C$ the bulk 'wins'  while when $D < D_C$ the surfaces 'win'. What we will use here is a periodic 1D model. We put an interaction term $-\epsilon_0$ in between the surface and the particles, denote $M$ the number of cells of our lattice and $\epsilon_\times$ the energy of interaction, finally by periodic we intend that $S_{M+1} = S_1$. Then the Hamiltonian is given by:
+To show an example of the use of this model we will apply it to a 1D capillary condensation model. The idea is that we have two surfaces facing each other at a distance $D$ and a bulk of gas on the side connected to the space in between the surfaces. The surfaces prefer to have a dense liquid in between them while the bulk prefers having a gaseous phase in it. We therefore have a competition in between these two phenomena and we get the intuition that we will have a phase transition for a certain $D_C$ where for $D > D_C$ the bulk 'wins'  while when $D < D_C$ the surfaces 'win'. What we will use here is a periodic 1D model. We put an interaction term $-\epsilon_0$ in between the surface and the particles, denote $M$ the number of cells of our lattice and $\epsilon_\times$ the energy of interaction, finally by periodic we intend that $S_{M+1} = S_1$. Then the Hamiltonian is given by:
 \[
 H_{1D} = -\epsilon_\times \sum_{i = 1}^M S_i S_{i +1} - \epsilon_0\sum_{i = 1}^M S_i
 \]
 Remark that if we try to fix the number of particles: $N = \sum_i S_i$ the computations for the Hamiltonian will be atrocious since we already have a dependence on the sum of the $S_i$. That is why we choose to work in the grand-canonical so as to not fix the number of particles. Then:
 \[
-\Theta = \sum_N e^{\frac{\mu N}{k_B T}} Z_N = \sum_{S_1 = 0, 1} \sum_{S_2 = 0, 2} \cdots e^{\frac{\mu}{k_B T} \sum_i S_i} e^{- \frac{H(\{S_i\})}{k_B T}} = \sum_{S_1 = 0, 1}\cdots \sum_{S_M = 0,1} \exp(\frac{\epsilon_\times}{k_B T} \sum_{i = 1}^M S_i S_{i + 1} + \frac{\epsilon_0 + \mu}{k_B T}\sum_{i = 1}^M S_i)
+\Theta = \sum_N e^{\frac{\mu N}{k_B T}} Z_N = \sum_{S_1 = 0, 1} \sum_{S_2 = 0, 1} \cdots e^{\frac{\mu}{k_B T} \sum_i S_i} e^{- \frac{H(\{S_i\})}{k_B T}} = \sum_{S_1 = 0, 1}\cdots \sum_{S_M = 0,1} \exp(\frac{\epsilon_\times}{k_B T} \sum_{i = 1}^M S_i S_{i + 1} + \frac{\epsilon_0 + \mu}{k_B T}\sum_{i = 1}^M S_i)
 \]
 
 \subsubsection{Computation of $\Theta$ by the transfer matrix method.}
@@ -2093,7 +2121,7 @@ Then note that we can rewrite the partition function as:
 \[
 \Theta = \sum_{S_1 = 0, 1}\cdots\sum_{S_M = 0, 1} \prod_{i = 1}^M T(S_i,S_{i+1})
 \]
-Note that from how we defined $T$ we see that it resembles closely to a matrix and in fact:
+Note that from how we defined $T$ we see that it resembles closely to a matrix and in fact if we fix $S_i,S_j$ we get
 \[
 \sum_{S_k} T(S_i, S_k) T(S_k ,S_j) = (\Pi^2) (S_i, S_j), \quad \text{ where } \Pi = \begin{pmatrix}
 T(1, 1) & T(1, 0)\\
@@ -2104,6 +2132,12 @@ Then we can rewrite our partition function as:
 \[
 \Theta = \sum_{S_1 = 0,1} (\Pi^M ) (S_1, S_1) = \Tr (\Pi^M)
 \]
+(Notice that in general we have that for any matrix $A$,
+$$(A^n)_{i,j}=\sum_{i_k\in\llbracket 1,n\rrbracket,\forall k\in\llbracket 1,n-1\rrbracket}A_{i,i_1}A_{i_1,i_2}\cdots A_{i_{n-1},j}$$ from which it follows that 
+$$
+\Tr(A^n)=
+\sum_{i_k\in\llbracket 1,n\rrbracket}A_{i_1,i_2}A_{i_2,i_3}\cdots A_{i_n,i_1}
+$$
 Now to compute the trace of this matrix we simply diagonalize it. The matrix itself is:
 \[
 \Pi = \begin{pmatrix}
@@ -2136,7 +2170,7 @@ Plugging all the results in this gives:
 \centering
 \includegraphics[width=0.6\textwidth]{graphs/CappillaryTransition}
 \end{figure}
-This might seem as something that is not that impressive but one has to appreciate that this is an exact result. Which means that it is an exact analytical solution to a problem that has a non-trivial interaction phenomenon. Now if we plot $\rho$ we get the figure plotted below. We see that we don't have any discontinuities, hence we do not have any real phase transition. However it is clear that we pass from a low density (gaseous system) to a high density (liquid system). Furthermore the transition becomes steeper and steeper as $\epsilon_\times \gg \epsilon_0$ and for $\epsilon_\times \to \infty$ we will get a step-function. \vspace{10cm}
+This might seem as something that is not that impressive but one has to appreciate that this is an exact result. Which means that it is an exact analytical solution to a problem that has non-trivial interaction phenomena. Now if we plot $\rho$ we get the figure plotted above. We see that we don't have any discontinuities, hence we do not have any real phase transition. However it is clear that we pass from a low density (gaseous system) to a high density (liquid system). Furthermore the transition becomes steeper and steeper as $\epsilon_\times \gg \epsilon_0$ and for $\epsilon_\times \to \infty$ we will get a step-function. \vspace{10cm}
 
 \section{Dense Liquids and Phase Transitions.}
 \subsection{Structures in liquids.}
@@ -2150,13 +2184,13 @@ V(x) = \begin{cases}
 Nonetheless, even such an approximate model presents very interesting behaviors. For example the hard spheres present a liquid-crystal transition, which was one of the first discoveries made using numerical simulation.
 
 \subsubsection{Even correlation function.}
-For the following we are now going to introduce a tool that is very widely used in liquid studies. It is denoted $g(r)$, and it denotes the ratio of density of particles at a distance $r$ from a particle. Hence $\rho \cdot g(r)$ gives the density of particles at a distance $r$ from a particle situated at $r = 0$. Another way of writing this is:
+For the following we are now going to introduce a tool that is very widely used in liquid studies. It is denoted $g(r)$, and it denotes the ratio of density of particles at a distance $r$ from a particle. Hence $\rho \cdot g(r)$ gives the density of particles at a distance $r$ from a particle situated at $r = 0$. This means that the (number of particles between distance $r,r+dr$ from a particle in $r=0$) $=4\pi r^2g(r)\rho dr$. Another way of writing this is:
 \[
 \rho^{(1)}(\vec{r}) = \langle \sum_{i = 1}^N \delta(\vec{r} - \vec{r}_i ) \rangle \quad \text{ with } \quad \int \dd^3 \vec{r} \rho^{(1)}(\vec{r}) = \langle \sum_{i = 1}^N \int \dd^3 \vec{r} \delta(\vec{r} - \vec{r}_i) \rangle = N
 \]
 This is the single body density, it is also possible to define a two-body density as follows:
 \[
-\rho^{(2)}(\vec{r}, \vec{r}') = \langle \sum_{i \neq j} \delta(\vec{r} - \vec{r}_i) \delta (\vec{r} - \vec{r}_i) \rangle \quad \text{ and when } \quad |\vec{r} - \vec{r}'| \to +\infty, \text{ then } \rho^{(2)}(\vec{r}, \vec{r}') \to \rho^2
+\rho^{(2)}(\vec{r}, \vec{r}') = \langle \sum_{i \neq j} \delta(\vec{r} - \vec{r}_i) \delta (\vec{r'} - \vec{r}_j) \rangle \quad \text{ and when } \quad |\vec{r} - \vec{r}'| \to +\infty, \text{ then } \rho^{(2)}(\vec{r}, \vec{r}') \to \rho^2
 \]
 Then the even correlation function is given by:
 \[
