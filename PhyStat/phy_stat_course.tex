@@ -2579,11 +2579,117 @@ P = \sigma T^4 , \text{ where } \sigma = \frac{2}{15} \frac{\pi^5 k_B^4}{h^3 c^2
 \]
 
 \section{Bosons and fermions without interactions.}
-
-
 \subsection{Indescernability and symetrisation.}
+In particles without interactions we can always split the Hamiltonian:
+\[
+\mathcal{H} = \mathcal{H}^{(1)} + \mathcal{H}^{(2)} + \cdots, \ket \psi = \ket{\psi_{\lambda_1}(1)} \otimes \ket{\psi_{\lambda_2}(2) }\otimes \cdots, E = E_{\lambda_1} + E_{\lambda_2} + \cdots
+\]
+The problem with such a formalism is that all the particles are treated as being discernable. So for example we have:
+\[
+\ket{\psi(1, 2, 3, \cdots, N)} = c \ket{\psi(2, 1, 3, \cdots, N)} = c^2 \ket{\psi(1, 2, \cdots N)} \Rightarrow c^2 = 1
+\]
+So if $c = 1$ the function is symmetric since $\ket{\psi(1,2)} = \ket{\psi(2, 1)}$ this is what we call bosons, if $c = -1$ then the function is anti-symmetric since $\ket{\psi(1,2)} = -\ket{\psi(2, 1)}$ these are what we call fermions.
+
+\subsubsection{Ex: 2 level system with 2 particles.}
+We have two energy levels $\lambda_1, \lambda_2$. Then for the bosonic case we have that:
+\[
+\ket \psi = \frac{1}{\sqrt{2}} \left(\ket{1:\lambda_1} \otimes \ket{2 : \lambda_2} + \ket{1 : \lambda_2} \otimes \ket{2 : \lambda_1}\right)
+\]
+As for the fermionic case we get:
+\[
+\ket \psi = \frac{1}{\sqrt{2}} \left( \ket{1: \lambda_1} \otimes \ket{2: \lambda_2} - \ket{1 : \lambda_2} \otimes \ket{2, \lambda_1}\right)
+\]
+We also have multiple very general results that we will not prove here. Bosons are integer spin particles, fermions are half-integers spin particles and two fermions can never be in the same quantum state. So for example in the previous case if we consider the particles are discenerable the possible states are: $\ket{\lambda_1, \lambda_1}, \ket{\lambda_1, \lambda_2}, \ket{\lambda_2, \lambda_1}, \ket{\lambda_2, \lambda_2}$. Now if we have bosons the possible states are: $\ket{(2, \lambda_1)}, \ket{(1, \lambda_1), (1, \lambda_2)}, \ket{(2, \lambda_2)}$. For fermions it is even easier there is only one possible state: $\ket{(1, \lambda_1), (1, \lambda_2)}$. Now if we include spin we have to write:
+\[
+\ket \psi = \ket \varphi \otimes \ket \chi
+\]
+Where $\ket \varphi$ is the orbital wavefunction and $\ket \chi$ is the spin wavefunction. Hence now there can be up to two fermions per energy level $\lambda_i$ since the spin lifts the degeneracy. In general for fermions we have that:
+\[
+\ket \psi = \frac{1}{\sqrt{N!}} \begin{vmatrix}
+\ket{\psi(1 :\lambda_1)} & \ket{\psi(1 : \lambda_2)} & & \ket{\psi(1:\lambda_N)}\\
+\ket{\psi(2 :\lambda_1)} & \cdots & & \\
+ & & \ddots & \\
+  & & & \ket{\psi(N:\lambda_N)} \\
+\end{vmatrix}
+\]
+As for bosons we have that:
+\[
+\ket{\psi(1,2, \cdots, N)} = C \sum_{\sigma \in \mathfrak{S}_N} \bigotimes_{i = 1}^N \ket{\psi(\sigma(i) : \lambda_i)}
+\]
+
 \subsection{Grand canonical partition function}
 \section{Fermion gas.}
+The general form of the partition function is:
+\[
+\Theta = \sum_{\text{microstates } s} e^{\beta(\mu N_s - E_s)}
+\]
+Once again remember the crucial idea of reverting the counting method and instead of associating a quantum state to every particle and iterate over every particle we associate a number of particles $n_i$ to a quantum state $\lambda_i$ and iterate over the quantum states. Note also that we have:
+\[
+N_s = \sum_{i} n_i
+\]
+We see immediately that if $N_s$ was fixed we would immediately have non-trivial combinatorics to solve right off the bat, this is why the grand canonical ensemble is much better to solve problem that have a quantum component. Now a given microstate is given by $\{n_i\}$. So we can write:
+\[
+\Theta = \sum_{n_1} \sum_{n_2} \cdots e^{\beta (\mu \sum_i n_i - \sum_i n_i \epsilon_i)} = \prod_i \underbrace{\sum_{n_i} e^{\beta (n_i (\mu - \epsilon_i)}}_{\zeta_i}
+\]
+\subsection{Fermions.}
+For fermions the problem is further simplified since the exclusion principle immediately gives that $n_i = 0 \lor n_i = 1$. Then the $\zeta_i$ simplify immediately to:
+\[
+\zeta_i = 1 + e^{\beta(\mu - \epsilon_i)}
+\]
+Then the average number of occupation $\langle n_i \rangle$ is given by:
+\[
+\langle n_i \rangle = \frac{\sum_{n_i = 0, 1} n_i e^{\beta(\mu - \epsilon_i)n_i}}{\sum_{n_i = 0, 1} e^{\beta(\mu - \epsilon_i)n_i}} = \frac{1}{e^{\beta(\epsilon_i - \mu)} + 1}
+\]
+\subsection{Bosons.}
+For the bosons since we have no restriction we have that $n_i \in \mathbb{N}$ hence we get that:
+\[
+\zeta_i = \sum_{n_i = 0}^{+\infty} e^{\beta(\mu - \epsilon_i)n_i} = \frac{1}{1 - e^{\beta(\mu - \epsilon_i)}}
+\]
+Which then gives in turn:
+\[
+\langle n_i \rangle  = - \frac{1}{\beta} \pdv{}{\epsilon_i} \log \zeta_i = \frac{1}{e^{\beta(\epsilon_i - \mu)} - 1}
+\]
+\subsubsection{Average number of particles.}
+The average number of particles in the system is given by:
+\[
+\langle N \rangle = \sum_i \langle n_i \rangle = \sum_i \frac{1}{e^{\beta(\epsilon_i - \mu)} \pm 1}
+\]
+
+\subsubsection{Average Energy.}
+The average energy of the system is given by:
+\[
+\langle E \rangle = \sum_i \langle n_i \rangle \epsilon_i = \sum_i \frac{\epsilon_i}{e^{\beta(\epsilon_i - \mu)} \pm 1}
+\]
+
+\subsubsection{Grand Potential.}
+The grand potential is given by:
+\[
+\Omega = - k_B T \log \Theta = -k_B T \sum_i \log \zeta_i
+\]
+
+\section{Fermionic gas.}
+A fermion gas is simply a certain number of independent fermions that have an energy described by $\epsilon(\vec{k}) = \frac{(\hbar k)^2}{2m} = \frac{p^2}{2m}$. Then the quantum states are described by two spins and $\vec{k} = \frac{2\pi}{L}(n_x, n_y, n_z)$. Then we get the following for the grand potential:
+\[
+\Omega = -k_B T 2 \int \frac{\dd^3 \vec{k}}{(2 \pi/L)^3} \log[1 + e^{\beta(\mu - \frac{(\hbar k)^2}{2m}}]
+\]
+The pressure is found by taking $P = -\frac{\Omega}{V}$ and the density by using:
+\[
+\rho(\mu, T) = \frac{\langle N \rangle}{V} = 2 \int \frac{\dd^3 \vec{k}}{(2\pi)^3} \frac{1}{e^{\beta(\frac{(\hbar k)^2}{2m} - \mu)} - 1}
+\]
+
+\subsubsection{High Temperatures.}
+A common parameter to introduce is what is called the fugacity: $z = e^{\beta \mu} \to 0$ at high temperatures. Then the formulas we have simplify to:
+\[
+P = \rho k_B T\left(1 + \frac{\rho \lambda_T^3}{2^{7/2}}  + \cdots \right)
+\]
+
+\subsubsection{Low Temperatures.}
+When $T$ becomes extremely low we have that: 
+\[
+\langle n \rangle \stackrel{T \to 0}{\longrightarrow} \Theta(\mu - \epsilon)
+\]
+Where $\Theta$ here is the heavy side step function and we denote by $\mu = \epsilon_F = \frac{(\hbar k_F)^2}{2m}$ the Fermi energy.
+
 \section{Bosonic gas and condensation of Bose-Einstein.}
 
 \end{document}

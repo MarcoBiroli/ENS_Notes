@@ -107,4 +107,26 @@ An equivalent notation that uses $s$ instead of $\sigma$ gives:
 \[
 m_s + \dv{M}{s} + T = 0, f_s + \dv{R}{s} = 0
 \]
+
+\section{Visco-elasticity: Return on motion.}
+A visco-elastic solid is for example some very viscos fluids like parafibe or glycerol) but also amorphous glass. We can describe with a unified theory these two regimes. (Maxwell 1831-1879). For viscous fluids if the velocity is given by:
+\[
+\vec{v} = \begin{pmatrix}
+v_x(z)\\0\\0
+\end{pmatrix}
+\]
+Then we have a force by unit surface given by: $\sigma = \nu \dv{v_x}{z}$ where $\nu$ is the dynamic viscosity parameter. For small displacements $u$ following $x$, $v_x = \dot{u}$ we have:
+\[
+\sigma = \nu \dv{\dot{u}}{z} = \nu \dv{}{t} \underbrace{\dv{u}{z}}_{\text{deformation tensor}}
+\] 
+Symmetrising the expression we get:
+\[
+\sigma = \nu \dot \epsilon
+\]
+If we denote $\epsilon = \underline{\epsilon} e^{j\omega t}$ then $\underline{\sigma} = j\eta \omega \underline{\epsilon}$. At high frequency we have an elastic solid so $\sigma = \mu \epsilon$. We pass from one regime to the other when $\mu \epsilon = \eta\omega \epsilon$ which is equivalent to $\omega = \frac{\mu}{\eta}$. We denote $\tau = \frac{1}{\omega} = \frac{\eta}{\mu}$. We then unifiy the two behaviors by postulating that $\dv{\sigma}{t} + \frac{\sigma}{\tau} = \mu \dot{\epsilon}$. In Fourier this gives:
+\[
+(j\omega + \frac{1}{\tau}) \underline{\sigma} = \mu j \omega \underline{\epsilon} \Rightarrow \frac{\sigma}{\underline{\epsilon}} = \frac{\mu j \omega}{j \omega + \frac{1}{\tau}} = T(\omega)
+\]
+Then for $\omega \ll 1$ $\frac{\sigma}{\epsilon} \approx \nu j \omega$ so viscous and for $\omega \gg 1$ then $\frac{\sigma}{\epsilon} = \mu$ so elastic. Then $\Re T$ corresponsd to the elastic regime and $Im(T)$ to the viscous one.
+
 \end{document}

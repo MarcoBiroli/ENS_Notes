@@ -12,6 +12,7 @@
 \usepackage{physics}
 \usepackage{multicol}
 \usepackage{caption}
+\usepackage{stmaryrd}
 \usepackage{subcaption}
 \author{Marco Biroli}
 \title{Quantum Physics}
@@ -144,4 +145,128 @@ So we get that:
 \]
 ....
 
+\chapter{Approximation Methods.}
+\section{Variational Method.}
+Let $E_0$ be the energy of the fondamental eigen state of the Hamiltonian $H$. Then we have that:
+\[
+\forall \ket\psi, \, \bra \psi H \ket \psi \geq E_0
+\]
+From this we get the intuition that we can approximate $E_0$ by minimizing $\bra \psi H \ket \psi$. Hence we introduce a family of wave functions $\left(\ket{\psi(\alpha)}\right)_\alpha$ indexed by the parameter $\alpha$, then $\bra{\psi(\alpha_0)} H \ket{\psi(\alpha_0)}$ is often a good approximation of $E_0$ if $\dv{}{\alpha} \bra{\psi(\alpha)} H \ket{\psi(\alpha)} |_{\alpha_0} = 0$.
+
+\subsection{Infinite potential well.}
+The fundamental state of the infinite potential well is: $\psi(x) = \sqrt{\frac{2}{L}} \sin(\frac{\pi x}{L})$ and $E_0 = \frac{\pi^2 \hbar^2}{2 m L^2}$. Now we take the following wave function: $\psi(x) = \frac{30}{L^5} x (x - L)$ (which respects the boundary conditions). We have that:
+\[
+\bra\psi H \ket \psi = \frac{5\hbar^2}{m L^2}
+\]
+Knowing that $\frac{\pi^2}{2} = 4.93$ this is already a very good approximation.
+
+\subsection{Helium atom.}
+The Hamiltonian of the helium atom is given by:
+\[
+H = \frac{p_1^2}{2m} + \frac{p_2^2}{2m} - \frac{2 e^2}{r_1} - \frac{2 e^2}{r_2} + \frac{e^2}{|\vec{r_1} - \vec{r_2}|}
+\]
+If we neglect the interaction term we get a separable Hamiltonian: $H = H_1 + H_2$. Then we have that:
+\[
+E_0 = 2 (4 \times E_I) = 108.8 \text{ eV}
+\]
+And the fundamental state is given by:
+\[
+\psi(\vec{r_1}, \vec{r_2}) = e^{-2r_1/a_0} e^{-2 r_2/a_0}
+\]
+We add an 'ecrantage' factor $\xi$ to model the interaction term:
+\[
+\psi_\xi (\vec{r_1}, \vec{r_2}) = \underbrace{\frac{\xi^2}{\pi a_0^2}}_{\text{normalization}} e^{-\xi r_1 /a_0} e^{-\xi r_2 / a_0}
+\]
+Then the Hamiltonian is written as:
+\[
+H = \left(\frac{p_1^2}{2m} - \frac{\xi e^2}{r_1}\right) + \left( \frac{p_2^2}{2m} - \frac{\xi e^2}{r_2}\right) + (\xi - 2) e^2 \left(\frac{1}{r_1} + \frac{1}{r_2}\right) + \frac{e^2}{|\vec{r_1} - \vec{r_2}|}
+\]
+Now looking individually at the contribution of each term:
+\begin{itemize}
+\item The first 2 terms gives and $\xi^2 E_I$ each.
+\item The third term gives $4 \xi(\xi -2) E_I$.
+\item The last term gives: $\iint \left(\frac{\xi^2}{\pi a_0^2}\right)^2 e^{-2 \xi r_1 /a_0}e^{-2\xi r_2/a_0} \frac{1}{|\vec{r_1} - \vec{r_2}|} \dd \vec{r_1} \dd \vec{r_2}$.
+\end{itemize}
+We know that:
+\[
+\frac{1}{r} = \frac{4\pi}{(2\pi)^3} \int \frac{e^{i \vec{k} \cdot \vec{r}}}{k^2} \dd^3 \vec{k} \Leftrightarrow \laplacian \frac{1}{r} = 4 \pi \delta(\vec{r})
+\]
+And we need to compute:
+\[
+\left(\frac{\xi^2}{\pi a_0^2}\right)^2 \int \frac{1}{k^2} \underbrace{\left(\int e^{i \vec{k} \cdot \vec{r} e^{-2 \xi r /a_0} \dd^3 \vec{r}}\right)^2}_{\frac{16 \xi /a_0}{(k^2 + (2\xi/a_0)^2)^2}} \dd^3\vec{k} = \frac{5}{4} \xi E_I
+\]
+Hence putting everything together we get that:
+\[
+\bra \psi_\xi H \ket \psi_\xi = 2 E_I (\xi^2 - \frac{27}{8} \xi) \text{ which is minimal for } \xi = \frac{27}{16} \lesssim 2
+\]
+This then gives that: $E_\text{min} = -\frac{729}{128}E_I = -77.5 \text{ eV}$ and the experimental value is $E_0 = - 78.6 \text{ eV}$.
+
+\subsection{Other Levels.}
+\subsubsection{Theorem:}
+$\ket\psi$ is an eigenstate of $H$ if and only if the differential of $\ket \phi \mapsto \frac{\bra \phi H \ket \phi}{\bra{\phi}\ket{\phi}}$ cancels in $\ket \psi$.
+\subsubsection{Proof:}
+We first prove the left to right implication. Suppose that $\ket \psi$ is an eigenstate of $H$ then:
+\[
+\bra{\delta \psi} H \ket{\psi} + \bra\psi H \ket{\delta \psi} = E_\psi \bra{\delta \psi}\ket\psi + E_\psi \bra \psi \ket{\delta \psi} \Rightarrow \bra{\delta \psi} H - E_\psi \ket\psi + \bra\psi H - E_\psi \ket{\delta \psi} = 0
+\]
+Now we suppose the right hand side. Let $\ket{\delta \psi} = \eta (H - E_\psi) \ket \psi \Rightarrow \bra\psi (H - E_\psi)^2 \ket \psi = 0 \Rightarrow ||(H - E_\psi)^2 \ket\psi|| = 0$.
+
+\section{Stationary perturbation method.}
+Take a Hamiltonian $H = H_0 + \underbrace{W}_{\text{perturbation}} = H_0 + \lambda V$ where $\lambda \ll 1$, and the eigenvalues of $V$ are of the same order of magnitude as those of $H_0$. We then write:
+\[
+\begin{cases}
+E = E_0 + \lambda E_1 + \lambda^2 E_2 + \cdots\\
+\ket\psi = \ket {\psi_0} + \lambda \ket{\psi_1} + \lambda^2 \ket{\psi_2} + \cdots
+\end{cases}
+\]
+Then the Schrodinger equation gives for the successive orders of $\lambda$:
+\begin{itemize}
+\item $H_0 \ket{\psi_0} = E_0 \ket{\psi_0}$.
+\item $H_0 \ket{\psi_1} + V \ket{\psi_0} = E_0 \ket{\psi_1} + E_1 \ket{\psi_0}$.
+\item $H_0 \ket{\psi_2} + V \ket{\psi_1} = E_0 \ket{\psi_2} + E_1 \ket{\psi_1} + E_2 \ket{\psi_0}$.
+\end{itemize}
+Furthermore the normalization of $\ket\psi$ gives:
+\[
+\bra{\psi_0} \ket{\psi_0} = 1 \land \bra{\psi_1}\ket{\psi_0} + \bra{\psi_0}\ket{\psi_1} = 0 \Leftrightarrow \Re(\bra{\psi_0}\ket{\psi_1}) = 0
+\] 
+
+\subsection{The case where $E_0$ is not degenerated.}
+For simplicity we write: $\ket{\psi_0} = \ket{n}$ and $E_0 = E_n$. Then we have that:
+\[
+\bra n H_0 \ket{\psi_1} + \bra n V \ket{\psi_0} = E_0 \bra n \ket{\psi_1} + E_1 \bra n \ket{\psi_0} \Leftrightarrow E_1 = \bra n V \ket n
+\]
+Then takes an eigenstate $\bra n' \neq \bra n$ then we have:
+\[
+\bra{n'} H_0 \ket{\psi_1} + \bra{ n'} V \ket{\psi_0} = E_0 \bra{ n'} \ket{\psi_1} + E_1 \cancelto{0}{\bra{ n'} \ket{\psi_0}} \Leftrightarrow \bra{n'} \ket {\psi_1} = \frac{\bra{n'} V \ket n}{E_n - E_{n'}}
+\]
+Furthermore if we impose that $\bra \psi \ket n \in \mathbb{R}$ then the condition $\Re(\bra{\psi_0}\ket{\psi_1}) = 0$ gives: $\bra n \ket{\psi_1} = 0$. Hence we get that at the first order:
+\[
+\ket \psi = \ket n + \sum_{n' \neq n} \frac{\bra{n'} V \ket n}{E_n - E_{n'}} \ket{n'}
+\]
+Repeating the same process for the second order we get that:
+\[
+E^2 = \bra n V \ket{\psi^1} = \sum_{n' \neq n} \frac{|\bra{n'} V \ket n|^2}{E_n - E_{n'}}
+\]
+Which gives:
+\[
+E = E_n + \bra n W \ket n +  \sum_{n' \neq n} \frac{|\bra{n'} V \ket n|^2}{E_n - E_{n'}}
+\]
+
+\subsubsection{Example for the non-degenerated harmonic oscillator.}
+We have the following Hamiltonian:
+\[
+H = \frac{p^2}{2m} + \frac{1}{2} m \omega^2 X^2 - q E X
+\]
+Then $\bra n q E X \ket n = 0$ which means that there is no first order correction. However at the second order we get:
+\[
+E = \hbar \omega (n + \frac{1}{2}) + \sum_{n' \neq n} \frac{|\bra{n'} q E X \ket{n}|^2}{E_n - E_{n'}} = \hbar \omega(n + \frac{1}{2}) - \frac{q^2 E^2}{2 m \omega^2}
+\]
+In this specific case it turns out that the second order is actually the exact answer.
+
+\subsection{The case where $E_0$ is degenerated.}
+Let $\ket {\psi_0} \in \ker (H - E_0 I)$ and we write: $\ket {\psi^i_{n,q}}$ with $q \in \llbracket 1, g_n\rrbracket$ instead of $\ket{\psi_i}$. Then we have that:
+\[
+\ket{\psi^0_{n, q}} = \sum_{r = 1}^{g_n} A_{q, r} \ket{n, r}
+\]
+Now applying the same method as before we have that: $ \sum_{r = 1}^{g_n} A_{q, r} \bra{n, r'} V \ket{n, r} = E^1_{n, q} A_{q, r'}$. Then to solve the following problem one needs to diagonalize $V_{|\ker(H - E_n I)}$.
 \end{document}
