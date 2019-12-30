@@ -6,6 +6,7 @@
 \usepackage{amssymb}
 \usepackage{wrapfig}
 \usepackage{mathtools}
+\usepackage{mathrsfs}
 \usepackage[makeroom]{cancel}
 \usepackage{graphicx}
 \usepackage{cancel}
@@ -14,6 +15,7 @@
 \usepackage{multicol}
 \usepackage{caption}
 \usepackage{subcaption}
+\usepackage{stmaryrd}
 \usepackage{braket} %\braket{a|b|c..}
 
 %main sets:
@@ -34,9 +36,112 @@
 \begin{document} 
 \maketitle
 
+\chapter*{Chapter 3}
+\section*{3.12}
+
+\subsection*{1)}
+Since we have periodic conditions the system in $d=1$ is equivalent to having a circle where the spins are placed and where they interact only between neighbors, so that we have $N$ interactions. In $d=2$ we have that the system is equivalent to a square lattice in which every spin has 4 neighbors, so that there are $4N/2=2N$ interactions.
+Now we have that
+$$Z=\sum_{\{\sigma_i\}}e^{-\beta H}=\sum_{\{\sigma_i\}}e^{K\sum_{\langle i,j\rangle} \sigma_i\sigma_j}=\sum_{\{\sigma_i\}}\prod_{\langle i,j\rangle}e^{K\sigma_i\sigma_j}
+$$
+Now since you are too stupid to come up with any idea, look at the result of the question and magically find that, since $\sigma_i\sigma_j=\pm 1$, you can write 
+$$(1+\sigma_i\sigma_j\tanh K)\cosh K=\frac{\sigma_i\sigma_j(e^K-e^{-K})+(e^K+e^{-K})}{2}=\frac{e^K(\sigma_i\sigma_j+1)+e^{-K}(1-\sigma_i\sigma_j)}{2}=e^{K\sigma_i\sigma_j}$$
+Hence recalling that there are $dN$ couples of interactions:
+\begin{align*}
+Z=\sum_{\{\sigma_i\}}\prod_{\langle i,j\rangle}\cosh K(1+\sigma_i\sigma_j\tanh K)=2^N(\cosh K)^{dN}Q(\tanh K)
+\end{align*}
+
+
+\subsection*{2)}
+\subsubsection*{a)}
+Notice that when we expand the product $\prod_{\langle i,j\rangle}(1+x\sigma_i\sigma_j)$ then each power of $x$ will have a certain coefficient of the type $\sigma_1^{n_1}\cdots \sigma_N^{n_N}$. Then notice that when we do the summation $\sum_{\{\sigma_i\}}$ then if $\sigma_1^{n_1}\cdots \sigma_N^{n_N}$ contains one of the $n_i$ which is odd, then after the summation the total contribution is gonna be zero. Indeed if wlog $n_1$ is odd, then for each configuration of the $\sigma_2,\ldots,\sigma_N$, we can pick $\sigma_1^{n_1}=\pm 1$ and the sum disappears. Hence the only possible configurations that have all the spins appearing with even exponents are the null configuration (all exponents are zero) and the complete configuration (all exponents are 2). 
+
+\subsubsection*{b)}
+Then we get that 
+$$Z=(\cosh K)^N \sum_{\{\sigma_i\}} \bigg(1+(\tanh K)^N\sigma_1^{2}\ldots\sigma_N^2\bigg)=2^{N}(\cosh K)^N(1+(\tanh K)^N)$$
+
+\subsubsection*{c)}
+We have that
+\begin{align*}
+\langle \sigma_a\sigma_{a+r}\rangle =\frac{(\cosh K)^N}{Z}\sum_{\{\sigma_i\}}\bigg(\sigma_a\sigma_{a+r}\prod_{\langle i,j\rangle}(1+\sigma_i\sigma_j\tanh K)\bigg)
+\end{align*}
+Then we have that if we expand inside with powers of $\tanh K$ we need to compute which configurations of the $\sigma_i^{n_i}$ will not add up to zero once summed over $\sum_{\{\sigma_i\}}$. The only two configurations are those connecting $\sigma_a$ and $\sigma_{a+r}$, i.e. $\sigma_a\sigma_{a+1}^2\ldots\sigma_{a+r-1}^2\sigma_{a+r}$ and $\sigma_{a+r}\sigma_{a+r+1}^2\ldots\sigma_N^2\ldots\sigma_{a-1}^2\sigma_a$. Hence we finally get 
+\begin{align*}
+\langle \sigma_a\sigma_{a+r}\rangle&=\frac{(\cosh K)^N}{Z}\sum_{\{\sigma_i\}}\bigg((\tanh K)^{r}+(\tanh K)^{N-r}\bigg)=\frac{(\cosh K)^N}{Z}2^N\bigg((\tanh K)^{r}+(\tanh K)^{N-r}\bigg)\\
+&=\frac{(\tanh K)^r+(\tanh K)^{N-r}}{1+(\tanh K)^N}
+\end{align*}
+
+
+\subsection*{3)}
+\subsubsection*{a)}
+Like before we need to take into account all those configurations of the $\sigma_1^{n_1}\ldots\sigma_N^{n_N}$ such that their exponents are even, and hence they don't cancel out when summing over all the possible configurations. If we see the spin system as a graph where every spin has exactly 4 connections, then a configuration that doesn't cancel is such that any involved spin has an even number of links activated. For $\tanh k$ with powers of $1,2,3$ there is nothing appearing, since we need to pass though every involved spin at least two times (or 4 ), which is clearly impossible. So the first term is $(\tanh K)^4$ , which is given by the squares (so in total $N$ of them). Then there is the term in $(\tanh K)^6$, which is made of rectangles of one side of 1 link and one side of 2 links: in total $12N/6=2N$. For $(\tanh K)^8$ we have either rectangles of one side made of 1 link and the other made of 3 or squares of side 2 or the little $L$ made of three squares attached and linked on the boundary or two one sided different squares: in total $N+2N+4N+N(N-5)/2$
+where the first two are trivial, the third one is found by thinking that there is a bijection between taking a square of side one and taking 4 $L$ that with it form a 2 sided square, the fourth one is found by saying that for any chosen square I can choose other $(N-5)$, so that we have a total of $N(N-5)/2$.
+Finally 
+$$Q=1+N(\tanh K)^4+2N(\tanh K)^6+\frac{N}{2}(N+9)(\tanh K)^8 +o((\tanh k)^8)$$
+
+\subsubsection*{b)}
+Recall that the expansion of $\ln(x)$ for $x$ close to $0$ is $\ln(1+x)=x-x^2/2$
+\begin{align*}
+F&=-k_BT\log(Z)
+=-k_BT\bigg(N\log(2)+2N\log(\cosh K)+\log(Q)\bigg)\\
+&=-k_BNT\bigg(\log(2)+2\log(\cosh K)+(\tanh K)^4+2(\tanh K)^6+\frac{N+9}{2}(\tanh K)^8-\frac{N}{2}(\tanh K)^8 +o((\tanh k)^8)\bigg)\\
+&=-Nk_BT\bigg(\log(2)+2\log(\cosh K)+(\tanh K)^4+2(\tanh K)^6+\frac{9}{2}(\tanh K)^8+o((\tanh k)^8)\bigg)
+\end{align*}
+
+It is clearly extensive
+\subsubsection*{c)}
+
+The fundamental state is when all the spins are aligned, so that the degeneracy is 2. The energy is $E_0=-2NJ$. 
+
+\subsubsection*{d)}
+The first excited state corresponds to having only one spin which is not aligned. Hence we have $g_1=2N$ . Then the energy is $E_1=E_0+8J$, so $\epsilon_1=8J$. The second energy is given by 2 non-aligned neighboring spins:
+$\epsilon_2=2(6J)=12J$ and $g_2=2(2N)$ (2 times the number of neghboring spins we can choose). For the third state we have that it can be obtained by three non-aligned neighboring spins, or two non-aligned non-neighboring spins, or 4 non-aligned spins forming a one sided square. Hence we have $\epsilon_3=2(8)J=16J$ and $g_3=2((4N+2N)+N+N(N-5)/2))=$
+where there are $4N+2N$ ways to choose 3 neighboring spins, $N$ ways to choose a square and $N(N-5)/2$ ways to choose two non-neighboring spins.
+
+\subsubsection*{e)}
+
+
+
+
+
+
+
 
 \chapter*{Chapter 6}
-\section*{Exercise 6.3)}
+
+
+\section*{6.1}
+\subsection*{1)}
+The derivative of $\mathscr{V}$ is 
+$$\frac{d\mathscr{V}}{dt}=\sum_i\dot{\mathbf{p}}_i\cdot \mathbf{r}_i+\mathbf{p}_i\cdot\dot{\mathbf{r}}_i=\sum_i\mathbf{F}_i\cdot \mathbf{r}_i+\frac{\mathbf{p}_i^2}{m}=\mathscr{H}+2E_c$$
+
+then  if we take the average we have that
+$$\overline{\frac{d\mathscr{V}}{dt}}=\frac{d\overline{\mathscr{V}}}{dt}=\frac{d}{dt}\bigg(\lim_{T\to\infty}\sum_i\frac{1}{T}\int_0^T\frac{1}{2m}\frac{d\mathbf{r}_i^2}{dt}\bigg)=\frac{d}{dt}\bigg(\sum_i\lim_{T\to\infty}\frac{\mathbf{r}_i^2(T)-\mathbf{r}_i(0)}{2mT}\bigg)=0$$
+where we used that since the volume $V$ is finite, then the position of a particle is bounded. Hence it follows that 
+$$\overline{\mathscr{H}}=-2\overline{E_c}$$
+
+\subsection*{2)}
+
+We decompose a force $\mathbf{F}_i$ as $\mathbf{F}_{int}-P(\vec{S}_1+\cdots+\vec{S}_6)=\mathbf{F}_{int}+\mathbf{F}_{ext}$ where we took into account the 6 oriented faces of the box where the particles are contained. Then we have
+$$\overline{\sum_i\mathbf{F}_{ext}\cdot\mathbf{r}_i}=-6PS\bigg(\overline{\sum_i \mathbf{n}\cdot \mathbf{r}_i}\bigg)$$
+where we said that all the 6 faces will give the same contribution ($S$ is the surface of a face), and $\mathbf{n}$ is just one of the 6 unitary vectors giving theh orientation of a face.
+Then 
+$$-6PS\bigg(\overline{\sum_i \mathbf{n}\cdot \mathbf{r}_i}\bigg)=-6PS\frac{d}{2}=-3PV$$
+where $d$ is the length of a side of the cube and where we used that the average of the sum of the projections of the vectors of each particle on one surface is going to be at the middle, i.e. at $d/2$.
+
+\subsection*{3)}
+
+
+
+
+
+
+
+
+
+
+
+\section*{6.3}
 
 
 
@@ -48,40 +153,64 @@ if we mesure the light on the screen, we get that
 $$I(z)=|E_{tot}(z)|^2\approx |TF(A)|^2\approx |S|^2$$.
 
 
-\subsection*{1)}
-We have $\rho^{(l)}(\vec{x}_1,\cdots,\vec{x}_l)=\mathbb{P}($particella 1 at $\vec{x}_1\pm d^3\vec{r}\cap\cdots\cap$ particella $l$ at $\vec{x}_l\pm d^3\vec{r}).$
-Moreover $E_p=\sum_{i>j} U(\vec{r}_i-\vec{r}_j)$.
 
+\subsection*{1)}
+The potential energy is
+$$E_p(\{\vec{r}_i\})=\sum_{i<j}U(|\vec{r}_i-\vec{r}_j|)$$
 \subsection*{2)}
-The kinetic energy is given by $E_c=\sum_{i}\frac{p_i^2}{2m}$.
+The kinetic energy is 
+$$E_c=\sum_i \frac{p_i^2}{2m}$$
 
 \subsection*{3)}
-As always
-$$Z=\frac{1}{h^{3N}\cdot N!}\int d\Gamma e^{-\beta (E_c+E_p)(\Gamma)}=\frac{1}{h^{3N}\cdot N!}\bigg(\sqrt{\frac{2\pi m}{\beta}}\bigg)^{3N}\int \prod d^{3}\vec{r}_i e^{-\beta E_p(\Gamma)}=\frac{\lambda^{-3N}}{N!}Q$$
-with $\lambda=\sqrt{\frac{h^{2}\beta}{2\pi m}}$
+The canonical partition function is written as
+\begin{align*}
+Z&=\frac{1}{N!h^{3N}}\int \prod d^3r_id^3p_i e^{-\beta(\sum_{i<j}U(|\vec{r}_i-\vec{r}_j|)+\sum_i \frac{p_i^2}{2m})}=\frac{1}{N!h^{3N}}\bigg(\sqrt{\frac{2m\pi}{\beta}}\bigg)^{3N}Q_N\\
+&=\frac{1}{\lambda^{3N}N!}Q_N
+\end{align*}
+
+we know that $\lambda$ is the De Broglie wavelenght, and it is the threshold at which we go to the quantum regime. This meas thatto have a classical desscription the average particle distance has to be $>>\lambda$. Instead when the interparticle distance is smaller than the De Broglie wavelength, then we will need a quantum description.
+
 
 \subsection*{4)}
-In order to have a classical description we need to have that (average distance between particles)$>>\lambda$. Hence since the average particle distance is $(V/N)^{1/3}$ we get that we must have$(V/N)^{1/3}=n^{-1/3}>>\lambda$.
-
+The classical description is valid when the average interparticle distance $(V/N)^{1/3}>>\lambda$. Hence $n^{-1/3}>>\lambda$. 
 
 \subsection*{5)}
-We proved that 
-$$\frac{1}{V}g(\vec{r})d^3\vec{r}=\mathbb{P}(\text{ 1 particle in }\vec{r}\pm d^3\vec{r}|\text{1 part in 0})\underset{GP}{=}\mathbb{P}(\text{1 part in }\vec{r}\pm d^3\vec{r})=\frac{d^3\vec{r}}{V}$$
-and so $g_{GP}(\vec{r})=1$. 
+We have 
+$$\rho^{(l)}(\mathbf{x}_1,\cdots,\mathbf{x}_l)=\sum_{i_1\neq \ldots\neq i_l}\langle \delta^{(3)}(\mathbf{x}_1-\mathbf{x}_{i_1})\ldots\delta^{(3)}(\mathbf{x}_l-\mathbf{x}_{i_l})\rangle=\sum_{i_1\neq\ldots\neq i_l}\mathbb{P}(\{\mathbf{x}_1=\mathbf{x}_{i_1}\}\cap \ldots\cap\{\mathbf{x}_l=\mathbf{x}_{i_l}\})$$
+where the sum is done over all the positions $\mathbf{x}_{i_1}\ldots\mathbf{x}_{i_l}$ which are taken between the positions of the particles. Hence for $l=2$ we have that 
+$$\rho^{(2)}(\mathbf{x},\mathbf{y})d\mathbf{x}d\mathbf{y}\sim \mathbb{P}(\text{1 particle at }\mathbf{x}\pm d\mathbf{x}\cap \text{1 particle at }\mathbf{y}\pm d\mathbf{y})$$
+Then we have that 
+$$\int d\mathbf{x}d\mathbf{y}\rho^{(2)}(\mathbf{x},\mathbf{y})=\sum_{i_1\neq i_2}\int d\mathbf{x}d\mathbf{y}\mathbb{P}(\{\mathbf{x}=\mathbf{x}_{i_1}\}\cap\{\mathbf{y}=\mathbf{x}_{i_2}\})=\sum_{i_1\neq i_2} 1=N(N-1)\approx N^2$$
+and owing to the normalization of $\mathbb{P}(\text{1 particle at }\mathbf{x}\pm d\mathbf{x}\cap \text{1 particle at }\mathbf{y}\pm d\mathbf{y})$, we get that
+$$\rho^{(2)}(\mathbf{x},\mathbf{y})d\mathbf{x} d\mathbf{y}=N^2 \mathbb{P}(\text{1 particle at }\mathbf{x}\pm d\mathbf{x}\cap \text{1 particle at }\mathbf{y}\pm d\mathbf{y})$$
+therefore now we have that
+\begin{align*}
+\mathbb{P}(\text{1 particle at }\mathbf{y}\pm d\mathbf{y}|\text{1 particle at }\mathbf{x}\pm d\mathbf{x})&=\frac{\mathbb{P}(\text{1 particle at }\mathbf{y}\pm d\mathbf{y}\cap \text{1 particle at }\mathbf{x}\pm d\mathbf{x})}{\mathbb{P}(\text{1 particle at }\mathbf{x}\pm d\mathbf{x})}\\
+&=\frac{\frac{1}{N^2}\rho^{(2)}(\mathbf{x},\mathbf{y})d\mathbf{x}d\mathbf{y}}{\frac{d^3\vec{r}}{V}}=\frac{\frac{1}{N^2}\rho^{(2)}(\mathbf{x},\mathbf{y})d^3\vec{r}d^3\vec{r}}{\frac{d^3\vec{r}}{V}}\\
+&=\frac{n^{-2}}{V}\rho^{(2)}(\vec{r})d^3\vec{r}=\frac{1}{V}g(\vec{r})d^3\vec{r}
+\end{align*}
+
+where we replaced $\vec{r}=\mathbf{x}-\mathbf{y}$ and we think of it as being $\mathbf{x}=0$. Hence $\frac{1}{V}g(\vec{r})d^3\vec{r}$ is the probability to find a particle at position $\vec{r}\pm d\vec{r}$ knowing that we have a particle at $\vec{0}\pm d\vec{r}$. 
+
+For a perfect gas we have 
+$\frac{1}{V}g(\vec{r})d^3\vec{r}=\frac{d^{3}\vec{r}}{V}\Rightarrow g(\vec{r})=1$.
+
+
 
 \subsection*{6)}
-Benzene is non-polar, hence it is better than water for the diffraction. Difficulty to obtein some data for small $\vec{r}$? If $\vec{ r}$ is too small with respect to the wavelength we don't get diffraction.\\
+Benzene is non-polar, hence it is better than water for the diffraction. Difficulty to obtain some data for small $\vec{r}$? If $\vec{ r}$ is too small with respect to the wavelength we don't get diffraction.\\
 Estimation of the diamater:
+to estimate it pick the value for which thefunction $g(r)=1$,i.e. the value of $r$ for which we have exactly one particle at close distance, and that will give us the typical diameter of a particle. From the figure it is $\sigma\approx 5\cdot 10^{2}nm$.
 
 
 
 \subsection*{7)}
-For diffraction we need that the $\sigma$ is almost the same as the wavelenght of the incoming light. Hence We have resolution$\sim\sigma\sim 500nm$ since we want $\lambda\sim\sigma$. Hence we need a laser of $\lambda \sim 514  nm$.
+Diffraction of a laser beam on the liquid. For diffraction we need that the $\sigma$ is almost the same as the wavelenght of the incoming light. Hence we have resolution$\sim\sigma\sim 500nm$ since we want $\lambda\sim\sigma$. Hence we need a laser of $\lambda \sim 514  nm$.
 
 
 \subsection*{8)}
 
-$$n=\frac{\text{number of particles}}{V}=\frac{\text{densite massique}}{\text{masse 1 particule}}=\frac{5\cdot 39\cdot 10^{-2}}{8\cdot 10^{-15}}\approx 10^{19}m^{-3}$$
+$$n=\frac{N}{V}=\frac{N}{M}\frac{M}{V}=\frac{\rho}{m}=\frac{5,39\cdot 10^{-2}}{8\cdot 10^{-15}}\approx 10^{19}m^{-3}$$
 minimal volume $\sim\sigma^3$.
 We have that
 $$n\sigma^3=10^{19}(5\cdot 10^{-7})^3=125\cdot 10^{19-21}\approx 1.25\text{ particles/elementar volume}$$
@@ -92,11 +221,12 @@ Hence it is not at all dilute, but mainly dense.
 We work on the LHS:
 
 \begin{align*}
-\rho^{(2)}=\sum_{i_1\neq i_2}
+\rho^{(2)}(\vec{x},\vec{y})=\sum_{i_1\neq i_2}
 <\delta(\vec{r}_{i_1}-\vec{x})\delta(\vec{r}_{i_2}-\vec{y})>
-&=\frac{1}{Z}\int\prod_{i=1}^n\frac{d\vec{r}_i d\vec{p}_i}{h^3}e^{-\beta H(..)}
-\cdot \sum_{i_1\neq i_2} 
-\underset{Q3}{=}\frac{1}{Q_N}\sum_{i_1\neq i_2}\int\prod_{i=1}^N d^3\vec{r}_i e^{-\beta E_p\{r_i\}}
+&=\frac{1}{N!Z}\int\bigg(\prod_{i=1}^N\frac{d\vec{r}_i d\vec{p}_i}{h^3}e^{-\beta H}
+\cdot \sum_{i_1\neq i_2}
+\delta(\vec{r}_{i_1}-\vec{x})\delta(\vec{r}_{i_2}-\vec{y})\bigg)\\ 
+&\underset{Q3}{=}\frac{1}{Q_N}\sum_{i_1\neq i_2}\int\prod_{i=1}^N d^3\vec{r}_i e^{-\beta E_p\{r_i\}}
 \delta(\vec{r}_{i_1}-\vec{x})\delta(\vec{r}_{i_2}-\vec{y})\\
 &=
 \frac{1}{Q_N}N(N-1)\int\prod_{i=1}^N d^3\vec{r}_i
@@ -109,52 +239,60 @@ e^{-\beta\big[U(x-y)+\sum_{i=3}^N(U(x-r_i)+U(y-r_i))+\sum_{i>j=3}^N U(r_i-r_j)\b
 Now we attack the gradient 
 
 \begin{align*}
-\vec{\nabla}_{\vec{x}}\rho^{(2)}(x,y)=
-\frac{N(N-1)}{Q_N}\int\prod_{i=3}^Nd^3\vec{r}_i(-\beta\nabla U(x-y)-\beta\sum_{i=3}^N\nabla U(x-r_i))\cdot e^{-\beta(..)}
-=\frac{N(N-1)}{Q_N}(-\beta\nabla U(x-y))\int\prod_{i=3}^Nd^3r_ie^{-\beta(..)}-\frac{N(N-1)}{Q_N}\beta\int\prod_{i=3}^Nd^3r_i\big[\sum_{i=3}^N\nabla U(x-r_i)\big]e^{-\beta E_p}
+\vec{\nabla}_{\vec{x}}\rho^{(2)}(x,y)&=
+\frac{N(N-1)}{Q_N}\int\bigg(\prod_{i=3}^Nd^3\vec{r}_i\big[-\beta\nabla U(x-y)-\beta\sum_{i=3}^N\nabla U(x-r_i)\big]\cdot e^{-\beta E_p}\bigg)\\
+&=\frac{N(N-1)}{Q_N}(-\beta\nabla U(x-y))\int\prod_{i=3}^Nd^3r_ie^{-\beta E_p}-\frac{N(N-1)}{Q_N}\beta\int\bigg(\prod_{i=3}^Nd^3r_i\big[\sum_{i=3}^N\nabla U(x-r_i)\big]e^{-\beta E_p}\bigg)
 \end{align*}
 
 Then we introduce $\sum_{i=3}^Nf(r_i)=\int dzf(z)\sum_{i=3}^N\delta(z-r_i)$. With that decomposition we get
 
-$$\nabla_{vec{x}}\rho^{(2)}(x,y)=-\beta(\nabla U(x-y))\rho^{(2)}(x,y)-\beta\int dz\nabla U(x-z)\frac{N(N-1)}{Q_N\int \prod_{i=3}^Ndr_ie^{-\beta E_p(x,y,r_{i>3})}}\sum_{i=3}^N\delta(r_i-z)
-$$
+\begin{align*}
+\vec{\nabla}_{\vec{x}}\rho^{(2)}(x,y)&=-\beta(\nabla U(x-y))\rho^{(2)}(x,y)-\beta\int \bigg(d^3z\nabla U(x-z)\sum_{i=3}^N\delta^{(3)}(r_i-z)\frac{N(N-1)}{Q_N}\int \prod_{i=3}^Ndr_ie^{-\beta E_p(x,y,r_{i>3})}\bigg)\\
+&=-\beta\nabla U(x-y)\rho^{(2)}(x,y)-\beta\int d^3z\nabla U(x-z)\rho^{(3)}(x,y,z)
+\end{align*}
 
 where $<>$ is the canonical average.
 
-\subsection{10)}
-
-
+\subsection*{10)}
 Born-Green is general.
 
-$\nabla\rho^2\approx f(\rho^2,\rho^3)$ and $\nabla \rho^3=f(\rho^3,\rho^4)$, it doens't stop. 
+$\nabla\rho^{(2)}\approx f(\rho^{(2)},\rho^{(3)})$ and $\nabla \rho^3=f(\rho^{(3)},\rho^{(4)})$, it doens't stop. 
 
-$$\rho^{(l)}(\vec{x}_1,\vec{x}_2,..,\vec{x}_n)=\sum_{i_1\neq..\neq i_l}<\delta(\vec{x}_{i_1}-vec{x}_{1})..\delta(\vec{x}_{i_l}-\vec{x}_l)>\underset{dilue}{\approx}\sum<\delta(\vec{x}_{i_1}-\vec{x}_{i_1})..\delta(..)>\approx n\sigma^3)^l$$
-IN practice, if we suppose dilute then $n\sigma^3<<1$ implies that $\rho^{(1)}>>\rho^{(2)}>>...$.
+$$\rho^{(l)}(\vec{x}_1,\vec{x}_2,..,\vec{x}_l)=\sum_{i_1\neq..\neq i_l}<\delta(\vec{x}_{i_1}-\vec{x}_{1})..\delta(\vec{x}_{i_l}-\vec{x}_l)>\underset{dilute}{\approx}\sum<\delta(\vec{x}_{i_1}-\vec{x}_{i_1})..\delta(..)>\approx n\sigma^3)^l$$
+In practice, if we suppose dilute then $n\sigma^3<<1$ implies that $\rho^{(1)}>>\rho^{(2)}>>...$.
 
 In our case we have 
 
 $$merda da fare$$
 
-By symmetry $\rho^{(2)}(x,y)=\rho^{(2)}(x-y)$. If we rewrite Born-Green at order 2 we get
+By symmetry $\rho^{(2)}(x,y)=\rho^{(2)}(x-y)=\rho^{(2)}(r)$. If we rewrite Born-Green at order 2 we get
 
-$$\frac{d}{dr}\rho^{(2)}=-\beta(\frac{d}{dr}U(r))\rho^{(2)}(r)\Rightarrow \rho^{(2)}(r)=Ae^{-\beta U(r)}$$ We determine $A$ with $\rho^{(2)}\underset{r\to\infty}{=}n^{-2}$ and $U(r)\underset{r\to\infty}{\to 0}$, so that $A=n^{-2}$.
+$$\frac{d}{dr}\rho^{(2)}=-\beta(\frac{d}{dr}U(r))\rho^{(2)}(r)\Rightarrow \rho^{(2)}(r)=Ae^{-\beta U(r)}$$ We determine $A$ with $\rho^{(2)}(r)\underset{r\to\infty}{=}n^{2}$ and $U(r)\underset{r\to\infty}{\to 0}$, so that $A=n^{2}$.
 
 
 \subsection*{11)}
+$g(\vec{r})=e^{-\beta U(\vec{r})}$
 
 
-on paper
+
 
 \subsection*{12)}
 
 
-Computing the TF of $g(\vec{r})-1$. Hors $g(\vec{r})=g(r,\xcancel{\theta},\xcancel{\phi})$.
+Computing the TF of $g(\vec{r})-1$, and using that  $g(\vec{r})=g(r,\xcancel{\theta},\xcancel{\phi})$.
 
-$$TF(g-1)(\vec{q})=\int d^3\vec{r} e^{i\vec{q}\cdot\vec{r}}(g(\vec{r})-1)=(coord spher z aligne \vec{q})=\int 4\pi r^2dr\int_0^{\pi}d\theta \sin\theta e^{iqr\cos\theta}(g(r)-1)
-=4\pi\int r^2dr(g(r)-1)\int_{-1}^1 du\cdot e^{iqru} u=\cos(\theta)$$
-with $\int(merda -1 1)=2\frac{\sin(qr)}{qr}$.
+\begin{align*}
+TF(g-1)(\vec{q})&=\int d^3\vec{r} e^{i\vec{q}\cdot\vec{r}}(g(\vec{r})-1)=\int 4\pi r^2dr\int_0^{\pi}d\theta \sin\theta e^{iqr\cos\theta}(g(r)-1)\\
+&\underset{u=\cos\theta}{=}4\pi\int\bigg( r^2dr(g(r)-1)\int_{-1}^1 du\cdot e^{iqru}\bigg)
+\end{align*}
 
-Hence $$TF(g-1)(q)=\frac{8\pi}{q}\int dr\cdot r(g(r)-1)\sin(qr)=\frac{4\pi}{q^3}\bigg((e^{\beta\epsilon}-1)(\sin\alpha\sigma q-\alpha q\cos \alpha\sigma q)+e^{\beta\epsilon}(\sigma q \cos(\sigma q)-\sin(\sigma q))$$
+with $\int_{-1}^1 du\cdot e^{iqru} =2\frac{\sin(qr)}{qr}$.
+Hence 
+\begin{align*}
+TF(g-1)(q)&=\frac{8\pi}{q}\int dr\cdot r(g(r)-1)\sin(qr)=\frac{8\pi}{q}\bigg(\int_{0}^{\sigma} -r\sin(qr)dr+\int_{\sigma}^{\alpha\sigma}(e^{\beta\epsilon}-1)r\sin(qr)dr\bigg)\\
+&=\frac{8\pi}{q}\bigg(\frac{\sigma q\cos(\sigma q)-\sin(\sigma q)}{q^2}+(e^{\beta \epsilon}-1)\frac{\sin(\sigma q\alpha)-\sigma q \alpha\cos(\sigma q \alpha)-\sin(\sigma q)+\sigma q\cos(\sigma q)}{q^2}\bigg)\\
+&=\frac{8\pi}{q^3}\bigg((e^{\beta\epsilon}-1)(\sin(\alpha\sigma q)-\alpha q\sigma\cos( \alpha\sigma q))+e^{\beta\epsilon}(\sigma q \cos(\sigma q)-\sin(\sigma q)\bigg)
+\end{align*}
 pseudoperiod $\sim\frac{2\pi}{\sigma},\frac{2\pi}{\alpha\sigma}$. $\rho^2\sim$ period $\sigma,\alpha\sigma$. Then we get 
 $$S(q)=1+nTF(g-1)(q)$$ and so $S(0)=1+n+4\pi(-(e^{\beta\epsilon})(\alpha\sigma)^3+e^{\beta\epsilon}\sigma^3)$ since $\sin(x)-x\cos(x)=x-x^3/6-x(1-x^2/2)=x^3/3+o(x^3)$ (S behaves well in 0).
 
@@ -169,10 +307,56 @@ $$U_{exp}(r)=-k_BT\ln(g_{exp}(r))$$
 FIg 6.3 $\Phi(r)=-\ln g_{exp}(r)$. 
 
 
+\section*{6.5}
+
+\subsection*{1)}
+No idea
+
+\subsection*{2)}
+
+We have that
+$$\Theta=\sum_{N=0}^{\infty}e^{\beta \mu N}Z_N=\sum_{N=0}^{\infty}(\lambda^{-3}e^{\beta\mu})^NQ_N$$
+so that at the order $p$ we get
+$$\Theta\approx \zeta Q_1+\ldots+\zeta^{p}Q_p$$
+with $Q_N=\frac{1}{N!}\int\prod d^3{r}_i e^{-\beta V(\{r_i\})}$
+
+
 
 
 
 \chapter*{Chapter 11}
+
+
+\section*{11.2}
+
+\subsection*{1)}
+Since there is a lack of geometry and all the particles interact with each other, we can consider them as being in a circle and forming a complete graph with $N$ vertices. Hence we devided the hamiltonian to take into account the fact that rotating this circle doesn't change the problem.
+
+\subsection*{2)}
+At first notice that 
+$$m:=\frac{\sum_{i=1}^n\sigma_i}{N} \Rightarrow m^2=\frac{\sum_{i,j=1}^N\sigma_i\sigma_j}{N^2}$$
+Now call $S=Nm$, and notice that $S=2a-N$, with $a\in\llbracket 0,N\rrbracket$. Hence $m$ will take $N+1$ values spaced by $2/N$ from $-1$ to $1$. For each of these $m$, i.e. for each $a$ we have $\binom{N}{a}$ possibilities. In the canonical ensemble we have that 
+\begin{align*}
+Z=\sum_{\{\sigma_i\}} e^{-\beta H}=\sum_{m} \binom{N}{\frac{(m+1)N}{2}}e^{-\beta N(-\frac{J}{2}m^2-hm)}
+\end{align*}
+
+\subsection*{3)}
+At large deviations of $N$ we retain only the dominant term in $Z$, and all the others will go to zero with respect to it as $N\to\infty$. Then 
+We have
+\begin{align*}
+f&=\lim_{N\to\infty}-\frac{1}{\beta N}\ln(Z)
+=
+\end{align*}
+
+
+
+
+
+
+
+
+
+
 \section*{11.4}
 \subsection*{1)}
 Call $q$ the number of defects in the chain. Then at each time we encounter a defect, we have to add a term $-1$, whereas inside the defect we only add $+1$ terms, because the particles have same spin. In simple words any meeting of two defect steals a spin link. Hence the hamiltonian will be given by 

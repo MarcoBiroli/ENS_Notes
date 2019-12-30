@@ -2480,7 +2480,7 @@ p_i = \frac{1}{Z} e^{-\beta E_i} \quad \text{ where } \quad Z = \sum_{ \text{ qu
 \subsubsection{Grand Canonical.}
 We get similarly that:
 \[
-p_i = \frac{1}{\Theta} e^{\frac{-E_i + \mu n_i}{k_B T}} \quad \text{ where } n_i \text{ is the degeneracy of the state } i
+p_i = \frac{1}{\Theta} e^{\frac{-E_i + \mu n_i}{k_B T}} \quad \text{ avec } n_i \text{ nombre occupation état } i
 \]
 And we have:
 \[
@@ -2535,13 +2535,13 @@ Z_N = \sum_{\text{microstates} N} e^{-\beta E_s} \text{ and since } \mu =0 \text
 \] 
 Now we have to define what we call a microstate. We call $L$ the size of the cavity that we are studying, then we get $\vec{k} = \frac{2 \pi}{L} (n_x, n_y, n_z)$ which have a given energy:
 \[
-\epsilon = \frac{2\pi}{L} \sqrt{n_x^2 + n_y^2 + n_z^2}
+\epsilon_{n_x,n_y,n_z} = \frac{2\pi}{L} \hbar c\sqrt{n_x^2 + n_y^2 + n_z^2}
 \]
-However putting this in the partition function is unsolvable hence we change our way of writing the system. We know say that each photon $\lambda_i $ is in a given quantum state $\lambda_i$, this is a typical way to write quantum problems. However the trick here that allows us to simply the math is to reverse the counting. We know traverse on the $\lambda_i$ and say that to each $\lambda_i$ is associated a certain amount $n_i$ of photons. Then the energy can be written as:
+However putting this in the partition function is unsolvable hence we change our way of writing the system. We know say that each photon $\lambda_i $ is in a given quantum state $\lambda_i$, this is a typical way to write quantum problems. However the trick here that allows us to simplify the math is to reverse the counting. We know traverse on the $\lambda_i$ and say that to each $\lambda_i$ is associated a certain amount $n_i$ of photons. Hence each microstate will be characterized by the numbers $n_1,n_2,..$ and so the total energy of one microstate can be written as:
 \[
-E = n_1 \epsilon_1 + n_2 \epsilon_2 + \cdots
+E_s = n_1 \epsilon_1 + n_2 \epsilon_2 + \cdots
 \]
-In other words what we are doing here is to characterize each microstates by the distribution of particles on the discrete energy levels. Now finally using this to re-write the partition function we get:
+In other words what we are doing here is to characterize each microstate by the distribution of particles on the discrete energy levels. Now finally using this to re-write the partition function we get:
 \[
 \Theta = \sum_{\text{microstates} s} e^{-\beta E_s} = \prod_{i} \sum_{n_i \text{ of quantum state } \lambda_i} e^{-\beta n_i \epsilon_i}
 \]
