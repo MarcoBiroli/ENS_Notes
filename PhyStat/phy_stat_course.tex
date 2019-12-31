@@ -2569,8 +2569,8 @@ And furthermore we also get that:
 \[
 \Omega = - k_B T \log (\Theta) = - k_B T \log \prod_{\text{quantum states } i} \frac{1}{1 - e^{-\beta \epsilon_i}} = k_B T \sum_{\text{quantum states}} \log (1 - e^{-\beta \epsilon_i})
 \]
-As seen previously a quantum state is define by $\vec{k} = \frac{2 \pi}{L} (n_x, n_y, n_z)$ which also allows us to pass from the continous to the discrete case:
-\[\sum_\text{quantum states} = \sum_{n_x, n_y, n_z, \text{ 2 polarizations } } = 2 \int \frac{\dd^3 \vec{k}}{(2\pi/ L)^3}
+Remark that a quantum state is different from a microstate, which is a possible configuration of the total system. As seen previously a quantum state is defined by $\vec{k} = \frac{2 \pi}{L} (n_x, n_y, n_z)$ which also allows us to pass from the continous to the discrete case:
+\[\sum_\text{quantum states} ()= \sum_{n_x, n_y, n_z, \text{ 2 polarizations } } ()= 2 \int \frac{\dd^3 \vec{k}}{(2\pi/ L)^3}
 \]
 Using this to simplify the partition function gives:
 \[
@@ -2578,13 +2578,13 @@ Using this to simplify the partition function gives:
 \]
 Which gives the final equation:
 \[
-\frac{\Omega}{V} = \frac{k_B T}{\pi^2 \hbar^3} \int_0^{+\infty} p^2 \dd p \log(1 - e^{-\beta p c})
+-P=\frac{\Omega}{V} = \frac{k_B T}{\pi^2 \hbar^3} \int_0^{+\infty} p^2 \dd p \log(1 - e^{-\beta p c})
 \]
 Then the average energy is given by:
 \[
-\langle E \rangle = \sum_{\text{quantum states } i} \langle n_i \rangle \epsilon_i \text{ and } \langle n_i \rangle = \frac{\sum_{n_i} n_i e^{-\beta n_i \epsilon_i}}{\sum_{n_i} e^{-\beta n_i \epsilon_i}} = -\frac{1}{\beta} \pdv{}{\epsilon_i} \log \zeta_i =  \frac{1}{e^{\beta \epsilon_i} - 1}
+\langle E \rangle = \sum_{\text{quantum states } i} \langle n_i \rangle \epsilon_i \text{  and } \langle n_i \rangle = \frac{\sum_{n_i} n_i e^{-\beta n_i \epsilon_i}}{\sum_{n_i} e^{-\beta n_i \epsilon_i}} = -\frac{1}{\beta} \pdv{}{\epsilon_i} \log \zeta_i =  \frac{1}{e^{\beta \epsilon_i} - 1}
 \]
-Then this leads to the following for the energy:
+Then by passing from the sum to the integral, this leads to the following for the energy:
 \[
 \langle E \rangle = 2 V \int \frac{\dd^3 p}{(2 \pi)^3 \hbar^3} \frac{pc}{e^{\beta pc} - 1} = \frac{c}{\hbar^3 \pi^2} V \int_0^{+\infty} \dd p \frac{p^3}{e^{\beta p c} - 1} 
 \]
@@ -2605,7 +2605,7 @@ Which can be computed to be:
 \[
 u(\omega) = \frac{h}{2\pi^3 c^3} \frac{\omega^3}{e^{\beta \hbar \omega} - 1}
 \]
-
+This is called Planck's Law.
 \subsubsection{Emitted Power.}
 One of the fundamental assumptions of black body radiation is that the emitted power is perfectly balanced by the received power, which can be found to be:
 \[
@@ -2661,16 +2661,18 @@ Once again remember the crucial idea of reverting the counting method and instea
 \[
 N_s = \sum_{i} n_i
 \]
-We see immediately that if $N_s$ was fixed we would immediately have non-trivial combinatorics to solve right off the bat, this is why the grand canonical ensemble is much better to solve problem that have a quantum component. Now a given microstate is given by $\{n_i\}$. So we can write:
+We see immediately that if $N_s$ was fixed we would immediately have non-trivial combinatorics to solve right off the bat, this is why the grand canonical ensemble is much better to solve problems that have a quantum component. Now a given microstate is given by $\{n_i\}$, i.e. the microstate is described by the number of particles that each quantum state $i$ has. So we can write:
 \[
-\Theta = \sum_{n_1} \sum_{n_2} \cdots e^{\beta (\mu \sum_i n_i - \sum_i n_i \epsilon_i)} = \prod_i \underbrace{\sum_{n_i} e^{\beta (n_i (\mu - \epsilon_i)}}_{\zeta_i}
+\Theta = \sum_{n_1} \sum_{n_2} \cdots e^{\beta (\mu \sum_i n_i - \sum_i n_i \epsilon_i)} = \prod_i \underbrace{\sum_{n_i} e^{\beta (n_i (\mu - \epsilon_i))}}_{\zeta_i}=\prod_i\zeta_i
 \]
+where $i$ denotes the $i$-th quantum state and $n_i$ is an integer non-negative number which spans a certain domain of $\mathbb{N}$ depending on the nature of the system which is being considered.
+
 \subsection{Fermions.}
-For fermions the problem is further simplified since the exclusion principle immediately gives that $n_i = 0 \lor n_i = 1$. Then the $\zeta_i$ simplify immediately to:
+For fermions the problem is further simplified since the exclusion principle  gives that $n_i = 0\, \lor\, n_i = 1$. Then the $\zeta_i$ simplify immediately to:
 \[
 \zeta_i = 1 + e^{\beta(\mu - \epsilon_i)}
 \]
-Then the average number of occupation $\langle n_i \rangle$ is given by:
+Then the average number of occupation $\langle n_i\rangle$ for the state $i$  is given by:
 \[
 \langle n_i \rangle = \frac{\sum_{n_i = 0, 1} n_i e^{\beta(\mu - \epsilon_i)n_i}}{\sum_{n_i = 0, 1} e^{\beta(\mu - \epsilon_i)n_i}} = \frac{1}{e^{\beta(\epsilon_i - \mu)} + 1}
 \]
@@ -2704,11 +2706,12 @@ The grand potential is given by:
 \section{Fermionic gas.}
 A fermion gas is simply a certain number of independent fermions that have an energy described by $\epsilon(\vec{k}) = \frac{(\hbar k)^2}{2m} = \frac{p^2}{2m}$. Then the quantum states are described by two spins and $\vec{k} = \frac{2\pi}{L}(n_x, n_y, n_z)$. Then we get the following for the grand potential:
 \[
-\Omega = -k_B T 2 \int \frac{\dd^3 \vec{k}}{(2 \pi/L)^3} \log[1 + e^{\beta(\mu - \frac{(\hbar k)^2}{2m}}]
+\Omega = -k_BT\sum_i\log(\zeta_i)=-k_BT\sum_i\log(1+e^{\beta(\mu-\epsilon_i)})\underset{\sum\to\int}{=} -k_B T 2 \int \frac{\dd^3 \vec{k}}{(2 \pi/L)^3} \log[1 + e^{\beta(\mu - \frac{(\hbar k)^2}{2m})}]
 \]
 The pressure is found by taking $P = -\frac{\Omega}{V}$ and the density by using:
 \[
-\rho(\mu, T) = \frac{\langle N \rangle}{V} = 2 \int \frac{\dd^3 \vec{k}}{(2\pi)^3} \frac{1}{e^{\beta(\frac{(\hbar k)^2}{2m} - \mu)} - 1}
+\rho(\mu, T) = \frac{\langle N \rangle}{V} = \frac{1}{V}\sum_i \frac{1}{e^{\beta(\epsilon_i-\mu)}}=
+2 \int \frac{\dd^3 \vec{k}}{(2\pi)^3} \frac{1}{e^{\beta(\frac{(\hbar k)^2}{2m} - \mu)} - 1}
 \]
 
 \subsubsection{High Temperatures.}

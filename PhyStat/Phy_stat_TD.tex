@@ -270,6 +270,8 @@ By symmetry $\rho^{(2)}(x,y)=\rho^{(2)}(x-y)=\rho^{(2)}(r)$. If we rewrite Born-
 $$\frac{d}{dr}\rho^{(2)}=-\beta(\frac{d}{dr}U(r))\rho^{(2)}(r)\Rightarrow \rho^{(2)}(r)=Ae^{-\beta U(r)}$$ We determine $A$ with $\rho^{(2)}(r)\underset{r\to\infty}{=}n^{2}$ and $U(r)\underset{r\to\infty}{\to 0}$, so that $A=n^{2}$.
 
 
+
+
 \subsection*{11)}
 $g(\vec{r})=e^{-\beta U(\vec{r})}$
 
@@ -320,6 +322,25 @@ so that at the order $p$ we get
 $$\Theta\approx \zeta Q_1+\ldots+\zeta^{p}Q_p$$
 with $Q_N=\frac{1}{N!}\int\prod d^3{r}_i e^{-\beta V(\{r_i\})}$
 
+
+\chapter*{Chapter 7}
+
+\section*{7.1}
+If we consider a particle and its hamiltonian $h$, with eigenvectors $\ket{k}$, then when considering the entire system the microstate in the grand-canonical ensemble is given by the numbers $n_k$, which say how many particles are in the state $\ket{k}$. Then the grand canonical partition function will be given by the $\Theta=\prod_i\zeta_i$ with $\zeta_i=\sum_{n_i} e^{\beta(n_i\mu-n_i\epsilon_i)}$.
+
+\subsubsection*{1)}
+
+We have that the density of states is definted as $\rho=\frac{\langle N\rangle}{V}$
+hence, owing the fact thtat a quantum state is defined by the $\vec{k}$ and by the spin (2 possibilities here), then we have
+$$\rho=\frac{\sum_i\langle n_i\rangle}{V}=2\int\frac{d^3\vec{k}}{(2\pi)^3}\frac{1}{e^{\beta(\frac{(\hbar k)^2}{2m}-\mu)}+\tau}=\frac{1}{\pi^2}\int_0^{\infty} dr\frac{r^2}{e^{\beta(\frac{(\hbar r)^2}{2m}-\mu)}+\tau}$$
+
+\subsection*{2)}
+We have that $\langle n_i\rangle =\frac{1}{e^{\beta(\epsilon_i-\mu)}-\tau}$ and this is small non lo so porca la balena nera. However for some black magical reason we have that 
+$$f\to 0$$
+
+\subsection*{3)}
+We have that
+$$\ln Z_G=-\tau\sum_k\ln(1-\tau f e^{-\beta\epsilon_k})\approx\int\frac{d^3\vec{k}}{(2\pi/L)^3}(fe^{-\beta\epsilon_k}+f^2\frac{e^{-2\beta\epsilon_k}}{2})=\int\frac{d^3\vec{k}}{(2\pi/L)^3}(fe^{-\beta\frac{\hbar^2 k^2}{2m}}+f^2\frac{e^{-2\beta\frac{\hbar^2 k^2}{2m}}}{2})$$
 
 
 
