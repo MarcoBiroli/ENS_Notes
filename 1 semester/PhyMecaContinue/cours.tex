@@ -1,0 +1,132 @@
+\documentclass[10pt,a4paper]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{wrapfig}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{cancel}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{physics}
+\usepackage{multicol}
+\usepackage{stmaryrd}
+\usepackage{caption}
+\usepackage{subcaption}
+\author{Marco Biroli}
+\title{Mechanics of continuous media.}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\chapter{...}
+\section{Beyond linear elasticity.}
+At the microscopical level the internal forces are caused by the interactions in between the particles and by an external applied force $f$ where we have: $f \approx \sigma r_0^2$. The interaction potential is usually given by something of the following form:
+....
+
+Then for $\frac{r - r_0}{r_0} \ll 1$, $f$ is linear in $r - r_0$ it is the elastic regime, but what happens if we pull harder? Two behaviors are possible:
+\subsection{Fragile Materials.}
+Fragile materials will stay elastic until a breaking point which happens for deformations that are still quite low $\varepsilon \sim \frac{1}{1000}$. Examples of such materials are glass, ceramic, plexiglas, graphite etc... The atomic model explains quite well this phenomenon from a qualitative point of view. We know that there exists a $\sigma_\text{max}$ such that $\frac{f}{r_0^2} > \sigma_\text{max}$. Knowing $V(r)$ we can therefore deduce $\sigma_\text{max}$. It is determined by the microscopic properties, and a scale reasoning done to estimate the Young modulus $E$ is valid to estimate $\sigma_\text{max}$ as well. For example for glass we have that: $E = 70 \text{ GPa}$ and the theoretical $\sigma_\text{max} = 20 \text{ GPa}$. From which we would deduce a deformation $\varepsilon = \frac{\sigma}{E} \sim 30\%$, which is way too high. In truth the experimental value is $\sigma_\text{max} = 0.1 \text{ GPa}$ which gives a deformation of $\varepsilon = \frac{1}{700} \sim 0.14 \%$. The reason for this considerable difference between theory and reality is that nothing is perfect in nature. Hence the crystal lattice will contain errors which lead to a much lower breaking point. Griffith in 1920 postulated the existence of superficial or volumic fissures where the constraints are concentrated. For example in 2D for an elliptical fissure where we would have $\frac{a}{b} = 10$ then we would get $\sigma_\text{summit} = 20 \sigma_\text{external}$.
+
+\subsubsection{Griffith Criterion.}
+When we put a small bar under constraint then the elastic energy will be given by: $\sigma_{ij} \varepsilon_{ij} \cdot \text{volume}$ and in order of magnitude we have $E = \sigma \varepsilon l S$ with $\sigma = E \varepsilon = \frac{\sigma^2}{E} l S$. The existence of a small imperfection of size $a$ will release the constraint on a characteristic length of size $a$. Hence with the defect we have an energy that is freed:
+\[
+\delta E_\text{elastic} = - \frac{\sigma^2}{E} a^3
+\]
+However to create the imperfection it costs a certain amount of energy: $\delta E_\text{breaking} = \Gamma a^2$ where $\Gamma$ is the surface tension of the solid and $a^2$ the zone we are breaking. At a microscopical level we have:
+\[
+\Gamma = \frac{\text{energy}}{\text{surface}} = \frac{\text{rydberg}}{a_0^2} \approx \frac{10^{-19} \text{ J}}{(10^{-10})^2 \text{ m}^2} = 10 \text{ J}.\text{m}^{-2}
+\]
+So overall when we create an imperfection we have:
+\[
+\delta E = - \frac{\sigma^2}{E} a^3 + \Gamma a^2
+\]
+So we get something of the form:
+[INCLUDE GRAPHICS]
+
+Where we have $a_c = \frac{\Gamma E}{\sigma^2}$, where defect with size greater than $a_c$ have a tendency to grow. If we consider that rupture happens for $\sigma_\text{break} \sim \frac{E}{100}$ then we get:
+\[
+a_c = 10^4 \frac{\Gamma}{E} \approx 1 \, \mu\text{m} = \text{ typical defect size}, \Gamma = \frac{\text{micro energy}}{(\text{micro size})^2}, E = \frac{\text{micro energy}}{(\text{micro size})^3}
+\]
+
+\subsection{Plastic Materials (ductile).}
+[INCLUDE GRAPHIC]
+When we augment $\varepsilon$ we pass from an elastic to a plastic regime. When we release the constraint we will get an elastic regime that has the same parameters as the initial one with the exception of the plasticity threshold having become higher. However the material will be permanently deformed. In this regime the deformation can be very significant with respect to the elastic regime (for example of the order of 50\%). The microscopic origin of this is a shifting of the microscopic planes of the solid. So if we pass the plasticity threshold the planes slide, the material gets deformed plasticly, the volume is conserved. It goes back to a shifted equilibrium position when the constraint is released and when it reaches it we find the same elastic properties. It is a good qualitative explanation however less so quantitatively. Once again we have an experimental sliding threshold much lower than the theoretical one. Once again to account for this we have to include the imperfections of the lattice in the model, those are called dislocations. The movement of these dislocations in the solid is very easy, hence it propagates the elastic deformation into the plastic regime. When we pull on the material in the plastic regime we are creating dislocations and these dislocations are going to be trapped either by the defects or by other dislocations. At low temperatures the dislocations tend to be trapped making the material fragile while at higher temperatures the dislocations move making the material plastic. For most elastic solids the elastic regime stops for deformation lower then $1\%$. However there are some exceptions like caoutchou for example. Because the internal potential of the material is not due to coulomb forces but to entropic forces since it is made of a number of long polymers.
+
+\chapter{Beams and rods, elongated structures.}
+The whole point of elongated structures is basically to reduce a 3D problem to a 1D problem by making the approximation that the object can be reduced to its long axis.
+
+\section{Geometric description of a beam.}
+We start from an initial state said 'of reference'. When we deform the structure we then describe it by a curve called 'actual curve'. We denote by $s$ the curvilinear abscissa. Then the curve is parametrically described by $(x(s), y(s))$ and $\dd s = \sqrt{\dd x^2 + \dd y^2}$. We also define $\lambda = \dv{s}{\sigma}$ called the elongation. The unitary tangent vector to the curve is defined by:
+\[
+\vec{t} = \dv{\vec{x}}{s} = \frac{\dv{\vec{x}}{\sigma}}{\dv{s}{\sigma}} = \frac{1}{\lambda} \dv{\vec{x}}{\sigma}
+\]
+The normal unitary vector is defined such that $(\vec{t}, \vec{n})$ is a direct orthonormal basis. We denote by $\theta$ the angle in between $\vec{t}$ and $(Ox)$. Then we have:
+\[
+\vec{t} = \cos\theta \vec{e}_x + \sin \theta \vec{e}_y \quad \land \quad \vec{n} = -\sin \theta \vec{e}_x + \cos \theta \vec{e}_y 
+\]
+
+\section{The stresses.}
+\subsection{External stress.}
+There are two type of stress that can act on an elongated structure. The first are ponctual stresses. They are localized in a point, for example a mass attached to a point. Then the force is denoted by $\vec{F}$, the moment $\vec{M}$ which is in principle 3D but here is only along $\vec{e}_r$. The second type of stress are distributed stress. They act along a section of the structure and the force is given by the force per unit length $f_\sigma$ s.t. $F = \int f_\sigma \dd \sigma$ and identically for the moment. We can index both by $\sigma$ or $s$.
+
+\subsection{Internal stress.}
+We define $R(\sigma)$ and $M(\sigma)$ the resultant (total force) and moment through the cut $\sigma$ applied by the right side on the left side. It is the opposite of what is applied by the left on the right side.
+
+\section{Equilibrium Equations.}
+We look at the system in between $x(\sigma_1)$ and $x(\sigma_2)$. Making a balance of the forces we get that:
+\[
+\sum \mathcal{F} + \int f_\sigma \dd \sigma + \sum \eta R = \dv{\vec{p}}{t} = 0
+\]
+We also have to do the same for the moment:
+\[
+\vec{M}_O = \sum \vec{Ox} \times \vec{F}(x) = \sum \vec{OO'} \times F(x) + \sum \vec{O'x} \times \vec{F}(x) = M_{O'} + \vec{OO'} \times \sum F(x)
+\]
+For internal forces we have that $\sum F(x) = R(x)$ hence we get that:
+\[
+\vec{M}(\sigma_1) = \vec{M}(\sigma) + (\vec{x}_\sigma - \vec{x}_{\sigma_1}) \vec{R}_\sigma
+\]
+Now the kinetic momentum theorem applied in $\vec{x}(\sigma_1)$ gives:
+\[
+\sum M(\sigma) + ((\vec{x}(\sigma) - \vec{x}(\sigma_{1})) \vec{R}_\sigma) \vec{e}_z + \int m_\sigma + ((x_\sigma - x_{\sigma_1}) f_\sigma) \vec{e}_z \dd \sigma + \sum (\eta M _ ((\vec{x}(\sigma) - \vec{x}(\sigma_1) ) \eta \vec{R}(\sigma)) \vec{e_z} = \dv{\vec{L}}{t} = 0
+\]
+
+\subsection{Border case.}
+When we apply a force to a border we have $\mathcal{F} = R$ and $\mathcal{M} = M$.
+
+\subsection{Discontinuity in a medium.}
+For a discontinuity we get: $\mathcal{F} + R(\sigma^+) - R(\sigma^-) = 0$. We sometimes denote $\llbracket R \rrbracket = R(\sigma^+) - R(\sigma^-)$. Then we have $\mathcal{F} + \llbracket R \rrbracket = 0$ and similarly we have $\mathcal{M} + \llbracket  M \rrbracket = 0$.
+
+\subsection{Internal point with no discontinuity.}
+When we have an internal point with no discontinuity we get: $f_\sigma \dd \sigma + R(\sigma + \dd \sigma) - R(\sigma) \rightarrow f_\sigma + \dv{R}{\sigma} = 0$. Then for the moment we get: $m_\sigma \dd \sigma + (\dd \sigma)^2 + M(\sigma + \dd \sigma) - M(\sigma) + ((\vec{x}(\sigma + \dd \sigma) + \vec{x}(\sigma)) R(\sigma + \dd \sigma)) \vec{e}_z = 0$. Which simplifies to the following: $m_\sigma + \dv{M}{\sigma} + (\dv{\vec{x}}{\sigma} \times \vec{R}) \cdot \vec{e}_z = 0$. We now decompose $\vec{R} = N \vec{T} + T \vec{n}$. We know that $\dv{\vec{x}}{\sigma} = \lambda \vec{t}$ hence the previous equation simplifies to:
+\[
+m_\sigma + \dv{M}{\sigma} + \lambda T = 0, f_\sigma + \dv{R}{\sigma} = 0
+\]
+An equivalent notation that uses $s$ instead of $\sigma$ gives:
+\[
+m_s + \dv{M}{s} + T = 0, f_s + \dv{R}{s} = 0
+\]
+
+\section{Visco-elasticity: Return on motion.}
+A visco-elastic solid is for example some very viscos fluids like parafibe or glycerol) but also amorphous glass. We can describe with a unified theory these two regimes. (Maxwell 1831-1879). For viscous fluids if the velocity is given by:
+\[
+\vec{v} = \begin{pmatrix}
+v_x(z)\\0\\0
+\end{pmatrix}
+\]
+Then we have a force by unit surface given by: $\sigma = \nu \dv{v_x}{z}$ where $\nu$ is the dynamic viscosity parameter. For small displacements $u$ following $x$, $v_x = \dot{u}$ we have:
+\[
+\sigma = \nu \dv{\dot{u}}{z} = \nu \dv{}{t} \underbrace{\dv{u}{z}}_{\text{deformation tensor}}
+\] 
+Symmetrising the expression we get:
+\[
+\sigma = \nu \dot \epsilon
+\]
+If we denote $\epsilon = \underline{\epsilon} e^{j\omega t}$ then $\underline{\sigma} = j\eta \omega \underline{\epsilon}$. At high frequency we have an elastic solid so $\sigma = \mu \epsilon$. We pass from one regime to the other when $\mu \epsilon = \eta\omega \epsilon$ which is equivalent to $\omega = \frac{\mu}{\eta}$. We denote $\tau = \frac{1}{\omega} = \frac{\eta}{\mu}$. We then unifiy the two behaviors by postulating that $\dv{\sigma}{t} + \frac{\sigma}{\tau} = \mu \dot{\epsilon}$. In Fourier this gives:
+\[
+(j\omega + \frac{1}{\tau}) \underline{\sigma} = \mu j \omega \underline{\epsilon} \Rightarrow \frac{\sigma}{\underline{\epsilon}} = \frac{\mu j \omega}{j \omega + \frac{1}{\tau}} = T(\omega)
+\]
+Then for $\omega \ll 1$ $\frac{\sigma}{\epsilon} \approx \nu j \omega$ so viscous and for $\omega \gg 1$ then $\frac{\sigma}{\epsilon} = \mu$ so elastic. Then $\Re T$ corresponsd to the elastic regime and $Im(T)$ to the viscous one.
+
+\end{document}

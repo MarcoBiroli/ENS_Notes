@@ -1,0 +1,272 @@
+\documentclass[10pt,a4paper]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{wrapfig}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{cancel}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{physics}
+\usepackage{multicol}
+\usepackage{caption}
+\usepackage{stmaryrd}
+\usepackage{subcaption}
+\author{Marco Biroli}
+\title{Quantum Physics}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\chapter{Hydrogen Atom.}
+\section{Two Body problem and quantum mechanics.}
+We consider two particles described by $\vec{r_1}, \vec{r_2}, \vec{p}_1, \vec{p}_2, m_1$ and $m_2$ that interact with a potential $V(\vec{r}_2 - \vec{r}_1)$. Then the Hamiltonian is given by:
+\[
+H = \frac{p_1^2}{2 m_1} + \frac{p_2^2}{2 m_2} + V(\vec{r_2} - \vec{r}_1)
+\]
+Now as usually done in classical physics we want to decompose the motion into the motion of the center of mass and a rotation around it. So we introduce:
+\[
+\vec{P} = \vec{p}_1 + \vec{p}_2,  \vec{R} = \frac{m_1 \vec{r_1} + m_2 \vec{r_2}}{m_1 + m_2}, \vec{r} = \vec{r_1} - \vec{r_2}, \vec{p} = \frac{m_2 \vec{p}_1 - m_1 \vec{p}_2}{m_1 + m_2}, M = m_1 + m_2, \mu = \frac{m_1 m_2}{m_1 + m_2}
+\]
+Then the Hamiltonian is re-written as:
+\[
+H = \underbrace{\frac{P^2}{2M}}_{H_{\text{CM}}} + \underbrace{\frac{p^2}{2\mu} + V(\vec{r})}_{H_\text{rel}}
+\]
+And the commutation relations are given by:
+\[
+[R_i, P_i] = i \hbar \delta_{ij}, [r_i, p_j] = i\hbar \delta_{ij}, [r_i, P_j] = 0, [R_i, p_j] = 0
+\]
+We immediately see that $[H, P] = 0$, this is a result of the invariance by translation of the problem. Hence $\vec{P}$ is a constant of the problem and $\vec{P}$ and $H$ share a common basis. The egein-values of the momentum of the center of mass are planes waves of the form:
+\[
+e^{i \vec{k} \cdot \vec{R}} \psi(\vec{r}) \quad \text{ and } \quad H_\text{rel} \psi(\vec{r}) = E \psi(\vec{r}) \Rightarrow E_\text{tot} = \frac{\hbar^2 k^2}{2 M} + E
+\]
+Now if we look at the specific case of the hydrogen atom since $m_p \gg m_e$ we have:
+\[
+\mu = \frac{m_e m_p}{m_e + m_p} = m_e \left[1 - \frac{m_e}{m_p}\right]
+\]
+
+\section{Central force movement.}
+Say we have a potential of the form $V(\vec{r}) = V(r)$ then we want to solve the T.I.S.E.:
+\[
+\left[ \frac{p^2}{2m} + V(r) \right] \psi = E \psi \Leftrightarrow \left[ -\frac{\hbar^2}{2m} \frac{1}{r} \pdv[2]{}{r} r + \frac{L^2}{2m r^2} + V(r) \right]\psi = E \psi
+\]
+Remember also that $[L^2, H] = [L^2, L_i] = 0$, so $[\vec{L}, H] = 0$. So we can now look for solution that eigenstates of $L^2$ and $L_z$ which we know to be the spherical harmonics. So we decompose a given eigenstate in a radial component and a spherical harmonic component:
+\[
+R_l(r) Y_{l, m}(\theta, \varphi)
+\]
+Now plugging this into the T.I.S.E. we get:
+\[
+\left[ - \frac{\hbar^2}{2m} \frac{1}{r} \pdv[2]{}{r} r + \frac{l (l+1) \hbar^2}{2m r^2} + V(r) \right]R_l(r) = E R_l(r)
+\]
+And normalization gives:
+\[\int_0^{+\infty} \int_{0}^\pi \int_{0}^{2\pi} r^2 \sin\theta\dd\theta \dd\varphi\dd r |R_l(r)|^2 |Y_{l,m}(\theta, \varphi)|^2 = \int_{0}^{+\infty} r^2 |R_l(r)|^2 \dd r = 
+\]
+Now to try and simplify the problem and reduce it to a 1D schrodinger equation we introduce a new function $u_l(r) = r R_l(r)$ we then have:
+\[
+\int_0^{+\infty} |u_l(r)|^2 = 1
+\]
+We also replace it in the T.I.S.E. which gives:
+\[
+\left[-\frac{\hbar^2}{2m} \pdv[2]{}{r} + \frac{l (l + 1) \hbar^2}{2m r^2} + V(r) \right] u_l(r) = E u_l(r)
+\]
+We see that we get a central force term plus a centrifugal term. The role of this centrifugal force is to make the potential diverge to infinity when $r$ goes to 0. A typical plot of this (for a coulomb potential) is as follows:
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.6\textwidth]{graphs/center_force_potential}
+\end{figure}
+
+\subsection{Behavior close to the origin.}
+We now write $u_l(r) \stackrel{r\to0}{\sim} C r^s$ and we assume that $V(r)$ does not go to infinity faster than $\frac{1}{r}$. Then we see that for the solution to be well defined we need the first two terms to cancel otherwise the solution diverges. So we get:
+\[
+-\frac{\hbar^2}{2m} s(s-1) + \frac{\hbar^2}{2m} l (l+1) = 0 \Leftrightarrow s = - l \lor s = l+ 1
+\]
+We see that the first solution is impossible if $l \neq 0$ since $u_l$ wouldn't be normalizable. It is also impossible when $l = 0$ because in that case $u_l(r) \sim c$ and so $R_l(r) \sim \frac{C}{r}$, but then $\Delta R_l = -4 \pi C \delta$ which is not a viable solution to the Schrodinger equation. So the only viable solution is $s = l+1$. So we now need to solve the following equation:
+\[
+\left[ - \frac{\hbar^2}{2m} \pdv[2]{}{r} + \frac{l(l+1) \hbar^2}{2m r^2} + V(r)\right] u_l(r) = E u_l(r) \quad \land \quad u_l(0) = 0
+\]
+We know that there are discrete energies solution to this problem and actually for the coulomb potential case the energies will be given by: $n' + l + 1 = n$. We call $n$ the principal quantum number.
+
+\section{Hydrogen Atom.}
+For the hydrogen atom the potential is given by: $V(r) = \frac{-q^2}{4\pi \varepsilon_0 r}$ to simplify the writing we introduce $e^2 = \frac{q^2}{4 \pi \varepsilon_0}$ so that $V(r) = - \frac{e^2}{r}$. Then the T.I.S.E. is given by:
+\[
+\left[ -\frac{\hbar^2}{2m} \pdv[2]{}{r} + \frac{l ( l + 1) \hbar}{2 m r^2} - \frac{e^2}{r} \right] u_l(r) = E u_l(r)
+\]
+We want to make the problem dimensionless so we introduce $a_0 = \frac{\hbar^2}{m e^2}= 0.53 \stackrel{\circ}{A}$ as a unit for length, $E_I = \frac{e^2}{2 a_0} = \frac{m^2 e^4}{2 \hbar^2} = 13.6 \text{ eV} $ as a unit for energy. We now introduce the dimensionless parameters $\rho = \frac{r}{a_0}$ and $\varepsilon = -\frac{E}{E_I}$ and plugging them in the T.I.S.E. we get:
+\[
+\left[ \dv[2]{}{\rho} - \frac{l(l+1)}{\rho^2} + \frac{2}{\rho} - \varepsilon \right] u_l(\rho) = 0
+\]
+When $\rho \to \infty$ the equation simplifies to something that gives $e^{\pm \sqrt{\varepsilon} \rho}$ the plus being non-normalizable we keep only the minus and we introduce a new variable: $u_l(\rho) = y_l(\rho) e^{-\sqrt{\varepsilon} \rho}$ and plugging this in and introducing $\lambda = \sqrt{\varepsilon}$ we get:
+\[
+\left[ \dv[2]{}{\rho} - 2\lambda \dv{}{\rho} + \left[\frac{2}{\rho} - \frac{l (l + 1)}{\rho^2} \right] \right] y_l = 0 \land y_l(0) = 0
+\]
+To solve this we pass by the series decomposition of $y_l$:
+\[
+y_l(\rho) = \rho^s \sum_{q = 0}^{\infty} c_q \rho^q \text{ with } s > 0 \text{ in order for } y_l(0) = 0
+\]
+Then the derivatives are given by:
+\[
+\dv{y_l(\rho)}{\rho} = \sum_{q = 0}^{+\infty} c_q \rho^{q + s - 1} (q + s) \land \dv[2]{y_l(\rho)}{\rho} = \sum_{q = 0}^{+\infty} c_q (q + s) (q + s - 1) e^{q + s - 2}
+\]
+Then plugging this into the differential equation and using the uniqueness of the series expansion we get the following recursion relation:
+\[
+c_q \left[ q (q + 2l + 1) \right] = 2 \left[(q+l)\lambda - 1 \right] c_{q-1} \Rightarrow \frac{c_q}{c_{q-1}} \stackrel{q \to \infty}{\sim} \frac{2\lambda}{q} \Rightarrow y_l(\rho) \stackrel{q \to \infty}{\sim} e^{2\lambda \rho}
+\]
+However if this was true then it would mean that $u_l(\rho) \stackrel{\rho \to \infty}{\sim} e^{\lambda \rho}$ which is impossible. Therefore it must be that $c_q$ terminates for a certain $n' \in \mathbb{N}$. Hence:
+\[
+(n' + 1 + l) \lambda - 1 = 0 \Rightarrow c_{n'+1} = 0
+\]
+Then the energy is given by:
+\[
+\varepsilon = \lambda^2 = \frac{1}{(n' + 1 + l)^2} \Leftrightarrow E = \frac{-E_I}{(n' + 1 + l)^2}
+\]
+Now note that the degeneracy of a given energy is given by the amount of ways we can write $n = n' + 1 + l$ changing $n'$ and $l$. So for $n$ given there are $n$ possible values that $l$ can take, for every $l$ there are $(2l +1)$ values that $m$ can take. So the degeneracy of a state of principal quantum number $n$ is given by:
+\[
+g_n = \sum_{l = 0}^{n-1} (2l + 1) = n^2
+\]
+Then the first eigenstates are given by:
+\[
+R_{n = 1, l =0} = 2(a_0)^{-3/2} e^{-r/a_0}, R_{n = 2, l = 0} = r (a_0)^{-3/2} (1 - \frac{r}{2 a_0})e^{-r/2a_0}, R_{n = 2, l = 1} = (2 a_0)^{-3/2} \frac{1}{\sqrt{3}} \frac{r}{a_0}e^{-r/2a_0}
+\]
+Which look like:
+\begin{figure}[h!]
+\centering
+\includegraphics[width = 0.6 \textwidth]{graphs/hydrogen_atom_R_Plots}
+\end{figure}
+
+Now note that:
+\[
+\bra{\psi_{n,l,m}} \frac{1}{r} \ket{\psi_{n,l,m}} \Rightarrow [H, \vec{r} \cdot \vec{p}] = - i\hbar \left[\frac{p^2}{m} + \frac{e^2}{r}\right] \Rightarrow \bra{\psi_{n, l, m}} [H, A] \ket{\psi_{n,l,m}} = 0\, \forall A 
+\]
+So we get that:
+\[
+\langle \frac{p^2}{m} \rangle + \langle \frac{e^2}{r} \rangle = 0, \langle \frac{p^2}{2m} - \frac{e^2}{r} \rangle = E \Rightarrow \langle \frac{e^2}{r} \rangle = -2 E, \langle \frac{p^2}{2m} \rangle = - E
+\]
+....
+
+\chapter{Approximation Methods.}
+\section{Variational Method.}
+Let $E_0$ be the energy of the fondamental eigen state of the Hamiltonian $H$. Then we have that:
+\[
+\forall \ket\psi, \, \bra \psi H \ket \psi \geq E_0
+\]
+From this we get the intuition that we can approximate $E_0$ by minimizing $\bra \psi H \ket \psi$. Hence we introduce a family of wave functions $\left(\ket{\psi(\alpha)}\right)_\alpha$ indexed by the parameter $\alpha$, then $\bra{\psi(\alpha_0)} H \ket{\psi(\alpha_0)}$ is often a good approximation of $E_0$ if $\dv{}{\alpha} \bra{\psi(\alpha)} H \ket{\psi(\alpha)} |_{\alpha_0} = 0$.
+
+\subsection{Infinite potential well.}
+The fundamental state of the infinite potential well is: $\psi(x) = \sqrt{\frac{2}{L}} \sin(\frac{\pi x}{L})$ and $E_0 = \frac{\pi^2 \hbar^2}{2 m L^2}$. Now we take the following wave function: $\psi(x) = \frac{30}{L^5} x (x - L)$ (which respects the boundary conditions). We have that:
+\[
+\bra\psi H \ket \psi = \frac{5\hbar^2}{m L^2}
+\]
+Knowing that $\frac{\pi^2}{2} = 4.93$ this is already a very good approximation.
+
+\subsection{Helium atom.}
+The Hamiltonian of the helium atom is given by:
+\[
+H = \frac{p_1^2}{2m} + \frac{p_2^2}{2m} - \frac{2 e^2}{r_1} - \frac{2 e^2}{r_2} + \frac{e^2}{|\vec{r_1} - \vec{r_2}|}
+\]
+If we neglect the interaction term we get a separable Hamiltonian: $H = H_1 + H_2$. Then we have that:
+\[
+E_0 = 2 (4 \times E_I) = 108.8 \text{ eV}
+\]
+And the fundamental state is given by:
+\[
+\psi(\vec{r_1}, \vec{r_2}) = e^{-2r_1/a_0} e^{-2 r_2/a_0}
+\]
+We add an 'ecrantage' factor $\xi$ to model the interaction term:
+\[
+\psi_\xi (\vec{r_1}, \vec{r_2}) = \underbrace{\frac{\xi^2}{\pi a_0^2}}_{\text{normalization}} e^{-\xi r_1 /a_0} e^{-\xi r_2 / a_0}
+\]
+Then the Hamiltonian is written as:
+\[
+H = \left(\frac{p_1^2}{2m} - \frac{\xi e^2}{r_1}\right) + \left( \frac{p_2^2}{2m} - \frac{\xi e^2}{r_2}\right) + (\xi - 2) e^2 \left(\frac{1}{r_1} + \frac{1}{r_2}\right) + \frac{e^2}{|\vec{r_1} - \vec{r_2}|}
+\]
+Now looking individually at the contribution of each term:
+\begin{itemize}
+\item The first 2 terms gives and $\xi^2 E_I$ each.
+\item The third term gives $4 \xi(\xi -2) E_I$.
+\item The last term gives: $\iint \left(\frac{\xi^2}{\pi a_0^2}\right)^2 e^{-2 \xi r_1 /a_0}e^{-2\xi r_2/a_0} \frac{1}{|\vec{r_1} - \vec{r_2}|} \dd \vec{r_1} \dd \vec{r_2}$.
+\end{itemize}
+We know that:
+\[
+\frac{1}{r} = \frac{4\pi}{(2\pi)^3} \int \frac{e^{i \vec{k} \cdot \vec{r}}}{k^2} \dd^3 \vec{k} \Leftrightarrow \laplacian \frac{1}{r} = 4 \pi \delta(\vec{r})
+\]
+And we need to compute:
+\[
+\left(\frac{\xi^2}{\pi a_0^2}\right)^2 \int \frac{1}{k^2} \underbrace{\left(\int e^{i \vec{k} \cdot \vec{r} e^{-2 \xi r /a_0} \dd^3 \vec{r}}\right)^2}_{\frac{16 \xi /a_0}{(k^2 + (2\xi/a_0)^2)^2}} \dd^3\vec{k} = \frac{5}{4} \xi E_I
+\]
+Hence putting everything together we get that:
+\[
+\bra \psi_\xi H \ket \psi_\xi = 2 E_I (\xi^2 - \frac{27}{8} \xi) \text{ which is minimal for } \xi = \frac{27}{16} \lesssim 2
+\]
+This then gives that: $E_\text{min} = -\frac{729}{128}E_I = -77.5 \text{ eV}$ and the experimental value is $E_0 = - 78.6 \text{ eV}$.
+
+\subsection{Other Levels.}
+\subsubsection{Theorem:}
+$\ket\psi$ is an eigenstate of $H$ if and only if the differential of $\ket \phi \mapsto \frac{\bra \phi H \ket \phi}{\bra{\phi}\ket{\phi}}$ cancels in $\ket \psi$.
+\subsubsection{Proof:}
+We first prove the left to right implication. Suppose that $\ket \psi$ is an eigenstate of $H$ then:
+\[
+\bra{\delta \psi} H \ket{\psi} + \bra\psi H \ket{\delta \psi} = E_\psi \bra{\delta \psi}\ket\psi + E_\psi \bra \psi \ket{\delta \psi} \Rightarrow \bra{\delta \psi} H - E_\psi \ket\psi + \bra\psi H - E_\psi \ket{\delta \psi} = 0
+\]
+Now we suppose the right hand side. Let $\ket{\delta \psi} = \eta (H - E_\psi) \ket \psi \Rightarrow \bra\psi (H - E_\psi)^2 \ket \psi = 0 \Rightarrow ||(H - E_\psi)^2 \ket\psi|| = 0$.
+
+\section{Stationary perturbation method.}
+Take a Hamiltonian $H = H_0 + \underbrace{W}_{\text{perturbation}} = H_0 + \lambda V$ where $\lambda \ll 1$, and the eigenvalues of $V$ are of the same order of magnitude as those of $H_0$. We then write:
+\[
+\begin{cases}
+E = E_0 + \lambda E_1 + \lambda^2 E_2 + \cdots\\
+\ket\psi = \ket {\psi_0} + \lambda \ket{\psi_1} + \lambda^2 \ket{\psi_2} + \cdots
+\end{cases}
+\]
+Then the Schrodinger equation gives for the successive orders of $\lambda$:
+\begin{itemize}
+\item $H_0 \ket{\psi_0} = E_0 \ket{\psi_0}$.
+\item $H_0 \ket{\psi_1} + V \ket{\psi_0} = E_0 \ket{\psi_1} + E_1 \ket{\psi_0}$.
+\item $H_0 \ket{\psi_2} + V \ket{\psi_1} = E_0 \ket{\psi_2} + E_1 \ket{\psi_1} + E_2 \ket{\psi_0}$.
+\end{itemize}
+Furthermore the normalization of $\ket\psi$ gives:
+\[
+\bra{\psi_0} \ket{\psi_0} = 1 \land \bra{\psi_1}\ket{\psi_0} + \bra{\psi_0}\ket{\psi_1} = 0 \Leftrightarrow \Re(\bra{\psi_0}\ket{\psi_1}) = 0
+\] 
+
+\subsection{The case where $E_0$ is not degenerated.}
+For simplicity we write: $\ket{\psi_0} = \ket{n}$ and $E_0 = E_n$. Then we have that:
+\[
+\bra n H_0 \ket{\psi_1} + \bra n V \ket{\psi_0} = E_0 \bra n \ket{\psi_1} + E_1 \bra n \ket{\psi_0} \Leftrightarrow E_1 = \bra n V \ket n
+\]
+Then takes an eigenstate $\bra n' \neq \bra n$ then we have:
+\[
+\bra{n'} H_0 \ket{\psi_1} + \bra{ n'} V \ket{\psi_0} = E_0 \bra{ n'} \ket{\psi_1} + E_1 \cancelto{0}{\bra{ n'} \ket{\psi_0}} \Leftrightarrow \bra{n'} \ket {\psi_1} = \frac{\bra{n'} V \ket n}{E_n - E_{n'}}
+\]
+Furthermore if we impose that $\bra \psi \ket n \in \mathbb{R}$ then the condition $\Re(\bra{\psi_0}\ket{\psi_1}) = 0$ gives: $\bra n \ket{\psi_1} = 0$. Hence we get that at the first order:
+\[
+\ket \psi = \ket n + \sum_{n' \neq n} \frac{\bra{n'} V \ket n}{E_n - E_{n'}} \ket{n'}
+\]
+Repeating the same process for the second order we get that:
+\[
+E^2 = \bra n V \ket{\psi^1} = \sum_{n' \neq n} \frac{|\bra{n'} V \ket n|^2}{E_n - E_{n'}}
+\]
+Which gives:
+\[
+E = E_n + \bra n W \ket n +  \sum_{n' \neq n} \frac{|\bra{n'} V \ket n|^2}{E_n - E_{n'}}
+\]
+
+\subsubsection{Example for the non-degenerated harmonic oscillator.}
+We have the following Hamiltonian:
+\[
+H = \frac{p^2}{2m} + \frac{1}{2} m \omega^2 X^2 - q E X
+\]
+Then $\bra n q E X \ket n = 0$ which means that there is no first order correction. However at the second order we get:
+\[
+E = \hbar \omega (n + \frac{1}{2}) + \sum_{n' \neq n} \frac{|\bra{n'} q E X \ket{n}|^2}{E_n - E_{n'}} = \hbar \omega(n + \frac{1}{2}) - \frac{q^2 E^2}{2 m \omega^2}
+\]
+In this specific case it turns out that the second order is actually the exact answer.
+
+\subsection{The case where $E_0$ is degenerated.}
+Let $\ket {\psi_0} \in \ker (H - E_0 I)$ and we write: $\ket {\psi^i_{n,q}}$ with $q \in \llbracket 1, g_n\rrbracket$ instead of $\ket{\psi_i}$. Then we have that:
+\[
+\ket{\psi^0_{n, q}} = \sum_{r = 1}^{g_n} A_{q, r} \ket{n, r}
+\]
+Now applying the same method as before we have that: $ \sum_{r = 1}^{g_n} A_{q, r} \bra{n, r'} V \ket{n, r} = E^1_{n, q} A_{q, r'}$. Then to solve the following problem one needs to diagonalize $V_{|\ker(H - E_n I)}$.
+\end{document}
