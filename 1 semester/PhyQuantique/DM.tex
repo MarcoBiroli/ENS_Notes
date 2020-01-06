@@ -73,6 +73,8 @@ Now in the basis $\ket{\mathbf{p}}$ we have
 Since all the operators involving the $z$-component are not composed with operators including the $x,y$-components, then we can write $\hat{H}=\hat{H}_{x,y}\otimes I+I\otimes\hat{H}_z$. Therefore if we call $\ket{\psi_{\perp}}$( reps. $\ket{\psi_z}$) the eigenstates of $\hat{H}_z$ (resp. $\hat{H}_{x,y}$ ) with energy $E_z$ (resp. $E_{\perp}$), then the eigenstate $\ket{\psi}=\ket{\psi_{\perp}}\otimes\ket{\psi_z}$ satisfies
 $$\hat{H}\ket{\psi}=(\hat{H}_{x,y}\otimes I)\ket{\psi}+(I\otimes\hat{H}_z)\ket{\psi}=E_{\perp}\ket{\psi}+E_z\ket{\psi}=(E_{\perp}+E_{z})\ket{\psi}$$
 Hence $\ket{\psi}$ is an eigenstate of $\hat{H}$ with eigenvalues $E_z+E_{\perp}$. 
+Finally we get 
+$$\psi(x,y,z)=\braket{x,y,z|\psi}=\bra{x}\otimes\bra{y}\bra{z}\ket{\psi_{\perp}}\otimes\ket{\psi_z}=\psi_{\perp}(x,y)\psi_z(z)$$
 
 \subsection*{2)}
 Since the operators including the component $x$ are not composed with those involving the component $y$, we can write that $\hat{H}_{x,y}=\hat{H}_x\otimes I+I\otimes\hat{H}_y$, with $\hat{H}_x$ and $\hat{H}_y$ the Hamiltonians for two harmonic oscillators of pulsations $\omega_{\perp}$. Hence the spectrum of $\hat{H}_x$ (resp. $\hat{H}_y$) is given by $E_{n_x}=\hbar \omega_{\perp}(n_x+1/2)$ (reps. $E_{n_y}=\hbar\omega_{\perp}(n_y+1/2)$). If we denote by $\ket{\psi_{n_x}}$ and $\ket{\psi_{n_y}}$ the two respective eigenstates, then we get that
@@ -81,9 +83,8 @@ i.e. the eigenstates of $\hat{H}_{x,y}$ are the $\ket{\psi_{n_x}}\otimes\ket{\ps
 
 \subsection*{3)}
 
-We have that in any isolated system the total angular momentum and the Hamiltonian commute (which is equivalent to the conservation of the total angular momentum). Hence we have that $$[\hat{H},\hat{L}_z\otimes I]=0$$
-However, since we have that $\hat{L}_z$ acts on the same Hilbert space as $\hat{H}_{x,y}$, i.e. we have that $\hat{H}=\hat{H}_{x,y}\otimes I$, then it directly follows that 
-$$[\hat{H}_{x,y}\otimes I,\hat{L}_z\otimes I]=0\Rightarrow [\hat{H}_{x,y},\hat{L}_z]=0$$
+We have that in any isolated system the total angular momentum and the Hamiltonian commute (which is equivalent to the conservation of the total angular momentum). Hence since the rotation is happening only on the $z$ axis, we have that $$[\hat{H},\hat{L}_z]=0$$
+where we have that both $\hat{L}_z$ and $\hat{H}_{x,y}$ act on the same Hilbert space.
 
 
 \subsection*{4)}
@@ -105,13 +106,13 @@ $$[\hat{a}_{x,y},\hat{a}^{\dagger}_{x,y}]=[\hat{a}_x\otimes\hat{a}_y,\hat{a}^{\d
 
 From $\hat{x}=\frac{a_0}{\sqrt{2}}(\hat{a}_x+\hat{a}^{\dagger}_x)$ and $\hat{p}_x=\frac{p_0}{i\sqrt{2}}(\hat{a}_x-\hat{a}^{\dagger}_x)$ (and similarly for $y$) we get that
 \begin{align*}
-\hat{L}_z&=\frac{a_0}{\sqrt{2}}(\hat{a}_x+\hat{a}^{\dagger}_x)\otimes \frac{p_0}{i\sqrt{2}}(\hat{a}_y-\hat{a}^{\dagger}_y)-\frac{a_0}{\sqrt{2}}(\hat{a}_y+\hat{a}^{\dagger}_y)\otimes \frac{p_0}{i\sqrt{2}}(\hat{a}_x-\hat{a}^{\dagger}_x)\\
+\hat{L}_z&=\hat{x}\otimes \hat{p}_y-\hat{y}\otimes\hat{p}_x\\
+&=\frac{a_0}{\sqrt{2}}(\hat{a}_x+\hat{a}^{\dagger}_x)\otimes \frac{p_0}{i\sqrt{2}}(\hat{a}_y-\hat{a}^{\dagger}_y)-\frac{a_0}{\sqrt{2}}(\hat{a}_y+\hat{a}^{\dagger}_y)\otimes \frac{p_0}{i\sqrt{2}}(\hat{a}_x-\hat{a}^{\dagger}_x)\\
 &=\frac{a_0p_0}{2i}(\hat{a}_x\otimes \hat{a}_y-\hat{a}_x\otimes \hat{a}_y^{\dagger}+\hat{a}_x^{\dagger}\otimes \hat{a}_y-\hat{a}_x^{\dagger}\otimes \hat{a}_y^{\dagger}-\hat{a}_y\otimes \hat{a}_x+\hat{a}_y\otimes \hat{a}_x^{\dagger}-\hat{a}_y^{\dagger}\otimes \hat{a}_x+\hat{a}_y^{\dagger}\otimes \hat{a}_x^{\dagger})\\
 &=i\hbar(\hat{a}_x\otimes \hat{a}_y^{\dagger}-\hat{a}^{\dagger}_x\otimes \hat{a}_y)
 \end{align*}
 where we simplified the terms $\hat{a}_x\otimes \hat{a}_y$ with $\hat{a}_y\otimes \hat{a}_x$ since both $\hat{x},\hat{p}_x$ commute with $\hat{y},\hat{p}_y$ (same for $\hat{a}_x^{\dagger}\otimes \hat{a}_y^{\dagger}$).
-
-Similarly using that we already know tha Hamiltonian for a one dimensional harmonic oscillator we get
+Similarly using the fact that we already know the Hamiltonian for a one dimensional harmonic oscillator, we get
 \begin{align*}
 \hat{H}_{x,y}=\hat{H}_x\otimes I+I\otimes\hat{H}_y=\hbar\omega_{\perp}(\hat{N}_x\otimes I+\frac{1}{2}I\otimes I)+\hbar\omega_{\perp}(I\otimes \hat{N}_y+\frac{1}{2} I\otimes I)=\hbar\omega_{\perp}(\hat{a}_x^{\dagger}\hat{a}_x\otimes I+I\otimes \hat{a}_y^{\dagger}\hat{a}_y +I\otimes I)
 \end{align*}
@@ -143,48 +144,106 @@ $$\hat{N}_{\sigma}\hat{a}_{\sigma}\ket{n_{\sigma}}=\hat{a}_{\sigma}^{\dagger}\ha
 
 $$\hat{N}_{\sigma}\hat{a}_{\sigma}^{\dagger}\ket{n_{\sigma}}=\hat{a}_{\sigma}^{\dagger}\hat{a}_{\sigma}\hat{a}_{\sigma}^{\dagger}\ket{n_{\sigma}}=\hat{a}_{\sigma}^{\dagger}(\hat{a}_{\sigma}^{\dagger}\hat{a}_{\sigma}+1)\ket{n_{\sigma}}=(n_{\sigma}+1)\hat{a}_{\sigma}^{\dagger}\ket{n_{\sigma}}$$
 
-which means that if $\hat{a}_{\sigma}\ket{n_{\sigma}}\neq 0$ then it is an eigenstate of $\hat{N}_{\sigma}$ of eigenvalue $(n_{\sigma}-1)$ and that $\hat{a}_{\sigma}^{\dagger}\ket{n_{\sigma}}$ is an eigenstate of $\hat{N}_{\sigma}$ of eigenvalue $(n_{\sigma}+1)$. Moreover we have that the eigenvalues of $\hat{N}_{\sigma}$ are non-negative, indeed we have that $0\leq ||\hat{N}_{\sigma}\ket{n_{\sigma}}||^2=\braket{n_{\sigma}|\hat{a}_{\sigma}^{\dagger}\hat{a}_{\sigma}|n_{\sigma}}=n_{\sigma}$. Therefore if any of the eigenvalues of $\hat{N}_{\sigma}$, say $s_{\sigma}>0$, were not a natural integer, then we could apply $\hat{a}_{\sigma}$ on $\ket{s_{\sigma}}$ $\ceil*{s_{\sigma}}$ times, getting then a negative eigenvalue, which we know being impossible. Hence the spectrum of $\hat{N}_{\sigma}$ belongs to $\mathbb{N}$.
+which means that if $\hat{a}_{\sigma}\ket{n_{\sigma}}\neq 0$ then it is an eigenstate of $\hat{N}_{\sigma}$ of eigenvalue $(n_{\sigma}-1)$ and that $\hat{a}_{\sigma}^{\dagger}\ket{n_{\sigma}}$ is an eigenstate of $\hat{N}_{\sigma}$ of eigenvalue $(n_{\sigma}+1)$. Moreover we have that the eigenvalues of $\hat{N}_{\sigma}$ are non-negative, indeed we have that $0\leq ||\hat{a}_{\sigma}\ket{n_{\sigma}}||^2=\braket{n_{\sigma}|\hat{a}_{\sigma}^{\dagger}\hat{a}_{\sigma}|n_{\sigma}}=n_{\sigma}$. Therefore if any of the eigenvalues of $\hat{N}_{\sigma}$, say $s_{\sigma}>0$, were not a natural integer, then we could apply $\hat{a}_{\sigma}$ on $\ket{s_{\sigma}}$ $\ceil*{s_{\sigma}}$ times, getting then a negative eigenvalue, which we know being impossible. Hence the spectrum of $\hat{N}_{\sigma}$ is included in $\mathbb{N}$.
 
 
 \subsubsection{f)}
 
-We have that $\hat{N}_-=\hat{a}_-^{\dagger}\hat{a}_-=\frac{1}{2}(\hat{a}_x^{\dagger}+i\hat{a}_y^{\dagger})(\hat{a}_x-i\hat{a}_y)=\frac{1}{2}(\hat{a}_x^{\dagger}\hat{a}_x-i\hat{a}_x^{\dagger}\hat{a}_y+i\hat{a}_y^{\dagger}\hat{a}_x+\hat{a}_y^{\dagger}\hat{a}_y)$ and
-$\hat{N}_+=\hat{a}_+^{\dagger}\hat{a}_+=\frac{1}{2}(\hat{a}_x^{\dagger}-i\hat{a}_y^{\dagger})(\hat{a}_x+i\hat{a}_y)=\frac{1}{2}(\hat{a}_x^{\dagger}\hat{a}_x+i\hat{a}_x^{\dagger}\hat{a}_y-i\hat{a}_y^{\dagger}\hat{a}_x+\hat{a}_y^{\dagger}\hat{a}_y)$.
-Hence notice that $\hat{N}_--\hat{N}_+=i(\hat{a}_x\hat{a}_y^{\dagger}-\hat{a}_x^{\dagger}\hat{a}_y)$, from which it directly follows that $\hat{L}_z=\hbar(\hat{N}_--\hat{N}_+)$. Then we have that $\hat{N}_-+\hat{N}_+=\hat{a}_x^{\dagger}\hat{a}_x+\hat{a}_y^{\dagger}\hat{a}_y$ which implies that $\hat{H}_{x,y}=\hbar\omega(\hat{N}_-+\hat{N}_++I)$.
+We have that $\hat{N}_-=\hat{a}_-^{\dagger}\otimes \hat{a}_-=\frac{1}{2}(\hat{a}_x^{\dagger}+i\hat{a}_y^{\dagger})\otimes(\hat{a}_x-i\hat{a}_y)=\frac{1}{2}(\hat{a}_x^{\dagger}\hat{a}_x-i\hat{a}_x^{\dagger}\hat{a}_y+i\hat{a}_y^{\dagger}\hat{a}_x+\hat{a}_y^{\dagger}\hat{a}_y)$ and
+$\hat{N}_+=\hat{a}_+^{\dagger}\otimes\hat{a}_+=\frac{1}{2}(\hat{a}_x^{\dagger}-i\hat{a}_y^{\dagger})\otimes (\hat{a}_x+i\hat{a}_y)=\frac{1}{2}(\hat{a}_x^{\dagger}\hat{a}_x+i\hat{a}_x^{\dagger}\hat{a}_y-i\hat{a}_y^{\dagger}\hat{a}_x+\hat{a}_y^{\dagger}\hat{a}_y)$.
+Hence notice that $\hat{N}_--\hat{N}_+=i(\hat{a}_x\otimes\hat{a}_y^{\dagger}-\hat{a}_x^{\dagger}\otimes\hat{a}_y)$, from which it directly follows that $\hat{L}_z=\hbar(\hat{N}_--\hat{N}_+)$. Then we have that $\hat{N}_-+\hat{N}_+=\hat{a}_x^{\dagger}\otimes \hat{a}_x+\hat{a}_y^{\dagger}\otimes \hat{a}_y$ which implies that $\hat{H}_{x,y}=\hbar\omega_{\perp}(\hat{N}_-+\hat{N}_++I)$.
 
 \subsubsection*{g)}
 First of all we study the action of $\hat{N}_{\pm}$ on $\hat{a}_{\mp}^{\dagger}\ket{n_{\pm}}$.  Now, if we use the commutation relations found in question $4.d$ we have:
 
 $$\hat{N}_{+}\hat{a}_{-}^{\dagger}\ket{n_{+}}=\hat{a}_+^{\dagger}\hat{a}_+\hat{a}_-^{\dagger}\ket{n_+}=\hat{a}_-^{\dagger}\hat{a}_+^{\dagger}\hat{a}_+\ket{n_+}=n_+\hat{a}^{\dagger}_-\ket{n_+}$$
-
 and 
-
-
 $$\hat{N}_{-}\hat{a}_{+}^{\dagger}\ket{n_{-}}=\hat{a}_-^{\dagger}\hat{a}_-\hat{a}_+^{\dagger}\ket{n_-}=\hat{a}_+^{\dagger}\hat{a}_-^{\dagger}\hat{a}_-\ket{n_-}=n_-\hat{a}^{\dagger}_+\ket{n_-}$$
+We already proved that we can co-diagonalize $\hat{N}_x$ and $\hat{N}_y$ in some common basis $\ket{\psi_{n_x,n_y}}$, such that
+$\hat{N}_+\ket{\psi_{n_+,n_-}}=n_+\ket{\psi_{n_+,n_-}}$ and $\hat{N}_-\ket{\psi_{n_+,n_-}}=n_-\ket{\psi_{n_+,n_-}}$
+Then we have that 
+$$\ket{\psi_{n_++1,n_-}}=\frac{\hat{a}_+^{\dagger}\ket{\psi_{n_+,n_-}}}{||\hat{a}_+^{\dagger}\ket{\psi_{n_+,n_-}}||}=\frac{\hat{a}_+^{\dagger}\ket{\psi_{n_+,n_-}}}{\sqrt{n_++1}}$$
 
+$$\ket{\psi_{n_+1,n_-+1}}=\frac{\hat{a}_-^{\dagger}\ket{\psi_{n_+,n_-}}}{||\hat{a}_-^{\dagger}\ket{\psi_{n_+,n_-}}||}=\frac{\hat{a}_-^{\dagger}\ket{\psi_{n_+,n_-}}}{\sqrt{n_-+1}}$$
+since $||\hat{a}_+^{\dagger}\ket{\psi_{n_+,n_-}}||=\sqrt{\braket{\psi_{n_+,n_-}|a_+a_+^{\dagger}|\psi_{n_+,n_-}}}=\sqrt{\braket{\psi_{n_+,n_-}|a_+^{\dagger}a_++1|\psi_{n_+,n_-}}}=\sqrt{n_++1}$ and similarly for $\hat{a}_-$.
+Therefore if we denote by $\ket{\psi_{0,0}}$ the fundamental state, for which $\hat{a}_+\ket{\psi_{0,0}}=0$ and $\hat{a}_-\ket{\psi_{0,0}}=0$ (which have to exist since otherwise we would get an infinite descent of eigenvalues of $n_+,n_-$, which is impossible for what we have already proved before, we get
 
+$$\ket{\psi_{n_+,n_-}}=\frac{(\hat{a}_+^{\dagger})^{n_+}}{\sqrt{n_+!}}\frac{(\hat{a}_-^{\dagger})^{n_-}}{\sqrt{n_-!}}\ket{\psi_{0,0}}$$
 
-
-
-
-The eigenvalues of $\hat{H}_{x,y}$ are given by
+Finally this is also the basis of diagonalization of $\hat{H}_{x,y}$ and $\hat{L}_z$ (since they decomposed as a sum/difference of $N_+,N_-$). Then we have that the eigenvalues of $\hat{H}_{x,y}$ are given by $\hbar\omega_{\perp}(n_-+n_++1)$ and the eigenvalues of $\hat{L}_z$ by $\hbar(n_--n_+)$.
 
 \subsection*{5)}
 
 \subsubsection*{a)}
 
-If we denote by $\ket{0}$ the state for which $\hat{a}_+\ket{0}=0$ and $\hat{a}_-\ket{0}=0$ then we have that 
+If we denote by $\ket{0}$ the state for which $\hat{a}_+\ket{0}=0$ and $\hat{a}_-\ket{0}=0$ then we have that $\hat{H}_{x,y}\ket{0}=\hbar\omega_{\perp}$, i.e. $\ket{0}$ is the fundamental state for $\hat{H}_{x,y}$. Now we must have $(a_x+ia_y)\ket{0}=0$ and $(a_x-ia_y)\ket{0}=0$ from which we get that $a_x\ket{0}=0$ and $a_y\ket{0}=0$. Therefore it follows that 
+\begin{align*}
+\bigg(x+\frac{\hbar}{m\omega_{\perp}}\frac{d}{dx}\bigg)\psi_{0,0}(x,y)=0\\
+\bigg(y+\frac{\hbar}{m\omega_{\perp}}\frac{d}{dy}\bigg)\psi_{0,0}(x,y)=0
+\end{align*}
+
+which implies that $\psi_{0,0}(x,y)=Ce^{-\frac{m\omega_{\perp}}{2\hbar}\rho^2}$, $C$ being the normalization constant:
+$$C^2\int_{-\infty}^{\infty}\int_{-\infty}^{\infty} e^{-\frac{m\omega_{\perp}}{\hbar}(x^2+y^2)}=1\Rightarrow C=\sqrt{\frac{m\omega_{\perp}}{\pi \hbar}}$$
+
+\subsubsection*{b)}
+
+We have that $\psi_{1,0}(\rho,\theta)=\hat{a}_+^{\dagger}\psi_{0,0}(\rho)$. Now notice that
+\begin{align*}
+\hat{a}_{+}^{\dagger}&=\frac{1}{2}\bigg(\frac{\hat{x}}{a_0}-i\frac{\hat{p}_x}{p_0}-i\frac{\hat{y}}{a_0}-\frac{\hat{p}_y}{p_0}\bigg)=\frac{1}{2}\bigg(\frac{1}{a_0}(x-iy)-a_0\bigg(\frac{\p}{\p x}-i\frac{\p}{\p y}\bigg)\bigg)=\frac{1}{2}\bigg(\frac{1}{a_0}\rho e^{-i\theta}-a_0\bigg(\frac{\p}{\p (\rho\cos\theta)}-i\frac{\p}{\p (\rho\sin\theta)}\bigg)\bigg)\\
+&=\frac{1}{2}\bigg(\frac{1}{a_0}\rho e^{-i\theta}-a_0\bigg(\cos\theta\frac{\p}{\p\rho}-\frac{1}{\rho}\sin\theta\frac{\p}{\p\theta}-i\sin\theta\frac{\p}{\p \rho}-i\frac{1}{\rho}\cos\theta\frac{\p}{\p\theta}\bigg)\bigg)\\
+&=\frac{e^{-i\theta}}{2}\bigg(\frac{\rho}{a_0}-a_0\frac{\p}{\p\rho}+a_0\frac{i}{\rho}\frac{\p}{\p\theta}\bigg)
+\end{align*}
+
+and similarly $\hat{a}_-^{\dagger}=\frac{e^{i\theta}}{2}\big(\frac{\rho}{a_0}-a_0\frac{\p}{\p\rho}-a_0\frac{i}{\rho}\frac{\p}{\p\theta}\big)$.
+Hence it follows that 
+$$\psi_{1,0}(\rho,\theta)=\frac{e^{-i\theta}}{2}\bigg(\frac{\rho}{a_0}\psi_{0,0}(\rho)+a_0\frac{1}{a_0^2}\psi_{0,0}(\rho)\bigg)=\frac{\rho}{a_0^2\sqrt{\pi}}e^{-\frac{\rho^2}{2a_0^2}}e^{i\theta}$$
+and similarly 
+$$\psi_{0,1}(\rho,\theta)=\frac{\rho}{a_0^2\sqrt{\pi}}e^{-\frac{\rho^2}{2a_0^2}}e^{-i\theta}$$
+
+\subsubsection*{c)}
+We recall that the probability current is defined as $\vec{J}=-\frac{\hbar}{m}\text{Im}(\psi\nabla\psi^{*})$ and that we have the continuity equation $\nabla \cdot \vec{J}=-\frac{\p|\psi|^2}{\p t}$.
+
+\subsubsection*{d)}
+
+In this case we have that for $\ket{0}$
+$$\mathbf{J}=0$$ since $\ket{0}$ is only real. Then for $\ket{\pm}$ we have:
+$$\mathbf{J}_-=-\frac{\hbar}{m}\text{Im}\bigg[\frac{\rho}{a_0^2\sqrt{\pi}}e^{-\frac{\rho^2}{2a_0^2}}e^{-i\theta}\bigg(\frac{1}{a_0^2\sqrt{\pi}}e^{-\frac{\rho^2}{2a_0^2}}e^{i\theta}\mathbf{u}_{\rho}-\frac{\rho^2}{a_0^4\sqrt{\pi}}e^{-\frac{\rho^2}{2a_0^2}}e^{i\theta}\mathbf{u}_{\rho}+i\frac{1}{a_0^2\sqrt{\pi}}e^{-\frac{\rho^2}{2a_0^2}}e^{i\theta}\mathbf{u}_{\theta}\bigg)\bigg]=-\frac{\hbar}{m}\frac{\rho}{a_0^4\pi}e^{-\frac{\rho^2}{a_0^2}}\mathbf{u}_{\theta}$$
+and similarly
+$$\mathbf{J}_+=-\frac{\hbar}{m}\text{Im}\bigg[\frac{\rho}{a_0^2\sqrt{\pi}}e^{-\frac{\rho^2}{2a_0^2}}e^{i\theta}\bigg(\frac{1}{a_0^2\sqrt{\pi}}e^{-\frac{\rho^2}{2a_0^2}}e^{-i\theta}\mathbf{u}_{\rho}-\frac{\rho^2}{a_0^4\sqrt{\pi}}e^{-\frac{\rho^2}{2a_0^2}}e^{-i\theta}\mathbf{u}_{\rho}-i\frac{1}{a_0^2\sqrt{\pi}}e^{-\frac{\rho^2}{2a_0^2}}e^{-i\theta}\mathbf{u}_{\theta}\bigg)\bigg]=\frac{\hbar}{m}\frac{\rho}{a_0^4\pi}e^{-\frac{\rho^2}{a_0^2}}\mathbf{u}_{\theta}$$
 
 
+\subsubsection*{e)}
+
+We see that the probability currents, for $\ket{\pm}$, depend only on the position from the $z$ axis, $\rho$, and are oriented in planes that are perpendicular to the $z$ axis, i.e. along the $\mathbf{u}_{\theta}$ direction. Hence the distribution of particles will be forming a vortex that is null on the $z$ axis, highly concetrated in a zone around the $z$ axis and going to zero at infinity (which means far from the $z$ axis). This behaviour can be understood from the function $\rho e^{-\frac{\rho^2}{a_0^2}}$, which is zero at the center, increases up to a maximum and then goes to zero, giving the idea of a vortex.
+
+\subsection*{6)}
+
+\subsubsection*{a)}
+
+I think that since it is an alkali metal, it has one electron in the outermost orbital. Then an isotope of the Rubidium will lack one neutron. Then the spin of the outer electron will cancel with the spin of the leftover proton in the nucleus, thus resulting in a total spin of zero (boson).
+
+\subsubsection*{b)}
+In the picture the vortex is not centered, in contrast to what we predicted before. 
+
+\subsection*{7)}
+
+\subsubsection*{a)}
+we have that 
+\begin{align*}
+\psi(x,y)&=\alpha \sqrt{\frac{m\omega_{\perp}}{\pi \hbar}}e^{-\frac{m\omega_{\perp}}{2\hbar}\rho^2}+\beta\frac{\rho}{a_0^2\sqrt{\pi}}e^{-\frac{m\omega_{\perp}}{2\hbar}\rho^2}e^{i\theta}=0\Leftrightarrow 
+\alpha+\beta\sqrt{\frac{m\omega_{\perp}}{\hbar}}\rho e^{i\theta}=0\\
+&\Leftrightarrow \frac{\alpha}{\beta}=-\sqrt{\frac{m\omega_{\perp}}{\hbar}}\rho e^{i\theta}
+\end{align*}
+from which it follows that $\theta=\text{Arg}(\alpha/\beta)$ and $\rho^2=\frac{|\alpha|^2}{1-|\alpha|^2}\frac{\hbar}{m\omega_{\perp}}$.
+
+\subsubsection*{b)}
+Since the Hamiltonian is time independent, we can say that any wavefunction evolves according to the evolution operator $e^{-\frac{i}{\hbar}t\hat{H}}$. In particular any eigenstate of $\hat{H}_{x,y}$ will just gain a phase $e^{-\frac{i}{\hbar}tE_n}$. Hence we have
+$$\ket{\psi(t)}=\alpha\ket{0}e^{-\frac{i}{\hbar}t\hbar\omega_{\perp}}+\beta\ket{+}e^{-\frac{i}{\hbar}t2\hbar \omega_{\perp}}=\alpha\ket{0}e^{-i\omega_{\perp}t}+\beta\ket{+}e^{-2i\omega_{\perp}t}$$
+and from before it follows that 
+$$\theta(t)=\text{Arg}\bigg(\frac{\alpha e^{i\omega_{\perp} t}}{\beta}\bigg)=\text{Arg}(\alpha/\beta)+\omega_{\perp}t$$
 
 
-
-
-
-
-
-
-
+so we see that there is a precession of the axis of zero density, with precession frequency of $\omega_{\perp}$. 
 
 
 
