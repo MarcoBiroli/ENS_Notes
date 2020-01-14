@@ -33,7 +33,7 @@
 
 
 
-\author{Alessandro Pacco}
+\author{Alessandro Pacco \& Marco Biroli}
 \title{DM Quantum Mechanics 2019}
 \begin{document} 
 \maketitle
@@ -53,18 +53,55 @@ We have that since the Hamiltonian $\hat{H}=\frac{\hat{P}^2}{2m}+U(\hat{X})+V(\h
 $$\ket{\psi(\tau)}=\hat{U}(\tau,0)\ket{\psi_0}=\sum_{k=0}^{\infty}\frac{(\frac{-i}{\hbar}\tau)^k}{k!}(\hat{H}_0+\hat{V})^k\ket{\psi_0}\underset{\text{ordre }1}{\approx} \ket{\psi_0}-\frac{i}{\hbar}\tau(\hat{H_0}+V_0\cos(q\hat{X}))\ket{\psi_0}=(1-\frac{i}{\hbar}\tau( E_0+V_0\cos(q\hat{X}))\ket{\psi_0}$$
 
 \subsection*{3)}
-
-In position representation we have 
-$$\braket{\mathbf{r_0}|\mathbf{p_0}}=(2\pi \hbar)^{-3/2}e^{\frac{i}{\hbar}\mathbf{p_0}\cdot\mathbf{r_0}}$$
-Now in the basis $\ket{\mathbf{p}}$ we have
-\begin{align*}
-\cos(q\hat{X})\ket{\mathbf{p_0}}&=
-\int d^3\mathbf{p}\ket{\mathbf{p}}\braket{\mathbf{p}|\cos(q\hat{X})|\mathbf{p_0}}
-\end{align*}
-
+We know that:
+\[
+\bra{x} \ket{\vec{p}} = \frac{e^{-i \vec{p} \cdot \vec{x}}}{\sqrt{2 \pi}^3} 
+\]
+Then we get that:
+\[
+\bra{x} \cos q \hat{X} \ket{\vec{p}} = \cos(qx) \bra{x}\ket{\vec{p}} = \frac{e^{i \vec{q} \vec{x}} + e^{-i \vec{q} \vec{x}}}{2} \frac{e^{-i \vec{p} \vec{x}}}{\sqrt{2 \pi}^3} = \frac{1}{2} \left[  \frac{e^{-i (\vec{p} - \vec{q}) \vec{x}}}{\sqrt{2 \pi}^3} + \frac{e^{-i(\vec{p} + \vec{q}) \vec{x}}}{\sqrt{2 \pi}^3} \right] = \frac{1}{2} (\bra{x}\ket{\vec{p} - \vec{q}} + \bra{x} \ket{\vec{p} + \vec{q}})
+\]
+Since this holds for all $\bra{x}$  we get that:
+\[
+\cos (q \hat{X}) \ket{p} = \frac{1}{2} \ket{\vec{p} - \vec{q}} + \frac{1}{2} \ket{\vec{p} + \vec{q}}
+\]
 
 \subsection*{4)}
+Then we have that:
+\begin{align*}
+\tilde{\psi}(\vec{p}, \tau) &= \bra{\vec{p}}\ket{\psi(\tau)} = \bra{\vec{p}}(1 - \frac{i}{\hbar} \tau (E_0 + V_0 \cos(q \hat{X})) \ket{\psi_0} \\
+&= \tilde{\psi}(\vec{p}, 0) (1 - \frac{i}{\hbar}\tau E_0) + \frac{i}{\hbar} \tau V_0 \left( \frac{1}{2}(\ket{\vec{p} - \vec{q}} + \ket{\vec{p} + \vec{q}}) \right)^\dagger \ket{\psi_0} \\
+&= \tilde{\psi}(\vec{p}, 0) \left(1 - \frac{i}{\hbar}\left( \tau E_0 + \frac{\tau V_0}{2} (\tilde{\psi}(\vec{p} - \vec{q}, 0) + \tilde{\psi}(\vec{p} + \vec{q}, 0)) \right) \right) 
+\end{align*}
 
+\subsection*{5)}
+\subsubsection*{a)}
+From the uncertainty principle we have that $\Delta x \Delta p \sim \frac{\hbar}{2}$ hence we obtain that:
+\[
+\Delta \tilde{\psi_0} \sim \frac{\hbar}{2 \Delta x}
+\]
+
+\subsubsection*{b)}
+From question (4) we see that at time $\tau$ the wavepacket is at a superposition of the wavepacket in $\vec{p}$, $\vec{p} - \vec{q}$ and $\vec{p} + \vec{q}$. Hence it means that wave packet is expanding and splitting in 3 separate peaks.
+
+\subsection*{6)}
+If we know let the wavepacket free the Hamiltonian becomes:
+\[
+\mathcal{H} = \frac{\hat{p}^2}{2m}
+\]
+Then we have that:
+\[
+i\hbar \partial_t \tilde{\psi}(\vec{p}, t) = \mathcal{H} \tilde{\psi}(\vec{p}, t) = \frac{p^2}{2m} \tilde{\psi}(\vec{p}, t) \Rightarrow \tilde{\psi}(\vec{p}, t) = A \exp(i\hbar\frac{2m}{p^2}t)
+\]
+Now using question (4) we have that:
+\[
+A = \tilde{\psi}(\vec{p}, \tau)\exp(-i\hbar \frac{2m}{p^2}\tau)
+\]
+Now we can find the position wavefunction by taking the Fourier transform:
+\[
+\psi(x, t) =  \int_{\mathbb{R}^3} \dd^3 \vec{p}\, \frac{e^{-i \vec{p} \vec{x}}}{\sqrt{2 \pi}^3} \tilde{\psi}(\vec{p}, t)
+\]
+We obtain that the space wavefunction will be composed of three peaks that will separate over time.
 
 \section*{Problem 2}
 
