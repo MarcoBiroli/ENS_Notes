@@ -24,7 +24,6 @@
 \tableofcontents
 
 \chapter{Introduction to statistical physics: 'more is different'}
-
 \section{Context and Goals}
 
 This course is an introduction to statistical physics. We will start by seeing how 'more is different', i.e. that the collective has a behavior of its own. We will then study statistical physics in the framework of thermodynamics which will allow us to not only display a system's behavior (as might have been previously done in thermodynamics courses) but predict how a system will behave. We will then work through 3 frameworks of statistical physics: the micro-canonical, the canonical and the grand-canonical. We will also see how we can create mechanical energy from entropy. For example, consider a tank of water with salty water on one side and pure water on the other. We place a filter in the middle that lets pass only water and not salt, then the entropy of the system will generate a mechanical force on the barrier. The course will then end on phase transitions from thermodynamics 'done well' with for example the gas of Van Der Walls, and we will open on an introduction to quantum statistical physics.
@@ -2728,5 +2727,133 @@ When $T$ becomes extremely low we have that:
 Where $\Theta$ here is the heavy side step function and we denote by $\mu = \epsilon_F = \frac{(\hbar k_F)^2}{2m}$ the Fermi energy.
 
 \section{Bosonic gas and condensation of Bose-Einstein.}
+
+
+
+[...]
+
+ALE
+
+[...]
+
+\subsubsection{Statistique}
+We have that:
+\[
+N = \sum_{\text{quantum states }i } \langle n \rangle_i = \sum_{\text{Q states } i} \frac{1}{e^{\beta(\epsilon_i - \mu} - 1}
+\]
+
+\subsubsection{Free bosons case.}
+In the case of free bosons we have that $i = \vec{k}$ and the energy is given by:
+\[
+\epsilon(\vec{k}) = \frac{p^2}{2m} = \frac{\left (\hbar \vec{k} \right)^2}{2m}
+\]
+If we additionally applied an external potential we would get another $\epsilon$. We now make the link from discrete to continuous in our momentum space as follows:
+\[
+\vec{k} = \frac{2\pi}{L} \left(n_x, n_y, n_z\right), \quad \sum_{\text{Q state } i} \left( \cdot \right) = \int \frac{\dd^3 \vec{k}}{\left( \frac{2\pi}{L} \right)^3} \left( \cdot \right)
+\]
+
+\subsubsection{Computation of the Pressure.}
+We have:
+\[
+P = \frac{k_B T }{V}\int \frac{\dd^3 \vec{k}}{\left(\frac{2\pi}{L}\right)^3} \log \frac{1}{\left(1 - e^{- \frac{\epsilon(\vec{k}) - \mu}{k_B T}}\right)}
+\]
+We then get (using that $V = L^3$):
+\[
+\beta \rho = \int \frac{\dd^3 \vec{k}}{(2 \pi )^3} \log(\frac{1}{1 - z e^{- \frac{\hbar^2 k^2}{2m k_B T}} }) = \int_0^{+\infty} \frac{4\pi}{(2\pi)^3} k^2 \dd k \log(\frac{1}{1 - z e^{-\frac{\hbar^2 k^2}{2m k_B T}}})
+\]
+Now substituting with the variable $x = \frac{\hbar^2 k^2}{2m k_B T}$ we get that:
+\[
+\beta \rho = \underbrace{\frac{1}{2 \pi^2} \left(\frac{2 m k_B T}{\hbar^2}\right)^{3/2}}_{\lambda_T} \int_0^{+\infty} x^2 \dd x \log(\frac{1}{1 - ze^{-x^2}})
+\]
+Now simplifying we get that:
+\[
+\beta \rho = \frac{4}{\sqrt{\pi}} \frac{1}{\lambda_T^3} \int_0^{+\infty} x^2 \dd x \log(\frac{1}{1 - z e^{-x^2}})
+\]
+Now expanding the $\log$ in power series we obtain:
+\[
+\log(\frac{1}{1 - X}) = \sum_{l = 1}^{+\infty} \frac{X^l}{l} \quad \text{ and we introduce } \quad g_\alpha (x) = \sum_{l = 1}^{+\infty} \frac{X^l}{l^\alpha}
+\]
+Now plugging this into the integral we get that:
+\[
+\int_0^{+\infty} \dd x\,  x^2 \log(\frac{1}{1 - ze^{x^2}}) = \sum_{l = 1}^{+\infty} \frac{1}{l} \int_0^{+\infty} \dd{x} x^2 z^l e^{\ell x^2} = \sum_{\ell = 1}^{+\infty} \frac{z^\ell}{\ell} \int_0^{+\infty} \dd{x} x^2 e^{-\ell x^2}
+\]
+From which we get the final result:
+\[
+\beta \rho(z) = \frac{1}{\lambda_T^3} g_{5/2}(z)
+\]
+Then from what we have done previously we know that:
+\[
+\rho = \pdv{P}{\mu} \Bigg|_T = z \pdv{\beta \rho}{z} \Bigg|_T = z \pdv{}{z}\left[ \frac{1}{\lambda_T^3} g_{5/2}(z) \right] \Bigg|_T 
+\]
+Furthermore:
+\[
+z \pdv{}{z} g_{5/2}(z) = z \sum_{\ell = 1}^{+\infty} \frac{1}{\ell^{5/2}} \ell z^{\ell - 1} = g_{3/2}(z)
+\]
+Which no plugging it back on top gives:
+\[
+\rho = \frac{1}{\lambda_T^3 g_{3/2}(z)} 
+\]
+
+\subsubsection{Bose Einstein Condensation.}
+Now when plotting $\rho(z)$ we obtain the following plot.
+\begin{center}
+\includegraphics[width = 0.6\textwidth]{graphs/rhocondensation}
+\end{center}
+However this poses a problem for when try to get the parametric solution. For $\rho$ given we have that $\rho \lambda_T^3 < g_{3/2}(1) = 2.612$ then $z(\rho) \Rightarrow \beta \rho(...)$. However if we take $\rho \lambda_T^3 > g_{3/2}(1) = 2.612$ then we will get $z = 1$ for all values of $\rho$. Which is not admissible. The origin of the problem comes from when we counted the states in energy levels. When we wrote:
+\[
+\langle n \rangle_0 = \frac{1}{\frac{1}{z} - 1} = \frac{z}{1 - z} \stackrel{z \to 1}{\longrightarrow} \infty
+\]
+Hence there is an infinite number of particles in the fondamental state. Then going back to the density:
+\[
+N = \sum_{\text{Q states } i} \frac{1}{e^{\beta(\varepsilon - \mu)} - 1} 
+\]
+When we passed from the discrete sum to the continuous integral we assumed that what we were describing was regular enough. However if the number of element in the fundamental state diverges this does not hold anymore and we have to separate it from the rest of the terms. So we write:
+\[
+N = \frac{1}{\frac{1}{z} - 1} + \sum_{\vec{k} \neq \vec{0}}
+\]
+Or in other words:
+\[
+\sum_{\vec{k} \neq \vec{0}} \left( \cdot \right) = \int \frac{\dd^3 \vec{k}}{\left(2 \pi /L\right)^3} \left( \cdot \right), \quad N_0 = \langle n_{\epsilon = 0} \rangle = \frac{z}{1 - z}, \quad N = N_0 + V \underbrace{\int \frac{\dd^3 \vec{k}}{(2 \pi)^3} \langle n_{\vec{k}} \rangle}_{\frac{1}{\lambda_T^3 g_{3/2} (z)}}
+\]
+Putting this together gives:
+\[
+\rho_0 = \frac{N_0}{V} = \frac{N}{V}\left(1 - \frac{g_{3/2}(z)}{\rho \lambda_T^3}\right), \quad  \frac{N_0}{N} = 1 - \frac{g_{3/2}(z)}{\rho \lambda_T^3}
+\]
+Then we have that the critical behaviors appears for $\rho \lambda_T^3 > g_{3/2}(1)$ which replaced above gives:
+\[
+\frac{N_0}{N} \approx 1 - \frac{2.612}{\rho \lambda_T^3}
+\]
+Then we want to find the critical temperature for which the transition happens. With the expression of the De Broglie wavelength we can replace it in the equation and we get:
+\[
+\begin{cases}
+\frac{N_0}{N} = 1 - \left(\frac{T}{T_\text{BE}}\right)^{3/2}, \quad &T < T_\text{BE}\\
+\frac{N_0}{N} = 0, &T > T_\text{BE}
+\end{cases}
+\]
+Which gives the following plots:
+[INSERT PLOT] [INSERT PLOT]
+
+\subsubsection{Pressure.}
+What we will now prove is that the fundamental state does not contribute to the pressure. If we do the same separation as before in between $\vec{k} = \vec{0}$ and $\vec{k} \neq \vec{0}$ we get:
+\[
+\rho = \frac{k_B T}{V} \sum_{\text{Q states } i} \log[\frac{1}{1 - e^{-\beta(\epsilon_i - \mu)}}] = \frac{k_B T}{V} \log[\frac{1}{1 - z}] + \frac{k_B T}{V}L^3 \int \frac{\dd^3\vec{k}}{(2\pi)^3} \log[\frac{1}{1 - e^{-\frac{\epsilon(\vec{k}) - \mu}{k_B T}}}]
+\]
+The integral term is exactly the same as previously, so we just get a difference characterized by the first term. However:
+\[
+\frac{k_B T}{V} \log \frac{1}{1 - z} \approx \frac{k_B T}{V} \log N_0 \sim \frac{\log V}{V} \ll 1
+\]
+So we can neglect it and the pressure is entirely determined from the integral term. So know we get the following:
+\[
+\rho \lambda_T^3 < 2.612 \Rightarrow \beta \rho = \frac{1}{\lambda_T^3} g_{5/2}(z), \quad \rho \lambda_T^3
+ > 2.612 \Rightarrow \beta \rho = \frac{1}{\lambda_T^3} g_{5/2}(1)\]
+ 
+\subsection{Thermodynamics.}
+\subsubsection{Energy.}
+The energy will be given by:
+\[
+E = \frac{3}{2}\rho V
+\]
+And computation gives the following result for $C_V$. This is observed experimentally although the phenomenon is not exactly the same since in reality one has to take into account the interaction in between the particles. Current experiment observe Bose-Einstein condensates with He(4) at around 2.18 Kelvins while the ideal critical temperature that our model would predict is around 3 Kelvins. 
+
 
 \end{document}
