@@ -31,12 +31,60 @@
 
 
 
-\author{Alessandro Pacco}
+\author{Alessandro Pacco \& Marco Biroli}
 \title{Statistical physics solutions}
 \begin{document} 
 \maketitle
 
 \chapter*{Chapter 3}
+\section*{3.1}
+\subsection*{1)}
+Denote $z$ the partition function for a single particle. Then we know that:
+\[
+z = \int e^{-\beta \mathcal{H}(\Gamma) } \dd \Gamma \quad \text{ and } \quad \mathcal{H} = \frac{p^2}{2m} + mgz
+\]
+This gives:
+\[
+z = \frac{1}{\hbar^3} (2 \pi m k_B T)^{3/2} S \frac{k_B T}{m g} ( 1 - e^{-\beta m g L})
+\]
+Which in turn yields the following for the total partition function:
+\[
+Z = \frac{1}{N!} z^N 
+\]
+\subsection*{2)}
+We notice that:
+\[
+\langle E \rangle = \frac{- \pdv{}{\beta} Z}{Z} = - \pdv{}{Z} \ln(Z) = \frac{5}{2} N k_B T - \frac{mg N  L}{e^{\beta m g L} - 1}
+\]
+When $L \to +\infty$ the Hospital rule applied on the second term quickly gives that:
+\[
+\langle E \rangle \stackrel{L \to +\infty}{\longrightarrow} \frac{3}{2} N k_B T
+\]
+
+\subsection*{3)}
+In order to answer formally we first state that $N(z) \dd z$ is actually the average value of the following quantity: $\chi_{[z, z + \dd z]} (z')$. Then the usual formula for the average gives the following expression:
+\[
+N(z) \dd z = \frac{\int \chi_{[z, z + \dd z]} (z') e^{-\beta \mathcal{H}(\Gamma)} \dd \Gamma}{Z} = \frac{\left(\int_z^{z + \dd z} e^{-\beta m g z} \dd z\right)^N}{\left(\int_0^L e^{-\beta m g z} \dd z\right)^N} = \frac{e^{-\beta m g z N}}{(\beta m g)^N (1 - e^{-\beta m g L})^N} \dd z
+\]
+The limit of which (when $L$ goes to $\infty$) is expressed as:
+\[
+N(z) \dd z \stackrel{L \to +\infty}{\longrightarrow} \frac{e^{-\beta mg zN}}{(\beta m g)^N} \dd z
+\]
+Which is the Boltzmann distribution.
+
+\subsection*{4)}
+Density is given by:
+\[
+\rho(z) = \frac{N(z) \dd z}{S \dd z} = \frac{N(z)}{S} \Rightarrow \frac{\rho(z_2)}{\rho(z_1)} = \frac{N(z_2)}{N(z_1)} = e^{-\beta m g N (z_2 - z_1)}
+\]
+
+\subsection*{5 - 7}
+Bla bla, numeri numeri, bla bla.
+
+
+
+
+
 \section*{3.12}
 
 \subsection*{1)}
