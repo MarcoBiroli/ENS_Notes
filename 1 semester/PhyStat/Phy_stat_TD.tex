@@ -360,6 +360,8 @@ We have that
 $$p=\frac{k_BT\ln Z_G}{V}=k_BT(2s+1)\frac{1}{\lambda_T^3}\bigg(f+\frac{\tau}{4\sqrt{2}}f^2\bigg)$$
 and 
 $$\bar{N}=k_BT\frac{\p\ln Z_G}{\p\mu}=k_BT(2s+1)\frac{V}{\lambda_T^3}\bigg(\frac{1}{k_BT}f+\frac{\tau}{2\sqrt{2}}\frac{1}{k_BT}f^2\bigg)$$
+The ideal gas law is satisfied only for first order. Then, if we take into account the second order, the law is different and there is a correction term.
+
 
 \chapter*{Chpater 8}
 Rappel density of states:
@@ -530,28 +532,68 @@ THen at $0$ since $U(0)=0$, we have $n(\vec{0})=\frac{1}{\lambda_T^3}g_{3/2}f$.
 \section*{11.2}
 
 \subsection*{1)}
-Since there is a lack of geometry and all the particles interact with each other, we can consider them as being in a circle and forming a complete graph with $N$ vertices. Hence we devided the hamiltonian to take into account the fact that rotating this circle doesn't change the problem.
+Since there is a lack of geometry and all the particles interact with each other, we can consider them as being in a circle and forming a complete graph with $N$ vertices. Hence we devided the hamiltonian to take into account the fact that rotating this circle doesn't change the problem. Other explanation: we want the variation of energy to be of order 1 when we flip one splin. Here however it is of order $N$ since each spin interacts with all of the others. Hence we divided by $N$ to make $1$ the change of energy when flipping one electron. 
 
 \subsection*{2)}
-At first notice that 
-$$m:=\frac{\sum_{i=1}^n\sigma_i}{N} \Rightarrow m^2=\frac{\sum_{i,j=1}^N\sigma_i\sigma_j}{N^2}$$
-Now call $S=Nm$, and notice that $S=2a-N$, with $a\in\llbracket 0,N\rrbracket$. Hence $m$ will take $N+1$ values spaced by $2/N$ from $-1$ to $1$. For each of these $m$, i.e. for each $a$ we have $\binom{N}{a}$ possibilities. In the canonical ensemble we have that 
+If we define $m$ as the average magnetisation, at first notice that 
+$$m:=\frac{\sum_{i=1}^N\sigma_i}{N} \Rightarrow m^2=\frac{\sum_{i,j=1}^N\sigma_i\sigma_j}{N^2}$$
+Now call $S=Nm$, and notice that $S=a-(N-a)=2a-N$, with $a\in\llbracket 0,N\rrbracket$, which indicates the number of spins that have +1 value. Hence $m$ will take $N+1$ values spaced by $2/N$ from $-1$ to $1$. For each of these $m$, i.e. for each $a$ we have $\binom{N}{a}$ possibilities to choose $a$ of the $\sigma_i$ with value $1$, the rest being of value $-1$ . In the canonical ensemble we have that 
 \begin{align*}
 Z=\sum_{\{\sigma_i\}} e^{-\beta H}=\sum_{m} \binom{N}{\frac{(m+1)N}{2}}e^{-\beta N(-\frac{J}{2}m^2-hm)}
 \end{align*}
 
+Now we work on $\binom{N}{\frac{(m+1)N}{2}}$:
+\begin{align*}
+\binom{N}{\frac{(m+1)N}{2}}&=\frac{N!}{\big(N\frac{m+1}{2}\big)!\big(N\frac{1-m}{2}\big)!}\\
+&\approx exp\bigg(N\ln(N)-N-N\frac{m+1}{2}\ln(N(m+1)/2)+N\frac{m+1}{2}-N\frac{1-m}{2}\ln(N(1-m)/2)+N\frac{1-m}{2}\bigg)\\
+&=exp\bigg(-N\frac{1+m}{2}\ln((1+m)/2)-N\frac{1-m}{2}\ln((1-m)/2)\bigg)
+\end{align*}
+Finally if follows that 
+$$Z=\frac{N}{2}\frac{2}{N}\sum_m e^{-N[\frac{1+m}{2}\ln\frac{1+m}{2}+\frac{1-m}{2}\ln\frac{1-m}{2}]+N[\beta Jm^2/2+\beta hm]}=\frac{N}{2}\int_{-1}^{1}dme^{-\beta N\mathbf{f}(m,\beta,h)}$$
+
+
+
 \subsection*{3)}
 At large deviations of $N$ we retain only the dominant term in $Z$, and all the others will go to zero with respect to it as $N\to\infty$. Then 
-We have
+We have that we define the free energy per spin as:
 \begin{align*}
 f&=\lim_{N\to\infty}-\frac{1}{\beta N}\ln(Z)
-=
 \end{align*}
 
+From the previous question we have that, in the limit of $N\to \infty$, we can use the steepest ascent method, and only the most relevant term in the integral remains:
+$$Z\approx \frac{N}{2} e^{-\beta N\inf_m\mathbf{f}}$$
+
+from which it follows that in the limit of $N\to\infty$ we get
+$$f=\lim_{N\to\infty}-\frac{1}{\beta N}\ln Z=\lim_{N\to\infty}-\frac{1}{\beta N}\bigg(\ln\frac{N}{2}-\beta N\inf_m\mathbf{f}\bigg)=\inf_m\mathbf{f}$$
+
+\subsection*{4)}
+Recall that we have $\tanh^{-1}(x)=\frac{1}{2}\ln\frac{1+x}{1-x}$.
+We have that $$\mathbf{f}(m,\beta,h)=\frac{1}{\beta}\bigg[\frac{1+m}{2}\ln\frac{1+m}{2}+\frac{1-m}{2}\ln\frac{1-m}{2}\bigg]-\frac{Jm^2}{2}-hm
+$$
+so that for $h=0$, if we trace the graph of $\mathbf{f}$ as a function of $m$, for many temperatures, we get the following pictures:\\
+\includegraphics[scale=0.5]{TD1}\\
+
+the two minima can be computed from $m=\tanh(\beta Jm)$. 
+
+\includegraphics[scale=0.5]{TD3}
+
+\subsection*{5)}
+The effect of the h field is that one of the two "tette" will be pushed more down than the other, namely the rightmost one. We have the same behaviour as before, just that one tetta is pushed more down.
 
 
+\includegraphics[scale=0.5]{TD4}
 
+\subsection*{6)}
+We compute the derivative:
+$$\frac{\p\mathbf{f}}{\p m}=\tanh^{-1}(m)-\beta Jm-\beta h=0\Leftrightarrow \tanh^{-1}(m)=\beta Jm+\beta h$$
 
+\subsection*{7)}
+\includegraphics[scale=0.5]{TD2}
+
+\subsection*{8)}
+Recall that $\tanh(x)=x-\frac{x^3}{3}+..$. 1
+The equation for $m^*$ is 
+$$m^*=\tanh(\beta Jm^*+\beta h)$$
 
 
 
