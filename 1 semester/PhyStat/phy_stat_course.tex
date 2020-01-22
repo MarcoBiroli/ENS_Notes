@@ -2621,7 +2621,7 @@ The problem with such a formalism is that all the particles are treated as being
 \[
 \ket{\psi(1, 2, 3, \cdots, N)} = c \ket{\psi(2, 1, 3, \cdots, N)} = c^2 \ket{\psi(1, 2, \cdots N)} \Rightarrow c^2 = 1
 \]
-So if $c = 1$ the function is symmetric since $\ket{\psi(1,2)} = \ket{\psi(2, 1)}$ this is what we call bosons, if $c = -1$ then the function is anti-symmetric since $\ket{\psi(1,2)} = -\ket{\psi(2, 1)}$ these are what we call fermions.
+So if $c = 1$ the function is symmetric since $\ket{\psi(1,2)} = \ket{\psi(2, 1)}$ this is what we call bosons, if $c = -1$ then the function is anti-symmetric since $\ket{\psi(1,2)} = -\ket{\psi(2, 1)}$ these are what we call fermions. It can be proven that fermions have spin $1/2$, whereas bosons have spin $1$. We also have that two fermions cannot be in the same quantum state, so that if two fermions they share the same spacial wavefunction, then they must have opposite spin. 
 
 \subsubsection{Ex: 2 level system with 2 particles.}
 We have two energy levels $\lambda_1, \lambda_2$. Then for the bosonic case we have that:
@@ -2632,7 +2632,7 @@ As for the fermionic case we get:
 \[
 \ket \psi = \frac{1}{\sqrt{2}} \left( \ket{1: \lambda_1} \otimes \ket{2: \lambda_2} - \ket{1 : \lambda_2} \otimes \ket{2, \lambda_1}\right)
 \]
-We also have multiple very general results that we will not prove here. Bosons are integer spin particles, fermions are half-integers spin particles and two fermions can never be in the same quantum state. So for example in the previous case if we consider the particles are discenerable the possible states are: $\ket{\lambda_1, \lambda_1}, \ket{\lambda_1, \lambda_2}, \ket{\lambda_2, \lambda_1}, \ket{\lambda_2, \lambda_2}$. Now if we have bosons the possible states are: $\ket{(2, \lambda_1)}, \ket{(1, \lambda_1), (1, \lambda_2)}, \ket{(2, \lambda_2)}$. For fermions it is even easier there is only one possible state: $\ket{(1, \lambda_1), (1, \lambda_2)}$. Now if we include spin we have to write:
+We also have multiple very general results that we will not prove here. Bosons are integer spin particles, fermions are half-integers spin particles and two fermions can never be in the same quantum state. So for example in the previous case if we consider the particles are discenerable the possible states are: $\ket{\lambda_1, \lambda_1}, \ket{\lambda_1, \lambda_2}, \ket{\lambda_2, \lambda_1}, \ket{\lambda_2, \lambda_2}$ (where in the ket the first arugment represents the state of the first particle, and te second argument represents the state of the second particle. Now if we have bosons the possible states are: $\ket{(2, \lambda_1)}, \ket{(1, \lambda_1), (1, \lambda_2)}, \ket{(2, \lambda_2)}$ (wjere the first argument now says the number of particles having the second argument as their quantum state). For fermions it is even easier there is only one possible state: $\ket{(1, \lambda_1), (1, \lambda_2)}$. Now if we include spin we have to write:
 \[
 \ket \psi = \ket \varphi \otimes \ket \chi
 \]
@@ -2652,15 +2652,15 @@ As for bosons we have that:
 
 \subsection{Grand canonical partition function}
 \section{Fermion gas.}
-The general form of the partition function is:
+The general form of the grand partition function is:
 \[
 \Theta = \sum_{\text{microstates } s} e^{\beta(\mu N_s - E_s)}
 \]
-Once again remember the crucial idea of reverting the counting method and instead of associating a quantum state to every particle and iterate over every particle we associate a number of particles $n_i$ to a quantum state $\lambda_i$ and iterate over the quantum states. Note also that we have:
+Once again remember the crucial idea of reverting the counting method and instead of associating a quantum state to every particle and iterate over every particle we associate a number of particles $n_i$ to a quantum state $\lambda_i$ and iterate over the quantum states. Now we define the total number of particles for a given microstate as:
 \[
 N_s = \sum_{i} n_i
 \]
-We see immediately that if $N_s$ was fixed we would immediately have non-trivial combinatorics to solve right off the bat, this is why the grand canonical ensemble is much better to solve problems that have a quantum component. Now a given microstate is given by $\{n_i\}$, i.e. the microstate is described by the number of particles that each quantum state $i$ has. So we can write:
+We see immediately that if $N_s$ was fixed we would immediately have non-trivial combinatorics to solve right off the bat, this is why the grand canonical ensemble is much better to solve problems that have a quantum component. Now a given microstate is given by $\{n_i\}_i$, i.e. the microstate is described by the number of particles that each quantum state $i$ has. The total energy for a microstate $E_s=\sum_i n_i\epsilon_i$. So we can write:
 \[
 \Theta = \sum_{n_1} \sum_{n_2} \cdots e^{\beta (\mu \sum_i n_i - \sum_i n_i \epsilon_i)} = \prod_i \underbrace{\sum_{n_i} e^{\beta (n_i (\mu - \epsilon_i))}}_{\zeta_i}=\prod_i\zeta_i
 \]
@@ -2671,7 +2671,7 @@ For fermions the problem is further simplified since the exclusion principle  gi
 \[
 \zeta_i = 1 + e^{\beta(\mu - \epsilon_i)}
 \]
-Then the average number of occupation $\langle n_i\rangle$ for the state $i$  is given by:
+Then if we consider only one quantum state, we can compute the average number of occupation $\langle n_i\rangle$ thanks to the usual formula for average in the gran canonical system:
 \[
 \langle n_i \rangle = \frac{\sum_{n_i = 0, 1} n_i e^{\beta(\mu - \epsilon_i)n_i}}{\sum_{n_i = 0, 1} e^{\beta(\mu - \epsilon_i)n_i}} = \frac{1}{e^{\beta(\epsilon_i - \mu)} + 1}
 \]
@@ -2682,14 +2682,14 @@ For the bosons since we have no restriction we have that $n_i \in \mathbb{N}$ he
 \]
 Which then gives in turn:
 \[
-\langle n_i \rangle  = - \frac{1}{\beta} \pdv{}{\epsilon_i} \log \zeta_i = \frac{1}{e^{\beta(\epsilon_i - \mu)} - 1}
+\langle n_i \rangle  =\frac{\sum_{n\in\mathbb{N}} ne^{\beta(\mu-\epsilon_i)n}}{\sum_{n\in\mathbb{N}} e^{\beta(\mu-\epsilon_i)n}}= - \frac{1}{\beta} \pdv{}{\epsilon_i} \log \zeta_i = \frac{1}{e^{\beta(\epsilon_i - \mu)} - 1}
 \]
 \subsubsection{Average number of particles.}
 The average number of particles in the system is given by:
 \[
 \langle N \rangle = \sum_i \langle n_i \rangle = \sum_i \frac{1}{e^{\beta(\epsilon_i - \mu)} \pm 1}
 \]
-
+where $+$ is for fermions and $-$ for bosons.
 \subsubsection{Average Energy.}
 The average energy of the system is given by:
 \[
@@ -2709,8 +2709,8 @@ A fermion gas is simply a certain number of independent fermions that have an en
 \]
 The pressure is found by taking $P = -\frac{\Omega}{V}$ and the density by using:
 \[
-\rho(\mu, T) = \frac{\langle N \rangle}{V} = \frac{1}{V}\sum_i \frac{1}{e^{\beta(\epsilon_i-\mu)}}=
-2 \int \frac{\dd^3 \vec{k}}{(2\pi)^3} \frac{1}{e^{\beta(\frac{(\hbar k)^2}{2m} - \mu)} - 1}
+\rho(\mu, T) = \frac{\langle N \rangle}{V} = \frac{1}{V}\sum_i \frac{1}{e^{\beta(\epsilon_i-\mu)}+1}=
+2 \int \frac{\dd^3 \vec{k}}{(2\pi)^3} \frac{1}{e^{\beta(\frac{(\hbar k)^2}{2m} - \mu)} + 1}
 \]
 
 \subsubsection{High Temperatures.}
@@ -2728,13 +2728,29 @@ Where $\Theta$ here is the heavy side step function and we denote by $\mu = \eps
 
 \section{Bosonic gas and condensation of Bose-Einstein.}
 
+We previously discussed of free fermions, where there were no interactions. The occupation number of a quantum state $i$, i.e. $\langle n_i\rangle$ was written as 
+$$\langle n_i\rangle=\frac{1}{e^{\beta(\epsilon_i- \mu)}\pm 1}$$ with $+$ for fermions and $-$ for bosons. Now we ask the following question: if we denote by $\epsilon_0=0$ the ground state and $\langle n_0\rangle=\frac{1}{e^{-\beta\mu}-1}$ and we pose $z=e^{\beta\mu}$ the fugacity, we have $\langle n_0\rangle=\frac{z}{1-z}$. We have that $0<z<1$ and $\mu\leq 0=\epsilon_0$. What happens for $z=-1$?. We should get that $\langle n_0\rangle\to\infty$. In a bose condensate we have that we canno have an infinte number of particles in the same state.
+
+\section{grand potential}
+
+We have that, for bosons:
+$$\Omega=-k_BT\log\Theta=-k_BT\sum_{\text{quantum state i}}\log\Theta=-k_BT\sum_{\text{quantum state i}}\log\frac{1}{1-e^{-\beta(\epsilon_i-\mu)}}$$
+for fermions recall that we have $\Omega=-k_BT\sum_i\log(1+e^{-\beta(\epsilon_i-\mu)})$.
 
 
-[...]
 
-ALE
+ Now we consider only bosons: the pression is given by $\Omega=-pV$:
+$$p=\frac{k_BT}{V}\sum_{\text{quantum state i}}\log(\frac{1}{1-e^{-\beta(\epsilon_i-\mu)}})$$
+and the average number  of particles 
+$$\langle N\rangle =-\frac{\partial\Omega}{\partial\mu}$$ and
 
-[...]
+$$\begin{cases} 
+\Omega=-pV\\
+z=e^{\beta\mu}
+\end{cases}
+$$
+so that $dz=\beta e^{\beta\mu}d\mu=\beta zd\mu\Rightarrow N=Vz\frac{\partial(\beta p)}{\partial z}\Rightarrow \rho=z\frac{\partial(\beta p)}{\partial z}$
+
 
 \subsubsection{Statistique}
 We have that:
