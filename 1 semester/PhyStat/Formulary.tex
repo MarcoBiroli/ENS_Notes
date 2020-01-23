@@ -1,0 +1,66 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{physics}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\author{Marco Biroli & Alessandro Pacco}
+\title{Formulary}
+\begin{document}
+\begin{center}
+\begin{tabular}{| c | c |}
+\hline
+P.f micro & $\Omega =  \sum_{\text{microstates } s} 1$\\
+\hline
+Entropy micro & $ S = k_B \log \Omega$\\
+\hline
+Temperature & $ \frac{1}{T} = \pdv{S}{E} \Big|_{V, N}$\\
+\hline
+Diff. Form & $\dd E = T \dd S - P \dd V + \mu \dd N$\\
+\hline
+Diff. Form & $\dd F = - S \dd T - P \dd V + \mu \dd N$\\
+\hline
+Perfect gas & \\
+\hline
+Entropy & $S = k_B N \left( \log(\frac{V}{N} \left(\frac{4 \pi m E}{3 N h^2}\right)^{3/2}) + \frac{5}{2}\right)$\\
+\hline
+Energy & $E = \frac{3}{2}N k_B T$\\
+\hline
+Calorific Capacity & $C_V = \frac{3}{2}N k_B$ \\
+\hline
+Pressure & $\frac{N}{V}k_B T$\\
+\hline
+Chemical potential & $\mu = k_B T \log(N \lambda^3)$\\
+\hline
+De Broglie Wavelength & $\lambda = \sqrt{\frac{h^2}{2 \pi m k_B T}}$\\
+\hline 
+Canonical Partition Function & $ Z = \frac{1}{N!} \int \dd \Gamma e^{-\beta \mathcal{H}(\Gamma)}$\\
+\hline
+Energy & $E = -\pdv{}{\beta}\log Z$\\
+\hline
+Free energy & $F = E - TS$ and $F = - k_B T \log Z$\\
+\hline
+Calorific Capacity & $\langle (E - \bar{E})^2 \rangle = k_B T^2 C_V$\\
+\hline
+Grand Canonical Partition Function & $\Theta = \sum_{\text{microstates } s} e^{-\beta(E_s - \mu N_s)} = \sum_N e^{\beta \mu N} Z_N$\\
+\hline 
+Grand Potential & $\Omega = -k_B T \log \Theta$\\
+\hline
+Free energy & $\Omega = F - \mu N$\\
+\hline
+Gibbs Duhem & $\Omega F - \mu N = - p V$\\
+\hline
+Free enthalpy & $ G = F + PV = \mu N$ so $\mu = \frac{G}{N}$\\
+\hline
+Diff. Enthalpy & $ \dd G = N \dd \mu + \mu \dd N$\\
+\hline
+\textbf{Useful Gibbs Duhem} & $N\dd\mu = - S \dd T + V \dd P$\\
+\hline
+Quantum Grand Can. P.F. & $\ln \Theta = - \tau \sum_k \ln(1 - \tau e^{\beta(\mu - \varepsilon_k)})$, $\tau = 1$ bosons, $\tau = -1$ fermions\\
+\hline
+\end{tabular}
+\end{center}
+\end{document}

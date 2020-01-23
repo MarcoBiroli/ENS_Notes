@@ -581,6 +581,7 @@ the two minima can be computed from $m=\tanh(\beta Jm)$.
 The effect of the h field is that one of the two "tette" will be pushed more down than the other, namely the rightmost one. We have the same behaviour as before, just that one tetta is pushed more down.
 
 
+<<<<<<< HEAD
 \includegraphics[scale=0.5]{TD4}
 
 \subsection*{6)}
@@ -594,9 +595,81 @@ $$\frac{\p\mathbf{f}}{\p m}=\tanh^{-1}(m)-\beta Jm-\beta h=0\Leftrightarrow \tan
 Recall that $\tanh(x)=x-\frac{x^3}{3}+..$. 1
 The equation for $m^*$ is 
 $$m^*=\tanh(\beta Jm^*+\beta h)$$
+=======
+\section*{11.3}
+\subsection*{1)}
+Interactions et rayons de particules non nul.
 
+\subsection*{2)}
+We have the following:
+\[
+\begin{cases}
+\frac{2N^2 a}{V^3} - \frac{N k_B T}{(V - N b)^2} = 0\\
+\frac{2 N k_B T}{(V - N b)^3} - \frac{6 N^2 a}{V^4} = 0
+\end{cases}
+\Leftrightarrow 
+\begin{cases}
+\frac{2N^2 a}{V^3} - \frac{N k_B T}{(V - N b)^2} = 0\\
+\frac{2 N k_B T}{(V - N b)^3} - \frac{3 N k_B T}{V ( V - N b)^2} = 0
+\end{cases}
+\Leftrightarrow 
+\begin{cases}
+\frac{2N^2 a}{27 N^3 b^3} - \frac{N k_B T}{4 N^2 b^2} = 0\\
+V = 3 N b
+\end{cases}
+\]
+\[
+\begin{cases}
+T_c = \frac{8 a}{27 b k_B}\\
+V_c = 3 N b
+\end{cases} \Rightarrow P_c = \frac{a}{27 b^2}
+\]
 
+\subsection*{4)} The Maxwell construction is done by stating that the free energy on the right of the transition should equal the free energy on the left. In this specific case it is the same as saying that we need to find a horizontal cut of the curve such that the section on the left has the same area as the one on the right.
 
+\subsection*{5)}
+We have:
+\begin{align*}
+(P + a\frac{N^2}{V^2}) (V - N b) = N k_B T &\Leftrightarrow ( \frac{a}{27 b^2} \hat{P} + a\frac{N^2}{\hat{V}^2}\frac{1}{9 N^2 b^2}) (\hat{V} 3 N b - N b) = N k_B \hat{T} \frac{8 a}{27 b k_B}\\
+&\Leftrightarrow 8 \hat{T} = (\hat{P} + \frac{3}{\hat{V}})(3\hat{V} - 1)
+\end{align*}
+
+\subsection*{6)}
+We know from construction that $P'(V_c) = P''(V_c) = 0$ hence we can immediately deduce that $\delta = 3$. For more details using the equation of (5) (and setting $\hat{T} = 1$) we get:
+\[
+\hat{P} - 1 = \frac{8}{3 \hat{V} - 1} - \frac{3}{\hat{V}^2} - 1 = \frac{-3 \hat{V}^3 + 9 \hat{V}^2 - 9 \hat{V} + 3}{\hat{V}^2(3 \hat{V} - 1)} = \frac{-3}{\hat{V}^2(3 \hat{V} - 1)} (\hat{V} - 1)^3 \stackrel{\hat{V} \to 1}{\propto} (\hat{V} - 1)^3
+\]
+
+\subsection*{7)}
+We have already computed the derivative $\pdv{P}{V}$ so by plugging it here and inverting it we get that:
+\begin{align*}
+\chi_T &= -\frac{1}{V}\left(\frac{2 N^2 a}{V^3} - \frac{N k_B T}{(V - N b)^2}\right)^{-1} \text{ which gives (by replacing } V \text{ with } V_c \text{)}\\
+\tilde{\chi_T}(T) &= -\frac{1}{3 N b}\frac{108 N b^3}{27 b k_B T - 8 a} = \frac{36 b^2}{8 a} (\hat{T} - 1)^{-1}
+\end{align*}
+Which tells us that $\gamma = 1$.
+
+\subsection*{8)}
+We have:
+\[
+\hat{P} = \frac{8(1 - \varepsilon)}{3(1 + \delta) - 1} - \frac{3}{(1 + \delta)^2} = \frac{8 - 8 \varepsilon}{2 + 3 \delta} - \frac{3}{(1 + \delta)^2}
+\]
+Now making a Taylor expansion in $\delta$ around 0 on both terms we get that:
+\begin{align*}
+\hat{P} = (4 - 4 \varepsilon) - 3 \frac{8 - 8 \varepsilon}{4} \delta + 3^2 \cdot 2 \frac{8 - 8 \varepsilon}{2\cdot 8} \delta^2 - 3^3 \cdot 6 \cdot \frac{8 - 8 \varepsilon}{6 \cdot 16} \delta^3 - 3  + 2 \cdot 3 \delta - \frac{2 \cdot 3^2}{2} \delta^2 + \frac{2 \cdot 3 \cdot 4 \cdot 3}{2 \cdot 3} \delta^3
+\end{align*}
+Now developing everything we get:
+\[
+\hat{P} = 4 - 4\varepsilon - 6 \delta + 6 \delta \varepsilon + 9 \delta^2 - 9 \varepsilon \delta^2 - \frac{27}{2} \delta^3 + \frac{27}{2} \varepsilon \delta^3 - 3 + 6 \delta - 9 \delta^2 + 12\delta^3
+\]
+Which simplifies to:
+\[
+\hat{P} = 1 - 4 \varepsilon - \frac{3}{2} \delta^3 + 6 \delta \varepsilon + \mathcal{O}(\delta^4, \varepsilon \delta^2)
+\]
+Now to know the order of the scaling of the volume near to the critical point it suffices to compute:
+\[
+1 - 4 \varepsilon - \frac{3}{2} \delta^3 + 6 \varepsilon \delta = 1 - 4 \varepsilon \Leftrightarrow \delta \sim 2\sqrt{\varepsilon}
+\]
+Which immediately tells us that $\beta = \frac{1}{2}$.
 
 
 \section*{11.4}
