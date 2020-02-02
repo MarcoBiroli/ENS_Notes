@@ -1,0 +1,99 @@
+\documentclass[10pt,a4paper]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{wrapfig}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{cancel}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{physics}
+\usepackage{multicol}
+\usepackage{caption}
+\usepackage{subcaption}
+\author{Alessandro Pacco}
+\title{DM-MMC, 2020}
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\section*{De la forme des arbres}
+
+
+\section*{Méthodes d'analyse complexe pour des problèmes d'élasticité bidimensionelle}
+
+\subsection*{1.a)}
+If $f$ is a holomorphic function then it is $C^{\infty}$ on all of its domain. 
+Then we have that 
+\begin{align*}
+f'(z)&=\lim_{|h|\to 0}\frac{f(z+h)-f(z)}{h}=\lim_{h_1\to 0,h_2\to 0}\frac{f_1(z_1+h_1,z_2+h_2)-f_1(z_1,z_2)+i[f_2(z_1+h_1,z_2+h_2)-f_2(z_1,z_2)]}{h_1+ih_2}
+\end{align*}
+now this limit must be valid both when $h_1=0$ and $h_2\to 0 $ and when $h_1\to 0$ and $h_2=0$. From this it follows that 
+\begin{align*}
+f'(z)&=\frac{\partial f_1(z_1,z_2)}{\partial z_1}+i\frac{\partial f_2(z_1,z_2}{\partial z_1}\\
+f'(z)&=-i\frac{\partial f_1(z_1,z_2)}{\partial z_2}+\frac{\partial f_2(z_1,z_2)}{\partial z_2}
+\end{align*} from which the Cauchy conditions follow, i.e.
+\begin{align*}
+\frac{\partial f_1}{\partial z_1}&=\frac{\partial f_2}{\partial z_2}\\
+\frac{\partial f_1}{\partial z_2}&=-\frac{\partial f_2}{\partial z_1}
+\end{align*}
+
+
+\subsection*{1.b)}
+Since $f_1$ and $f_2$ are $C^2$, then we can exchange the order of derivation, thus getting
+$$\Delta f_1=\partial^2_{z_1}f_1+\partial^2_{z_2} f_1=\partial^2_{z_1z_2}f_2+\partial^2_{z_2z_1}(-f_2)=0$$
+
+similarly for $f_2$ we get that 
+$$\Delta f_2=\partial^2_{z_1}f_2+\partial^2{z_2}f_2=\partial^2_{z_1z_2}(-f_1)+\partial^2_{z_2z_1}f_1=0$$
+
+\subsection*{2)}
+At equilibrium we have that 
+$$\phi+\div(\sigma)=0$$
+where $$\div(\sigma)=\begin{pmatrix}
+\frac{\partial \sigma_{xx}}{\partial x}+\frac{\partial \sigma_{xy}}{\partial y}+\frac{\partial \sigma_{xz}}{\partial z}\\
+\frac{\partial \sigma_{yx}}{\partial x}+\frac{\partial \sigma_{yy}}{\partial y}+\frac{\partial \sigma_{yz}}{\partial z}\\
+\frac{\partial \sigma_{zx}}{\partial x}+\frac{\partial \sigma_{zy}}{\partial y}+\frac{\partial \sigma_{zz}}{\partial z}
+\end{pmatrix}$$Componentwise and using Einstein's notation we can therefore write: $\phi_i+\partial_j(\sigma_{ij})=0$.
+Still with Einstein's notation we have that Hooke's law says that 
+$$\sigma_{ij}=2\mu \epsilon_{ij}+\lambda \epsilon_{kk}\delta_{ij}$$
+Now it follows that 
+\begin{align*}
+\partial_j\sigma_{ij}=2\mu\partial_j\epsilon_{ij}+\lambda \partial_i\epsilon_{kk}
+\end{align*}
+and using the fact that $\epsilon_{kk}=\div(\mathbf{u})$ and $\partial_j\epsilon_{ij}=\frac{1}{2}\partial_j(\partial_j u_i+\partial_i u_j)=\frac{1}{2}\partial_{jj}u_i+\frac{1}{2}\partial_j\partial_i u_j=\frac{1}{2}\laplacian u_i+\frac{1}{2}\partial_j\partial_i u_j$
+we get that
+$\partial_j\sigma_{ij}=2\mu[ \frac{1}{2}\laplacian u_i+\frac{1}{2}\partial_j\partial_i u_j]+\lambda\partial_i\div(\mathbf{u})$. Finally it follows that
+\begin{align*}
+\phi_i+\mu\laplacian u_i+\mu\partial_j\partial_i u_j +\lambda\partial_i\div(\mathbf{u})=0\Rightarrow \phi+\mu\laplacian \mathbf{u}+(\mu+\lambda)\grad(\div(\mathbf{u}))=0
+\end{align*}
+
+
+
+\subsection*{3)}
+We have that $\mathbf{u}=(0,0,\omega)$,
+from which, using the equation found previously, it follows that 
+$$\mu\laplacian(\omega)=0\Rightarrow\partial^2_x\omega+\partial^2_y\omega=0$$
+where we used the fact that in this case $\div(\mathbf{u})=0$. So $\omega$ is harmonic
+
+%$\epsilon_{xx}=\epsilon_{xy}=\epsilon_{yx}=\epsilon_{yy}=\epsilon_{zz}=0$ and $\epsilon_{zx}=\epsilon_{xz}=\frac{1}{2}\frac{\partial w}{\partial x}$, $\epsilon_{yz}=\epsilon_{zy}=\frac{1}{2}\frac{\partial w}{\partial y}$. 
+
+\subsection*{4)}
+We have that 
+$$\sigma=\begin{pmatrix}
+0 && 0 && \frac{1}{2}\frac{\partial \omega}{\partial x}\\
+0 && 0 && \frac{1}{2}\frac{\partial \omega}{\partial y}\\
+\frac{1}{2}\frac{\partial \omega}{\partial x} && \frac{1}{2}\frac{\partial \omega}{\partial y} && 0\\
+\end{pmatrix}$$
+
+
+
+
+ì
+
+
+
+
+\end{document}
