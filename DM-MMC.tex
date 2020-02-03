@@ -82,16 +82,89 @@ where we used the fact that in this case $\div(\mathbf{u})=0$. So $\omega$ is ha
 
 \subsection*{4)}
 We have that 
-$$\sigma=\begin{pmatrix}
+$$\epsilon=\begin{pmatrix}
 0 && 0 && \frac{1}{2}\frac{\partial \omega}{\partial x}\\
 0 && 0 && \frac{1}{2}\frac{\partial \omega}{\partial y}\\
 \frac{1}{2}\frac{\partial \omega}{\partial x} && \frac{1}{2}\frac{\partial \omega}{\partial y} && 0\\
 \end{pmatrix}$$
+and from $\sigma_{ij}=2\mu\epsilon_{ij}+\lambda\epsilon_{kk}\delta_{ij}$ we get that 
+$$
+\sigma=2\mu\begin{pmatrix}
+ 0 && 0 && \frac{1}{2}\frac{\partial \omega}{\partial x}\\
+0 && 0 && \frac{1}{2}\frac{\partial \omega}{\partial y}\\
+\frac{1}{2}\frac{\partial \omega}{\partial x} && \frac{1}{2}\frac{\partial \omega}{\partial y} && 0\\
+\end{pmatrix}=
+\begin{pmatrix}
+ 0 && 0 && \frac{\partial\text{Im}\Omega}{\partial x}\\
+0 && 0 && \frac{\partial\text{Im}\Omega}{\partial y}\\
+\frac{\partial\text{Im}\Omega}{\partial x} && \frac{\partial\text{Im}\Omega}{\partial y} && 0\\
+\end{pmatrix}$$
+Finally we have that $\sigma_{yz}+i\sigma_{xz}=\frac{\partial\text{Im}\Omega}{\partial y}+i\frac{\partial\text{Im}\Omega}{\partial x}=\frac{\partial\text{Re}\Omega}{\partial x}+i\frac{\partial\text{Im}\Omega}{\partial x}=\Omega$.
+
+\subsection*{5)}
+From $\log(z)=\ln(|z|)+i\arg(z)$ we get that $\Omega(z)=-iP\ln(|z|)/2\pi+\arg(z)/2\pi$, which implies that the displacement field has its $z$ component $\omega$ given by $\mu\omega(x,y)=-P\ln(\sqrt{x^2+y^2})/2\pi$. Then it follows that $\mu\partial_x\omega=-\frac{P}{2\pi}\frac{x}{x^2+y^2}$ and $\mu\partial_y\omega=-\frac{P}{2\pi}\frac{y}{x^2+y^2}$, and finally
+$$\sigma=-\frac{P}{2\pi}\frac{1}{x^2+y^2}\begin{pmatrix}
+0 && 0 && x\\
+0 && 0 && y\\
+x && y && 0
+\end{pmatrix}$$
+This corresponds to a situation where 
+
+\subsection*{6.a)}
+With $$\sigma=\begin{pmatrix}
+0 && 0 && 0\\
+0 && 0 && S\\
+0 && S && 0
+\end{pmatrix}$$
+
+\subsection*{6.b)}
+If we call $z=x+iy$, then we have that $\Omega=S(z-R^2/z)=S\bigg(x-\frac{R^2x}{x^2+y^2}+i\frac{x^2y+R^2y^2+y^3}{x^2+y^2}\bigg)$ from which it follows that $\omega(x,y)=\frac{S}{\mu}\frac{x^2y+R^2y^2+y^3}{x^2+y^2}$. The displacement field is given by $\mathbf{u}=(0,0,\omega)$. Finally we have that 
+$$\frac{\partial\text{Im}\Omega}{\partial x}=-\frac{2R^2xy^2}{(x^2+y^2)^2}$$
+$$\frac{\partial\text{Im}\Omega}{\partial y}=\frac{2x^2y(R^2+y)+x^4+y^4}{(x^2+y^2)^2}$$
+so that 
+$$\sigma=
+\frac{1}{(x^2+y^2)^2}
+\begin{pmatrix}
+0 && 0 && -2R^2xy^2\\
+0 && 0 && 2x^2y(R^2+y)+x^4+y^4\\
+-2R^2xy^2 && 2x^2y(R^2+y)+x^4+y^4 && 0
+\end{pmatrix}
+$$
+We have the following behaviors:
+
+
+\subsection*{6.c)}
+BOOOOOOOHHHHHHH non ne sacciun cazzo
+
+
+\subsection*{7.a)}
 
 
 
 
-ì
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
