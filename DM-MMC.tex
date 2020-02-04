@@ -111,19 +111,21 @@ x && y && 0
 This corresponds to a situation where 
 
 \subsection*{6.a)}
-With $$\sigma=\begin{pmatrix}
+With $$\sigma_l=\begin{pmatrix}
 0 && 0 && 0\\
 0 && 0 && S\\
 0 && S && 0
 \end{pmatrix}$$
+the behaviour of $\Omega$ should be such that when $|z|$ goes to infinity, then $\partial_y\text{Im}\Omega\to S$ and $\partial_x\text{Im}\Omega\to 0$, which by the Cauchy conditions also implies that 
+$\partial_x\text{Re}\Omega\to S$ and $\partial_y\text{Re}\Omega\to 0$.
 
 \subsection*{6.b)}
 If we call $z=x+iy$, then we have that $\Omega=S(z-R^2/z)=S\bigg(x-\frac{R^2x}{x^2+y^2}+i\frac{x^2y+R^2y^2+y^3}{x^2+y^2}\bigg)$ from which it follows that $\omega(x,y)=\frac{S}{\mu}\frac{x^2y+R^2y^2+y^3}{x^2+y^2}$. The displacement field is given by $\mathbf{u}=(0,0,\omega)$. Finally we have that 
-$$\frac{\partial\text{Im}\Omega}{\partial x}=-\frac{2R^2xy^2}{(x^2+y^2)^2}$$
-$$\frac{\partial\text{Im}\Omega}{\partial y}=\frac{2x^2y(R^2+y)+x^4+y^4}{(x^2+y^2)^2}$$
+$$\frac{\partial\text{Im}\Omega}{\partial x}=-S\frac{2R^2xy^2}{(x^2+y^2)^2}$$
+$$\frac{\partial\text{Im}\Omega}{\partial y}=S\frac{2x^2y(R^2+y)+x^4+y^4}{(x^2+y^2)^2}$$
 so that 
 $$\sigma=
-\frac{1}{(x^2+y^2)^2}
+\frac{S}{(x^2+y^2)^2}
 \begin{pmatrix}
 0 && 0 && -2R^2xy^2\\
 0 && 0 && 2x^2y(R^2+y)+x^4+y^4\\
@@ -134,12 +136,41 @@ We have the following behaviors:
 
 
 \subsection*{6.c)}
-BOOOOOOOHHHHHHH non ne sacciun cazzo
+At the boundary we need to have that $\sigma\cdot \vec{n}cst$
 
 
 \subsection*{7.a)}
+We have that 
+\begin{align*}
+\Gamma(z_0)=\frac{a+b}{2}z_0+\frac{a-b}{2z_0}=x_0\frac{a(|z_0|^2+1)+b(|z_0|^2-1)}{2|z_0|^2}+iy_0\frac{a(|z_0|^2-1)+b(|z_0|^2+1)}{2|z_0|^2}
+\end{align*}
+which implies that 
+$$x:=\text{Re}\Gamma=x_0\frac{a(x_0^2+y_0^2+1)+b(x_0^2+y_0^2-1)}{2(x_0^2+y_0^2)}$$
+$$y:=\text{Im}\Gamma=y_0\frac{a(x_0^2+y_0^2-1)+b(x_0^2+y_0^2+1)}{2(x_0^2+y_0^2)}$$
 
+Now we want to see where circles of radius $r$ are mapped by $\Gamma$: suppose we consider the circle of radius $r$, i.e. the set of points satisfying $x_0^2+y_0^2=r^2$, then we get that
+$$\begin{cases}
+x=x_0\big(\frac{a+b}{2}+\frac{a-b}{2r^2}\big)\\
+y=y_0\big(\frac{a+b}{2}-\frac{a-b}{2r^2}\big)
+\end{cases}\Rightarrow \frac{x^2}{\big(\frac{a+b}{2}+\frac{a-b}{2r^2}\big)^2}+\frac{y^2}{\big(\frac{a+b}{2}-\frac{a-b}{2r^2}\big)^2}=r^2$$
+hence the image of a circle of radius $r$ is an ellipse with semi-major and semi-minor axes given respectively by $r\frac{a+b}{2}+\frac{a-b}{2r}$ and $r\frac{a+b}{2}-\frac{a-b}{2r}$. Since the circle of radius $1$ has been excluded from the domain, it follows that the ellipse of semi-major and semi-minor axes given by $a,b$ is not mapped by any circle. In order to conlude that the image of $\Gamma$ is the complex plane without the ellipse of axes $a,b$ we need to prove that this ellipse is not intersected by any other ellipse of the type found above. To prove this we use the fact that if two ellipses with semi-major/semi-minor axes respectively given by $g_1,g_2$ and $f_1,f_2$ are such that $g_1>f_1$ and $g_2>f_2$, then these two ellipses don't intersect. In particular consider a generical ellipse of the type found above, $\frac{x^2}{\big(r\frac{a+b}{2}+\frac{a-b}{2r}\big)^2}+\frac{y^2}{\big(r\frac{a+b}{2}-\frac{a-b}{2r}\big)^2}=1$, mapped by $\Gamma$ from a circle of radius $r>1$; then we have that 
+\begin{align*}
+&r\frac{a+b}{2}+\frac{a-b}{2r}>a\\
+\Leftrightarrow & r^2(a+b)-2ar+(a-b)>0\\
+\Leftrightarrow & (r-1)(r-\frac{a-b}{a+b})>0\\
+\Leftrightarrow &\text{(True since }r>1)
+\end{align*}
 
+and \begin{align*}
+&r\frac{a+b}{2}-\frac{a-b}{2r}>b\\
+\Leftrightarrow &r^2(a+b)-2rb-(a-b)>0\\
+\Leftrightarrow &(r-1)(r-\frac{b-a}{a+b})>0\\
+\Leftrightarrow &\text{(True since }r>1)
+\end{align*}
+instead if $r<1$ we have that 
+
+\subsection*{7.b)}
+The question is equivalent to finding $\omega(x,y)$ by knowing $\omega(x_0,y_0)$. In principle we have to find the imaginary part of $\Omega(\Gamma(z_0))$ and then substitute $x_0,y_0$ as a function of $x,y$. 
 
 
 
