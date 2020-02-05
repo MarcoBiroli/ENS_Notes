@@ -21,7 +21,67 @@
 \tableofcontents
 
 \section*{De la forme des arbres}
-
+We assume that trees will try to grow as tall as possible whilst staying balanced and not breaking in order to get as much sunlight as possible. Hence the problem is to find what is the maximal height that a cylinder of diameter $2d$ can reach before becoming unstable. We know that the area $A$ of a cross-section of the cylinder is given by $4 \pi d^2$.  We denote by $E$ Young's modulus of the tree and assume it to be constant in all of the tree. Then  denoting by $\rho$ the radius of curvature of the line  that links all the successive centers of the circles building the cylinder. Theory of elasticity given in class tells us that:
+\[
+M = E I \frac{1}{\rho}
+\]
+Then using the following coordinates: [INSERT GRAPH]
+We can write:
+\[
+\frac{1}{\rho} = \dv[2]{y}{x}
+\]
+I.e. our previous equation becomes:
+\[
+M(P) = EA k^2 \dv[2]{y}{x}
+\]
+However this is also given by:
+\[
+M(P) = \lambda A \int_0^x (y' - y) \dd x'
+\]
+This gives rise to the following differential equation:
+\[
+EA k^2 \dv[2]{y}{x} = \lambda A \int_0^x (y' - y) \dd x'
+\]
+Derivating w.r.t. $x$ on both sides and taking $p = \dv{y}{x}$ we get:
+\[
+E A k^2 \dv[2]{p}{x} = - \lambda A \int_0^x p \dd x' = - \lambda A x p
+\]
+Which can be re-written as:
+\[
+x^2 \dv[2]{p}{x} + \frac{\lambda}{E k^2}  x^3 p = 0 
+\]
+Now doing a change of variable by taking $p = x^{1/2} z$ we get:
+\[
+x^2 \dv[2]{z}{x} + x \dv{z}{x} + (\frac{\lambda}{E k^2} x^3 - \frac{1}{4}) z = 0
+\]
+Now taking $x^3 = r^2$ we get:
+\[
+x^2 \dv[2]{z}{r} + x \dv{z}{r} + \left(\frac{4 \lambda}{9 E k^2} r^2 - \frac{1}{9}\right) z = 0
+\]
+Which is re-written as:
+\[
+r^2 \dv[2]{z}{r} + r \dv{z}{r} + (\frac{4 \lambda}{9 E k^2} r^2 - \frac{1}{9}) z = 0
+\]
+This is a special case of Bessel's differential equation. Hence whe know it's exact solution which is given by:
+\[
+z = A J_{1/3}(\kappa r) + B J_{-1/3} (\kappa r) \text{ where } \kappa = \sqrt{\frac{4 \lambda}{9 E k^2}}
+\]
+Which by reversing the variable changes gives as original solution:
+\[
+p = \sqrt{x} \left(A J_{1/3}(\kappa x^{3/2}) + B J_{-1/3} (\kappa x^{3/2}) \right)
+\]
+The border condition $\dv{p}{x}\Bigg|_{x = 0} = 0$ gives that $A = 0$. Then at $A$ we must have $p = 0$ and we denote by $h$ the height of the tree then we need to solve:
+\[
+J_{-1/3}(\kappa h^{3/2}) = 0
+\]
+We know that the Bessel functions admit roots and call $c$ its first root. Then we get that:
+\[
+c = \kappa h^{3/2} \Rightarrow h = \left(\frac{9 E k^2 c^2}{4 \lambda}\right)^{1/3}
+\]
+Numerically we know $c \approx 1.88$ which then gives:
+\[
+h = 1.52 \left(\frac{9 E}{16 \lambda} \right)^{1/3} d^{2/3} \propto d^{2/3}
+\]
 
 \section*{Méthodes d'analyse complexe pour des problèmes d'élasticité bidimensionelle}
 
