@@ -1,0 +1,153 @@
+\documentclass[10pt,a4paper]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{physics}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\author{Marco Biroli & Alessandro Pacco}
+\title{TD - Hydro}
+\begin{document}
+\chapter{TD1}
+\section{Eulerian/Lagrangian cinematics.}
+We consider the following velocity field: $\mathbf{v} = (\alpha x, - \alpha y, 0)$. 
+\subsection{}
+To check whether it is compressible we compute:
+\[
+\grad \mathbf{v} = (\alpha, - \alpha, 0) \neq \vec{0}
+\]
+To check whether it is irrotational we compute:
+\[
+\omega = \grad \times \mathbf{v} = 0
+\]
+\subsection{}
+The streamlines follow the following:
+\[
+\dd \mathbf{l} \cross \mathbf{v} = 0
+\]
+
+\subsection{}
+\subsection{}
+
+\subsection{}
+We now consider the following flow:
+\[
+\mathbf{v} = \begin{pmatrix}
+v_0 e^{kz}\sin(\omega t - kx)\\
+0\\
+v_0 e^{kz} \cos(\omega t - k x)
+\end{pmatrix}
+\]
+\subsubsection{a)}
+We have that:
+\[
+\grad \mathbf{u} = v_0 e^{kz}\left(- k \cos(\omega t - k x) + k \cos(\omega t  - k x)\right) = 0
+\]
+And:
+\[
+\grad \times \mathbf{u} = \mathbf{e_y} \left( v_0 e^{kz}\left( k \sin(\omega t - k x) - (- 1)(- k)\sin(\omega t  - k x) \right) \right) = 0
+\]
+The streamlines then respect:
+\[
+\dd \mathbf{l} \times \mathbf{v} = 0 \Leftrightarrow \dd z v_0 e^{kz} \sin(\omega t - k x) - \dd x v_0 e^{kz} \cos(\omega t - k x) = 0
+\]
+Which simplifies:
+\begin{align*}
+\dd z \sin(\omega t - kx) - \dd x \cos(\omega t - k x) = 0 &\Leftrightarrow z = \int \tan^{-1}(\omega t - k x) \dd x = -\frac{\log(| \sin (k x - t \omega)|)}{k} + c 
+\end{align*}
+
+\subsubsection{b)}
+We have the following: $v_0 \ll \frac{\omega}{k}$.
+
+\subsection{}
+Streaklines follow the following PDE:
+\begin{align*}
+\begin{cases}
+\pdv{x_p}{t} = v_0 e^{kz} \sin(\omega t - kx)\\
+\pdv{z_p}{t} = v_0 e^{kz} \cos(\omega t - k x)
+\end{cases}
+\end{align*}
+Hence at the first order we can write:
+\[
+x_p(t) = x_0 + \varepsilon X_1  + \varepsilon^2 X_2 + \cdots\quad \& \quad z_p(t) = z_0 + \varepsilon Z_1 + \varepsilon^2 Z_2 + \cdots
+\]
+Then the velocity field can be written as:
+\[
+\mathbf{\mathbf{v}}(x_p(t), z_p(t), t) = \underbrace{\mathbf{v}(x_0, z_0, t)}_{\sim \varepsilon} + \underbrace{\pdv{\mathbf{v}}{x} \left(x - x_0\right) + \pdv{\mathbf{v}}{z} \left(z - z_0\right)}_{\sim \varepsilon^2}
+\]
+Then at the first order we get:
+\begin{align*}
+\begin{cases}
+\varepsilon \dot{X_1} = v_0 e^{kz_0}\sin(\omega t - k x_0)\\
+\varepsilon \dot{Z_1} = v_0 e^{k z_0 }\cos(\omega t - k x_0)
+\end{cases} &\Leftrightarrow \begin{cases}
+x_1 = -\frac{v_0}{\omega} e^{kz_0} \cos(\omega t - k x_0)\\
+z_1 = \frac{v_0}{\omega} e^{kz_0} \sin(\omega t - k x_0)
+\end{cases}
+\end{align*}
+So we observe a circular trajectory. Now at second order we get:
+\begin{align*}
+\begin{cases}
+\dot{x_2} = v_0 e^{k z_0} k (-x_1 \cos(\omega t - k x_0) + z_1 \sin(\omega t - k x_0))\\
+\dot{z_2} = v_0 e^{k z_0}k (x_1 \sin(\omega t - k x_0) + z_1 \cos(\omega t - k x_0))
+\end{cases} &\Leftrightarrow 
+\begin{cases}
+\dot{x_2} = v_0^2 e^{ 2 k z_0} \frac{k}{\omega}\\
+\dot{z_2} = 0
+\end{cases}
+\end{align*}
+We therefore obtain Stokes' drift.
+
+\section{Dimensional Analysis.}
+\subsection{}
+\subsubsection{a)}
+The parameters of our problem are: $\omega\, [s^{-1}], k\, [m^{-1}], g\, [m.s^{-2}], h\, [m]$
+
+\subsubsection{b)}
+By dimensional analysis we guess:
+\[
+\omega(k) \propto \sqrt{g k}
+\]
+
+\subsubsection{c)}
+We can use the above formula only if the height is negligible. Otherwise we would have to add a corrective term:
+\[
+\omega(k) \propto \sqrt{gk} f(k \cdot h) 
+\]
+Now making asymptotic analysis we know that:
+\[
+\lim_{h \to +\infty} f(k h) = 1 \quad \& \quad \lim_{h \to 0} f(kh) = 0
+\]
+From physical intuition we also expect the system to respond linearly with $kh$ close to 0 hence a good candidate for our general dispersion relation would be something of the form:
+\[
+\omega(k) \propto \sqrt{gk}\tanh(\alpha kh)
+\]
+
+\subsubsection{d)}
+Similarly when the only force we are considering is surface tension we then have the following parameters: 
+\[
+\omega\, [s^{-1}], k\, [m^{-1}], \gamma\, [N.m^{-1}], h\, [m], \rho \, [\text{kg}.m^{-3}]
+\]
+We then can guess something of the form:
+\[
+\Pi_1 = k h, \quad \Pi_2 = \frac{\rho \omega^2 k^3}{\gamma}
+\]
+Pi's theorem then gives:
+\[
+\Pi_2 = f(\Pi_1) \Leftrightarrow \omega^2 = \frac{\gamma}{\rho k^3} f(kh)
+\]
+So in deep water we guess:
+\[
+\omega^2 = \frac{\gamma}{\rho k^3}
+\]
+
+\subsection{}
+The parameters of the problem are:
+\[
+R\,[m], t\, [s], E [m.s^{-2}] 
+\]
+
+
+\end{document}
