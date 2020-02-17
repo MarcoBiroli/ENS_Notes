@@ -1,0 +1,66 @@
+\documentclass[10pt,a4paper]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{physics}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\author{Marco Biroli}
+\title{Solid State Physics}
+\begin{document}
+\maketitle
+\chapter{Introduction to solid state physics.}
+\section{Quantum Physics and the macroscopic world.}
+Quantum physics is usually always considered at the microscopic scale. Some effects are unique to this scale, like the wave-particle duality, the tunnel effect, entangled states and the stability of matter like the hydrogen atom. However we can still observe quantum effects at the macroscopic scale, magnets are a perfect example of that. If solids could be described classically then no solid should be magnetized. Superconductivity, Bose-Einstein condensates, transport in solids and Black-Body Radiation are all other examples of macroscopic quantum effects. The quantum effects that we will use are the Schrodinger equation and quantum Fermi-Dirac statistics.
+
+\section{Conductivity in metals.}
+Metals are good electrical and thermic conductors and it is not by luck that it is both. There is a link between electrical and thermic conduction. In both cases the conduction rests upon the transport of free electrons in the metal. A first explanation for this came in 1900 with the Drude model based on the kinetic theory of gases and the notion of electrons discovered 3 years earlier. The idea is that a metal is described by fixed ions that have freed $z$ electrons and therefore we have a "gas" of electrons traveling through the metal. Now to analyze the model we need to make a few assumptions. We suppose that the gas collides only with its environment and not itself and that in between 2 collisions each electron is free. Furthermore collisions are random with a characteristic time $\tau$ (Poisson distribution), instantaneous and perfectly elastic. Finally since we want to use statistical physics we also assume that everything is at equilibrium and collisions included the velocities follow the Maxwell-Boltzmann distribution. Now imagine we plunge the metal in an electric field $\vec{E}$. From the second law of Newton we get that:
+\[
+m \dv{\vec{v}}{t} = - e \vec{E} \Rightarrow \langle \vec{v}(t) \rangle = \underbrace{\langle \vec{v}(t = 0^+)\rangle}_\text{by isotropy} - \frac{e \vec{E}}{m} \underbrace{\langle t \rangle}_{\tau} = - \frac{e \vec{E} \tau}{m}
+\]
+So the current is given by (where $n$ is the electron density):
+\[
+\vec{j} = (-e) n \langle \vec{v} \rangle = \underbrace{\frac{n e^2 \tau}{m}}_{\sigma} \vec{E}
+\]
+So we indeed get Ohm's law and if we take a numerical value it does indeed correspond to the experimental values. Similarly to model thermic conduction we consider a metal to which we apply a gradient of temperature. Then we say that an electron is a random walker and we obtain that $j_Q = - \kappa \pdv{T}{x}$ where $\kappa = \frac{1}{3} v^2 \tau C_V$. So what are the pros and cons of this model? Obvious pros are that this model not only explains Ohm's Law but also gives the correct numerical values, it explains this link between thermic and electrical conduction. It also gives the Wiedemann-Franz law which tells us that $\frac{\kappa}{\sigma} = L T$ is independent of the material. The cons of the model are that we know $C_V \to 0$ when $T \to 0$ however we are using here $C_V = \frac{3}{2} n k_B$ which is constant. Secondly we get the right value for $L$ at ambient temperature however it does not work at all when we change the temperature but $L$ should be independent of temperature. Furthermore $\sigma$ goes from $10^{-24} \,\Omega^{-1}.\text{m}^{-1}$ for teflon to $10^{25}  \,\Omega^{-1}.\text{m}^{-1}$ for supraconductors. However our formula for $\sigma$ does not involve many parameters and it is hard to rationalize this difference of magnitude with the only adjustable parameter $\tau$. This model also fails w.r.t. the Hall effect, this model is able to explain the Hall potential however we get a negative sign for the potential when in reality we observe both positive and negative signs for the potential. So overall although this model gives promising results it turns out that it cannot describe reality. We are going to have to introduce quantum mechanics and statistics to understand $\kappa$ and $\sigma$. Our first intuition is that this phenomenon is really based on the electrons. Then we suppose that the Hamiltonian of an electron is given by:
+\[
+\hat{\mathcal{H}} = \sum_{i = 1}^N \frac{\hat{\mathbf{p}}_i^2}{2m} + \frac{e^2}{4 \pi \varepsilon_0} \sum_{i < j = 1}^N \frac{1}{|\mathbf{r_j} - \mathbf{r_i}|} - \frac{Ze^2}{4 \pi \varepsilon_0} \sum_{i = 1}^N \sum_{j = 1}^N \frac{1}{|\mathbf{r_i} - \mathbf{R_j}|}
+\]
+This Hamiltonian is obviously impossible to solve analytically or even numerically. Hence we start by doing the mean field approximation hence we get the following simplified Hamiltonian:
+\[
+\hat{\mathcal{H}} = \sum_{i = 1}^N \left[ \frac{\hat{\mathbf{p_i}}^2}{2m} + V^\text{at}(\mathbf{r_i})  \right]
+\]
+Where $V^\text{at}(\mathbf{r_i})$ represents the geometry of the ionic lattice $\mathbf{R_j}$.
+
+\chapter{Free electron models and Fermi levels.}
+\section{Model}
+In a first approximation we consider a gas of $N$ free electrons in a box of size $L$, so we are neglecting the ionic background. This box is a zeroth order approximation of the ionic lattice, we know that the energy to extract an electron from a metal is very high, hence why we consider this box. Then from the Schrodinger equation we immediately get that for one electron we have:
+\[
+E = \frac{\hbar^2 \mathbf{k}^2}{2m} \quad \text{ and } \quad \psi(\mathbf{r}) = \frac{1}{\sqrt{V}} e^{i \mathbf{k} \cdot \mathbf{r}}
+\]
+Then the quantization of energy is given by the boundary conditions. Instead of considering strict boundary conditions we will use periodic boundary conditions. This only changes the base that we are using for our vector space, it does not change the physics at hand. So we force $\psi(\mathbf{r}) = \psi(\mathbf{r} + L \mathbf{e_i})$. Which gives the following quantization for $\mathbf{k}$:
+\[
+\mathbf{k} = \frac{2\pi}{L}(n_x \mathbf{e_x} + n_y \mathbf{e_y} + n_z \mathbf{e_z})
+\]
+Then using the continuous approximation for the phase space we get the following densities:
+\begin{align*}
+\rho(\mathbf{k}) \dd^3 \mathbf{k} &= 2 \frac{\dd \mathbf{k}}{\left(\frac{2 \pi}{L}\right)^3} = \frac{V}{4 \pi^3} \dd^3 \mathbf{k} \quad \text{ similarly } \quad \rho(k) \dd k = \frac{V}{\pi^2} k^2 \dd k \\
+&\text{ and } \quad \rho(\varepsilon) \dd \varepsilon = \frac{V}{\pi^2} \left(\frac{2m}{\hbar^2}\right)^{3/2} \varepsilon \frac{\dd \varepsilon}{2 \sqrt{\varepsilon}} = A V \sqrt{\varepsilon} \,\dd \varepsilon
+\end{align*}
+Then occupation probability is given by:
+\[
+f^\text{FD} = \frac{1}{1 + e^{\beta(\varepsilon - \mu)}}
+\]
+We are using here the equivalence in between the grand-canonical and the canonical ensemble. When we do this we are assuming that $N \to \infty, T$ is the same and $N = \langle N \rangle (\mu, T)$ or in other words:
+\[
+N = \int_0^{+\infty} \dd\varepsilon \, \rho(\varepsilon) f^\text{FD}(\varepsilon, T, \mu) 
+\]
+Then using this we get that the Fermi energy is given by:
+\[
+\varepsilon_F = \mu(T = 0, N) = \frac{\hbar^2}{2m} \left( 3 \pi^2 \frac{N}{V}\right)^{2/3} = \frac{\hbar^2}{2m} k_F^2
+\]
+
+
+\end{document}
