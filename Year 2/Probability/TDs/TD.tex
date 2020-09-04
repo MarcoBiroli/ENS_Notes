@@ -1,0 +1,109 @@
+\documentclass[10pt,a4paper]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\author{Marco Biroli}
+\title{TD-Probability}
+\usepackage{stmaryrd}
+
+\newcommand{\card}{\text{card}}
+
+\begin{document}
+\maketitle
+\chapter{TD 1}
+\section{A strategic choice.}
+Let $X \in \{0, 1\}^3$ (resp. $Y$) be the random variable corresponding to the results of the matches using the first strategy (resp. the second strategy). Then we have that (let $D = \{ (1, 1, 1), (1, 1, 0), (0, 1, 1) \}$):
+\[
+P(X \in D ) = a^2 b + a b (1-a) + (1-a) b a = ab(2 - a)  
+\]  
+Similarly:
+\[
+P(Y \in D) = b^2 a + b a (1-b) + (1-b) a b = ba(2 - b)  
+\]
+Then since $a > b$ we have that $P(X \in D) < P(Y \in D)$, hence the winning strategy is BAB.
+
+\section{Derangements}
+\subsection{}
+Let $E$ be a finite set and $A, B \subseteq E$. We denote by $1_A$ the indicator function of $A$ and $\bar{A}$ the complement of $A$. Then we have that:
+\[
+1_{\bar{A}} = 1 - 1_A \mbox{~~and~~} 1_{A \cap B} = 1_A \cdot 1_B \mbox{~~and~~} 1_{A \cup B} = 1_A + 1_B - 1_{A \cap B}
+\]
+\subsection{}
+We will prove this by induction on $n$. The base case $n = 1$ as well as $n = 2$ are trivially satisfied. Now assume that this is satisfied for $n$ then we have that (using the induction hypothesis for $n = 2$):
+\[
+\card\left( \bigcup_{i = 1}^n A_i \bigcup A_{n+1} \right) = \card\left( \bigcup_{i = 1}^n A_i  \right) + \card(A_{n+1}) - \card\left( \left(\bigcup_{i = 1}^n A_i\right) \bigcap A_{n+1} \right)
+\] 
+Now we develop the last term into:
+\[
+\left(\bigcup_{i = 1}^n A_i\right) \bigcap A_{n+1} = \bigcup_{i = 1}^n \left( A_i \bigcap A_{n+1} \right)
+\]
+Now applying the induction hypothesis gives the desired result.
+
+\subsection{}
+Let $A_i$ be the set of permutations that fixes point $i$. Then from the inclusion-exclusion principle we have:
+\[
+D_n = n! - \card\left( \bigcup_{i = 1}^n A_i  \right) = n! - \sum_{k = 1}^{n} (-1)^{k-1} \binom{n}{k}(n-k)! = n! \sum_{k = 2}^n \frac{(-1)^k}{k!}
+\]
+
+\subsection{}
+The probability that no one gets their jacket corresponds to the probability of having a derangement in other words:
+\[
+p_n = \frac{D_n}{n!} = \sum_{k = 2}^n \frac{(-1)^k}{k!} \stackrel{n\to\infty}{\longrightarrow} \frac{1}{e}
+\]
+
+\subsection{}
+We have that:
+\[
+D_{n, l} = \binom{n}{l} D_{n - l} = \binom{n}{l} (n - l)! \sum_{k = 2}^{n - l} \frac{(-1)^k}{k!} = \frac{n!}{l!}\sum_{k = 2}^{n - l} \frac{(-1)^k}{k!}
+\]
+Hence the probability that eaxctly $l$ people leave with their jackets is:
+\[
+p_l = \frac{D_{n, l}}{n!} = \frac{1}{l!} \sum_{ k = 2}^{n - l} \frac{(-1)^k}{k!}
+\]
+
+\subsection{}
+The probability that a given person gets back their jacket is $p_s = \frac{1}{n}$. The probability that at least one person gets back their jacket is:
+\[
+p_a = 1 - p_n = 1 - \sum_{k = 2}^n \frac{(-1)^k}{k!}
+\]
+Notice that $p_s < p_a$.
+
+\section{Balls in bins}
+
+\subsection{}
+\begin{enumerate}
+\item[(a)] If all the balls are distinguishable then we have $\Omega = \llbracket 1 , n \rrbracket^r$ is the set of tuples where each element corresponds to where the $i$-th ball has been sent to. Then $\mathcal{F} = \mathcal{P}(\Omega)$ and since each event is sampled uniformly at random we have that:
+\[
+\forall \omega \in \Omega, P(\omega) = \frac{1}{|\Omega|} = \frac{1}{n^r}
+\] 
+Then the probability of $(r_1, \cdots, r_n)$ is given by:
+\[
+P[(r_1, \cdots, r_n)] = P[\{ \omega \in \Omega : \forall i \in \llbracket 1, n\rrbracket \, \# \{b \in \Omega : b = i\} = r_i \}] = \frac{1}{n^r} \binom{r}{r_1, r_2, \ldots, r_n}
+\]
+\item[(b)] Now we have that $\Omega = \{ (r_i \in \mathbb{N} : i \in \llbracket 1 , n \rrbracket ) : \sum_{i = 1}^n r_i = r \}$. Again we have that $\mathcal{F} = \mathcal{P}(\Omega)$. Then we have that:
+\[
+P[(r_1, \ldots, r_n)] = \frac{1}{|\Omega|} = \frac{1}{\binom{r + n - 1}{n - 1}}
+\]
+\item[(c)] Now we have that $\Omega = \{s \in \{0, 1\}^n : \sum_{i = 1}^n s_i = r \}$ corresponding to the tuple indicating if each state is occupied or not. Once again $\mathcal{F} = \mathcal{P}(\Omega)$. Now the probability is given by:
+\[
+P[(r_1, \ldots, r_n)] = \frac{1}{|\Omega|} = \frac{1}{\binom{n}{r}}
+\]
+\end{enumerate}
+
+\subsection{}
+The probability that at least two have the same birthday is the 1 minus the probability that none of them share a birthday. The probability that none of them share a birthday is given by $\frac{r!}{n^r}\binom{n}{r}$. Hence the probability that at least two people share a birthday is given by: $1 - \frac{r!}{n^r} \binom{n}{r}$.
+
+\subsection{}
+Days are bins, accidents are distinguishable balls hence the probability is given by:
+\[
+\frac{\binom{r}{n} n^{r - n}}{n^r}  = n^{-n} \binom{r}{n}
+\]
+
+\subsection{}
+
+
+\end{document}

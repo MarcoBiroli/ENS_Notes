@@ -1,0 +1,181 @@
+\documentclass[10pt,a4paper]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{stmaryrd}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{physics}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\author{Marco Biroli}
+\title{Probability}
+
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\newtheorem*{remark}{Remark}
+\newtheorem*{notation}{Notation}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+
+\begin{document}
+\maketitle
+\tableofcontents
+\chapter{Founding Blocks}
+\section{Definitions}
+
+\begin{definition}[Universe]
+We consider a random experiment, then the set of all possible outcomes of the experiment is denoted by $\Omega$ and is called the universe.
+\end{definition}
+
+\begin{definition}[Event]
+An event is usually denoted by $E$. An event is a set of results for which we can compute the probability.
+\end{definition}
+
+\begin{definition}[Collection]
+The collection of all events is denoted by $\mathcal{F}$. Hence $\mathcal{F} \subseteq \mathcal{P}(\Omega)$.
+\end{definition}
+
+\begin{definition}[Disjoint Events]
+Two events $A, B \in \mathcal{F}$ are disjoint or incompatible if they cannot occur simultaneously. In other words if $A \cap B = \emptyset$.
+\end{definition}
+
+\begin{remark}
+We require that the collection $\mathcal{F}$ of the events is an algebra of sets.
+\end{remark}
+
+\begin{definition}[Algebra of Sets]
+An element $\mathcal{F}$ is called an algebra of sets if $\mathcal{F} \neq \emptyset$ and:
+\begin{enumerate}
+\item $A \in \mathcal{F} \Rightarrow A^c \in \mathcal{F}$
+\item $A, B \in \mathcal{F} \Rightarrow A \cup B \in \mathcal{F}$
+\end{enumerate}
+\end{definition}
+
+\begin{remark}
+For the scope of this course we further require that $\mathcal{F}$ is stable under countable unions. In other words the second condition above is replaced by:
+\[
+(A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N} \Rightarrow \bigcup_{n \in \mathbb{N}} A_n \in \mathcal{F}
+\]
+\end{remark}
+
+\begin{definition}[$\sigma$-algebra]
+A $\sigma$-algebra is an algebra of sets where the second condition is replaced by the stronger condition requiring stability under countable union.
+\end{definition}
+
+\begin{definition}[Probability]
+The probability $P(E)$ of $E$ is the theoretical value for the proportion of experiments in which $E$ occurs. Thus the probability is a function from $\mathcal{F}$ to $[0,1]$. Such that:
+\begin{enumerate}
+\item $P(\Omega) = 1$.
+\item $A, B \in \mathcal{F}, A \cap B = \emptyset \Rightarrow P(A \cup B) = P(A) + P(B)$.
+\end{enumerate}
+In other words, $P$ is an additive set function from $\mathcal{F}$ to $[0,1]$.
+\end{definition}
+
+\begin{remark}
+This definition however is not very well suited to infinite event sets. Then modern probability theory adds a condition to the above.
+\end{remark}
+
+\begin{definition}[Modern Probability]
+A modern probability $P(E)$ of $E$ is a probability with the stronger condition:
+\[
+\forall (A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}, \left(\forall n, m \in \mathbb{N}, n \neq m \Rightarrow A_n \cap A_m = \emptyset\right) \Rightarrow P\left(\bigcup_{n \in \mathbb{N}} A_n \right) = \sum_{n \in \mathbb{N}} P(A_n)
+\]
+\end{definition}
+
+\begin{definition}[Probability Space]
+A probability space is a triple $(\Omega, \mathcal{F}, P)$. Where $\Omega$ is the universe of all possible results, $\mathcal{F}$ is a $\sigma$-field on $\Omega$, and $P$ is a modern probability function on $\mathcal{F}$.
+\end{definition}
+
+\begin{remark}
+The mathematical framework which defines probability theory actually comes from another mathematical framework called measure theory. This is why the elements of the $\sigma$-field are sometimes called the measurable sets and the probability function is sometimes called a probability measure.
+\end{remark}
+
+\begin{definition}[Finite Space]
+We consider the case where $\Omega$ is a finite set, we write $\Omega = \{x_1, \ldots, x_n\}$. The natural $\sigma$-field on $\Omega$ is $\mathcal{P}(\Omega)$. It is the only $\sigma$-field which contains the singletons. Then let $P$ be a probability on $\Omega$ and let us set $\forall i \in \llbracket 1, n\rrbracket, p_i = P(\{x_i\})$. Then the numbers $p_i$ satisfy:
+\[
+\left( \forall i \in \llbracket 1, n\rrbracket, 0 \leq p_i \leq 1\right) \land \sum_{i = 1}^n p_i = 1
+\]
+Then for any $A \subset \Omega$ we have by additivity that:
+\[
+P(A) = \sum_{x \in A} P(\{x\}) = \sum_{i : x_i \in A} p_i
+\]
+Hence $P$ is completely determined by the numbers $p_i$.
+\end{definition}
+
+\begin{remark}
+Notice that conversely if we are given the numbers $p_i$ summing to 1 we can define a probability $P$ on $\Omega$ by stating $P(\{x_i\}) = p_i$ and $P$ will indeed be a probability measure.
+\end{remark}
+
+\begin{definition}[Countable Spaces]
+We suppose that $\Omega$ is countable and we set $\Omega = \{ x_n , n \in \mathbb{N}\}$. The natural $\sigma$-field on $\Omega$ is again the power set of $\Omega$. Then the definitions are an immediate generalization of the ones for a finite space.
+\end{definition}
+
+\begin{definition}[Continuous Spaces]
+If we take the simplest example of $\Omega = \mathbb{R}$ then the intuitive $\sigma$-field being the power set turns out to be too complicated to be useful. Hence we take for $\mathcal{F}$ the Borel tribe of $\mathbb{R}$, $\mathcal{B}(\mathbb{R})$. The Borel $\sigma$-field corresponds to taking a countable union of all possible closed intervals of $\mathbb{R}$.
+\end{definition}
+
+\begin{definition}[Random Variable]
+Let $(\Omega, \mathcal{F}, P)$ be a probability space. A random variable $X$ on $(\Omega, \mathcal{F}, P)$ is map from $\Omega$ to $\mathbb{R}$. Which satisfies:
+\[
+\forall B \in \mathcal{B}(\mathbb{R}), X^{-1}(B) = \{ \omega \in \Omega : X(\omega) \in B \} \in \mathcal{F}
+\]
+\end{definition}
+
+\begin{remark}
+This definition is equivalent to: for all interval $I$ of $\mathbb{R}$ we have that $X^{-1}(I) \in \mathcal{F}$.
+\end{remark}
+
+\begin{notation}
+The event $X^{-1}(I)$ is denoted by $\{X \in I\}$ or even simply $X \in I$. Secondly random variables are denoted by capital letters typically $X, Y, U, V$ and their possible values are denoted by the corresponding lowercase letters.
+\end{notation}
+
+\begin{definition}[Law of a random variable]
+Let $(\Omega, \mathcal{F}, P)$ be a probability space and let $X$ be a random variable defined on $\Omega \to \mathbb{R}$. The law of $X$ is the probability measure on $\mathbb{R}$ defined by:
+\[
+\forall B \in \mathcal{B}(\mathbb{R}), P_X(B) = P(X \in B)
+\]
+\end{definition}
+
+\begin{proof}
+Let us check that $P_X$ is indeed a probability measure. We have that:
+\[
+P_X(\mathbb{R}) = P(X \in \mathbb{R}) = 1.
+\]
+Furthermore let $(B_n)_{n \in \mathbb{N}} \in \mathcal{B}(\mathbb{R})^\mathbb{N}$ be a disjoint sequence of Borel sets. Then:
+\[
+P_X\left(\bigcup_{n \in \mathbb{N}} B_n\right) = P\left(X \in \bigcup_{n\in\mathbb{N}} B_n\right) = P\left( \bigcup_{n\in\mathbb{N}} \{ X \in B_n \} \right) = \sum_{n \in \mathbb{N}} P(X \in B_n) = \sum_{n \in \mathbb{N}} P_X(B_n)
+\]
+\end{proof}
+
+\begin{notation}
+The law $P_X$ of $X$ is sometimes called the \textit{distribution} of $X$. We furthermore say that two variables $X, Y$ have the same law if $P_X = P_Y$. The object of primary interest for a random variable is its law.
+\end{notation}
+
+\begin{definition}[Law]
+Let $f$ be a non-negative function $\mathbb{R} \to \mathbb{R}^+$ which is integrable and $\int_\mathbb{R} f(x) \dd x = 1$. We define next:
+\[
+\forall A \in \mathcal{B}(\mathbb{R}) \quad P(A) = \int_A f(x) \dd x
+\]
+This formula defines a probability measure on $\mathbb{R}$, called the probability measure with density function $f$.
+\end{definition}
+
+\begin{definition}[Expectation]
+We say that the random variable $X$ has an expectation or that it is integrable if:
+\[
+\int_\mathbb{R} |x| \dd P_X(x) < +\infty
+\]
+Then the expectation is defined as:
+\[
+E(X) = \int_\mathbb{R} x \dd P_X(x) = \int_\Omega X \dd P = \int_{\omega \in \Omega} X(\omega)\dd P(\omega) = \int_\mathbb{R} \text{Id}_\mathbb{R} \dd P_X
+\]
+From this formula we see that the expectation is completely dependent on the law of the random variable.
+\end{definition}
+
+\end{document}
