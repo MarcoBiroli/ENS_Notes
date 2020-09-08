@@ -7,6 +7,7 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{graphicx}
+\usepackage{tikz}
 \usepackage{physics}
 \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
 \author{Marco Biroli}
@@ -16,6 +17,7 @@
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{corollary}{Corollary}[theorem]
 \newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[section]{Proposition}
 
 \newtheorem*{remark}{Remark}
 \newtheorem*{notation}{Notation}
@@ -178,6 +180,139 @@ E(X) = \int_\mathbb{R} x \dd P_X(x) = \int_\Omega X \dd P = \int_{\omega \in \Om
 From this formula we see that the expectation is completely dependent on the law of the random variable.
 \end{definition}
 
+\chapter{Coin tossing games.}
 
+\section{The model}
+We take a fair coin and consider the experiment which consists in throwing $n$ times the coin.If -1 denotes tail and +1 denotes head then the result of the experiment is $r \in \{-1, 1\}^n = \Omega$. Since $\Omega$ is finite we immediately have $\mathcal{F} = \mathcal{P}(\Omega)$. Since we assumed the coin to be fair we have by symmetry that all the results are equiprobable. Hence:
+\[
+\forall \omega \in \Omega, \quad P(\omega) = \frac{1}{|\Omega|} = \frac{1}{2^n}
+\]
+Now let $X_k$ be the random variable corresponding to the result of the $k$-th throw. Formally $X_k$ is the map:
+\begin{align*}
+X_k : \Omega &\longrightarrow  X_k(\Omega)\\
+(\omega_1, \cdots, \omega_n) &\longmapsto \omega_k 
+\end{align*}
+
+\section{Graphical Representation.}
+To the sequence $X_1, \cdots, X_n$ we associate the partial sums $S_0 = 0, S_1 = X_1, \cdots, S_n = X_1 + \cdots + X_n$. The sequence $S_0, \cdots, S_n$ contains exactly the same information as $X_1, \cdots, X_n$. We can therefore represent the result of the experiment by a polygonal line, which is the line which joins successively the points: $(0, S_0), \cdots, (n, S_n)$. Such a polygonal line, associated to a sequence of signs, will be called a path.
+
+\section{Interpretation of the model.}
+\subsection{Coin tossing game} Potter and Voldemort play the following game. Potter throws a coin and Voldemort tries to guess the result. If Voldemort is wrong he pays 1 euro to Potter however if he is right Potter gives 1 euro to Voldemort. Then $S_n$ represents the algebraic gain of Potter after $n$ turns. 
+\subsection{Random Walk} We consider a drunkard which performs a random walk on $\mathbb{Z}$ with the following mechanism. At $t=0$ we center the origin on his position, then at every step he tosses a fair coin and he goes left or right according to whether he obtains tails or heads. Then $S_n$ corresponds to the final position after $n$ steps.
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\draw (-2.5, 0) -- (2.5, 0);
+\draw (0, 0) node[below] {0};
+\draw (0, -0.1) -- (0, 0.1);
+\draw (1, -0.1) -- (1, 0.1);
+\draw (2, -0.1) -- (2, 0.1);
+\draw (-1, -0.1) -- (-1, 0.1);
+\draw (-2, -0.1) -- (-2, 0.1);
+\draw[->] (0,0) arc(0:180:0.5);
+\draw[<-] (1,0) arc(0:180:0.5);
+\draw (0.5, 0.5) node[above right] {heads};
+\draw (-0.5, 0.5) node[above left] {tails};
+\end{tikzpicture}
+\end{figure}
+
+\section{Distribution or law of $S_n$}
+\begin{proposition}
+The law of $S_n$ is the probability distribution on $\{-n, \cdots, n\}$ given by:
+\[
+\forall k \in \{-n, \cdots, n\} \quad P(S_n = k) = \binom{n}{\frac{n + k}{2}} \frac{1}{2^n}
+\]
+\end{proposition}
+\begin{proof}
+A simple proof can be done geometrically. We know that all results are equiprobable hence it suffices to count the number of possible choice that leads to $S_n = k$. Let us consider such a path and let us denote by $\alpha$ the number of ascending steps and $\beta$ the number of descending steps, then we have that:
+\[
+\begin{cases}
+\alpha - \beta = k\\
+\alpha + \beta = n
+\end{cases}
+\Rightarrow \alpha = \frac{n + k}{2}
+\] 
+Then the number of possible paths is simply given by the number of possible choices for the ascending steps which are immediately given by: $\binom{n}{\alpha}$.
+\end{proof}
+
+\section{Equalization or return to 0} We say that there is an equalization or return to 0 at time $n$ if $S_n = 0$. Since $n$ and $S_n$ have the same parity this occurs only at even times. Then from what we got previously we immediately get that:
+\[
+P(S_{2n} = 0) = \frac{1}{2^{2n}} \binom{2n}{n} = \frac{1}{2^{2n}} \frac{(2n)!}{(n!)^2}
+\]
+Then Stirling's formula tells us that: $n! = \left(\frac{n}{\ell}\right)^n \sqrt{2\pi n} \left( 1 + \frac{1}{12 n} + \frac{1}{288 n^2} + o(\frac{1}{n^2})\right)$ and applying it above we obtain:
+\[
+P(S_{2n} = 0) \stackrel{n \to +\infty}{\sim} = \frac{1}{\sqrt{\pi n}}
+\]
+This gives an excellent approximation even for small values of $n$.
+
+\section{The lamplighter walk.}
+Imagine you have an infinite street with lanterns every meter and one lamplighter whose job is to light all the lanterns. He also starts at the origin and lights the lantern at the origin. Then he throws a coin and goes left or right according to if it is tails or heads and lights the successive lantern. The position at time $n$ is given by $S_n$ and the process $(S_n)_{n \in \mathbb{N}}$ is the symmetric random walk on $\mathbb{Z}$. Now we are interested in the following question: What is the probability that the lamplighter comes back to the original lantern? Mathematically this is described by:
+\begin{align*}
+P(\exists n \in \mathbb{N}^*, S_{2n} = 0) &= P\left(\bigcup_{n \geq 1} \{ S_{2n} = 0 \} \right) \\
+&= P\left(\{S_2 = 0\} \cup (\{S_4 = 0\}\setminus\{S_2 = 0\}) \cup \cdots \cup (S_{2n = 0} \setminus (\{S_2 = 0\} \cup \cdots \cup \{S_{2n - 2} = 0\} )\right)\\
+&= P\left(\bigcup_{n \geq 1} \left( \left\{S_{2n} = 0\right\} \setminus \left( \left\{S_2 = 0\right\} \cup \cdots \cup \left\{ S_{2n - 2} \right\} \right) \right)\right)
+\end{align*}
+Now since the events are disjoint we can use the $\sigma$-additivity property. Hence we get:
+\[
+P(\exists n \in \mathbb{N}^*, S_{2n} = 0) = \sum_{n \geq 1} P(S_2 \neq 0, \cdots, S_{2n - 2} \neq 0, S_{2n} = 0)
+\]
+Now necessarily all the $S_{2i}$ for $i \in \llbracket 1, n-1\rrbracket$ must have the same sign. By symmetry the probability that they are all positive is equal to the probability that they are all negative. Hence:
+\begin{align*}
+P(\exists n \in \mathbb{N}^*, S_{2n} = 0) &= 2 P(S_1 > 0, \cdots, S_{2n-1} > 0, S_{2n} = 0) \\
+&= \frac{2}{2^{2n}} |\{ \text{paths from } (1, 1) \text{ to } (2n -1, 1) \text{ which do not touch the axis} \}|
+\end{align*}
+Now we decide to count the number of paths that do touch the axis instead of the one that do not touch the axis. Since we know the total number of paths this is an equivalent problem. 
+
+\section{Reflection principle.} Let $A = (a, \alpha)$ and $B = (b, \beta)$ be two points with $0 < a < b$ and $\alpha, \beta > 0$. My problem now is to count the number of paths that go from $A$ to $B$ which touch or cross the axis. Notice that this problem is perfectly equivalent to counting the number of paths that go from $A' = (a, -\alpha)$ to $B$. To formalize this we need to make sure that this is a one-to-one map. Consider a path $s = (s_a, s_{a+1}, \cdots, s_b)$ be a path from $A$ to $B$ which touches the axis and $t$ be the first time it touches in other words $t = \min\{ i \geq a : s_i = 0\}$. Let $T = (t, 0)$ and to the path $s$ we associate the path $\phi(s)$ obtained from $s$ by taking the reflexion of the portion $AT$ with respect to the $x$-axis. Now we claim that $\phi$ is a one-to-one correspondence from the paths from $A$ to $B$ which touch the axis unto the paths from $A'$ to $B$. In fact $\phi$ is an involution ($\phi^2 = \text{Id}$) and hence it is injective and obviously surjective therefore bijective. 
+
+\section{The ballot theorem.} Let $x, n > 0$. The number of paths from $(0,0)$ to $(n, x)$ which do not touch the axis after time $0$ is equal to the number of paths from $(1, 1)$ to $(n,x)$ minus the number of paths from $(1, -1)$ to $(n, x)$. This immediately yields:
+\[
+\frac{x}{n}\binom{n}{\frac{n+x}{2}}
+\]  
+An example of application is the following. In an election the candidate $P$ scores $p$ votes and $Q$ scores $q$ votes with $p > q$. The probability that the winning candidate is always ahead during the reading of the votes is given by:
+\[
+\frac{p - q}{p + q}
+\]
+
+\section{End of the computation.}
+Now going back to our lamplighter computation applying the reflexion principle we have that:
+\[
+P(\exists n \in \mathbb{N}^*, S_{2n} = 0) = \frac{2}{2^{2n}} \frac{1}{2n - 1} \binom{2n - 1}{n} = \frac{1}{2n - 1} P(S_{2n} = 0)
+\]
+Hence the probability that the lamplighter returns to 0 is given by:
+\[
+P(\text{return to 0}) = \sum_{n \geq 1} \frac{1}{2n -1} P(S_{2n} = 0) = \sum_{n \geq 1} P(S_{2n - 2} = 0 ) - P(S_{2n} = 0) = 1
+\]
+
+\section{Fundamental Lemma}
+From the previous computation we have gotten that:
+\[
+P(S_2 \neq 0, \cdots, S_{2n - 2}\neq 0, S_{2n} = 0) = P(S_{2n - 2} = 0) - P(S_{2n} = 0)
+\]
+Yet we also have that:
+\[
+P(S_2 \neq 0, \cdots, S_{2n - 2}\neq 0, S_{2n} = 0) = P(S_2 \neq 0, \cdots, S_{2n - 2}\neq 0) - P(S_2 \neq 0, \cdots, S_{2n - 2}\neq 0, S_{2n} \neq 0)
+\]
+Hence for any $n$ larger than 1 we have that:
+\[
+P(S_{2n - 2} = 0) - P(S_{2n} = 0) = P(S_2 \neq 0, \cdots, S_{2n - 2}\neq 0) - P(S_2 \neq 0, \cdots, S_{2n - 2}\neq 0, S_{2n} \neq 0)
+\]
+Moreover we have that:
+\[
+P(S_2 \neq 0 ) = \frac{1}{2} = P(S_2 = 0)
+\]
+Which gives the fundamental lemma:
+\[
+P(S_2 \neq 0, \cdots, S_{2n} \neq 0) = P(S_{2n} = 0)
+\]
+
+\section{Last tie}
+Consider a coin tossing game of length $2n$ and the time $T$ of the last tie before $2n$: $T = \max\{k \leq 2n : S_k = 0\}$. Now we want to find the distribution of $T$. 
+\begin{proposition}
+The law of $T$ is called the arcsinus law and is given by:
+\[
+P(T = k) = P(S_{2k} = 0)P(S_{2n - 2k} = 0)
+\]
+\end{proposition}
 
 \end{document}

@@ -1,0 +1,98 @@
+\documentclass[10pt,a4paper]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{physics}
+\usepackage{tikz}
+
+\author{Marco Biroli}
+\title{Topology in Physics TDs}
+
+
+\begin{document}
+\maketitle
+\chapter{TD 1: Aharonov-Bohm effect}
+\section{Magnetism and analytical mechanics.}
+\subsection{}
+\[
+\vb{E} = -\grad V - \dv{\vb{A}}{t} \mbox{~~and~~} \vb{B} = \curl \vb{A}
+\]
+
+\subsection{}
+\[
+\mathcal{L}(\vb{r}, \dot{\vb{r}}) = \frac{1}{2} m \dot{\vb{r}}^2 + q(\dot{\vb{r}} \cdot \vb{A} - V)
+\]
+Hence:
+\[
+\vb{p} = \pdv{\mathcal{L}}{\dot{\vb{r}}} = m \dot{\vb{r}} + q \vb{A}
+\]
+Then we have that:
+\[
+\mathcal{H}(\vb{r}, \vb{p}) = \dot{\vb{r}} \cdot  \vb{p} - \mathcal{L}(\vb{r}, \dot{\vb{r}}) = \frac{1}{2} m \dot{\vb{r}}^2 + qV = \frac{1}{2m} (\vb{p} - q\vb{A})^2 + qV
+\]
+Let $\ket{\psi}$ such that $\hat{\mathcal{H}} \ket{\psi} = i \hbar \pdv{\ket{\psi}}{t}$ then if we modify $\mathcal{H}$ by $\vb{A} \to \vb{A} + \grad \chi$ we get that:
+\[
+(\vb{p} - q \vb{A}) \ket{\psi'} = (-i\hbar - q \vb{A} - q \grad \chi)\ket{\psi'} 
+\] 
+Then notice that by taking $\psi' = e^{i\varphi} \psi$ with $\varphi = \frac{q}{\hbar}\chi$ cancels out the additional term and we get that $H' \ket{\psi'} = H \ket{\psi}$.
+
+\subsection{}
+Up to rewriting:
+\[
+\grad'_i = \grad - i \frac{q}{\hbar} \vb{A} \mbox{~~and~~} \partial_t' = \partial_t - i \frac{q}{\hbar}(-V)  
+\]
+We get:
+\[
+i\hbar \partial_t' \psi = \frac{(-i\hbar \grad')^2}{2m}\psi
+\]
+In general replacing the derivatives as such:
+\[
+\grad'_\mu = \partial_\mu - \omega_\mu
+\]
+Is called a covariant derivative and $\omega$ is called the connection. It corresponds to modifying the structure of the space in order to pretend as if the particle is moving in free space since the force is included in the curvature of the space, similarly to the concept behind general relativity.
+
+\section{Aharonov-Bohm effect}
+\subsection{}
+If the magnetic field was turned off one should observe a diffraction pattern on the screen from the solenoid.
+
+\subsection{}
+Inside the solenoid the magnetic field is given by $\vb{B} = B\vu{z} = \mu_0\left(\frac{N}{L}\right)I \vu{z}$. Outside of the solenoid the magnetic field is 0. Then the vector potential can be given by:
+\[
+\vb{A} = \frac{B R^2}{2 r} \vu{\varphi}
+\] 
+
+\subsection{}
+Since the magnetic field is $\vb{0}$ out of the solenoid we now that in any region which does not contain the solenoid the magnetic field potential can be written as $\vb{A} = \grad f$. 
+
+\subsection{}
+From the previous question let $f_\ell$ be the potential for the magnetic field on the left and respectively $f_r$ for the right. Then we have that:
+\[
+\psi_\ell = e^{i\frac{q}{\hbar} f_\ell} \psi^{(0)} \mbox{~~and~~} \psi_r = e^{i\frac{q}{\hbar} f_r} \psi^{(0)}
+\]
+
+\subsection{}
+By direct computation we have that:
+\[
+\psi_r^* \psi_\ell = e^{\frac{q}{\hbar}(f_\ell - f_r)} |\psi^{(0)}|^2
+\]
+However from the magnetic flux properties we know that $f_\ell - f_r = \pi R^2 B$ since: 
+\[
+f_\ell = f_0 + \int_0^t \vb{A} \cdot \dd \vb{l} \Rightarrow f_\ell - f_r = \oint \vb{A} \cdot \dd \vb{l}
+\]
+And hence:
+\[
+\psi_r^* \psi_\ell = e^{\frac{q}{\hbar}\pi R^2 B} |\psi^{(0)}|^2
+\]
+
+\section{Study of Tonomura et al.}
+\subsection{}
+The introduction is the first paragraphs, methods are the paragraphs 2 through 5, results 6 through 8, Discussion is 9 up to the last paragraph and the conclusion is the last paragraph (not counting for acknowledgments).
+
+\subsection{}
+
+
+\end{document}

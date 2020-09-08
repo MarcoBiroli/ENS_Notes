@@ -106,4 +106,79 @@ Days are bins, accidents are distinguishable balls hence the probability is give
 \subsection{}
 
 
+\chapter{TD2}
+
+\section{Symmetric Random Walk}
+Consider a balanced coin drawn $n$ times. Denote $X_1, \cdots, X_n$ the results and $S_k$ the partial sums. 
+\subsection{}
+The law of $S_k$ is given by:
+\[
+p_{n,r} = P(S_n = r) = \frac{1}{2^n} \binom{n}{\frac{n + r}{2}}
+\]
+
+\subsection{}
+The number of paths from $(0, 0)$ to $(2n +2, 0)$ never zero are equal to the number of paths from $(1, 1)$ to $(2n + 1, 1)$ which always stay above or equal to the line $y = 1$. Hence rescaling the $y$-axis by a factor 1 we get a bijection in between the strictly positive walks from $(0, 0)$ to $(2n +2, 0)$ with the positive or zero walks from $(0, 0)$ to $(2n, 0)$.
+Hence for symmetric random walks the number of random walks going from $(0,0)$ to $(2n+2, 0)$ never touching the axis is twice as much as the number of walks from $(0,0)$ to $(2n, 0)$ being always positive or 0. Furhtemore there are $4$ times more walks going from $0$ to $2n+2$ which therefore gives the desired result. 
+
+\subsection{}
+We now that the end of the random walk is going to be given by $a- b$. Now the number of possible only positive walks is given by the number of walks from $(1, 1)$ to $(a+b, a-b)$ minus the number of walks from $(1, -1)$ to $(a+b, a-b)$ by the reflexion principle. Hence we get that:
+\[
+p = p_{a+b - 1, a-b-1} - p_{a+b - 1, a-b+1} = \frac{1}{2^n}\frac{a-b}{a+b} \binom{a+b}{a}
+\] 
+
+\subsection{}
+
+\subsubsection{a)}
+Up to a re-scaling of the $y$-axis we have the equivalent problem of computing the number of paths that go from $(0, -r)$ to $(n, k-r)$ and which touch the $x$-axis at least once. Now notice that from the reflexion principle this is equal to the number of paths from $(0, r)$ to $(n, k-r)$ and up to a second shifting this is equal to the number of paths from $(0,0)$ to $(n, k - 2 r)$. Hence the desired probability is given by $p_{n, k - 2r} = p_{n, 2r - k}$. 
+
+\subsubsection{b)}
+Then for any $r$ we have that:
+\begin{align*}
+P(\max\{S_1, \cdots, S_n\} = r) &= \sum_{k = -\infty}^{+\infty} P(S_n = k, \max\{S_1, \cdots, S_n\} = r)\\
+&= \sum_{k = -\infty}^{+\infty} ( P(S_n = k, \max\{S_1, \cdots, S_n\} \geq r) - P(S_n = k, \max\{S_1, \cdots, S_n\} > r) )\\
+&= \sum_{k = -\infty}^{+\infty} ( P(S_n = k, \max\{S_1, \cdots, S_n\} \geq r) - P(S_n = k, \max\{S_1, \cdots, S_n\} \geq r + 1) )\\
+&= \sum_{k = -\infty}^{+\infty}  (p_{n, k - 2r} - p_{n, k - 2r - 2}) = p_{n, r} + p_{n, r+1}
+\end{align*}
+
+\subsubsection{c)}
+This can be re-written as:
+\[
+P(S_n = 0, S_1 < 0, \cdots, S_{n-1} < 0, S_0 = -r) = P(S_n = -r, S_1 < 0, \cdots, S_{n-1} < 0, S_0 = 0) 
+\]
+Now again notice that this corresponds to a symmetric re-writing of the problem 3. Hence we get immediately that:
+\[
+\hat{p}_{n, r} = P(S_n = r, S_1 < r, \cdots, S_{n-1} < r) = \frac{1}{2^n}\frac{r}{n} \binom{n}{\frac{n + r}{2}} = \frac{r}{n} p_{n, r}
+\]
+\subsubsection{d)}
+
+
+\section{Geometric and negative-binomial laws.}
+\subsection{}
+We want to compute:
+\[
+P(T_1 = t + 1) 
+\]
+For such a thing to be the case we need to have thrown tails successively $t$ times and heads the last time. Hence the probability is given by:
+\[
+P(T_1 - 1 = t) = P(T_1 = t + 1) = (1-p)^t p = \mathcal{G}(p)
+\]
+The expectancy of $\mathcal{G}(p)$ is given by:
+\[
+\mathbb{E}[\mathcal{G}(p)] = \sum_{t = 0}^{+\infty} (1 - p)^t p t = p \cdot \frac{1 - p}{p^2} = \frac{1 - p}{p}
+\]
+The variance of $\mathcal{G}(p)$ is given by:
+\[
+\text{Var}[\mathcal{G}(p)]^2 = \frac{p^2 - 3p + 2}{p^2} - \frac{1 - 2p + p^2}{p^2} = \frac{1-p}{p^2}
+\]
+
+\subsection{}
+A geometric law corresponds to something not happening $t$ times and then happening at the $t+1$ time. Then the infimum of two geometric laws corresponds to two things not happening $t$ times and one of them happening at the $t+1$ time. The probability of which is given as follows:
+\[
+P[(\inf(S_1, S_2) = s] = (1-p)^{2(s - 1)} (p^2 + 2p(1 - p)) = (1-p)^{2(s - 1)} (2p - p^2) = (1-p)^{2(s - 1)} (1 - (1-p)^2) 
+\]
+Hence the infimum is a geometric variable with law $\mathcal{G}(1 - (1 - p)^2)$
+
+\subsection{}
+We want to compute $P(T_m - m = k) = $.
+
 \end{document}
