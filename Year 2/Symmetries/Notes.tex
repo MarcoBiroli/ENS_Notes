@@ -77,6 +77,59 @@ h : \mathcal{G} &\to \mathbb{Z}/p\mathbb{Z}\\
 g^k &\mapsto k \mod p
 \end{align*}
 
+\chapter{TD2}
+\section{All finite groups up to 5 elements.}
+The only group of size $1$ is the trivial group which is isomorphic to $\mathbb{Z}_{/1\mathbb{Z}}$. The group of size 2 is isomorphic to $\mathbb{Z}_{/2\mathbb{Z}}$. The group of size 3 is:
+\begin{center}
+\begin{tabular}{c | c | c | c |}
+ & a & b & c\\
+ \hline
+ a & a & b & c\\
+ \hline
+ b & b & c & a \\
+ \hline
+ c & c & a & b
 
+\end{tabular}
+\end{center}
+Which is clearly isomorphic to $\mathbb{Z}_{/3\mathbb{Z}}$. The groups of size 4 are:
+\begin{center}
+\begin{tabular}{c c}
+\begin{tabular}{c | c | c | c | c |}
+ & a & b & c & d\\
+ \hline
+ a & a & b & c & d\\
+ \hline
+ b & b & c & d & a\\
+ \hline
+ c & c & d & a & b\\
+ \hline
+ d & d & a & b & c
+\end{tabular}
+&
+\begin{tabular}{c | c | c | c | c |}
+ & a & b & c & d\\
+ \hline
+ a & a & b & c & d\\
+ \hline
+ b & b & a & d & c \\
+ \hline
+ c & c & d & a & b\\
+ \hline
+ d & d & c & b & a
+\end{tabular}
+\end{tabular}
+\end{center}
+Which are respectively isomorphic to $\mathbb{Z}_{/4\mathbb{Z}}$ and $\mathbb{Z}_{/2\mathbb{Z}} \times \mathbb{Z}_{/2\mathbb{Z}}$. Finally the only possible group of size 5 is given by $\mathbb{Z}_{/5\mathbb{Z}}$. 
+
+\section{Union of groups.}
+Let $\mathcal{G}_1$ and $\mathcal{G}_2$ be two groups. Then let $g \in \mathcal{G}_1$ and $h \in \mathcal{G}_2$ (w.l.o.g.) then $gh \in \mathcal{G}_1 \cup \mathcal{G}_2 \leftrightarrow gh \in \mathcal{G}_1$ (w.l.o.g.). However since $g \in \mathcal{G}_1$ then $g^{-1} \in \mathcal{G}_1$ and hence we would have that $h \in \mathcal{G}_1$. Hence we have that $\mathcal{G}_1 \cup \mathcal{G}_2$ is a group if and only if $\mathcal{G}_1 \leqslant \mathcal{G}_2$ or vice-versa.   
+
+\section{Quotient groups.}
+\begin{enumerate}
+\item Let $\pi : g \mapsto g \mathcal{H}$ which is a natural isomorphism. Then let $\mathcal{G}' = \pi^{-1}(A)$. Since $\mathcal{H} = \text{Ker}\pi$ we have that $\mathcal{H} \triangleleft \mathcal{G}'$. Then it is immediate from definition that: $\mathcal{G}'/A = \pi(\mathcal{G}') = \pi \circ \pi^{-1} (A) = A$. 
+\item ...
+\item Notice that the isomorphism $\psi : g \mapsto \varphi_g$ has that $\text{Ker} \psi = Z( \mathcal{G})$ furthermore we know that $\mathcal{G}/\text{Ker} \psi \cong \text{Im} \psi$ and hence we immediately get that $\mathcal{G}/Z(\mathcal{G}) \cong \text{Inn}(\mathcal{G})$. 
+\end{enumerate}
 
 \end{document}

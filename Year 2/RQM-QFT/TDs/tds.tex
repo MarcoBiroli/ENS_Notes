@@ -1,0 +1,154 @@
+\documentclass[10pt,a4paper]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{physics}
+\usepackage{stmaryrd}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\author{Marco Biroli}
+\title{TDs - QFT}
+
+
+\begin{document}
+\maketitle
+\chapter{TD1}
+\section{Matrix Groups}
+\section{The relationship between $SO(3)$ and $SU(2)$.}
+\section{Representations of $SU(2)$.}
+
+\begin{enumerate}
+
+\item An immediate computation yields the desired result
+
+\item Let $\ket{a}$ an eigenvector of $\vu{J}^2$ then:
+\[
+\vu{J}^2 \ket{a} = a \ket{a} \Rightarrow \bra{a} \vu{J}^2 \ket{a} = a \braket{a} \Rightarrow || \vu{J} \ket{a} ||^2 = a || \ket{a} || \Rightarrow a > 0
+\]
+We propose as a writing for them $j(j+1)$ notice that:
+\[
+j(j+1) = x \Leftrightarrow j^2 + j - x = 0 \Rightarrow j = \frac{-j + \sqrt{j^2 + 4 x}}{2}
+\]
+Hence the writing as $j(j+1)$ is not restrictive and covers all of $\mathbb{R}^+$.
+
+\item Let $\ket{v}$ an eigenvector of $\vu{J}^2$ and $\vu{J_3}$ with eigenvalues $j(j+1)$ and $m$. Then:
+\[
+\vu{J}^2 \vu{J_+} \ket{v} = \vu{J_+}\vu{J}^2 \ket{v} = j (j + 1) \vu{J_+} \ket{v}
+\]
+Since the operator $\vu{J}^2$ commutes with the $\vu{J_i}$. Then:
+\[
+\vu{J_3} \vu{J_+} \ket{v} = (\vu{J_+} \vu{J_3} + [\vu{J_3}, \vu{J_+}] )\ket{v} = (m \vu{J_+} + i\vu{J_2} + 1 \vu{J_1}) \ket{v} = ( m + 1 ) \vu{J_+} \ket{v}  
+\]
+Identically for $\vu{J_-}$ we obtain the same thing but with $m - 1$ as the eigenvalue for $\vu{J_3}$.
+
+\item Assume that there is no such vector than the ladder operator would span an infinite family of eigenvectors of $\vu{J_3}$ and $\vu{J_+}$ and hence $V$ would be infinite dimensional.
+
+\item We have that:
+\[
+\vu{J_-}\vu{J_+} = \vu{J_1}^2 - i [\vu{J_1}, \vu{J_2}] + \vu{J_2}^2 = \vu{J}^2 - \vu{J_3}^2 + \vu{J_3}
+\]
+Then applying this for $\ket{v_0}$ we get:
+\[
+\vu{J_-}\vu{J_+}\ket{v_0} = 0 = (j(j + 1) - m_0^2 + m_0) \ket{v_0} \Rightarrow j(j+1) = m_0(m_0 + 1) 
+\]
+
+\item An identical argument tells us that successive application of the lowering ladder operator must lead to a vanishing state. Then from definition we have that:
+\[
+\ket{w_0} = (\vu{J_-})^k \ket{v_0} \Rightarrow m'_0 = m_0 - k
+\]
+
+\item Similarly as before we get the exact same result but with a minus sign.
+
+\item We then have the system:
+\[
+\begin{cases}
+j(j+1) = m_0 (m_0 + 1)\\
+j(j + 1) = (m_0 - k) (m_0 - k - 1)
+\end{cases}
+\Rightarrow
+\begin{cases}
+j(j+1) = m_0(m_0 + 1)\\
+k^2 + k = 2 m_0( 1 +  k)
+\end{cases}
+\Rightarrow
+\begin{cases}
+j = \frac{k}{2}\\
+\frac{k}{2} = m_0
+\end{cases}
+\]
+
+\item We have that $\vu{J_+}$ sends $\ket{j, m}$ to $\ket{j, m+1}$ and similarly $\vu{J_-}$ sends $\ket{j, m}$ to $\ket{j, m - 1}$. Then we get that:
+\[
+\vu{J_+} \ket{j, m} = x \ket{j, m + 1} \Rightarrow \bra{j, m} \vu{J_-} \vu{J_+} \ket{j, m} = |x|^2 = j(j+1) - m(m+1)
+\]
+Hence we obtain:
+\[
+x = \sqrt{j(j+1) - m(m+1)}
+\]
+Then we have that:
+\[
+\vu{J_1} \ket{j, m} = \frac{\vu{J_+} + \vu{J_-}}{2} \ket{j, m} = \frac{x}{2} \left( \ket{j, m+1} + \ket{j, m-1} \right)
+\]
+Similarly:
+\[
+\vu{J_2} \ket{j, m} = \frac{\vu{J_+} - \vu{J_-}}{2i} \ket{j, m} = \frac{x}{2i} \left( \ket{j, m+1} - \ket{j, m-1} \right)
+\]
+
+\item Since $\vu{J}^2$ commutes with the $\vu{J_i}$ we know that the eigenspaces of $\vu{J}^2$ are sub-representations of $SU(2)$. We now restrict ourselves to one eigenspace, call it $\tilde{V}_j$ corresponding to the eigenvalue $j(j+1)$. As said previously there must be at least one eigenvector of $\vu{J}^2$ and $\vu{J_3}$ which is killed by $\vu{J_+}$ call it $\ket{j, j, 1}$. Then from this eigenvector we can build $\ket{j, m, 1} = \vu{J_-}^{j - m} \ket{j, j, 1}$. Which is an irreducible subspace of $\tilde{V}_j$. Then we can write $\tilde{V}_j = V_j^1 \oplus \tilde{V}_j'$. We can then repeat the process on $\tilde{V}_j'$ until we spanned the whole space. Then we have:
+\[
+V = V_0^1 \oplus \cdots \oplus V^{n_0}_0 \oplus V_{1/2}^1 \oplus \cdots \oplus V_{1/2}^{n_{1/2}} \oplus \cdots 
+\]
+
+\item We have that $\vec{L} = \vec{R} \land \vec{P}$ where $\vec{R}$ and $\vec{P}$ are operators on $L^2(\mathbb{R}^3)$ where $[R_j, P_k] = i \delta_{jk}$. Then we have that $[L_a, L_b] = i\varepsilon_{a b c} L_c$. Then the space we describe is $V : \{ \psi : S^2 \to \mathbb{C}\}$ and the spherical harmonic decomposition tells us that:
+\[
+\psi(\theta, \varphi) = \sum_{\ell = 0}^{+\infty}\sum_{m = -\ell}^\ell a_{\ell,m} Y_\ell^m(\theta, \varphi)
+\]
+Furthermore we have that:
+\[
+\vec{L}^2 = Y_\ell^m = \ell(\ell+1) Y_{\ell}^m \mbox{~~and~~} L_3 Y_\ell^m = m Y_\ell^m
+\]
+Hence the subspace $V_\ell = \text{Span}(Y_\ell^{-\ell}, \cdots, Y_\ell^\ell)$ is stable under rotation and $V = V_0 \oplus V_1 \oplus V_2 \oplus \cdots $
+
+\item We have:
+\[
+e^{2i\pi \vu{J_3}} \ket{j, m} = e^{2 i \pi m} \ket{j, m}
+\]
+Now if $j$ is an integer we have that $m \in \mathbb{Z}$ and hence $e^{2 i \pi \vu{J_3}} = \text{Id}$. However if $j$ is a half integer then $m$ is also a half integer and hence $e^{2 i \pi \vu{J_3}} = -\text{Id}$.
+
+\item In QM for example we usually consider the wavefunctions of one particle with no spin we will use the space $L^2(\mathbb{R}^3, \mathbb{C})$ however now if we introduce spin we will consider $L^2(\mathbb{R}^3, \mathbb{C}) \otimes \mathbb{C}^2$ or similarly if we consider two particles we need to consider $L^2(\mathbb{R}^3, \mathbb{C}) \otimes L^2(\mathbb{R}^3, \mathbb{C})$. Then we know also that:
+\[
+V_{j_1} \otimes V_{j_2} = V_{|j_1 - j_2|} \oplus V_{|j_1 - j_2| + 1} \oplus \cdots \oplus V_{j_1 + j_2}
+\]
+
+\end{enumerate}
+
+\chapter{TD2}
+\section{Properties of time-like vectors.}
+\begin{enumerate}
+\item Let $\vb{A}$ and $\vb{B}$ in $\mathcal{C}_+$. Then $\vb{A} \cdot \vb{B} < 0$. 
+
+\item Let $\vb{A}, \vb{B} \in \mathcal{C}_+$ and $\mu, \nu \in \mathbb{R}^+$ then $(\mu\vb{A} + \nu\vb{B})^2 = \mu^2\vb{A}^2 + 2 \mu \nu \vb{A} \cdot \vb{B} + \nu^2 \vb{B}^2 < 0$. Hence $(\vb{A} + \vb{B}) \in \mathcal{C}_+$.
+
+\item A special Lorentz transformation is an isometry of the Minkowski space hence $\mathcal{C}_+$ is stable under it.
+
+\item We have that:
+\[
+a^{i} - \beta^i a^0 = 0 \Rightarrow \beta^i = \frac{a^{i}}{a^0}
+\]
+
+\item Suppose by induction that this is true for $n$ the base cases being trivial. Then for $n+1$ note that $C_+$ is stable under addition so any case can be reduced to the base case $n = 2$. We prove this case here:
+\[
+\sqrt{-(\vb{A} + \vb{B})^2} = \sqrt{-(\vb{A'} + \vb{B'})^2} = \sqrt{{a^0}^2 + 2 a^0 b^0 + {b^0}^2 - \vec{a}^2} \geq {a_0} + b_0 - || \vec{a} || \geq \sqrt{-\vb{A}^2} + \sqrt{-\vb{B}^2}
+\]
+\end{enumerate}
+
+\section{Applications to 4-momenta}
+\begin{enumerate}
+
+\item   
+
+\end{enumerate}
+
+\end{document}

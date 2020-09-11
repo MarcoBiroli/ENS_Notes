@@ -1,0 +1,201 @@
+\documentclass[10pt,a4paper]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{physics}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\author{Marco Biroli}
+\title{Dynamical Systems TDs.}
+\begin{document}
+\maketitle
+\tableofcontents
+\chapter{Deterministic dynamics and fluctuations}
+
+\section{Linearization in the vicinity of a fixed point in a planar phase space.}
+
+\begin{enumerate}
+\item We have:
+\[
+\dv{}{t}
+\begin{pmatrix}
+x\\y
+\end{pmatrix} = \begin{pmatrix}
+a & b\\
+c & d
+\end{pmatrix}
+\begin{pmatrix}
+x\\
+y
+\end{pmatrix}
+\]
+Now the eigenvalues of the matrix are given by:
+\[
+(a - \lambda)(d - \lambda) - cb  = 0 \Rightarrow \lambda = \frac{a + d \pm \sqrt{a^2 + 4 bc - 2 ad + d^2}}{2} = \frac{p \pm \sqrt{p^2 - 4 q}}{2}
+\]
+Then we have that:
+\[
+\dv{}{t}
+\begin{pmatrix}
+x\\y
+\end{pmatrix} = \begin{pmatrix}
+s_1 & 0\\
+0 & s_2
+\end{pmatrix}
+\begin{pmatrix}
+x\\
+y
+\end{pmatrix}
+\]
+
+\item Generally we get:
+\[
+\begin{pmatrix}
+x(0)\\
+y(0)
+\end{pmatrix} = A(0) \begin{pmatrix} \alpha_1 \\ \beta_1 \end{pmatrix} + B(0) \begin{pmatrix}
+\alpha_2 \\ \beta_2
+\end{pmatrix}
+\]
+Hence we have:
+\[
+\dv{}{t} \begin{pmatrix}
+x \\ y
+\end{pmatrix}
+ = A(t) s_1 \begin{pmatrix}
+ \alpha_1 \\ \beta_1
+ \end{pmatrix} + B(t) s_2 \begin{pmatrix}
+ \alpha_2 \\ \beta_2
+ \end{pmatrix} \Rightarrow A(t) = e^{s_1 t} \mbox{~~and~~} B(t) = e^{s_2 t}
+\]
+In other words introducing $z(t) = x(t) + i y(t)$ we get:
+\[
+z(t) = e^{i\theta} e^{s_1 t} + e^{i\phi} e^{s_2 t}
+\]
+Where we have that $\alpha_1 = \cos(\theta)$ and $\beta_1 = \sin(\theta)$. Similarly for $\alpha_2, \beta_2$. Then using the definition of $s_1$ and $s_2$ we get:
+\[
+z(t) = (e^{i\theta} e^{\frac{\sqrt{\Delta}}{2} t} + e^{i\phi} e^{-\frac{\sqrt{\Delta}}{2} t})e^{\frac{p}{2}t}
+\]
+
+\item When $s_1 > 0$ and $s_2 > 0$ then we have that $z(t) \to $ \texttt{ComplexInfinity}. When $s_1 < 0$ and $s_2 < 0$ we have that $z(t) \to 0$. When $s_1 > 0$ and $s_2 < 0$ then $z(t)$ will be dominated by the first term and diverge and vice-versa. Finally if $s_1$ and $s_2$ are complex with a non zero real part then if any real part is positive we will get a diverging elliptic spiral, if both real parts are negative then we will get an inward elliptic spiral to 0.
+
+\item In the case $\Delta = 0$ we have that $s_1 = s_2$ and we get a perfect circle. 
+
+\item By simply plotting $\Delta(p, q)$ one gets the desired regions.
+
+\end{enumerate}
+
+\section{A predatory-prey model. Volterra's equations}
+
+\begin{enumerate}
+\item Assuming that the probability that a big fish eats a small fish is proportional to the density of small fishes and big fishes we get the equations given in the text. We furthermore assumed that the penalty of dying from an attack is not necessarily equal to the gain in succeeding in an attack. 
+
+\item At equilibrium we get:
+\[
+\begin{cases}
+\mu x = a xy\\
+\nu y = b xy
+\end{cases} \Rightarrow \begin{cases}
+y = \frac{\mu}{a}\\
+x = \frac{\nu}{b}
+\end{cases} \lor \begin{cases}
+x = 0\\
+y = 0
+\end{cases}
+\]
+We start by analyzing the stability of the first equilibrium. Take $x(t) = \frac{\nu}{b} + \varepsilon_x(t)$ and similarly for $y(t)$. Then we get the following equations:
+\[
+\begin{cases}
+\dot{\varepsilon}_x(t) = \frac{\mu \nu}{b} + \mu \varepsilon_x(t) - a\left( \frac{\nu}{b} + \varepsilon_x(t) \right)\left( \frac{\mu}{a} + \varepsilon_y(t) \right)\\
+\dot{\varepsilon}_y(t) = -\frac{\mu \nu}{a} + \nu \varepsilon_y(t) + b\left( \frac{\nu}{b} + \varepsilon_x(t) \right)\left( \frac{\mu}{a} + \varepsilon_y(t) \right)
+\end{cases}
+\]
+Now restricting ourselves to first order we get:
+\[
+\begin{cases}
+\dot{\varepsilon}_x(t) = \frac{\mu \nu}{b} + \mu \varepsilon_x(t) - \frac{\mu \nu}{b} - \frac{a \nu}{b} \varepsilon_y(t) - \mu \varepsilon_x(t)\\
+\dot{\varepsilon}_y(t) = -\frac{\mu \nu}{a} - \nu \varepsilon_y(t) + \frac{\mu \nu}{a} + \frac{b \mu}{a} \varepsilon_x(t) + \nu \varepsilon_y(t)
+\end{cases}
+\]
+Which simplifies to:
+\[
+\begin{cases}
+
+\dot{\varepsilon}_x(t) = - \frac{a \nu }{b} \varepsilon_y(t)\\
+\dot{\varepsilon}_y(t) = \frac{b \mu}{a} \varepsilon_x(t)
+
+\end{cases}
+\]
+This is a specific case of exercise 1 where $a = 0, b = -\frac{a \nu}{b}, c = \frac{b\mu}{a}, d = 0$. Then in this case we clearly have $p = 0$ and $q = \mu \nu$ and hence $\Delta = - 4 \mu \nu$. Hence the solutions are purely imaginary and we know that $\varepsilon_x$ and $\varepsilon_y$ will stay bounded. \\
+Now we interest ourselves to the second equation. Take $x(t) = \varepsilon_x(t)$ and $y(t) = \varepsilon_y(t)$ then we get:
+\[
+\begin{cases}
+\dot{\varepsilon}_x(t) = \mu \varepsilon_x(t)\\
+\dot{\varepsilon}_y(t) = - \nu \varepsilon_y(t)
+\end{cases}
+\]
+Now we immediately get that $\varepsilon_y \to 0$ and $\varepsilon_x \to +\infty$ and hence this is an unstable solution.
+
+\item During the stability analysis of the first equilibrium we already exhibited an oscillating solution. Where in the limit of small amplitude oscillations the period was given by $\frac{\pi}{\sqrt{\mu \nu}}$ or equivalently the frequency was given by $2 \sqrt{\mu \nu}$. 
+
+\item ...
+
+\item Dividing everything together and separating the variables yields:
+\[
+\dv{y}{x} = \frac{-\nu y + b x y}{\mu x - a x y} = -\frac{y}{x} \frac{b x - \nu}{a y - \mu} = - \left(\frac{y}{ay  - \mu} \right)\left(\frac{bx - \nu}{x}\right) \Rightarrow \dd y \left(\frac{y}{ay - \mu}\right)^{-1} = - \dd x \left(\frac{bx - \nu}{x}\right)
+\]
+Which when simplified gives:
+\[
+\dd x \left(\frac{b x - \nu}{x}\right)  + \dd y \left(\frac{a y - \mu}{y}\right) = 0
+\]
+Now integrating gives:
+\[
+V = b \int \dd x - \nu \int \frac{\dd x}{x} + a \int \dd y - \mu \int \frac{\dd y}{y} = b x - \nu \ln(x) + a y - \mu \ln(y) 
+\]
+
+\item We simply get that we need to replace $\mu$ with $\mu - c \rho$ and $\nu$ with $\nu + c \rho$ where $\rho$ is the number of fishermen and $c$ the hunting rate. 
+
+\end{enumerate}
+
+\section{The Van Der Pol oscillator.}
+
+\begin{enumerate}
+
+\item The one and only equilibrium solution is given by $x = 0$. Then let $x(t) = \varepsilon(t)$. Then simplifying to first order we get:
+\[
+\ddot{\varepsilon}(t) - \lambda \dot{\varepsilon}(t) + \omega_0^2 \varepsilon(t) = 0 
+\]
+The solution of such an equation is well known and given by:
+\[
+\varepsilon(t) = \alpha e^{\frac{t(\lambda - \sqrt{\lambda^2 - 4 \omega_0^2})}{2}} + \beta e^{\frac{t(\lambda + \sqrt{\lambda^2 - 4 \omega_0^2})}{2}}
+\]
+Then we see that this is stable if and only if $\lambda \leq 0$. 
+
+\item From the ODE we get:
+\[
+\dv{E}{t} = \dv{x}{t} \dv[2]{x}{t} + \omega_0^2 x \dv{x}{t} = \left( \dv[2]{x}{t} + \omega_0^2 x \right) \dv{x}{t} = (\lambda - x^2) \left(\dv{x}{t}\right)^2
+\]
+
+\item When $\lambda < 0$ we have $\dv{E}{t} < 0$ however we know $E(t) \geq 0$ hence we have that $E(t) \to 0$. 
+
+\item Taking the Ansatz $x(t) = a \sin(\omega t + \phi)$ and plugging it into the energy equation we get:
+\[
+E = \frac{1}{2} \left( a^2 \omega^2 \cos^2(\omega t + \phi) + a^2 \omega_0^2 \sin^2(\omega t + \phi)  \right)
+\]
+And:
+\[
+(\lambda - a^2 \sin^2(\omega t + \phi)) (a^2 \omega^2 \cos^2(\omega t + \phi))
+\]
+...
+
+\item We have:
+\[
+\overline{\left( \dv{x}{t} \right)^2} = 
+\]
+
+
+\end{enumerate}
+
+\end{document}
