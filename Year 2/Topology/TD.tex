@@ -94,5 +94,36 @@ The introduction is the first paragraphs, methods are the paragraphs 2 through 5
 
 \subsection{}
 
+\chapter{Magnetic Monopoles}
+\section{Magnetic monopoles}
+\begin{enumerate}
+
+\item The magnetic field that verifies $\div \vb{B} = g_m \delta(\vb{r})$ is given by $\vb{B} = \frac{g_m}{4\pi}\frac{\vb{r}}{r^3}$. Then a magnetic monopole would exert a force of $F = q(\vb{E} + \vb{v}\times \vb{B}) + \frac{g_m}{\mu_0}(\vb{B} - \frac{\vb{v} \times \vb{E}}{c^2})$.
+
+\item Let $\vb{A}(\vb{r}) = \frac{q_m}{4\pi}\frac{1 - \cos \theta}{r \sin \theta} \vu{\varphi}$. Now since $\vb{A}(\vb{r})$ is of the form $A_\varphi(r, \theta)$ and depends only linearly in $r$ the curl simplifies directly to:
+\[
+\curl \vb{A}(\vb{r}) = \frac{1}{r \sin \theta} \pdv{}{\theta}\left( A_\varphi \sin \theta \right) \vu{r} = \frac{\vu{r} q_m}{4 \pi r^2 \sin \theta} \pdv{}{\theta} (1 - \cos \theta) = \frac{q_m}{4 \pi r^2} \vu{r} = \frac{q_m \vb{r}}{4 \pi r^2 }
+\]
+
+\item The previous expression is undefined for $\theta = \pi$ an equivalent expression that would be undefined for $\theta = 0$ is given by:
+\[
+\tilde{\vb{A}}(\vb{r}) = \frac{q_m}{4\pi} \frac{1 + \cos \theta}{r \sin \theta} \vu{\varphi}
+\]
+Now we have:
+\[
+\tilde{\vb{A}}(\vb{r}) - \vb{A}(\vb{r}) = \frac{q_m}{2 \pi r \tan \theta} \vu{\varphi} = \grad(-\frac{q_m}{2\pi} \varphi + c) \stackrel{\theta \to \pi/2}{\longrightarrow} 0
+\]
+
+\item One simply needs to take a semi-infinite solenoid and observe it only close to the endpoint.
+
+\end{enumerate}
+
+\section{Engineering magnetic monopoles in condensed matter.}
+
+\begin{enumerate}
+
+\item 
+
+\end{enumerate}
 
 \end{document}

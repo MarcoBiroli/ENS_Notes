@@ -1,0 +1,187 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{physics}
+\usepackage{tikz}
+\usepackage{stmaryrd}
+
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\author{Marco Biroli}
+\title{HW1 - Probability}
+
+\begin{document}
+\maketitle
+
+\section{Generating functions.}
+\begin{enumerate}
+
+\item We have:
+\[
+g_X(s) = E[s^X] = \sum_{n \geq 0} P[X = n]s^n \mbox{~~and hence~~} g_X(1) = \sum_{n \in \mathbb{N}} P[X = n] = 1
+\]
+
+\item We know that:
+\[
+|g_X(s)| \leqslant \sum_{n \in \mathbb{N}} s^n
+\]
+Hence $g_X$ is well defined for all $s \in [0, 1[$. Furthermore:
+\[
+\left|\dv[k]{g_X(s)}{s}\right| \leqslant \sum_{n \in \mathbb{N}} (n+k)^k s^{n}  
+\] 
+Hence every derivative also has a radius of convergence of 1. 
+
+\item For a Bernouilli variable we get:
+\[
+g_X(s) = (1- p)s^0 + p \cdot s = 1 - p + p s
+\]
+
+\item Notice that:
+\[
+P[X = i] = \dv[i]{g_X}{s} \Big|_{s = 0}
+\]
+Hence the law of $X$ is fully characterized by $g_X$. 
+
+\item We have:
+\[
+E[X^k] = \sum_{n \in \mathbb{N}} P[X = n] n^k 
+\]
+And we also have:
+\[
+\dv[k]{g_X(s)}{s} = \sum_{n \geq 0} P[X = n+k](n + k) \cdots (n - 1) \cdot  s^{n}
+\]
+Now the radius of convergence of this series is given by:
+\begin{align*}
+R^{-1} &= \limsup_{n \to +\infty} \sqrt[n]{P[X = n + k](n + k) \cdots (n - 1)} = \limsup_{n \to +\infty} \sqrt[n]{P[X = n + k] (n + k)^k \cdot 1 \cdots \frac{n - 1}{n + k}}  \\
+&= \limsup_{n \to +\infty} \sqrt[n]{P[X = n + k](n + k)^k}  = \limsup_{n \to +\infty} \sqrt[n]{P[X = n]n^k} 
+\end{align*}
+Hence we see that:
+\[
+f(s) = \sum_{n \in \mathbb{N}} P[X = n]n^k s^n \mbox{~~and~~} \dv[k]{g_X(s)}{s} = \sum_{n \geq 0} P[X = n](n + k) \cdots (n - 1) \cdot  s^{n}
+\]
+Have the same radius of convergence. Hence $E[X^k] = \lim_{s \to 1^-} f(x)$ converges if and only if $\lim_{s \to 1^-} \dv[k]{g_X(s)}{s}$ converges.
+
+\item We have:
+\[
+\dv{g_X(s)}{s} = \sum_{n \geqslant 1} P[X = n] n s^{n-1}
+\]
+Hence we get that $E[X] = \dv{g_X}{s}\Big|_{s = 0}$. Now notice that $V[X] = E[X^2 - 2 E[X] X + E[X]^2] = E[X^2] - 2 E[X]^2 + E[X]^2 = E[X^2] - E[X]^2$. Now notice that:
+\[
+\dv[2]{g_X(s)}{s} = \sum_{n \geq 2} P[X = n] n (n - 1) s^{n - 2} = \sum_{n \geq 2} (P[X = n]n^2 - P[X = n] n)s^{n - 2} = \sum_{n \geq 0} P[X = n]n^2 - \frac{1}{s}\dv{g_X(s)}{s}
+\]
+Hence we have that $E[X^2] = \left(\dv[2]{g_X}{s} + \dv{g_X}{s}\right)\Big|_{s = 0}$. Putting everything together gives:
+\[
+V[X] = \left(\dv[2]{g_X}{s} + \dv{g_X}{s}\right)\Big|_{s = 0} - \left( \dv{g_X}{s}\Big|_{s = 0} \right)^2
+\]
+
+\item We have that $g_{S_n}(s) = E[s^{\sum_{i = 1}^n X_i}] = E[\prod_{i = 1}^n s^{X_i}] = \prod_{i = 1}^n E[s^{X_i}] = \prod_{i = 1}^n g_{X_i}(s)$.
+
+\item Applying question 8 with the results of question 2 we know that the generating function of a binomial law of parameters $(n, p)$ represented by the r.v. $Y$ is given by:
+\[
+g_Y(s) = \prod_{i = 1}^n (1 - p(1 + s)) = (1 - p(1 + s))^n
+\]
+
+\item We have that $g_Y(s) = E[s^{\sum_{1 \leq i \leq U} X_i}] = E[\prod_{i = 1}^U s^{X_i}] = E[\prod_{i = 1}^U E[s^{X_i}]] = E[E[s^{X_1}]^U] = g_U \circ g_{X_1} (s)$.
+
+\item See question 2 for the first part of the question. Then we have:
+\begin{align*}
+\int_0^{2\pi} g_X(e^{i \theta}) e^{- i k \theta} \dd \theta &= \int_{0}^{2 \pi} \sum_{n \in \mathbb{N}} P[X = n] e^{i \theta(n - k)} \dd \theta = \sum_{n \in \mathbb{N}} P[X = n] \int_0^{2 \pi} e^{i \theta ( n -k )} \dd \theta \\
+&= \sum_{n \in \mathbb{N}} P[X = n] 2 \pi \delta(n - k) = 2 \pi P[X = k]  
+\end{align*}  
+
+\item Applying the inversion formula we have that:
+\begin{align*}
+\lim_{n \to +\infty} P[X_n = k] &= \lim_{n \to +\infty} \frac{1}{2\pi} \int_0^{2\pi} g_{X_n}(e^{i\theta})e^{-ik\theta} \dd \theta = \frac{1}{2\pi} \int_0^{2\pi} \lim_{n \to +\infty} g_{X_n}(e^{i\theta})e^{- i k \theta} \dd \theta \\
+&= \frac{1}{2\pi}\int_0^{2\pi} g_{X}(e^{i\theta})e^{-ik\theta} \dd \theta = P[X = k]
+\end{align*}
+\end{enumerate}
+
+\section{Simple random walk.}
+
+\begin{enumerate}
+
+\item The random walk can reach zero only after an even amount of steps because it must have done $k$ steps up and $k$ steps down for a total of $2k$ steps. Hence $T_{2n}$ must be even.
+
+\item Let $(S_1, \cdots, S_{2n})$ be a path such that $T_{2n} = 2k$ then notice that the unique equivalent path given by $(-S_1, \cdots, -S_{2n})$ has $T_{2n} = 2n - 2k$ hence the conclusion follows.
+
+\item The probability that $P(T_{2n} = 0)$ corresponds to the probability of the path choosing -1 as a first step and then never touch the axis again. Now from the fundamental lemma we know that the probability of the path never touching the axis is equal to the probability of returning to 0 after $2n$ steps. Hence we have that:
+\[
+P(T_{2n} = 0) = \frac{1}{2} P(S_{2n} = 0) = \frac{1}{2} \frac{1}{2^{2n}} \frac{(2n)!}{(n!)^2}
+\] 
+
+\item Let $(S_1, \cdots, S_{2n})$ be a path such that $T_{2n} = 2k$ since $ 1 \leq k \leq n - 1$ we know that there are at least 2 steps in the negative plane and at most $2n-2$ and hence the path must have at least one return to the origin. Call the time of the first such return $2r$. We now want to compute the following:
+\[
+P(S_1 > 0, S_2 > 0, \cdots, S_{2r-1} > 0, S_{2r} = 0) = \frac{1}{4} P(S_1 \geq 0, S_2 \geq 0, \cdots, S_{2r - 3} \geq 0, S_{2r - 2} = 0)
+\]
+Now using the formula from TD2 we get:
+\[
+P(S_1 > 0, S_2 > 0, \cdots, S_{2r-1} > 0, S_{2r} = 0) = \frac{1}{2} P(S_1 \neq 0, \cdots, S_{2r - 1} \neq 0, S_{2r} = 0)
+\]
+Now using the formula from the course from which the fundamental lemma is derived we get that:
+\[
+P(S_1 > 0, S_2 > 0, \cdots, S_{2r-1} > 0, S_{2r} = 0) = 2^{-1} (P(S_{2r  -2} = 0) - P(S_{2r} = 0))
+\]
+Now replacing these two probabilities with their expression (also derived in the course) we get:
+\[
+P(S_1 > 0, S_2 > 0, \cdots, S_{2r-1} > 0, S_{2r} = 0) = 2^{-1}\left( \frac{(2r - 2)!}{2^{2r - 2} (r - 1)!^2} - \frac{(2r)!}{2^{2r} r!^2} \right)
+\]
+Now putting everything on the same denominator gives:
+\[
+P(S_1 > 0, S_2 > 0, \cdots, S_{2r-1} > 0, S_{2r} = 0)  = 2^{-1}\left( \frac{1}{2r - 1} \frac{(2r)!}{2^{2r} r!^2} \right) = \frac{2^{-1}}{2r - 1} P(S_{2r} = 0)
+\]
+Now there are two possible cases, either the path was positive before the return to 0 and hence we have $2k - 2r$ steps left that need to be positive in the $2n - 2r$ remaining steps. Or the path was negative before the first return to 0 and hence we need $2k$ steps to be positive in the $2n - 2r$ steps left. This leads to the following formula:
+\begin{align*}
+P(T_{2n} = 2k) = \sum_{r = 1}^k &P(S_1 > 0, \cdots, S_{2r - 1} > 0, S_{2r} = 0) P(T_{2n - 2r} = 2k - 2r) \\
+&+ \sum_{r = 1}^{n - k} P(S_1 < 0, \cdots, S_{2r - 1} < 0, S_{2r} = 0) P(T_{2n - 2r} = 2k)\\
+= \sum_{r = 1}^k &\frac{2^{-1}}{2r - 1} P(S_{2r} = 0) P(T_{2n - 2r} = 2k - 2r) \\
+&+ \sum_{r = 1}^{n - k} P(S_1 < 0, \cdots, S_{2r - 1} < 0, S_{2r} = 0) P(T_{2n - 2r} = 2k)\\
+= \sum_{r = 1}^k &\frac{2^{-1}}{2r - 1} P(S_{2r} = 0) P(T_{2n - 2r} = 2k - 2r) \\
+&+ \sum_{r = 1}^{n - k} \frac{2^{-1}}{2r - 1} P(S_{2r} = 0) P(T_{2n - 2r} = 2k)\\
+\end{align*}
+Where in the $3^{rd}$ equality we used the fact that the number of paths strictly above the axis is equal to the number of paths below which follows from a mirror symmetry along the axis. Now multiplying left and right by powers of 2 we get the formula asked for in the homework.
+
+\item Let $\mathcal{H}_n : "  \forall k \in \llbracket 0, n \rrbracket, \quad P(T_{2n} = 2k) = 2^{-2n} \binom{2k}{k} \binom{2n - 2k}{n - k}"$. We have that $\mathcal{H}_0$ is trivially true. Then take $n \in \mathbb{N} $ such that $\mathcal{H}_m$ is true for $m \in \llbracket 0, n - 1 \rrbracket$. As seen in the course we are going to re-write the arcsin law as follows for more compact notation: $P(T_{2n} = 2k) = P(S_{2k} = 0)P(S_{2n - 2k} = 0)$. Then we get that:
+\begin{align*}
+P(T_{2n} = 2k) &= \sum_{r = 1}^k \frac{P(S_{2r} = 0)}{2(2r - 1)} P(T_{2n - 2r} = 2k - 2r) + \sum_{r = 1}^{n - k} \frac{P(S_{2r} = 0)}{2(2r - 1)} P(T_{2n - 2r} = 2k)\\
+&= \sum_{r = 1}^k \frac{P(S_{2r} = 0)}{2(2r - 1)} P(S_{2k - 2r} = 0)P(S_{2n - 2k} = 0) + \sum_{r = 1}^{n - k} \frac{P(S_{2r} = 0)}{2(2r - 1)} P(S_{2k} = 0)P(S_{2n - 2r - 2k} = 0)\\
+&= \frac{P(S_{2n - 2k} = 0)}{2}\sum_{r = 1}^k \frac{P(S_{2r} = 0)}{2r - 1} P(S_{2k - 2r} = 0) + \frac{P(S_{2k} = 0)}{2}\sum_{r = 1}^{n - k} \frac{P(S_{2r} = 0)}{2r - 1} P(S_{2n - 2r - 2k} = 0)\\ 
+\end{align*}
+However now reversing the steps in the proof that we made in question 5 notice that the first sum can be re-written as (and similarly for the second sum):
+\[
+\sum_{r = 1}^k P(S_1 \neq 0, \cdots, S_{2r - 1} \neq 0, S_{2r} = 0) P(S_{2 k - 2r} = 0)
+\]
+Notice that every term of the sum corresponds to the probability of the event: $A_r$ : "the walk touches zero for the first time at step $2r$ and finishes at 0 after $2k$ steps in total". Notice furthermore that all the $A_i$ are disjoint since the 'first time' condition necessarily separates them. Hence we can rewrite the sum as:
+\[
+\sum_{r = 1}^k P(A_r) = P(\bigcup_{i = 1}^k A_r) = P(S_{2k} = 0)
+\]
+An identical reasoning can be applied to the second sum and hence we obtain:
+\begin{align*}
+P(T_{2n} = 2k) &= \frac{P(S_{2n - 2k} = 0)P(S_{2k = 0})}{2} + \frac{P(S_{2k} = 0)P(S_{2n - 2k} = 0)}{2}\\
+&= P(S_{2n - 2k} = 0) P(S_{2k} = 0)
+\end{align*}
+And hence $\{\mathcal{H}_i : i \in \llbracket 0, n- 1 \rrbracket\} \Rightarrow \mathcal{H}_n$ and this concludes the proof.
+
+\item \begin{enumerate}
+\item The probability that one of the players leads the whole game is given by $P(T_{20} = 20) + P(T_{20} = 0) = 2P(T_{20} = 0) = \frac{46\,189}{131\,072} \approx 0.35$.  
+\item The probability of the winner leading at least 16 times during the game is given  by $2(P(T_{20} \in \{20, 18, 16\}) = \frac{22\,451}{32\,768} \approx 0.69$. 
+\item The probability that both players lead 10 times is given by $P(T_{20} = 10) = \frac{3\,969}{65\,536} \approx 0.06$. 
+\end{enumerate}
+
+\item Following the same reasoning as in question 4 for $P(S_1 \geq 0, \cdots, S_{2r - 1}\geq 0, S_{2r } = 0)$ and replacing $r$ with $n$ we immediately obtain the desired formula which is:
+\[
+P(T_{2n} = 2n, S_{2n} = 0) = \frac{2}{2n + 1} P(S_{2n + 2} = 0) = \frac{2}{2n + 1} \frac{P(S_{2n} = 0) (2 n + 1)}{2(n + 1)} = \frac{P(S_{2n} = 0)}{n + 1} = P(T_{2n} = 0, S_{2n} = 0)
+\]
+Where the last equality directly follows from symmetry with the axis.
+
+\item Notice now that by imposing that the path finishes at 0 we can reverse the direction of the $x$-axis without problem. Now we want to use symmetry arguments to justify that every time above the axis is equiprobable. To do so take the previous recursive formula:
+\[
+\sum_{r = 1}^k \frac{2^{-1}}{2r - 1} P(S_{2r} = 0) \frac{P(S_{2n - 2r} = 0)}{n - r + 1} + \sum_{r = 1}^{n - k}\frac{2^{-1}}{2r - 1} P(S_{2r} = 0) \frac{P(S_{2n - 2r} = 0)}{n - r + 1}\\
+\]
+Now notice that when we change $k$ a new term appears in one sum but the equivalent term disappears in the other. And overall the two terms cancel out. Hence we get the desired equiprobability property.
+
+\end{enumerate}
+
+\end{document}

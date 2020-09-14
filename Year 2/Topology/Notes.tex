@@ -8,6 +8,42 @@
 \usepackage{physics}
 \usepackage{stmaryrd}
 \usepackage{tikz}
+\usetikzlibrary{fit, calc, matrix, positioning, arrows.meta, intersections, through, backgrounds, patterns}
+\usepackage{xparse}
+
+
+\newcommand\irregularcircle[2]{% radius, irregularity
+  \pgfextra {\pgfmathsetmacro\len{(#1)+rand*(#2)}}
+  +(0:\len pt)
+  \foreach \a in {10,20,...,350}{
+    \pgfextra {\pgfmathsetmacro\len{(#1)+rand*(#2)}}
+    -- +(\a:\len pt)
+  } -- cycle
+}
+
+\NewDocumentCommand{\irregularline}{%
+  O     {2mm}   % Amplitude of irregularity. Optional. Default value = 2mm
+  m             % First point
+  m            % Second point
+  D   <> {20}   % Number of peaks. Optional. Default value = 20
+}{{%
+  \coordinate (old) at #2;
+  \foreach \i in {1,2,...,#4}{
+  \draw (old) -- ($ ($#2!\i/(#4+1)!#3$) + (0,#1*rand) $) coordinate (old);
+  }
+  \draw (old) -- #3;
+}}
+
+\newcommand{\sphere}{
+  \shade[ball color = gray!40, opacity = 0.4] (0,0) circle (2cm);
+  \draw (0,0) circle (2cm);
+  \draw (-2,0) arc (180:360:2 and 0.6);
+  \draw[dashed] (2,0) arc (0:180:2 and 0.6);
+  \draw (0, -2) arc (-90:90:-1 and 2);
+  \draw[dashed] (0, -2) arc (-90:90:1 and 2);
+}
+
+
 
 \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
 \author{Marco Biroli}
@@ -181,7 +217,188 @@ Similarly the computation for the velocity field yields:
 \oint_{\dd\Sigma} \vb{v} \cdot \dd \vb{l} = \frac{h}{m} \Rightarrow \vb{v} = \left(\frac{h}{m}\right)\frac{1}{r} \vb{1}_\phi
 \]
 Notice that this corresponds to our intuition of vortices where we imagine and increasing and diverging velocity the closer we go to the center. This might seem unphysical however in reality it is not a problem since the density of the superfluid vanishes at the origin as well and hence cancels out the divergence of the velocity. 
+
 \section{Topology in electromagnetism}
+\begin{figure}
+\centering
+\begin{tikzpicture}
+  \shade[ball color = gray!40, opacity = 0.4] (0,0) circle (2cm);
+  \draw (0,0) circle (2cm);
+  \draw (-2,0) arc (180:360:2 and 0.6);
+  \draw[dashed] (2,0) arc (0:180:2 and 0.6);
+  \draw[red] (0, -2) arc (-90:90:-1 and 2);
+  \draw[dashed, red] (0, -2) arc (-90:90:1 and 2);
+  \draw (-2, 0) node[left] {$\gamma_1$};
+  \draw (0, -2) node[below left, red] {$\gamma_2$};
+  \draw (-1, -0.52) node[below left] {$p_1$};
+  \draw[thick, ->] (-1, -0.52) -- node[below] {${\overrightarrow{V}}$} (1, -0.7);
+  \draw (1, 0.52) node[below left] {$p_2$};
+  \draw[thick, ->] (1, 0.52) -- node[above left ] {$\tilde{V}_{\gamma_1}$} (-1, 0.7);
+  \draw[thick, ->, red] (1, 0.52) -- node[above right] {$\tilde{V}_{\gamma_2}$} (2.5, 0.34);
+\end{tikzpicture}
+\end{figure}
+We start from Maxwell's equations, in particular $\div \vb{B} = 0$ which tells us that we have no magnetic charges in nature. In 1931 Dirac wondered what would happen if there existed point like magnetic charges and hence we modified the equation to $\div \vb{B} = 4 \pi \rho_m = 4 \pi g \delta^{(3)} (\vb{r})$. Then the magnetic field generated from such a charge would give $\vb{B} = g \frac{\vb{r}}{r^3}$ which is purely radial. We know interest ourselves to:
+\[
+\Phi = \int_{S^2} \vb{B} \cdot \dd\vb{S} = \int_V (\div \vb{B}) \dd V = 4 \pi g 
+\]
+Nothing special happened yet, this is just a reformulation of Gauss's theorem. We now introduce the gauge potential $\curl \vb{A} = \vb{B}$.  Re-writing the above we get:
+\[
+\Phi = \int_{S^2} (\curl \vb{A}) \cdot \dd \vb{S} = \int_V \div (\curl \vb{A}) \dd V = 0 
+\]
+Hence such a construction cannot work. Our underlying false assumption here is that $\vb{A}$ was globally defined which is false if magnetic charges can exist. We put ourselves in spherical coordinates then we write $\vb{A} = g(1 - \cos \theta) \grad \varphi$. The reader can check that $\curl \vb{A} = g \frac{\vb{r}}{r^3} = \vb{B}$. So this is indeed the potential we are looking for and notice indeed that such a potential is not well-defined everywhere since $\grad \varphi = \frac{1}{r\sin\theta} \vb{1}_\varphi$ and $\vb{1}_\varphi$ is not well-defined along the $z$-axis. Now the prefactor cancels for $\theta = 0$ however it does not cancel for $\theta = \pi$ hence the potential is for sure ill-defined on the negative $z$-axis. However this is not the approach that we are going to follow. We will do what has been done 50 years later in 1975 by Wu and Yang. 
+
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale = 0.75]
+  \shade[ball color = gray!40, opacity = 0.4] (0,0) circle (2cm);
+  \draw (0,0) circle (2cm);
+  \draw (-2,0) arc (180:360:2 and 0.6);
+  \draw[dashed] (2,0) arc (0:180:2 and 0.6);
+  \draw (2, 2) node {$U_N$};
+  \draw (2, -2) node {$U_S$};
+  \draw (2, 0) node[right] {$\varepsilon$};   
+\end{tikzpicture}
+\end{figure} 
+Then we define $\vb{A}_N = \vb{A} = g(1 - \cos\theta) \grad \varphi$ in the $U_N$ region and similarly we define $\vb{A}_S = -g(1 + \cos \theta) \grad \varphi$ on $U_S$. Then recomputing the integral we now get:
+\[
+\Phi = \int_{S^2} \vb{B} \cdot \dd \vb{S} = \int_{U_N} (\curl \vb{A}_N) \cdot \dd \vb{S} + \int_{U_S} (\curl \vb{A}_S) \cdot \dd S = \int_{\partial U_N = \partial U_S = \varepsilon} (\vb{A}_N - \vb{A}_S) = 2g \int_{\varepsilon} (\grad \varphi) \cdot \dd \vb{\ell}
+\]
+Where in third equality we used Stokes theorem accounting for the orientation of integration along the boundary. Furthermore from the definition of the azimuthal angle we can easily compute the last integral and we get:
+\[
+\Phi = \int_{S^2} \vb{B}\cdot \dd \vb{S} = 4 \pi g
+\]
+\subsubsection{Gauge transformation (on the equator).}
+Notice that we can rewrite the potential on one hemisphere as a Gauge transformation of the other:
+\[
+\vb{A}_N = \vb{A}_S + \grad(2g \varphi)
+\]
+Now consider a particle coupled to the monopole field then Schrodinger's equation is given by:
+\[
+\frac{1}{2m} [\vb{p} - q \vb{A}]^2 \psi(\vb{r}) = E \psi(\vb{r})
+\]
+Then the Gauge transformation will force $\psi_S(\vb{r}) = \psi_N(\vb{r})e^{-i2g \varphi}$. Now physically we expect $\psi_N$ and $\psi_S$ to be compatible and $\psi_{N,S}$ on their overlap (the equator $\varepsilon = (\theta = \pi/2)$) must be single valued. Hence this forces that $2g \in \mathbb{Z}$ telling us that the monopole charge must be quantized. Now re-introducing the $\hbar, c, e$ constants by re-scaling units we get the real Dirac quantization law: $2 g \left(\frac{\hbar}{ec}\right) \in \mathbb{Z}$. 
+
+\subsubsection{Monopoles and winding numbers.}
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[scale = 0.75]
+  \shade[ball color = gray!40, opacity = 0.4] (0,0) circle (2cm);
+  \draw (0,0) circle (2cm);
+  \draw (-2, 0) .. controls (-1.5, -0.5) and (0.5, 1.5) .. (2, 0); 
+  \draw[dashed] (-2, 0) .. controls (-1.5, 1.5) and (0.5, -1) .. (2, 0);
+  \draw (2, 2) node {$\mathcal{R}_1$};
+  \draw (2, -2) node {$\mathcal{R}_2$};
+  \draw (2, 0) node[right] {$\partial \mathcal{R}$};   
+\end{tikzpicture}
+\end{figure} 
+We now define $\vb{A}_1$ on $\mathcal{R}_1$ and $\vb{A}_2$ on $\mathcal{R}_2$ and we write $\partial \mathcal{R}_1 = \partial \mathcal{R}_2 = \partial \mathcal{R}$.  Then on the boundary we have:
+\[
+\mbox{For~} \ell \in \partial \mathcal{R} \to U(1) \cong S^1 \mbox{~~we get~~}
+\begin{cases}
+\vb{A}_2 = \vb{A}_1 + \grad chi\\
+\psi_2(\ell) = \psi_1(\ell) e^{i \chi(\ell)}
+\end{cases}
+\]
+Now once again the single-valuedness of the wavefunction imposes that the map $e^{i\chi(\ell)}$ must loop on $S^1$. Hence the winding number must be quantized:
+\[
+W = \frac{1}{2\pi} \int_{\partial R} (\grad \chi) \cdot \dd \ell \in \mathbb{Z}
+\] 
+Then we get:
+\begin{align*}
+\Phi = \int_{S^2} \vb{B} \cdot \dd \vb{S} = \int_{\mathcal{R}_1} \curl \vb{A}_1 \cdot \dd \vb{S} + \int_{\mathcal{R}_2} \curl \vb{A}_2 \cdot \dd \vb{S} = \oint_{\partial R} (\vb{A}_2 - \vb{A}_1) \cdot \dd \vb{\ell} = \oint_{\partial \mathcal{R}} (\grad \chi) \cdot \dd \vb{\ell} = 2 \pi W
+\end{align*}
+Hence necessarily we must have $2g  = W$. 
+
+\subsubsection{Conclusion.}
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}
+\draw[rounded corners = 1.5mm] (-0.8, 0) \irregularcircle{1.2cm}{2mm};
+\draw[rounded corners = 1.5mm] (0.8, 0) \irregularcircle{1.2cm}{2mm};
+\draw (-2, -1) node{$\mathcal{R}_1$};
+\draw (2, -1) node{$\mathcal{R}_2$};
+\draw (-1.5, -1.4) node[right] {$\psi_1$};
+\draw (1.5, -1.4) node[left] {$\psi_2 e^{i\chi}$};
+\draw (-1, -1.35) -- (0.5, -1.35);
+\draw (-1, -1.45) -- (0.5, -1.45);
+\draw[->] (-1.3, -1.2) .. controls (-1.5, -0.5) .. (-1, 0); 
+\draw[->] (1.35, -1.2) .. controls (1.5, -0.5) .. (1, 0); 
+\draw (0, 0) node{$W$};
+\draw[<->] (0, -0.2) -- (0, -1.2);
+\end{tikzpicture}
+\end{figure}
+
+In conclusion if we have no monopole we can define $\vb{A}$ globally and $\psi(\vb{r})$ too. However as soon as we have a monopole $(2g)$ then we must define $\vb{A}$ locally over several regions covering the space, and the quantity that relates the wavefunctions over the gluing regions of the patches is set by the winding number.
+
+\subsection{Fibre bundles in a nutshell.}
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}
+\draw (0, 0) circle (1cm);
+\irregularline[1mm]{(-0.7, -0.7)}{(0.7, 0.7)};
+\end{tikzpicture}
+\end{figure}
+We first define a Manifold:
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}
+\draw (0, 0) .. controls (0.5, 0.5) and (1.5, -0.5)  .. (2, 0); 
+\draw (0.25, 1) .. controls (0.75, 1.5) and (1.75, 0.5)  .. (2.25, 1);
+\draw (0, 0) -- (0.25, 1);
+\draw (2, 0) -- (2.25, 1);
+\fill[fill=black] (0.4,0.5) node[above] {$p_1$} circle (1pt);
+\fill[fill=black] (1.5,0.7) node[below] {$p_2$} circle (1pt);
+\draw[dashed] (0.4, 0.5) .. controls (0.9, 0.8) .. (1.5, 0.7);
+\end{tikzpicture}
+\end{figure}
+A manifold $\mathcal{M}$ is defined as an atlas of maps: $\{(U_i, \varphi_i)\}$. The $U_i$ are an open subset cover of $\mathcal{M}$ i.e. $\bigcup U_i = \mathcal{M}$. The $\varphi_i$ are smooth maps that map $U_i \to \mathcal{R}_i \in \mathbb{R}^m$. We also have rules on the overlaps which impose smoothness: $U_i \cap U_j : \psi_{ij} = \varphi_i \circ \varphi_j$ must be smooth. So what are fibre bundles? A hand-wavy definition of fibre bundles consists in considering them as "a product of two manifolds". We could write is as $\mathcal{M} \times \mathcal{F} = \mathcal{E}$ where $\mathcal{M}$ is a base manifold, $\mathcal{F}$ is the fibre and $\mathcal{E}$ is the bundle. Hence by construction the product is locally trivial i.e. $\mathcal{E}\Big|_{U_i} \cong U_i \times \mathcal{F}$, however globally the product is not trivial $\mathcal{E} \not\cong \mathcal{M} \times \mathcal{F}$.
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}
+\draw (0, 0) .. controls (0.5, 0.5) and (1.5, -0.5)  .. (2, 0); 
+\draw (0.25, 1) .. controls (0.75, 1.5) and (1.75, 0.5)  .. (2.25, 1);
+\draw (0, 0) -- (0.25, 1);
+\draw (2, 0) -- (2.25, 1);
+\draw[red] (0.8, 0.5) -- (0.8, 1.5);
+\draw[dashed, red] (0.8, 0.5) -- (0.8, 0);
+\draw[red] (0.8, 0) -- (0.8, -1); 
+\draw[rounded corners = 0.5mm] (1.5, 0.4) \irregularcircle{4mm}{1mm};
+\end{tikzpicture}
+\end{figure}
+
+\subsubsection{Bundle examples.}
+A simple example is given by $\mathcal{M} = S^1$ and $\mathcal{F} = I = (a, b)$. Then we can construct the trivial bundle given by the unit cylinder of height $b - a$. However an example of a non-trivial bundle that we can build is, for example, a Mobius strip. 
+
+\subsubsection{Section}
+We start by defining what a section is. A local section is a mpa $s_i : U_i \to \mathcal{E}$. This corresponds to selecting at every point of $\mathcal{M}$ choosing a point of the corresponding fiber. A global section is a map $s : \mathcal{M} \to \mathcal{E}$. If a global section can be defined then the fiber bundle is necessarily trivial.
+
+\subsubsection{Transition functions.}
+Suppose we have a local section $s_1: U_1 \to \mathcal{E}$ and another local section $s_2 : U_2 \to \mathcal{E}$ and $U_1 \cap U_2 \neq \emptyset$. Then let $p \in U_1 \cap U_2$ we have that $s_1(p) = s_2(p)t_{21}(p)$ where we define $t_{21}$ to be the transition function. Now if we have that $t_{ij}(p) =  \text{Id}_\mathcal{F}, \forall p \in \mathcal{M}$ then the fiber bundle is trivial because we can build a global section. Note that if $\mathcal{M} \cong \mathbb{R}^m$ then the fiber bundle will always be trivial. Hence we will almost always work either with $\mathcal{M} \cong S^m$ (the spheres) or $\mathcal{M} \cong \mathbb{I}^m$ (the tori). 
+
+\subsubsection{Parallel transport.}
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}
+\draw (0, 0) .. controls (0.5, 0.5) and (1.5, -0.5)  .. (2, 0); 
+\draw (0.25, 1) .. controls (0.75, 1.5) and (1.75, 0.5)  .. (2.25, 1);
+\draw (0, 0) -- (0.25, 1);
+\draw (2, 0) -- (2.25, 1);
+\draw[red] (0.8, 0.5) -- (0.8, 1.5);
+\draw[dashed, red] (0.8, 0.5) -- (0.8, 0);
+\draw[red] (0.8, 0) -- (0.8, -1); 
+\fill[fill = black] (1.5, 0.5) circle (0.5mm);
+\draw[->] (0.8, 0.5) .. controls (1, 0.7) and (1.2, 0.3) .. (1.5, 0.5);
+\end{tikzpicture}
+\end{figure}
+Suppose we have a section $s_i(p) : U_i \to \mathcal{E}$ and path $\gamma(t) : [0, 1] \to \mathcal{M}$ and a lifted curve $\tilde{\gamma}(t) : [0, 1] \to \mathcal{E}$ corresponding to the generalization of the path to fiber space. Such that $\gamma(0) = p, \gamma(1) = p_1$, $\tilde{\gamma}(0) = s_i(p)$ and $\tilde{\gamma}(1) = s_i(p_1) \exp(- \int_\gamma \mathcal{A}_\mu \dd x^\mu )$. Where $\mathcal{A}$ is called a connection and is a $1$-form and is a local property (it is defined only over $U_i$). The connection has some constraints and most notoriously we have the notion of compatibility expressed as follows. On $U_i \cap U_j$ the connection must satisfy: $\mathcal{A}_j = t_{ij}^{-1} \mathcal{A}_i t_{ij} + t_{ij}^{-1} \dd t_{ij} $.
+
+\subsubsection{Curvature}
+As we did before we use the notion of parallel transport to define curvature. Using the notion of parallel transport over a closed loop we can write:
+\[
+\tilde{\gamma}(1) = s_i(p) = e^{-\oint_\gamma \mathcal{A}} = s_i(p) e^{-\int_\Sigma \mathcal{F}} \mbox{~~where~~} \mathcal{F} = \dd \mathcal{A}
+\]
+Since $\mathcal{A}$ is a 1-form we have that $\mathcal{F}$ is a 2-form and hence has to be written $\mathcal{F} = \frac{1}{2} \mathcal{F}_{\mu \nu}\dd x^\mu \dd x^\nu$ where $\mathcal{F}_{\mu \nu} = \partial_{\mu} \mathcal{A}_\nu - \partial_\nu \mathcal{A}_\mu$ so long as we are looking at Abelian situations. 
+
 \section{Berry's geometric phase}
 \section{Topological Matter}
 \section{Synthetic topological systems}
