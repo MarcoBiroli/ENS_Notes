@@ -3,6 +3,7 @@
 \usepackage[english]{babel}
 \usepackage{amsmath}
 \usepackage{amsfonts}
+\usepackage{physics}
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
@@ -179,6 +180,231 @@ P[(\inf(S_1, S_2) = s] = (1-p)^{2(s - 1)} (p^2 + 2p(1 - p)) = (1-p)^{2(s - 1)} (
 Hence the infimum is a geometric variable with law $\mathcal{G}(1 - (1 - p)^2)$
 
 \subsection{}
-We want to compute $P(T_m - m = k) = $.
+We want to compute $P(T_m - m = k)$. The number of possible outcomes for which $T_{m} - m = k$ is given by $\binom{k + m - 1}{m-1} p^m (1 - p)^k = Neg(m, p)$. Now using the formula we get that:
+\[
+\sum_{k \geq 0} Neg(m, p)[k] =  p^m (1 - (1 - p))^{-m} = 1
+\]
+
+\subsection{}
+Notice that we can re-write $T_m - m$ as the number of steps before the first $H$ plus the number of steps between the first and second head etc. now the number of steps in between two succesive heads is given by $\mathcal{G}(p)$ then the result follows.
+
+\subsection{}
+Then we have that:
+\[
+\mathbb{E}[T_m - m] = m \mathbb{E}[\mathcal{G}(p)] = m\frac{1-p}{p}
+\]
+Hence:
+\[
+\mathbb{E}[T_m] = \frac{m}{p}
+\]
+Similarly we get:
+\[
+Var(T_m) = m \frac{1 - p}{p^2}
+\]
+
+\section{Thinning and Poisson random variables}
+
+We have that:
+\[
+P[Y = k | X = n] = \binom{n}{k} p^k (1 - p)^{n - k}
+\]
+Then from the law of total probability we have that:
+\[
+P[Y = k] = \sum_{n = k}^{+\infty} \binom{n}{k} p^k (1 - p)^{n - k} \frac{\lambda^n e^{-\lambda}}{n!} = \frac{p^k e^{- \lambda} \lambda^k}{k!} \sum_{n = 0}^{+\infty} (1 - p)^n \frac{\lambda^{n}}{(n)!} = \frac{(\lambda p)^k  e^{- \lambda p}}{k!}
+\]
+
+\section{Conditional Probabilities}
+
+\begin{enumerate}
+
+\item \begin{enumerate}
+
+\item $P(B|A) = \frac{P(A \cap B)}{P(B)} = \frac{P(A)}{P(B)} \frac{P(A \cap B)}{P(A)} = \frac{P(A)}{P(B)} P(A | B)$. 
+
+\item From the previous question we have: 
+\[
+P(B | A) = \frac{P(A)}{P(B)} P(A | B) = \frac{P(A | B)}{P(B)} \sum_{i \in \mathbb{N}} P(A | C_i) P(C_i)
+\]
+
+\item Let $X$ be the r.v. corresponding to the number of children of law $p_i$ and $A$ the event "has no daughter". Then:
+\[
+P(X = 1 | A) = \frac{P(A | X = 1)}{P(X = 1)} \sum_{i \in \mathbb{N}} P(A | X = i) P(X = i) = \frac{1}{2 p_1} \sum_{i \in \mathbb{N}} \frac{p_i}{2^i} 
+\]
+
+\end{enumerate}
+
+\item The law of $(X, Y)$ is given by:
+\[
+P((X, Y) = (x, y)) = \frac{1}{6} \cdot \frac{\delta_{y \leqslant x}}{x} \mbox{~~for~~} (x, y) \in \llbracket 1, 6 \rrbracket^2
+\]
+Then:
+\[
+P(X = x) = \sum_{y = 1}^6 P((X, Y) = (x, y)) = \sum_{y= 1}^x \frac{1}{6x} = \frac{1}{6}
+\]
+Similarly:
+\[
+P(Y = y) = \sum_{x = 1}^6 P((X, Y) = (x, y)) = \frac{1}{6} \sum_{x=y}^6 \frac{1}{x}
+\]
+
+\end{enumerate}
+
+\section{Change of variables.}
+
+\begin{enumerate}
+
+\item Let $U$ be a r.v. with uniform law over $[-\frac{\pi}{2}, \frac{\pi}{2}]$. Then:
+\[
+P(\tan(U) \leq x) = P(U \leq \tan^{-1}(x)) = \frac{\arctan(x) - \frac{\pi}{2}}{\pi} 
+\]
+Then the pdf of $\tan U$ is given by:
+\[
+f(x) = \frac{1}{\pi(1 + x^2)}
+\]
+Then the value of $\mathbb{E}[|\tan U|]$ is given by:
+\[
+\mathbb{E}[|\tan U|] = \int_{-\infty}^{+\infty} \frac{|x|}{\pi(1 + x^2)} \dd x
+\]
+Which diverges. 
+
+\item We have that $X = \cos \theta$ and $Y = \sin \theta$ and $\theta$ is a r.v. with uniform law on $[0, 2\pi[$. Then:
+\[
+f_X(x) = f_{\cos \theta}(x) = \frac{1}{\pi} \left|\dv{}{x} \arccos x\right| = \frac{1}{\pi \sqrt{1 - x^2}}
+\]  
+By symmetry it is immediate that $P(X = x) = P(Y = x)$. Then $z = X+ Y = \cos \theta + \sin \theta = \sqrt{2} \cos(\theta - \frac{\pi}{4})$. Then:
+\[
+f_Z(z) = f_x\left(\frac{z}{\sqrt{2}}\right) \frac{1}{\sqrt{2}} = \frac{1}{\pi}\frac{1}{\sqrt{2 - z^2}}
+\]
+
+\end{enumerate}
+
+\section{Random Variables}
+\begin{enumerate}
+
+\item Let $X(\omega) = a 1_A(\omega) + b 1_B(\omega)$ and $C \in \mathcal{B}(\mathbb{R})$. Then:
+\[
+\sigma(X) = \langle \emptyset, A, B, A \cup B, A \cap B \rangle \mbox{~~and~~} P(X = x) = \begin{cases}
+P(A)  \mbox{~~if~~} x = a\\
+P(B)  \mbox{~~if~~} x = b\\
+P(A \cap B)  \mbox{~~if~~} x = a + b
+\end{cases}
+\]
+
+\item Then:
+\[
+P_X = \frac{1}{2} \delta_1 + \frac{1}{2} Unif([0, 1]) \mbox{~~and~~} \sigma(X) = \langle \emptyset, \mathcal{B}([0, 1/2]), [1/2, 1] \rangle
+\]
+
+\item Then:
+\[
+P(X \leq x) = \int_{-\sqrt{x}}^{\sqrt{x}} \frac{\dd x}{2} = \sqrt{x} \mbox{~~and~~} \sigma(X) = \{A \in \mathcal{B}([-1, 1]) : A = -A\}
+\]
+
+\end{enumerate}
+
+\chapter{TD3}
+
+\section{Gamma Law}
+\begin{enumerate}
+\item We have that:
+\[
+f_{X}(x) = f_{Z/\lambda}(x) = h_{a, 1}( \lambda x) \lambda = 1_{x \geq 0} \frac{1}{\Gamma(a)} 1^a (\lambda x)^{a - 1} \exp(-\lambda x)\lambda =  h_{a, \lambda}(x)
+\]
+
+\item We have that:
+\[
+E[Z] = \int_0^{+\infty} \frac{x^{a-1} e^{-x}}{\Gamma(a)} x \dd x = \frac{1}{\Gamma(a)} \int_0^{+\infty} x^{(a + 1) - 1} e^{-x} \dd x = \frac{\Gamma(a + 1)}{\Gamma(a)} = a + 1
+\]
+Which also immediately gives:
+\[
+E[X] = E[Z/\lambda] = \frac{a}{\lambda}
+\]
+Then the variance is given by a similar integration which yields:
+\[
+Var[Z] = \frac{\Gamma(a+2)}{\Gamma(a)} - \frac{\Gamma(a+1)}{\Gamma(a)} = a
+\]
+Which also gives:
+\[
+Var[X] = Var[Z/\lambda] = \frac{a}{\lambda^2}
+\]
+
+\item Using question 1 it is sufficient to show the case where $X, Y$ have laws $\mathcal{G}(a, 1)$ and $\mathcal{G}(b, 1)$. Then:
+\[
+f_Z(z) = f_X \star f_Y(z) = \int f_{X, Y}(x, z - x) \dd x = \int f_X(x) f_Y(z - x) \dd x
+\]
+Now replacing with the laws we get:
+\[
+f_Z(z) = \int_0^z \frac{1}{\Gamma(a)\Gamma(b)} x^{a-1} (z - x)^{b-1} e^{-\lambda x - \lambda(z - x)} \dd x = \frac{z^{a - 1 + b - 1 + 1} e^{-\lambda z}}{\Gamma(a) \Gamma(b)} \int_0^1 u^{a - 1}(1 - u)^{b-1} = h_{a+b, 1}(z)
+\]
+Where the last equality follows from normalization. For a proof check the next question.
+\end{enumerate}
+
+\section{Beta law}
+
+\begin{enumerate}
+
+\item We compute:
+\begin{align*}
+\int_{0}^1 x^{a-1}(1 - x)^{b-1} \dd x = 
+\end{align*}
+
+\item We introduce $V = X$ and make the change of variable $(X, Y) \to (Z, V)$. Which explicitly gives $(Z, V) = (XY, X)$ Then the Jacobian determinant is given by:
+\[
+\begin{vmatrix}
+y & x \\
+1 & 0
+\end{vmatrix} = - x  = -v
+\]
+Then we have:
+\[
+f_{Z, V}(z, v) = f_{x, y}(v, \frac{z}{v}) \frac{1}{|v|}
+\]
+And integrating gives:
+\[
+f_Z(z) = \int f_{X, Y}(x, \frac{z}{x}) \frac{1}{|x|} \dd x = \int f_X(x) f_Y(\frac{z}{x}) \frac{1}{|x|} \dd x
+\]
+Then plugging in the laws gives the desired result.
+
+\end{enumerate}
+
+\section{Gaussian Law}
+
+\begin{enumerate}
+
+\item We have:
+\[
+E[X] = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{+\infty} \exp[-\frac{x^2}{2}] x \dd x = 0
+\]
+Since the integrand is odd. Then the variance is given by:
+\[
+E[X^2] = \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{+\infty} \exp[-\frac{x^2}{2}] x^2 \dd x = 1
+\]
+
+\item The law of $Y = m + \sigma X$ is given by:
+\[
+f_Y(y) = f_X(\frac{y - m}{\sigma}) \frac{1}{\sigma} = \frac{1}{\sqrt{2\pi} \sigma} \exp[- \frac{(\frac{y - m}{\sigma})^2}{2}]  = h_{m, \sigma^2}(y)
+\]
+Then we have that:
+\[
+E[Y] = m \mbox{~~and~~} Var[Y] = \sigma^2
+\]
+
+\item Let $Z = X/Y$ and $V = Y$ then the Jacobian determinant is given by:
+\[
+\begin{vmatrix}
+\frac{1}{Y} & -\frac{X}{Y^2}\\
+0 & 1
+\end{vmatrix} = \frac{1}{Y}
+\]
+Then we have that:
+\[
+f_{Z, V}(z, v) = f_{X, Y}(zv, v) |y| \Rightarrow f_Z(z) = \int f_{X}(zv)f_Y(v)|v| \dd v
+\]
+Which when replacing with the laws gives:
+\[
+f_{Z}(z) = \frac{1}{\pi} \frac{1}{1 + z^2}
+\]
+From symmetry the law of $1/Z$ is identical.
+
+\end{enumerate}
 
 \end{document}

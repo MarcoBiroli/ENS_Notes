@@ -9,7 +9,7 @@
 \usepackage{tikz}
 \usepackage{stmaryrd}
 
-\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[left=1cm,right=1cm,top=2cm,bottom=2cm]{geometry}
 \author{Marco Biroli}
 \title{HW1 - Probability}
 
@@ -101,17 +101,45 @@ g_Y(s) = \prod_{i = 1}^n (1 - p(1 + s)) = (1 - p(1 + s))^n
 
 \section{Simple random walk.}
 
+\textbf{Fundamental Lemma.} We remind here the statement of the Fundamental Lemma seen in the course since it will prove useful multiple times. The Fundamental Lemma states that for a symmetric random walk:
+\[
+P(S_{2} \neq 0, \cdots, S_{2n} \neq 0) = P(S_{2n} = 0)
+\]
+Furthermore this follows from the recursive formula given by:
+\[
+P(S_2 \neq 0, \cdots, S_{2n-2} \neq 0, S_{2n} = 0) = P(S_{2n - 2} = 0) -  P(S_{2n} = 0)
+\]
+\textbf{Basic probability.} We also remind here the basic probability formula for random walks which follows from combinatorics arguments:
+\[
+P(S_n = k) = \binom{n}{\frac{n + k}{2}} \frac{1}{2^n}
+\]\\
+
 \begin{enumerate}
 
 \item The random walk can reach zero only after an even amount of steps because it must have done $k$ steps up and $k$ steps down for a total of $2k$ steps. Hence $T_{2n}$ must be even.
 
 \item Let $(S_1, \cdots, S_{2n})$ be a path such that $T_{2n} = 2k$ then notice that the unique equivalent path given by $(-S_1, \cdots, -S_{2n})$ has $T_{2n} = 2n - 2k$ hence the conclusion follows.
 
-\item The probability that $P(T_{2n} = 0)$ corresponds to the probability of the path choosing -1 as a first step and then never touch the axis again. Now from the fundamental lemma we know that the probability of the path never touching the axis is equal to the probability of returning to 0 after $2n$ steps. Hence we have that:
+\item To solve this question we consider an equivalent problem. Notice that number of strictly negative paths from 0 to $2n + 1$ is equal to the number of paths equal or below $-1$ from 1 to $2n + 1$ since the first step must be negative and we then must stay at all time below the $-1$ axis. Then up to a re-scaling of the $y$-axis we know that this is equal to the negative or zero paths of length $2n$ which is what we are looking for. Then we know from the Fundamental Lemma seen in the course that the number of strictly negative paths from $0$ to $2n$ is given by:
 \[
-P(T_{2n} = 0) = \frac{1}{2} P(S_{2n} = 0) = \frac{1}{2} \frac{1}{2^{2n}} \frac{(2n)!}{(n!)^2}
+\#\{S_1 < 0, \cdots, S_{2n} < 0\} = \frac{1}{2}\#\{S_1 \neq 0, \cdots, S_{2n} \neq 0\} = \frac{1}{2}\#\{S_{2n} = 0\}
 \] 
-
+Now to every strictly negative path from $0$ to $2n$ we have $2$ possible paths from $0$ to $2n+1$ since we get an extra 2 choices for the last step. Furthermore one needs not to worry for the last step being zero since it is impossible to return at 0 after an odd number of steps: $2n+1$. Hence we get that:
+\[
+\#\{ S_1 \leq 0, \cdots, S_{2n} \leq 0 \} = \#\{ S_1 < 0, \cdots, S_{2n + 1} < 0 \} = \frac{1}{2}\#\{S_{2n} = 0\} \cdot 2 = \#\{S_{2n} = 0\}
+\]
+Hence:
+\[
+P(T_{2n} = 0) = P(S_1 \leq 0, \cdots, S_{2n} \leq 0) = P(S_{2n} = 0)
+\]
+\vspace{1cm}
+\hrule
+\textbf{Intermediary Result.} At the start of question 4 we will first prove the following statement which will turn out to be helpful in question 5. We therefore single it out here for clarity:
+\[
+\frac{P(S_{2n} = 0)}{2r - 1} = P(S_1 \neq 0, \cdots, S_{2n-1} \neq 0, S_{2n} = 0)
+\]
+\hrule
+\vspace{1cm}
 \item Let $(S_1, \cdots, S_{2n})$ be a path such that $T_{2n} = 2k$ since $ 1 \leq k \leq n - 1$ we know that there are at least 2 steps in the negative plane and at most $2n-2$ and hence the path must have at least one return to the origin. Call the time of the first such return $2r$. We now want to compute the following:
 \[
 P(S_1 > 0, S_2 > 0, \cdots, S_{2r-1} > 0, S_{2r} = 0) = \frac{1}{4} P(S_1 \geq 0, S_2 \geq 0, \cdots, S_{2r - 3} \geq 0, S_{2r - 2} = 0)
@@ -128,7 +156,7 @@ Now replacing these two probabilities with their expression (also derived in the
 \[
 P(S_1 > 0, S_2 > 0, \cdots, S_{2r-1} > 0, S_{2r} = 0) = 2^{-1}\left( \frac{(2r - 2)!}{2^{2r - 2} (r - 1)!^2} - \frac{(2r)!}{2^{2r} r!^2} \right)
 \]
-Now putting everything on the same denominator gives:
+Now putting everything on the same denominator gives (which also proves the intermediary result):
 \[
 P(S_1 > 0, S_2 > 0, \cdots, S_{2r-1} > 0, S_{2r} = 0)  = 2^{-1}\left( \frac{1}{2r - 1} \frac{(2r)!}{2^{2r} r!^2} \right) = \frac{2^{-1}}{2r - 1} P(S_{2r} = 0)
 \]
@@ -149,7 +177,7 @@ P(T_{2n} = 2k) &= \sum_{r = 1}^k \frac{P(S_{2r} = 0)}{2(2r - 1)} P(T_{2n - 2r} =
 &= \sum_{r = 1}^k \frac{P(S_{2r} = 0)}{2(2r - 1)} P(S_{2k - 2r} = 0)P(S_{2n - 2k} = 0) + \sum_{r = 1}^{n - k} \frac{P(S_{2r} = 0)}{2(2r - 1)} P(S_{2k} = 0)P(S_{2n - 2r - 2k} = 0)\\
 &= \frac{P(S_{2n - 2k} = 0)}{2}\sum_{r = 1}^k \frac{P(S_{2r} = 0)}{2r - 1} P(S_{2k - 2r} = 0) + \frac{P(S_{2k} = 0)}{2}\sum_{r = 1}^{n - k} \frac{P(S_{2r} = 0)}{2r - 1} P(S_{2n - 2r - 2k} = 0)\\ 
 \end{align*}
-However now reversing the steps in the proof that we made in question 5 notice that the first sum can be re-written as (and similarly for the second sum):
+However now using the intermediary result of question 4 notice that the first sum can be re-written as (and similarly for the second sum):
 \[
 \sum_{r = 1}^k P(S_1 \neq 0, \cdots, S_{2r - 1} \neq 0, S_{2r} = 0) P(S_{2 k - 2r} = 0)
 \]
@@ -176,11 +204,28 @@ P(T_{2n} = 2n, S_{2n} = 0) = \frac{2}{2n + 1} P(S_{2n + 2} = 0) = \frac{2}{2n + 
 \]
 Where the last equality directly follows from symmetry with the axis.
 
-\item Notice now that by imposing that the path finishes at 0 we can reverse the direction of the $x$-axis without problem. Now we want to use symmetry arguments to justify that every time above the axis is equiprobable. To do so take the previous recursive formula:
-\[
-\sum_{r = 1}^k \frac{2^{-1}}{2r - 1} P(S_{2r} = 0) \frac{P(S_{2n - 2r} = 0)}{n - r + 1} + \sum_{r = 1}^{n - k}\frac{2^{-1}}{2r - 1} P(S_{2r} = 0) \frac{P(S_{2n - 2r} = 0)}{n - r + 1}\\
-\]
-Now notice that when we change $k$ a new term appears in one sum but the equivalent term disappears in the other. And overall the two terms cancel out. Hence we get the desired equiprobability property.
+\item We take the same recursive formula as previously and consider the first term:
+\begin{align*}
+\frac{2^{-1}}{2r - 1} P(S_{2r} = 0) \frac{P(S_{2n - 2r} = 0)}{n - r + 1} &= 2^{-1} \left( \frac{P(S_{2r} = 0)}{2r - 1} \right)\left( \frac{P(S_{2n - 2r + 2} = 0)}{2n - 2r + 1} \right) 2\\
+&= P(S_2 \neq 0, \cdots, S_{2r - 2} \neq 0, S_{2r} = 0) P(S_2 \neq 0, \cdots, S_{2n - 2r} \neq 0, S_{2n - 2r + 2} = 0)\\
+&= P(S_2 \neq 0, \cdots, S_{2r - 2} \neq 0, S_{2r} = 0, S_{2r + 2} \neq 0, \cdots, S_{2n} \neq 0, S_{2n + 2} = 0)
+\end{align*}
+Notice that this corresponds to the probability of the event $A_r:$' a path of length $2n+2$ admits only two zeroes in $2r$ and at the end in $2n + 2$.". Notice furthermore that all the $A_r$ are disjoint events and furthermore from the symmetry which comes from flipping the horizontal axis we have that $A_r \cong A_{n - r}$. Hence we get that:
+\begin{align*}
+\sum_{r = 1}^k P(A_r) + \sum_{r = 1}^{n - k} P(A_r) &= P(\bigcup_{r = 1}^k A_r) + \sum_{r = 1}^{n - k} P(A_{n - r}) = P(\bigcup_{r = 1}^k A_r) + \sum_{r = k}^{n - 1} P(A_{r})\\
+&= P(\bigcup_{r = 1}^k A_r) + P(\bigcup_{r = k}^{n-1} A_{r}) = P(\bigcup_{r = 1}^{n-1} A_r) = P(S_{2n + 2} = 0, \exists r \in \llbracket 1, n - 1\rrbracket S_{2r} = 0)
+\end{align*}
+Notice that we could conclude here since the value is independent from $k$ we already know that normalization will force the correct result. Now notice that this is simply a re-writing of the lamplighter problem seen in the lecture and from the lecture we know that:
+\begin{align*}
+\sum_{r = 1}^k P(A_r) + \sum_{r = 1}^{n - k} P(A_r) &= P(\bigcup_{r = 1}^{n-1} A_r) = P(S_{2n + 2} = 0, \exists r \in \llbracket 1, n - 1\rrbracket S_{2r} = 0)\\
+&= 2\frac{P(S_{2n + 2} = 0)}{2n + 2 - 1} = 2\frac{P(S_{2n + 2} = 0)}{2n + 1}\\
+&= 2\frac{P(S_{2n} = 0) (2n + 1)}{2 (n + 1)} \frac{1}{2n + 1}\\
+&= \frac{P(S_{2n} = 0)}{n + 1}
+\end{align*}
+
+
+\item The most striking difference in between the results of question 5 and 8 is that the result in question 8 is independent of that value of $k$ whilst the one of question 5 is not. 
+
 
 \end{enumerate}
 

@@ -127,7 +127,7 @@ V_{j_1} \otimes V_{j_2} = V_{|j_1 - j_2|} \oplus V_{|j_1 - j_2| + 1} \oplus \cdo
 \chapter{TD2}
 \section{Properties of time-like vectors.}
 \begin{enumerate}
-\item Let $\vb{A}$ and $\vb{B}$ in $\mathcal{C}_+$. Then $\vb{A} \cdot \vb{B} < 0$. 
+\item Let $\vb{A}$ and $\vb{B}$ in $\mathcal{C}_+$. Then $a^0 > || \vec{a} || $ and similarly for $\vb{B}$. Hence $\vec{a}\cdot\vec{b} \leq || \vec{a}|| \cdot || \vec{b}|| \leq a^0 b^0$. Then $\vb{A} \cdot \vb{B} < 0$. 
 
 \item Let $\vb{A}, \vb{B} \in \mathcal{C}_+$ and $\mu, \nu \in \mathbb{R}^+$ then $(\mu\vb{A} + \nu\vb{B})^2 = \mu^2\vb{A}^2 + 2 \mu \nu \vb{A} \cdot \vb{B} + \nu^2 \vb{B}^2 < 0$. Hence $(\vb{A} + \vb{B}) \in \mathcal{C}_+$.
 
@@ -138,16 +138,87 @@ V_{j_1} \otimes V_{j_2} = V_{|j_1 - j_2|} \oplus V_{|j_1 - j_2| + 1} \oplus \cdo
 a^{i} - \beta^i a^0 = 0 \Rightarrow \beta^i = \frac{a^{i}}{a^0}
 \]
 
-\item Suppose by induction that this is true for $n$ the base cases being trivial. Then for $n+1$ note that $C_+$ is stable under addition so any case can be reduced to the base case $n = 2$. We prove this case here:
+\item Suppose by induction that this is true for $n$ the base cases being trivial. Then for $n+1$ note that $\mathcal{C}_+$ is stable under addition so any case can be reduced to the base case $n = 2$. We prove this case here:
 \[
-\sqrt{-(\vb{A} + \vb{B})^2} = \sqrt{-(\vb{A'} + \vb{B'})^2} = \sqrt{{a^0}^2 + 2 a^0 b^0 + {b^0}^2 - \vec{a}^2} \geq {a_0} + b_0 - || \vec{a} || \geq \sqrt{-\vb{A}^2} + \sqrt{-\vb{B}^2}
+\sqrt{-(\vb{A} + \vb{B})^2} = \sqrt{-(\vb{A'} + \vb{B'})^2} = \sqrt{{d^0}^2} = d^0 
+\]
+Then $\vb{A_i}^2 = \vec{a_i}^2 - (a^0_i)^2$ and hence $a^0_i = \sqrt{- \vb{A_i}^2 + \vec{a_i}^2} \geq \sqrt{-\vb{A_i}^2}$ hence:
+\[
+\sqrt{-(\vb{A} + \vb{B})^2} \geq \sqrt{-\vb{A}^2} + \sqrt{-\vb{B}^2}
 \]
 \end{enumerate}
 
 \section{Applications to 4-momenta}
 \begin{enumerate}
 
-\item   
+\item  $\vb{P} = m \dv{\vb{X}}{\vb{\tau}} = (E, m \vec{U})$ and:
+\[
+\vb{P}^2 = - E^2 + m^2 \vec{U}^2 = -m^2 
+\]
+
+\item We directly have that $P^0 = E > 0$ and $\vb{P}^2 = -m^2 < 0$. Hence $\vb{P} \in \mathcal{C}_+$. 
+
+\item From question 2 of Exercise 1 we know that since $\vb{P}_i$ are in $\mathcal{C}_+$ then so is $\vb{P}$. Then from question 4 of Exercise 1 we know that there exists a boost transformation such that $\vb{P} = (E^*, \vec{0})$. Then using question 5 of Exercise 1 we also know that:
+\[
+E^* \geq \sum_{i = 1}^n m_i 
+\]
+
+\end{enumerate}
+
+\section{Decays of particles}
+
+\begin{enumerate}
+
+\item We must have that $M \geq \sum_{i = 1}^n m_i$. 
+
+\item \begin{enumerate}
+
+\item The number of unknowns are 8 since they are all the components of the two momenta $\vb{P}_1$ and $\vb{P}_2$. We also have the four equations given by: $\vb{P} = \vb{P}_1 + \vb{P}_2$. Finally we have two more equations $\vb{P_1}^2 = - m_1^2$ and $\vb{P_2}^2 = -m_2^2$. 
+
+\item We have that:
+\[
+\vb{P_1}^2 = \vb{P}^2 + \vb{P_2}^2 - 2 \vb{P} \cdot \vb{P_2} \Leftrightarrow - m_1^2 = - M^2 - m_2^2 - 2 \left( - M E_2 \right) \Leftrightarrow 2 M E_2 = M^2 + m_2^2 - m_1^2  
+\]
+Then symmetry gives the desired opposite result.
+
+\item We have:
+\[
+E_{kin, 1} = E_1 - m_1
+\]
+Which immediately gives the desired result after factorization and identically for $E_{kin, 2}$. Then:
+\[
+E_{kin, 1} + E_{kin, 2} = \Delta M 
+\]
+In other words all excess mass is converted to kinetic energy.
+
+\end{enumerate}
+
+\item For each new particle we get 4 more unknowns and one more equation so 3 more indeterminates. Now following the hint we write:
+\[
+\vb{P} = \sum_j \vb{P_j} = \vb{P_i} + \vb{Q}
+\]
+Then:
+\[
+\vb{P_i}^2 = \vb{P}^2 + \vb{Q}^2 - 2 \vb{P} \cdot \vb{Q}  \Leftrightarrow - m_i^2 = - M^2 - 2 M E' + \vb{Q}^2 
+\]
+Then we have:
+\[
+E_i = \frac{M^2 + m_i^2 + \vb{Q}^2}{2m} \mbox{~~and~~} E_{kin, i} = \frac{M^2 + m_i^2 - 2 M m_i + \vb{Q}^2}{2m}
+\]
+Now using question 5 of Exercise 1 we can bound $\vb{Q}^2$ as follows:
+\[
+\sqrt{-\vb{Q}^2} \geq \sum_{j \neq i} m_j \Rightarrow \vb{Q}^2 \leq -(M - \Delta M - m_i)^2
+\]
+Then re-injecting this above we get the desired inequalities. 
+
+
+\end{enumerate}
+
+\section{Creations of particles}
+
+\begin{enumerate}
+
+\item 
 
 \end{enumerate}
 

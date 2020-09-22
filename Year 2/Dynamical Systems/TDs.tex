@@ -12,7 +12,7 @@
 \begin{document}
 \maketitle
 \tableofcontents
-\chapter{Deterministic dynamics and fluctuations}
+\chapter{TD1}
 
 \section{Linearization in the vicinity of a fixed point in a planar phase space.}
 
@@ -182,19 +182,137 @@ Then we see that this is stable if and only if $\lambda \leq 0$.
 
 \item Taking the Ansatz $x(t) = a \sin(\omega t + \phi)$ and plugging it into the energy equation we get:
 \[
-E = \frac{1}{2} \left( a^2 \omega^2 \cos^2(\omega t + \phi) + a^2 \omega_0^2 \sin^2(\omega t + \phi)  \right)
+E = \frac{1}{2}\left[ a^2 \omega^2 \cos^2(\omega t + \phi) + \omega_0^2 a^2 \sin^2(\omega t + \phi) \right]
 \]
-And:
+Which gives:
 \[
-(\lambda - a^2 \sin^2(\omega t + \phi)) (a^2 \omega^2 \cos^2(\omega t + \phi))
+\frac{a^2}{2}( -2 \omega^3 \cos(\omega t + \phi) \sin(\omega t + \phi) + 2 \omega_0^2 a^2 \sin(\omega t + \phi) \cos(\omega t + \phi)   ) = (\lambda - a^2 \sin^2(\omega t + \phi)) a^2 \omega^2 \cos^2(\omega t + \phi)
 \]
-...
-
-\item We have:
+Which simplifies to:
 \[
-\overline{\left( \dv{x}{t} \right)^2} = 
+a(\omega_0^2 - \omega^2) \sin(\omega t + \phi) + (\frac{a^4}{4} - \lambda) \cos(\omega t + \phi) - \frac{a^3}{2} \omega \cos(3 \omega t + \phi) = 0
+\]
+Now neglect the higher harmonics and hence set the last term to 0. Which now gives us that:
+\[
+\omega = \omega_0 \mbox{~~and~~} a^2 = 4 \lambda
 \]
 
+\item We start from (7):
+\[
+\ddot{x} + (x^2 - \lambda)\dot{x} + \omega_0^2 x = 0 \Rightarrow \ddot{x} x + (x^3- \lambda x) \dot{x} + \omega_0^2 x^2  = 0 
+\]
+Now taking the average, integrating by parts and using that the average of the derivatives must be 0 gives:
+\[
+\int \ddot{x} x + \omega_0^2 \bar{x}^2 = 0 \Leftrightarrow [x \dot{x}] - \int \dot{x}^2 + \omega_0^2 \bar{x}^2 = 0 \Leftrightarrow \overline{\dot{x}}^2 = \omega_0^2 \bar{x}^2
+\]
+
+\item We now take:
+\[
+x(t) = \sum_{n \geq 1} a_n \sin(\omega n t + \phi_n)
+\]
+Then:
+\[
+x^2 = \sum_{n, m} a_n a_m \sin(\omega n t + \phi_n) \sin(\omega m t + \phi_m) 
+\]
+Hence:
+\[
+\bar{x}^2 = \sum_{n \geq 1} a_n^2 \sin^2(\omega n t + \phi_n)
+\]
+Now repeating something similar for the derivatives we obtain:
+\[
+\omega_0^2 \sum_{n \geq 1} a_n^2 = \sum_{n \geq 1} a_n^2 n^2 \omega^2 \Rightarrow \omega^2 = \omega_0^2 \frac{\sum a_n^2}{\sum a_n^2 n^2}
+\]
+The approximation is valid only if:
+\[
+a_1^2 \gg \sum_{n \geq 2} a_n^2 n^2
+\]
+
+\item We now take $x = \sqrt{\lambda} \dot{y}$. Which gives:
+\[
+\sqrt{\lambda} \dddot{y} + (\lambda \dot{y}^2 - \lambda) \sqrt{\lambda} \ddot{y} + \omega_0^2 \sqrt{\lambda} \dot{y} = 0 \Leftrightarrow \dddot{y} +\lambda(\dot{y}^2 - 1) \ddot{y} + \omega_0^2 \dot{y} = 0
+\]
+Which after integration gives:
+\[
+\ddot{y} + \lambda \left( \frac{\dot{y}^3}{3} - \dot{y} \right) + \omega_0^2 y = 0
+\]
+Where we took the constant equal to zero up to a shift of origin.
+
+\item We define $u = y/\lambda$, $t = \lambda \tau$ and $v = \dot{u}$ we get:
+\[
+\begin{cases}
+\dv[2]{y}{\tau} \left(\dv{\tau}{t}\right)^2 + \lambda(\frac{1}{3} \left( \dv{y}{\tau} \dv{\tau}{t} \right)^3 - \dv{y}{\tau}\dv{\tau}{t}) + \omega_0^2 y = 0   \\
+v = \dot{u}
+\end{cases}
+\]
+Which re-writes as:
+\[
+\begin{cases}
+\dot{v} \lambda^{-2}  + \frac{1}{3} v^3 - v + \omega_0^2 u = 0\\
+v = \dot{u}
+\end{cases}
+\]
+
+\item Re-writing the above equation we get:
+\[
+\dot{v} = -\lambda^2 \omega_0^2 (u - (v - \frac{v^3}{3})\frac{1}{\omega_0^2})
+\]
+Hence for both time scales to be on the same level we need:
+\[
+u = \frac{1}{\omega_0^2}\left(v - \frac{v^3}{3}\right) = f(v)
+\]
+
+\item ...
+
+
+\item 
+
+
+\end{enumerate}
+
+\chapter{TD2}
+\section{Instability of linearly coupled oscillators}
+
+\subsection{Stability Analysis}
+
+\begin{enumerate}
+
+\item We can re-write the system by taking $u = \dot{x}$ and $v= \dot{y}$ then:
+\[
+\dv{}{t} \begin{pmatrix}
+x\\ y \\ u \\ v
+\end{pmatrix} = \begin{pmatrix}
+0 & 0 & 1 & 0\\
+0 & 0 & 0 & 1\\
+-\omega_1^2 & a & 0 & 0\\
+b & -\omega_2^2 & 0 & 0
+\end{pmatrix} \begin{pmatrix}
+x\\y\\u\\v
+\end{pmatrix}
+\]
+Diagonalization gives:
+\[
+s^2 = \frac{-\omega_1^2 - \omega_2^2 \pm \sqrt{4ab + (\omega_1^2 - \omega_2^2)^2}}{2}
+\]
+
+\item If $ab > 0$ and small then the two $s_i$ are negative reals and hence the system is stable. And the difference in between the $s_i$ increases when $ab$ increases. 
+
+\item If $ab$ is negative then the system will be unstable if:
+\[
+4ab + (\omega_1^2 - \omega_2^2)^2 \leq 0
+\]
+Then if $\omega_1 = \omega_2$ the system will be negative for any negative value of $ab$.
+
+\item ...
+
+\item Because of the symmetry involved in exchanging the two oscillators
+
+\end{enumerate}
+
+\section{Multiple scales}
+
+\begin{enumerate}
+
+\item 
 
 \end{enumerate}
 

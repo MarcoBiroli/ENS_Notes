@@ -258,8 +258,8 @@ P(\exists n \in \mathbb{N}^*, S_{2n} = 0) = \sum_{n \geq 1} P(S_2 \neq 0, \cdots
 \]
 Now necessarily all the $S_{2i}$ for $i \in \llbracket 1, n-1\rrbracket$ must have the same sign. By symmetry the probability that they are all positive is equal to the probability that they are all negative. Hence:
 \begin{align*}
-P(\exists n \in \mathbb{N}^*, S_{2n} = 0) &= 2 P(S_1 > 0, \cdots, S_{2n-1} > 0, S_{2n} = 0) \\
-&= \frac{2}{2^{2n}} |\{ \text{paths from } (1, 1) \text{ to } (2n -1, 1) \text{ which do not touch the axis} \}|
+P(\exists n \in \mathbb{N}^*, S_{2n} = 0) &= \sum_{n\geq 1} 2 P(S_1 > 0, \cdots, S_{2n-1} > 0, S_{2n} = 0) \\
+&= \sum_{n \geq 1} \frac{2}{2^{2n}} |\{ \text{paths from } (1, 1) \text{ to } (2n -1, 1) \text{ which do not touch the axis} \}|
 \end{align*}
 Now we decide to count the number of paths that do touch the axis instead of the one that do not touch the axis. Since we know the total number of paths this is an equivalent problem. 
 
@@ -277,7 +277,7 @@ An example of application is the following. In an election the candidate $P$ sco
 \section{End of the computation.}
 Now going back to our lamplighter computation applying the reflexion principle we have that:
 \[
-P(\exists n \in \mathbb{N}^*, S_{2n} = 0) = \frac{2}{2^{2n}} \frac{1}{2n - 1} \binom{2n - 1}{n} = \frac{1}{2n - 1} P(S_{2n} = 0)
+P(\exists n \in \mathbb{N}^*, S_{2n} = 0) = \sum_{n \geq 1} \frac{2}{2^{2n}} \frac{1}{2n - 1} \binom{2n - 1}{n} = \sum_{n \geq 1} \frac{1}{2n - 1} P(S_{2n} = 0)
 \]
 Hence the probability that the lamplighter returns to 0 is given by:
 \[
@@ -509,5 +509,138 @@ Let $X_1, \cdots, X_n$ be $n$ random variables defined on $(\Omega, \mathcal{F},
 \begin{remark}
 The law $P_{X_1, \cdots, X_n}$ is the joint law on $(X_1, \cdots, X_n)$ and it is a probability measure on $\mathbb{R}^n$ defined by $P_{X_1, \cdots, X_n}(A) = P((X_1, \cdots, X_n) \in A)$ where $A$ is a borelian of $\mathbb{R}^n$. Then the $P_{X_1} \otimes \cdots \otimes P_{X_n}$ is the product law as defined previously.  
 \end{remark}
+
+\chapter{Infinite sequences of random variables.}
+
+\section{A random uniform number in $[0, 1]$}
+We would like to build a mathematical model for the experiment which consists in drawing a random number in $[0,1]$ with uniform distribution. We take $\Omega = [0, 1]$ and $\mathcal{F} = \mathcal{B}([0, 1])$ where $\mathcal{B}([0, 1])$ is the Borel $\sigma$-field of $[0, 1]$ which can be defined as the trace or the restriction of $\mathcal{B}(\mathbb{R})$ to $[0, 1]$, i.e. :
+\[
+\mathcal{B}([0, 1]) = \{ B \cap [0, 1] : B \in \mathcal{B}(\mathbb{R})\} = \{ B \in \mathcal{B}(\mathbb{R}), B \subset [0, 1]\}
+\]
+
+\begin{theorem} [Lebesgue Measure]
+There exists a unique probability measure $\lambda$ on $\mathcal{B}([0,1])$ such that: $\forall a < b \in [0,1],\, \lambda([a,b]) = b- a$. This probability measure $\lambda$ is called the Lebesgue measure. 
+\end{theorem}
+
+\begin{proof}
+We give here a sketch of the proof. We define for any subset $A$ of $[0, 1]$ the following:
+\[
+\lambda^*(A) = \inf \left\{ \sum_{i \in I} b_i - a_i : a_i < b_i, A \subset \bigcup_{i \in I} ]a_i, b_i[\right\}
+\] 
+We would like for $\lambda^*$ to be a probability measure however it is not the case since it is not $\sigma$-additive but $\sigma$-sub-additive. However $\lambda^*$ restricted to $\mathcal{B}([0, 1])$ is a genuine probability measure. However to prove this is a hard work. Then we define $\lambda$ as the restriction of $\lambda^*$ to $\mathcal{B}([0,1])$. We have the following facts:
+\[
+\forall x_0 \in [0, 1], \lambda(\{x_0\}) = 0 \mbox{~~and~~} \forall x_i \in [0,1], \lambda\left( \bigcup_{i \in \mathbb{N}} x_i \right) = 0
+\]
+Furthermore there exist also subsets of $[0,1]$ which are not countable and whose $\lambda$-measure is $0$, such as the Cantor set for example.
+\end{proof}
+
+\section{Convergences}
+Let $(\Omega, \mathcal{F}, P)$ be a probability space. Let $(X_n)_{n \in \mathbb{N}}$ be a sequence of random variables defined on $\Omega$. Let $X$ be another random variable.
+
+\begin{definition}[Converging almost surely]
+The sequence $(X_n)_{n \in \mathbb{N}}$ is said to converge almost surely towards $X$ if and only if $P(\{\omega : \lim_{n\to+\infty} X_n(\omega) = X(\omega)\}) = 1$. This is denoted by $X_n \stackrel{a.s.}{\longrightarrow} X$. 
+\end{definition}
+
+\begin{definition}[$L^p$ mean convergence]
+The sequence $(X_n)$ converges in $L^p$ mean towards $X$ if and only if $\lim_{n \to +\infty} E(|X_n - X|^p) = 0$. This is denoted by $X_n \stackrel{L^p}{\longrightarrow} X$. 
+\end{definition}
+
+\begin{definition}[Converging in probability]
+The sequence $(X_n)$ converges in probability towards $X$ if and only if $\forall \varepsilon > 0, \lim_{n \to +\infty} P(|X_n - X| > \varepsilon) = 0$. This is denoted by $X_n \stackrel{P}{\longrightarrow} X$. 
+\end{definition}
+
+\section{Links between the different convergences.}
+The convergence which is usually the most difficult to establish is the first one. 
+
+\begin{lemma}
+We start with a lemma which we will need for the following proof. If $(A_n)$ is a non-increasing sequence of events, i.e., $A_{n+1}\subset A_n$ then $P(\bigcap_n A_n) = \lim_{n \to \infty} P(A_n)$. 
+\end{lemma}
+
+\begin{proposition}
+If $X_n \stackrel{a.s.}{\longrightarrow} X$ then $X_n \stackrel{P}{\longrightarrow} X$. 
+\end{proposition}
+
+\begin{proof}
+Suppose that $X_n \stackrel{a.s.}{\longrightarrow} X$. Then:
+\begin{align*}
+P(\{\omega : \lim_{n \to \infty} X_n(\omega) = X(\omega)\}) = 1 &\Leftrightarrow P(\forall \varepsilon > 0, \exists N, \forall n \geq N, |X_n - X| < \varepsilon) = 1\\
+&\Leftrightarrow P\left(\bigcap_{\varepsilon > 0, \varepsilon \in \mathbb{Q}} \bigcup_{N \geq 1} \bigcap_{n \geq N} \{|X_n - X| < \varepsilon\} \right) = 1\\
+&\Leftrightarrow \forall \varepsilon > 0, \varepsilon \in \mathbb{Q}, P(\bigcup_{N \geq 1} \bigcap_{n \geq N} \{|X_n - X| < \varepsilon\}) = 1\\
+&\Leftrightarrow \forall \varepsilon > 0, \varepsilon \in \mathbb{Q}, P(\bigcap_{N \geq 1} \bigcup_{n \geq N} \{|X_n - X| < \varepsilon\}) = 0\\
+&\Leftrightarrow \forall \varepsilon > 0, \lim_{N \to \infty} P(\bigcup_{n \geq N} \{|X_n - X| < \varepsilon\}) = 0 \\
+&\Rightarrow \forall \varepsilon > 0, \lim_{N \to \infty} P(|X_n - X| > \varepsilon) = 0 \Leftrightarrow X_n \stackrel{P}{\longrightarrow} X 
+\end{align*}
+\end{proof}
+
+\begin{proposition}
+Let $r \geq 1$. If $X_n \stackrel{L^r}{\longrightarrow} X$ then $X_n \stackrel{P}{\longrightarrow} X$. 
+\end{proposition}
+
+\begin{proof}
+Suppose that $X_n \stackrel{L^r}{\longrightarrow} X$, i.e. $\lim_{n \to \infty} E(|X_n - X|^r) = 0$. Which we can re-write as:
+\[
+E(|X_n - X|^r) = \int_\Omega |X_n - X|^r \dd P = \int_{|X_n - X| > \varepsilon} |X_n - X|^r \dd P + \int_{|X_n - X| \leq \varepsilon} |X_n - X|^r \dd P 
+\]
+Which gives us the following lower-bounds:
+\[
+E(|X_n - X|^r) \geq \int_{|X_n - X| > \varepsilon} \varepsilon^r \dd P = \varepsilon^r P(|X_n - X| \geq \varepsilon)
+\]
+Hence we get:
+\[
+P(|X_n - X| > \varepsilon) \leq \varepsilon^{-r} E(|X_n - X|^r) \stackrel{n \to \infty}{\longrightarrow} 0 
+\]
+\end{proof}
+
+\begin{proposition}
+
+Suppose $X_n \stackrel{\star}{\longrightarrow}$ and $Y_n \stackrel{\star}{\longrightarrow} Y$ where $\star = a.s.$, or $L^p$ or $P$. Then $X_n + Y_n \stackrel{\star}{\longrightarrow} X+ Y$. 
+
+\end{proposition}
+
+\begin{proof}
+The cases where $\star = a.s.$ or $L^r$ are quite classical. Let us look at $\star = P$. To do so we bound the following probability:
+\[
+P(|X_n + Y_n - (X + Y)| > \varepsilon) \leq P(|X_n - X| > \frac{\varepsilon}{2}) + P(|Y_n - Y| > \frac{\varepsilon}{2})
+\]
+\end{proof}
+
+\begin{theorem}[Dominated Convergence Theorem]
+Let $(X_n)$ be a sequence of random variables $\Omega \to \mathbb{R}$ and suppose that $X_n \stackrel{a.s}{\longrightarrow} X$, and there exists a random variable $Y$ such that $\forall n,\, |X_n| \leq Y$ and $E[Y] < \infty$. Then $X_n \stackrel{L^1}{\longrightarrow} X$. 
+\end{theorem}
+
+\section{Examples and counter examples.}
+We consider the space $(\Omega, \mathcal{F}, P)$ which is $([0,1], \mathcal{B}([0, 1]), \lambda)$. We consider the sequence $(X_n)$ defined as follows:
+\[
+X_{2n} = \begin{cases} 1 \mbox{~~if~~} \omega < \frac{1}{2}\\
+0 \mbox{~~otherwise}
+\end{cases} \mbox{~~and~~} X_{2n+1} = \begin{cases} 0 \mbox{~~if~~} \omega < \frac{1}{2}\\
+1 \mbox{~~otherwise}
+\end{cases}
+\]
+Then $X_n$ does not converge according to any definition. Yet the distribution of $X_n$ is $Bernouilli(\frac{1}{2})$. 
+
+\section{Independence for an infinite sequence}
+
+\begin{definition}
+A sequence $(\mathcal{F}_n)$ of sub $\sigma$-fields of $\mathcal{F}$ (respectively of r.v. $(X_n) : \Omega \to \mathbb{R}$ or events $(A_n)$) is said to be independent if any finite sub-family extracted from $(\mathcal{F}_n)$ is independent. 
+\end{definition}
+
+\begin{theorem}[Block grouping] Let $(\mathcal{F}_n)$ be an independent sequence of sub $\sigma$-fields of $\mathcal{F}$. Let $(I_k)$ be a sequence of subsets of $\mathbb{N}$ which are pairwise disjoint. Then the $\sigma$-fields: $J_k = \sigma(\mathcal{F}_i, i \in I_k)$ are independent. 
+
+\end{theorem}
+
+\begin{proof}
+Same argument as the finite case. 
+\end{proof}
+
+\section{An analytic model for coin tossing.}
+We want to construct a probability space $(\Omega, \mathcal{F}, P)$ such that we can define an infinite sequence $(X_n)$ of Bernouilli i.i.d.r.v. on $\Omega$. We consider the space $(\Omega, \mathcal{F}, P) = ([0, 1], \mathcal{B}([0,1]), \lambda)$. Let $\omega \in [0, 1]$ and let us consider the dyadic or binary expansion of $\omega = 0, \omega_1 \omega_2 \cdots = \sum_{n \geq 1} \frac{\omega_n}{2^n}$. If we exclude sequences which are constantly equal to 1 after a finite rank the expansion is unique and we define $X_n : \Omega \to \{-1, +1\}$ by $X_n(\omega) = 2\omega_n - 1$. Thus $X_n$ is a Bernouilli random variable. Let $(\varepsilon_1, \cdots, \varepsilon_n) \in \{-1, 1\}$ then:
+\[
+P(X_i = \varepsilon_i) =  \lambda(\omega : \frac{1 + \varepsilon_1}{2} + \cdots + \frac{1 + \varepsilon_n}{2^n} \leq \omega < \frac{1 + \varepsilon_1}{2} + \cdots + \frac{1 + \varepsilon_n}{2^n} + \frac{1}{2^n}) = \frac{1}{2^n}
+\]  
+Since this is true for any $n$ we also have that the $(X_n)$ are independent. We can now use this model for the coin tossing game and formulate questions dealing with an infinite number of coins. For instance the return to 0. 
+
+\section{An infinite sequence of i.i.d.r.v.}
+Often one wants to defined an infinite sequence of r.v. with any given law however the existence of such a structure is a difficult question. 
 
 \end{document}
