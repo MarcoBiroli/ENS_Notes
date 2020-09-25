@@ -66,4 +66,101 @@ p_{e1} = (E'', 0, p_y, p_z), p_{p1} = (E', 0, - E' \sin\theta, - E' \cos \theta)
 \end{enumerate}
 
 
+\chapter{}
+
+\chapter{}
+\section{Covariant derivatives and Christoffel symbols}
+\begin{enumerate}
+\item \begin{enumerate}
+\item We have that:
+\[
+J^\mu_{\mu'} J^{\mu'}_{\nu} = \pdv{x^{\mu}}{x^{\mu'}} \pdv{x^{\mu'}}{x^\nu} = \pdv{x^{\mu}}{x^\nu} = \delta_\nu^\mu
+\]
+\item We have that:
+\[
+\left(J_{\sigma'}^\mu J_\mu^{\mu'} \right)_{, \gamma} = \left(\delta_{\mu}^\mu \right)_{, \gamma} = 0 \Rightarrow J_{\sigma', \gamma}^\mu J_\mu^{\mu'} = - J_{\sigma'}^\mu J_{\mu, \gamma}^{\mu'}
+\]
+\end{enumerate}
+
+\item \begin{enumerate}
+
+\item We have that:
+\[
+\partial_{\mu'}\phi'(x') = \pdv{}{x^{\mu'}} \phi(x) = \pdv{x^\mu}{x^{\mu'}} \pdv{}{x^\mu} \phi(x) = J_{\mu'}^\mu \partial_\mu \phi(x)
+\]
+Hence it is a tensor. 
+
+\item No.
+
+\item We have:
+\begin{align*}
+\grad_{\mu'}A^{\nu'} = \partial_{\mu'}A^{\nu'} = J_{\mu'}^\mu J_{\nu}^{\nu'} ( \partial_{\mu} A^\nu + \Gamma_{\mu \rho}^\nu A^\rho) &\Leftrightarrow J_{\mu'}^\mu J_{\nu}^{\nu'} \partial_{\mu} A^{\mu} + J_{\mu'}^\mu J_{\nu, \mu'}^{\nu'} A^\nu = J_{\mu'}^\mu J_{\nu}^{\nu'} \partial_{\mu} A^\nu + J_{\mu'}^\mu J_{\nu'}^\nu \Gamma_{\mu \rho}^\nu A^\rho\\
+&\Leftrightarrow (J_{\mu'}^\mu J_{\nu, \mu'}^{\nu'} - J_{\mu'}^\mu J_{\sigma}^{\nu'} \Gamma_{\mu \nu}^\sigma) A^\nu = 0
+\end{align*}
+Which gives the desired result.
+
+\item The exchange of the lower indices changes nothing.
+
+\item We consider the invariant quantity $B^\mu A_\mu$ then:
+\[
+\grad_\rho(A_\mu B^\mu) = \partial_\rho(A_\mu B^\mu) = (\partial_\rho A_\mu)B^\mu + A_\mu \partial_\rho B^\mu
+\]
+However we also have that:
+\[
+\grad_\rho(A_\mu B^\mu) = (\grad_\rho A_\mu) B^\mu + A_\mu \grad_\rho B^\mu = (\grad_\rho A_\mu) B^\mu + A_\mu \partial_\rho B^\mu + A_\mu \Gamma_{\rho v}^\mu B^\nu
+\]
+Now equating both sides we obtain:
+\[
+(\partial_\rho A_\mu) B^\mu = \Gamma_{\rho M}^{\sigma} B^\mu A_\sigma + \grad_\rho A_\mu B^\mu
+\]
+Which gives:
+\[
+\grad_\rho A_\mu = \partial_\rho A_\mu - \Gamma_{\rho \mu}^\sigma A_\sigma
+\]
+
+\end{enumerate}
+
+\item \begin{enumerate}
+
+\item We have that:
+\[
+\Gamma^{\rho'}_{\nu' \mu'} = \pdv{x^{\rho'}}{X^\alpha} \pdv[2]{X^\alpha}{x^{\mu'}}{x^{\nu'}} = 
+\]
+
+\item 
+
+\end{enumerate}
+
+\end{enumerate}
+
+\section{Geodesics and the shortest path}
+\begin{enumerate}
+
+\item \begin{enumerate}
+
+\item We have that:
+\[
+S = - m \int | \dd s | = - m \int \sqrt{ \dd s_\mu \dd s^\mu }  = - m \int \sqrt{ g_{\mu \nu} \dd s^\mu \dd s^\nu }
+\]
+Now notice that:
+\[
+\dd s = \dv{x}{\lambda} \dd \lambda
+\]
+Hence re-writing on top we obtain:
+\[
+S = - m \int \sqrt{ - g_{\mu \nu} \dot{x}^\mu \dot{x}^\nu } \dd \lambda
+\]
+
+\item The Euler-Lagrange equations are given by:
+\[
+\dv{}{\lambda} \pdv{\mathcal{L}}{\dot{x}} - \pdv{\mathcal{L}}{x} = \dv{}{\lambda} \pdv{\mathcal{L}}{\dot{x}} = \dv{}{\lambda} \frac{-g_{\mu \nu} \dot{x}^\mu}{2 \mathcal{L}} = 
+\]
+
+\end{enumerate}
+
+
+
+\end{enumerate}
+
+
 \end{document}

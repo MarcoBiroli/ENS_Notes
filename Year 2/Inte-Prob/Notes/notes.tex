@@ -1,0 +1,396 @@
+ \documentclass[10pt,a4paper]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{stmaryrd}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{physics}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{physics}
+\usepackage{tikz}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\author{Marco Biroli}
+\title{Integration and probability}
+
+
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}{Proposition}[section]
+
+\newtheorem*{remark}{Remark}
+\newtheorem*{notation}{Notation}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\chapter{Introduction}
+\section{Motivation}
+This courses aims at answering some basic question of measure theory. Examples are defining what is the length of a part of $\mathbb{R}$ or the surface of a part of $\mathbb{R}^2$. In a second time we will introduce integrals in the most general way in order to allow the integration of as many functions as possible. Then define and precise the mathematical structure allowing us to describe an infinite series of fair coins throws. Notice that the definition of an integral can follow from the definition of sections of $\mathbb{R}^2$ since we can characterize an integral by the area enclosed by the curve. Furthermore integrals and measures on intervals are also equivalent since integrating the identity over an interval should give the same value as the measure of that interval.
+
+\section{Initial definitions}
+
+\begin{definition}[Countable Set]
+A set $S$ is said to be countable if and only if there exists a bijection in between $S$ and $\mathbb{N}$.
+\end{definition}
+
+\begin{proposition}
+All parts of a countable set are countable.
+\end{proposition}
+
+\begin{proof}
+We can simply start indexing by the smallest element.
+\end{proof}
+
+\begin{proposition}
+
+The image of a sequence is countable.
+
+\end{proposition}
+
+\begin{proof}
+
+By simply indexing the image by their antecedents we get a bijection.
+
+\end{proof}
+
+\begin{remark}
+$\mathbb{N}^2$ is countable. The bijection is given by $(n_1, n_2) \mapsto 2^{n_1}(2 n_2 + 1) - 1$. 
+\end{remark}
+
+\begin{proposition}
+
+A countable union of countable (or finite) sets is countable (or finite). 
+
+\end{proposition}
+
+\begin{proof}
+
+Let $A_i$ be countable parts of a set $X$. For all $i$ there exists a bijection $b_i : \mathbb{N} \to A_i$. And hence the bijection given by $(i, j) \mapsto b_i(j)$ maps $\mathbb{N}^2 \to \cup_i A_i$. 
+
+\end{proof}
+
+\begin{proposition}
+If $X$ is countable the powerset $\mathcal{P}(X)$ is not. Or more generally no bijection exists in between $X$ and $\mathcal{P}(X)$.
+\end{proposition}
+
+\begin{proof}
+Suppose by contradiction that there exists a bijective mapping $x \mapsto A_x$ of $X$ to $\mathcal{P}(X)$. Now we consider the set $B := \{x : x \not \in A_x\}$. Now suppose consider $A_y = B$ then this means that $y \in B \Leftrightarrow y \in A_y \Leftrightarrow y \not\in B$.  
+\end{proof}
+
+\begin{definition}[$\limsup$]
+Let $(x_n)_{n \in \mathbb{N}}$ be a sequence. Then introduce the sequence $s_n := \sup_{k \geq n} x_k$ then the sequence $(s_n)_{n \in \mathbb{N}}$ is naturally decreasing and therefore admits a limit in $[-\infty, \infty]$. Then the limit of $(s_n)_{n \in \mathbb{N}}$ is called the limsup and we denote:
+\[
+\limsup_{n \to +\infty} x_n = \lim_{n \to +\infty} s_n = \inf_{n \in \mathbb{N}} s_n
+\]
+\end{definition}
+
+\begin{definition}[$\liminf$]
+An equivalent definition gives:
+\[
+\liminf_{n \to +\infty} x_n = \lim_{n \to +\infty} (\inf_{k \geq n} x_k) = \sup_{n \in \mathbb{N}} \inf_{k \geq n} x_k
+\]
+\end{definition}
+
+\begin{remark}
+The advantage of the $\limsup$ and $\liminf$ with respect to the $\lim$ is that they are always defined even if they might diverge. It is furthermore trivial to see that $\liminf x_n \leq \limsup x_n$. 
+\end{remark}
+
+\begin{proposition}
+The limit of $(x_n)_{n \in \mathbb{N}}$ exists if and only if $\limsup x_n = \liminf x_n$. 
+\end{proposition}
+
+\begin{proof}
+\[
+\forall n \in \mathbb{N}, i_n \leq x_n \leq s_n \Rightarrow \liminf x_n = \lim i_n \leq \lim x_n \leq \lim s_n = \limsup x_n
+\]
+Hence if $\liminf x_n = \limsup x_n$ the $\lim x_n = \liminf x_n = \limsup x_n$. Inversely if $\lim x_n = \ell$ then from definition $\forall \varepsilon > 0, \exists N, s.t.\, \forall n \geq N,  \ell - \varepsilon \leq x_n \leq l + \varepsilon$ and hence $s_n \to \ell$ and $i_n \to \ell$. 
+\end{proof}
+
+\begin{proposition}
+If $(y_n)_{n \in \mathbb{N}}$ is a subsequence of $(x_n)_{n \in \mathbb{N}}$ then $\liminf x_n \leq \liminf y_n \leq \limsup y_n \leq \limsup x_n$. Hence any adherence point of $(x_n)_{n \in \mathbb{N}}$ is contained in the interval $[\liminf x_n, \limsup x_n]$. 
+\end{proposition}
+
+\begin{proposition}
+There exists a subsequence of $(x_n)_{n \in \mathbb{N}}$ which converges to the $\limsup x_n$ (or equivalently the $\liminf x_n$)
+\end{proposition}
+
+\begin{proof}
+
+We can choose a $k_n \geq n$ such that $s_n - \frac{1}{n} \leq x_{k_n} \leq s_n$ and $k_n > k_{n-1}$ and then the sequence $(x_{k_n})_{n \in \mathbb{N}}$ converges to $\limsup x_n$. 
+
+\end{proof}
+
+\begin{definition}[Series]
+
+Let $a_i, i \in \mathcal{I}$ be a not necessarily countable family of positive reals. Then we define the infinite sum as:
+\[
+\sum_{i \in \mathcal{I}} a_i := \sup_{F \in \mathcal{I}, F \text{ finite}} \sum_{i \in F} a_i
+\]
+
+\end{definition}
+
+\begin{proposition}
+
+If $\sum_{i \in \mathcal{I}} a_i < +\infty$ then the set $\{i : a_i > 0\}$ is finite or countable.
+
+\end{proposition}
+
+\begin{proof}
+
+Notice that:
+\[
+\{ i : a_i > 0\} \subset \bigcup_{k \in \mathbb{N}} \{i : a_i > \frac{1}{k}\}
+\]
+Then each one of the sets in the union has the cardinality bounded by:
+\[
+\#\{ i : a_i > \frac{1}{k} \} \leq k \sum_{i \in \mathcal{L}} a_i
+\]
+
+\end{proof}
+
+\begin{proposition}
+
+We now consider $\mathcal{I}$ countable. Then we have a bijection $\sigma : \mathbb{N} \to \mathcal{I}$ then:
+\[
+\sum_{i \in \mathcal{I}} a_i = \lim_{n \to \infty} \sum_{k = 1}^n a_{\sigma(k)} =: \sum_{k = 1}^{+\infty} a_{\sigma(k)}
+\]
+
+\end{proposition}
+
+\begin{proof}
+
+We have that $\forall F \subset \mathcal{I}$ finite then $\sigma^{-1}(F)$ is finite, and therefore bounded for a certain $N$. Hence:
+\[
+\sum_{i \in F} a_i = \sum_{k \in \sigma^{-1}(F)} a_{\sigma(k)} \leq \sum_{k = 1}^N a_{\sigma(k)} \leq \sum_{k = 1}^{+\infty} a_{\sigma(k)}
+\]
+Now taking the $\sup$ for all $F$ we get that:
+\[
+\sum_{i \in \mathcal{I}} a_i \leq \sum_{k = 1}^{+\infty} a_{\sigma(k)}
+\]
+Then the other way around we simply have that:
+\[
+\sum_{k = 1}^{n} a_{\sigma(k)} = \sum_{i \in \sigma(\llbracket 1, n \rrbracket)} a_i \leq \sum_{i \in \mathcal{I}} a_i
+\]
+And finally be taking the limit this gives:
+\[
+\sum_{k= 1}^{+\infty} a_{\sigma(k)} \leq \sum_{i \in \mathcal{I}} a_i
+\]
+\end{proof}
+
+\begin{corollary}
+Notice that the above is independent of $\sigma$ and hence we trivially see that:
+\[
+\forall a_k \geq 0, \forall \sigma \in Aut(\mathbb{N}),\quad \sum_{k = 1}^{+\infty} a_k = \sum_{k = 1}^{+\infty} a_{\sigma(k)} 
+\]
+\end{corollary}
+
+\begin{proposition}
+\[
+\sum_{(i, j) \in \mathcal{I}} a_{ij} = \sum_{i = 1}^{+\infty} \left( \sum_{j = 1}^{+\infty} a_{ij} \right) = \sum_{j = 1}^{+\infty} \left( \sum_{i = 1}^{+\infty} a_{ij} \right)
+\]
+\end{proposition}
+
+\begin{proof}
+
+$F \subset \mathcal{I}$ finite implies that $\exists N$ such that $F \in \llbracket 1, N \rrbracket^2$. Hence we have that:
+\[
+\sum_{(i, j) \in F} a_{ij} \leq \sum_{i = 1}^N \sum_{j = 1}^N a_{ij} \leq \sum_{i = 1}^N \sum_{j = 1}^{+\infty} a_{ij} \leq \sum_{i = 1}^{+\infty} \left( \sum_{j = 1}^{+\infty} a_{ij} \right)
+\] 
+Now taking the $\sup$ on all $F$ we get that:
+\[
+\sum_{(i, j) \in \mathbb{I}} \leq \sum_{i = 1}^{+\infty} \left( \sum_{j = 1}^{+\infty} a_{ij} \right)
+\]
+Now the other way around we have that:
+\[
+\forall N, \forall M, \sum_{i = 1}^N \sum_{j = 1}^M a_{ij} \leq \sum_{(i, j) \in \mathbb{N}^2} a_{ij}
+\]
+Taking the limit as $M \to +\infty$ with $N$ fixed we get: 
+\[
+\forall N, \sum_{i = 1}^N \sum_{j = 1}^{+\infty} a_{ij} \leq \sum_{(i, j) \in \mathbb{N}^2} a_{ij}
+\]
+Now taking the limit $N \to +\infty$ we get:
+\[
+\sum_{i = 1}^{+\infty} \left(\sum_{j = 1}^{+\infty} a_{ij}\right) \leq \sum_{(i, j) \in \mathbb{N}^2} a_{ij}
+\]
+Now by symmetry the third equality follows.
+\end{proof}
+
+\begin{definition}[Absolute convergence]
+Let $a_i, i \in \mathcal{I}$ be a not necessarily countable family of reals then the series is said to be absolutely convergent if and only if:
+\[
+\sum_{i \in \mathcal{I}} |a_i| < + \infty
+\]
+\end{definition}
+
+\begin{proposition}
+Now we define $a_i^+ = \max(a_i, 0)$ and $a_i^- = \max(-a_i, 0)$ then we have that $\forall i, a_i = a_i^+ - a_i^-$ and $|a_i| = a_i^+ + a_i^-$. If the family is absolutely convergent we have that: 
+\[
+\sum_{i \in \mathcal{I}} a_i^+ - \sum_{i \in \mathcal{I}} a_i^- = \sum_{k = 1}^{+\infty} a_{\sigma(k)}
+\]
+\end{proposition}
+
+\begin{proof}
+We have that:
+\[
+\sum_{k = 1}^{n} a_{\sigma(k)} = \sum_{k = 1}^n a^+_{\sigma(k)} - a_{\sigma(k)}^- = \sum_{k = 1}^n a^+_{\sigma(k)} - \sum_{k = 1}^n a_{\sigma(k)}^-  \stackrel{n \to +\infty}{\longrightarrow}\sum_{k = 1}^{+\infty} a_{\sigma(k)}^{+\infty} - \sum_{k = 1}^{+\infty} a_{\sigma(k)}^-
+\]
+\end{proof}
+
+\begin{corollary}
+
+From this we can deduce two corollaries when the terms are absolutely convergent we have that:
+\begin{itemize}
+\item  $ \sum_{k = 1}^{+\infty} a_k = \sum_{k = 1}^{+\infty} a_{\sigma(k)} $
+\item $\sum_{i = 1}^{+\infty} \sum_{j = 1}^{+\infty} a_{ij} = \sum_{j = 1}^{+\infty} \sum_{i = 1}^{+\infty} a_{ij}$
+\end{itemize}
+
+\end{corollary}
+
+\begin{definition}[Algebra of sets]
+Let $X$ be a set. We say that $\mathcal{A} \subset \mathcal{P}(X)$ is an algebra of sets if it is stable by finite union and intersection and complement and $\emptyset, X \in \mathcal{A}$. 
+\end{definition}
+
+\begin{definition}[Tribe or $\sigma$-algebra]
+Let $X$ be a set. We say that $\mathcal{A} \subset \mathcal{P}(X)$ is a tribe or $\sigma$-algebra if it is stable by countable union and intersection and complement and $\emptyset, X \in \mathcal{A}$. 
+\end{definition}
+
+\begin{remark}
+We give here a few examples. Trivially $\mathcal{P}(X)$ is a tribe. The if we have a finite partition of $X$:
+\[
+X = \bigcup_{k} X_k \mbox{~~where the~~} X_k \mbox{~~are disjoint.}
+\]
+Then any set $A \subset X$ of the form:
+\[
+\forall \mathcal{I} \subset \llbracket 1, l \rrbracket, A = \bigcup_{i \in \mathcal{I}} X_i
+\]
+Is a finite tribe.
+\end{remark}
+
+\begin{lemma}
+All finite algebra is associated to a finite partition of the set. 
+\end{lemma}
+
+\begin{proof}
+
+Let $\mathcal{A}$ be a finite algebra on $X$. Then we define:
+\[
+\forall x \in X, A(x) := \bigcap_{A \in \mathcal{A}, x \in A} A
+\]
+Now for $x$ and $y$ given we necessarily have that:
+\[
+A(x) = A(y) \mbox{~~or~~} A(x) \cap A(y) = \emptyset
+\]
+To show this formally let $x \in X$ and $B \in \mathcal{A}$. Then if $x \in B$ we must have that $A(x) \subset B$. Identically if $x \in B^c$ then we must have that $A(x) \subset B^c$ or in other words $A(x) \cap B = \emptyset$. 
+
+\end{proof}
+
+\begin{definition}[Additive measure]
+Let $\mathcal{A} \in \mathcal{P}(X)$ be an algebra and $m : \mathcal{A} \to [0, +\infty]$ a function. Then we say that $m$ is an additive measure if:
+\begin{itemize}
+\item $m(\emptyset) = 0$
+\item If $A \cap B = \emptyset$ then $m(A \cup B) = m(A) + m(B)$
+\end{itemize}
+\end{definition}
+
+\begin{definition}[Measure or $\sigma$-additive measure]
+
+Let $\mathcal{F} \subset P(X)$ be a tribe and $m : \mathcal{F} \to [0, +\infty]$ a function. We say that $m$ is a measure if:
+\begin{itemize}
+\item $m(\emptyset) = 0$.
+\item If given a countable family of disjoint sets $(A_i)_{i \in \mathbb{N}}$ we have that $m(\bigcup_{i = 1}^{+\infty} A_i) = \sum_{i = 1}^{+\infty} m(A_i)$
+\end{itemize}
+
+\end{definition}
+
+\begin{remark}
+
+Notice that the notation is confusing: a measure is stronger than an additive measure. Which is why we sometimes refer to measures as $\sigma$-additive measures in order to underline the difference.
+
+\end{remark}
+
+\begin{proposition}
+
+When $m : \mathcal{A} \to [0, +\infty]$ is an additive measure on an algebra the following properties are equivalent:
+\begin{enumerate}
+\item If $A_i \in \mathcal{A}$ are a countable disjoint family and $\bigcup_i A_i \in \mathcal{A}$  then $m(\bigcup_i A_i) = \sum_i m(A_i)$
+\item If $A, A_i \in \mathcal{A}$ and $A \subset \bigcup_i A_i$ then $m(A) \leq \sum_i m(A_i)$.
+\end{enumerate}
+In such a case we say that $m$ is $\sigma$-additive on $\mathcal{A}$.
+\end{proposition}
+
+\begin{proof}
+We start by proving $(1) \Rightarrow (2)$. Let $A_i \in \mathcal{A}$ we define $\tilde{A_i}$ by:
+\[
+\tilde{A}_1 = A_1, \quad \tilde{A}_n = A_n - \tilde{A}_{n-1}
+\]
+Then the family $\tilde{A}_i$ is disjoint by construction and $\bigcup_i A_i = \bigcup_i \tilde{A}_i$. Now for $A \subset \bigcup_i A_i$ we have that:
+\[
+A \subset \bigcup_i \tilde{A}_i \Rightarrow A = \bigcup_i \left(\tilde{A}_i \cap A\right) \Rightarrow m(A) = \sum_i m(\tilde{A}_i \cap A) \leq \sum_i m(A_i)
+\]
+Now the other implication $(2) \Rightarrow (1)$ follows from the opposite equality:
+\[
+A = \bigcup A_i \Rightarrow m(A) \leq \sum_i m(A_i)
+\]
+Which is true since:
+\[
+\forall n, \quad \bigcup_{i = 1}^n A_i \subset A
+\]
+Hence $m(A) \geq \sum_{i = 1}^n m(A_i)$ and hence at the limit $n \to +\infty$ we get:
+\[
+m(A) \geq \sum_{i = 1}^{+\infty} m(A_i)
+\]
+\end{proof}
+
+\begin{definition}[Image and pre-image of algebras of sets and tribes]
+
+Let $f : \Omega \to X$ an application. Then if $\mathcal{A}$ is an algebra (or respectively tribe) on $\Omega$, then we define the image algebra (or respectively tribe) by:
+\[
+f_\star \mathcal{A} = \{ A \subset X, f^{-1}(A) \in \mathcal{A}\}
+\]
+Inversely if $\mathcal{A}$ is an algebra (or respectively tribe) on $X$ then the pre-image algebra (or respectively tribe) is given by:
+\[
+f^\star \mathcal{A} = \{ f^{-1}(A), A \in \mathcal{A}\}
+\]
+
+\end{definition}
+
+\begin{proof}
+The fact that these are indeed algebras of sets or tribes follow directly from the basic properties of image and pre-image sets:
+\[
+f^{-1}(A^c) = f^{-1}(A)^c \mbox{~~and~~} f^{-1}(\bigcap_{i \in \mathcal{I}} A_i) = \bigcap_{i \in \mathcal{I}} f^{-1}(A_i) \mbox{~~and~~} f^{-1}(\bigcup_{i \in \mathcal{I}} A_i) = \bigcup_{i \in \mathcal{I}} f^{-1}(A_i)
+\]
+\end{proof}
+
+\begin{definition}[Image measure]
+
+Let $f : (\Omega, \mathcal{A}, m) \to X$ be an application. We define the image measure or law as the measure defined by:
+\[
+(f_\star m)( Y) := m(f^{-1}(Y)) \mbox{~~defined on~~} f_\star \mathcal{A}
+\]
+
+\end{definition}
+
+\begin{definition}[Finite and probability measures]
+
+A measure $m$ on $X$ is said to be finite if $m(X) < +\infty$ and it is said to be of probability if $m(X) = 1$. 
+
+\end{definition}
+
+\begin{definition}
+
+An application $f: (\Omega, \tau) \to (X, \mathcal{T})$ is said to be measurable if $\forall Y \in \mathcal{T}, f^{-1}(Y) \in \tau$ or in other words: $\mathcal{T} \subset f_\star \tau$ or $f^\star \mathcal{T} \subset \tau$. 
+\end{definition}
+
+
+\end{document}
