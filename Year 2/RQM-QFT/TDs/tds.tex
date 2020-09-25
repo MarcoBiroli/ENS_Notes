@@ -222,4 +222,42 @@ Then re-injecting this above we get the desired inequalities.
 
 \end{enumerate}
 
+
+\chapter{TD3}
+
+\section{The Laplace Equation}
+
+\begin{enumerate}
+
+\item The solution is given by $\frac{q \vb{r}}{4\pi}$. 
+
+\item Rotationally invariant harmonic functions are given by:
+\begin{align*}
+\laplacian u = 0 &\Leftrightarrow \dv{}{r} \left(r^{n-1} u'(r)\right) = 0 \Leftrightarrow r^{n-1} u'(r) = c \Leftrightarrow u'(r) = c\, r^{1 - n} \Leftrightarrow u(r) = \frac{c}{r^{n-2} (n - 2)} + c'
+\end{align*}
+When $n\neq 2$ in the case where $n = 2$ then we get:
+\[
+u(r) = c \ln r + c'
+\]
+
+\item We have that:
+\begin{align*}
+\int_\Omega \dd \vb{x} [u \laplacian v - v \laplacian u] &= \int_{\Omega} \dd \vb{x} \div [ u \grad v - v \grad u ] = \int_{\partial \Omega} \dd \vb{x}\, \vb{n} \cdot [u \grad v - v \grad u] = \int_{\partial \Omega} \dd \vb{x} \left[ u \pdv{v}{n} - v \pdv{u}{n} \right]
+\end{align*}
+
+\item We have that:
+\begin{align*}
+\int_{\overline{\mathcal{B}_\varepsilon}} \dd \vb{x}\, G(\vb{x}) \laplacian \varphi(\vb{x}) &= \int_{\overline{\mathcal{B}_\varepsilon}} \dd\vb{x} \left[ G(\vb{x}) \laplacian \varphi(\vb{x}) - \varphi(x) \laplacian G(x) \right]\\
+&= \int_{\mathcal{C}_\varepsilon} \dd \vb{x} \left( G(\vb{x}) (-\vb{r}) \cdot \grad \varphi(\vb{x}) - \varphi(\vb{x}) (-\vb{r}) \grad G(\vb{x}) \right)\\
+&= \int_{\partial \Omega} \dd \vb{x} -\varphi(\vb{x})\pdv{G}{r} \stackrel{\varepsilon \to 0}{\longrightarrow} \varphi(\vb{0}) \omega_n \varepsilon^{n-1} \pdv{G}{r}\Big|_{r = \varepsilon} = \varphi(\vb{0})
+\end{align*} 
+
+\item We have:
+\[
+\bra{G}\ket{\laplacian \varphi} = \bra{\delta}\ket{\varphi} = (-1)^2 \bra{\laplacian G}\ket{\varphi} = \bra{\delta}\ket{\varphi}
+\]
+
+\end{enumerate}
+
+
 \end{document}
