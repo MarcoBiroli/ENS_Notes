@@ -126,4 +126,97 @@ Now we have:
 
 \end{enumerate}
 
+\chapter{TD 3}
+\section{Topological origin of equatorial waves.}
+\begin{enumerate}
+
+\item 
+
+\item Navier Stokes.
+
+\item The previous equations become:
+\[
+\begin{cases}
+\partial_t \eta + H \div \vb{u}  = 0\\
+\partial_t \vb{u} = g \grad \eta - f \vu{n} \times \vb{u}
+\end{cases}
+\]
+
+\item In the case $f = 0$ the above simplifies and derivating again we obtain directly:
+\[
+\partial_t^2 \eta - c^2 \laplacian \eta = 0 \mbox{~~where~~} c = \sqrt{g H}
+\]
+
+\item We have:
+\[
+H = \begin{pmatrix}
+0 & k_x & k_y\\
+k_x & 0 & if\\
+k_y & -if & 0
+\end{pmatrix}
+\sim \begin{pmatrix}
+0 & 0 & 0\\
+0 & -s_1 & 0 \\
+0 & 0 & s_1
+\end{pmatrix}
+\mbox{~~where~~} s_1 = \sqrt{k^2 + f^2} = \sqrt{k_x^2 + k_y^2 + f^2}
+\]
+We get:
+\[
+\Psi_+ = \frac{1}{\sqrt{2}} \begin{pmatrix}
+\sin\theta\\
+\cos \varphi - i \sin \varphi \cos \theta\\
+\sin \varphi + i \cos \varphi \cos \theta
+\end{pmatrix}
+\]
+
+\item At $\theta = 0$ we get:
+\[
+\Psi_+ = \frac{1}{\sqrt{2}} \begin{pmatrix}
+0\\
+e^{-i\varphi}\\
+i e^{-i\varphi}
+\end{pmatrix}
+\]
+Now replacing $\Psi_+$ up to a phase by $e^{i\varphi} \Psi_+$ we make the vector single valued at the north pole. However this leaves the one on the south pole multivalued. A different scaling is required for the south pole $\theta = \pi$ which is given by $e^{-i\varphi} \psi_+$. 
+
+\item We now want to compute the Berry connection:
+\[
+\overrightarrow{\mathcal{A}_+^N} = - i \braket{\Psi_+^N}{\grad \Psi_{+}^N} = \begin{pmatrix}
+0 \\ A_\theta \\ A_\varphi
+\end{pmatrix}
+\] 
+We start by computing the first term:
+\[
+A_\theta = - \frac{i}{r} \braket{\psi_+^N}{\partial_\theta \Psi_+^N} = 0 \mbox{~~from symmetry.~~}
+\]
+Then the last component is given by:
+\[
+A_\varphi = - \frac{1}{r \sin \theta} \braket{\psi_+^N}{\partial_\varphi \psi_+^N} = \frac{1 - \cos \theta}{r \sin \theta} 
+\]
+Then we can write:
+\[
+\overrightarrow{A_+^N} = \frac{1 - \cos \theta}{r \sin \theta} \vu{\varphi} = (1 - \cos\theta) \grad \varphi
+\]
+Then identical computation for the south connection gives:
+\[
+\overrightarrow{A_+^S} = (1 + \cos\theta) \grad \varphi
+\]
+Then we get:
+\[
+A_+^N - A_+^S = 2 \grad \varphi
+\]
+
+\item We now want to compute the Berry curvature: $\overrightarrow{\mathcal{B}} = \curl \vb{A_+^N} = \curl \vb{A_+^S}$ except on the poles. Then the Chern number is given by:
+\[
+2 \pi \nu = \oint \vb{\mathcal{B}_+} \dd \vb{S} = \iint_N \vb{B} \dd \vb{S}  + \iint_S \vb{B} \dd \vb{S} = \oint_\gamma \mathcal{A}_+^N \dd \ell + \oint_{-\gamma} \mathcal{A}_+^S \dd \ell = 4 \pi \Rightarrow \nu = 2
+\]
+
+\item By symmetry the Chern number of the lower band is given by: $\nu_- = -2$. Then from the fact that $\sum_i \nu_i = 0$ we get that $\nu_0 = 0$. 
+
+\item 
+
+\end{enumerate}
+
+
 \end{document}

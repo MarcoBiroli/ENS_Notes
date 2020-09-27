@@ -134,4 +134,56 @@ Let $\mathcal{G}_1$ and $\mathcal{G}_2$ be two groups. Then let $g \in \mathcal{
 
 \chapter{TD3}
 
+\chapter{TD 4}
+\section{Symmetric Group}
+\begin{enumerate}
+\item ...
+
+\item ...
+
+\item ...
+
+\item ...
+
+\item Notice that:
+\[
+\tau \sigma \tau^{-1} ( \tau(j_i)) = \tau \sigma (j_i) = \begin{cases}
+\tau(j_i) \mbox{~~if~~} i > k\\
+\tau(j_{i+1}) \mbox{~~if~~} i \leq k
+\end{cases}
+\]
+Q.E.D.
+
+\item We prove this in two steps. We start by proving that two elements with the same cycle type are conjugated then we prove that two elements which are conjugate have the same cycle type. Let $\sigma_1$ and $\sigma_2$ who have cycle type $\{\ell_1, \ell_2, \cdots, \ell_k\}$ not that the order in the $\ell_i$ are arbitrary since disjoint cycles can be permutated. Then from question 5 let $j_i^{(c_n)}$ be the elements of the cycle $c$ of length $\ell_c$ of $\sigma_n$. Then we define:
+\[
+\tau(j_i^{(c_1)}) = j_i^{(c_2)}
+\]
+Note that this is from construction necessarily a surjective and injective mapping and therefore is a permutation of the elements. Then from construction we get the desired result. \\
+Then from question 5 still we know that the cycle type of a permutation is invariant under conjugation hence necessarily two elements with different cycle types cannot be conjugate of one another.
+
+\item ...
+
+\item ...
+
+\end{enumerate}
+
+
+\section{Representations}
+
+\begin{enumerate}
+
+\item Notice that for any irreducible representations $(r', Z(G))$ we have that:
+\[
+r'[g] r[g] = r[g] r'[g], \quad \forall g \in Z(G)
+\]
+Since for any element in $Z(G)$ we must have that:
+\[
+r[g_1 \cdot g_2] = r[g_2 \cdot g_1] = r[g_1]r[g_2] = r[g_2]r[g_1]
+\]
+From the definition of $Z(G)$. Then from Schur's Lemma we can conclude that $r[g] = \lambda \text{Id}_\mathcal{E}$. 
+
+\item 
+
+\end{enumerate}
+
 \end{document}
