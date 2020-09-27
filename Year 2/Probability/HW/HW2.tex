@@ -49,43 +49,33 @@ f(v) = ...
 
 \begin{enumerate}
 
-\item Let $(\Omega_i, \mathcal{F}_i, P_i)$ be the probability space of $X_i$ then define the product probability space as $(\Omega, \mathcal{F}, P)$. Let $(\llbracket 1, n \rrbracket, \mathcal{P}(\llbracket 1, n \rrbracket), P')$ be the probability space of $T$. Then define the probability space $(\Omega', \mathcal{F}', P')$ as the product probability space of the two previous ones. Then we define:
+\item Let $(\Omega_i, \mathcal{F}_i, P_i)$ be the probability space of $X_i$ then define the product probability space as $(\Omega, \mathcal{F}, P)$. Let $(\Omega, \mathcal{F}, P)$ also be the probability space of $T$. Then we define:
 \begin{align*}
-X_T : \Omega \times \llbracket 1, n \rrbracket &\longrightarrow \mathbb{R}\\
-(\vb{x}, i) &\longmapsto x_i
+X_T : \Omega &\longrightarrow \mathbb{R}\\
+\vb{x} &\longmapsto \vb{x}_{T(\vb{x})}
 \end{align*}
 Then let $B \in \mathcal{B}(\mathbb{R})$ then we have that:
 \begin{align*}
-\{(\omega, i) \in \Omega' : X_T(\omega, i) \in B\} &\subset \bigotimes_{i \in \llbracket 1, n \rrbracket} \{\omega_i \in \Omega_i : \exists i,  X_i(\omega) \in B\} \times \llbracket 1, n \rrbracket \in \mathcal{F}'
+\{\vb{x} \in \Omega : X_T(\vb{x}) \in B\} &\subset \bigotimes_{i \in \llbracket 1, n \rrbracket} \{x_i \in \Omega_i :  X_i(x_i) \in B\} \in \mathcal{F}
 \end{align*}
-Where the belonging to $\mathcal{F}'$ follows from the definition of the product $\sigma$-algebra. 
+Where the belonging to $\mathcal{F}$ follows from the definition of the product $\sigma$-algebra. 
 
 \item I think that $(X_{(1)}, \cdots, X_{(n)})$ is ill-defined since there exists no clear order relation on functions which might not even come from the same space. I assume that what was meant was that:
 \[
 \forall \omega \in \Omega, \exists \sigma \in \mathfrak{S}_n, \sigma(X(\omega)) = \sigma\left(\left(X_1(\omega_1), \cdots, X_n(\omega_n)\right)\right) = (X_{\sigma(1)}(\omega_{\sigma(1)}), \cdots, X_{\sigma(n)}(\omega_{\sigma(n)})) \mbox{~~ is in increasing order.} 
 \]
-Then admitting the axiom of choice let $\omega \in \Omega$ then since we have a finite list of real numbers we know from the constructions of the real numbers we can order it. Then we define the permutation $\sigma_\omega$ as the one which sets them in the right order and in case of parity the smaller index goes first. Then we have that $\sigma$ is a random variable defined as:
+Since we have a finite list of real numbers we know from the constructions of the real numbers we can order it. Then we define the permutation $\sigma_\omega$ as the one which sets them in the right order and in case of parity the smaller index goes first. Then we have that $\sigma$ is a random variable defined as:
 \begin{align*}
 \sigma : \Omega &\longrightarrow \mathfrak{S}_n\\
 \omega &\longmapsto \sigma_\omega
 \end{align*}
-We furthermore have that $\sigma$ is injective and therefore measurable. Hence $\sigma$ is a well-defined random variable.
+We furthermore have that $\sigma$ is injective and therefore measurable. Hence $\sigma$ is a well-defined random variable. 
 
-\item From the previous question we have that:
-\begin{align*}
-\mathbb{E}[\varphi(X_{(1)}, \cdots, X_{(n)} - X_{(n-1)})] &= \mathbb{E}[\varphi(X_{\sigma(1)}, \cdots, X_{\sigma(n)} - X_{\sigma(n-1)})]\\
-&= \int_{\omega \in \Omega} \varphi(\sigma(X(\omega))) P'(\sigma(X(\omega)))  \dd \omega \\
-&= \int_{\omega \in \Omega} \varphi(\sigma(X(\omega)) P(X(\omega)) \dd \omega \\
-&= \sum_{\sigma \in \mathfrak{S}_n} \int_{\omega \in \Omega} \varphi(X(\omega)) P(X(\omega)) 1_{X_1 \leq \cdots \leq X_n} \dd \omega \\
-&= n! \int_{\omega \in \Omega} \varphi(X(\omega)) P(X(\omega)) 1_{X_1 \leq \cdots \leq X_n} \dd \omega \\
-&= n!\, \mathbb{E}[\varphi(X(\omega)) 1_{X_1 \leq \cdots \leq X_n}]
-\end{align*}
-
-\item We write $(X_{(1)}, \cdots, X_{(n)}) = \sigma(X)$. Then notice that:
+\item From the previous question we write $(X_{(1)}, \cdots, X_{(n)}) = \sigma(X)$. Then notice that:
 \[
 f_{\sigma(X)}(\vb{x}) \dd \vb{x} = \sum_{\mu \in \mathfrak{S}_n} f_X(\mu^{-1}(\vb{x})) \dd \vb{x} = \sum_{\mu \in \mathfrak{S}_n} f_X(\mu(\vb{x})) \dd \vb{x} = \sum_{\mu \in \mathfrak{S}_n} \prod_{i = 1}^n f_{X_i}(\mu(\vb{x})_i) \dd \vb{x}
 \]
-Where one the last equality we used that the $X_i$ are independent. Then since the $X_i$ are identically distributed we have that $\forall i, \, f_{X_i} = f_{X_1}$. Now since the product commutes we have that the terms inside the sum are all equal up to a permutation of the terms, hence:
+Where on the last equality we used that the $X_i$ are independent. Then since the $X_i$ are identically distributed we have that $\forall i, \, f_{X_i} = f_{X_1}$. Now since the product commutes we have that the terms inside the sum are all equal up to a permutation of the terms, hence:
 \[
 \sum_{\mu \in \mathfrak{S}_n} \prod_{i = 1}^n f_{X_i}(\mu(\vb{x})_i) \dd \vb{x} = \sum_{\mu \in \mathfrak{S}_n} \left( \prod_{i = 1}^n f_{X_1}(x_i) \dd x_i \right) = n!\left( \prod_{i = 1}^n f_{X_1}(x_i) \dd x_i \right) = n! f_X(\vb{x'}) 1_{\vb{x'} = \mu(\vb{x})} \dd \vb{x'}
 \]
@@ -93,15 +83,27 @@ Where we are free to chose any $\mu \in \mathfrak{S}_n$ since the terms in the p
 \[
 \sum_{\mu \in \mathfrak{S}_n} \prod_{i = 1}^n f_{X_i}(\mu(\vb{x})_i) \dd \vb{x} = n! f_X(\sigma(\vb{x})) = n! f_X(\vb{x'}) 1_{\vb{x'} = \sigma(\vb{x})} \dd \vb{x}
 \]
-Then plugging this in the definition of the expectancy we get:
+Call $\mu$ the function that maps $X_1, \cdots, X_n$ to $X_1, \cdots, X_n - X_{n-1}$. Then plugging this in the definition of the expectancy we get:
 \begin{align*}
-E[\varphi(\sigma(X))] &= \int_{\vb{x} \in \Omega} \varphi(\sigma(X(\vb{x}))) f_{\sigma(X)}(\vb{x}) \dd \vb{x} = n! \int_{\vb{x} \in \Omega} \varphi(\sigma(X(\vb{x}))) f_{X}(\vb{x'}) 1_{\vb{x'} = \sigma(\vb{x})} \dd \vb{x} = n! \int_{\vb{x} \in \sigma(\Omega)} \varphi(X(\vb{x})) f_{X}(\vb{x}) \dd \vb{x}\\
-&= n! \mathbb{E}[\varphi(X) 1_{\sigma}] \mbox{~~where~~} 1_\sigma(\vb{x}) = \begin{cases}
+E[\varphi(\mu(\sigma(X)))] &= \int_{\vb{x} \in \Omega} \varphi(\mu(\sigma(X(\vb{x})))) f_{\mu(\sigma(X))}(\mu(\vb{x})) \dd \vb{x} = n! \int_{\vb{x} \in \Omega} \varphi(\mu(\sigma(X(\vb{x})))) f_{X}(\vb{x'}) 1_{\vb{x'} = \sigma(\vb{x})} \dd \vb{x}\\
+&= n! \int_{\vb{x} \in \sigma(\Omega)} \varphi(\mu(X(\vb{x}))) f_{X}(\vb{x}) \dd \vb{x} = n! \mathbb{E}[\mu(\varphi(X)) 1_{\sigma}] \mbox{~~where~~} 1_\sigma(\vb{x}) = \begin{cases}
 1 \mbox{~~if~~} \vb{x} = \sigma(\vb{x})\\
 0 \mbox{~~otherwise.}
 \end{cases}
 \end{align*}
 
+\item From the Block grouping theorem we know that if $X_1, \cdots, X_n$ are independent then $X_1, X_2 - X_1, \cdots, X_{n} - X_{n-1}$ are independent. Hence taking $\varphi(\mu(\vb{x})) = \prod_{i = 1}^n g_i(\mu(\vb{x_i}))$ where all the $f_i$ are measurable we get that:
+\[
+\mathbb{E}\left[\prod_{i = 1}^n g_i(\mu(\sigma(X))_i)\right] = \mathbb{E}\left[ n!\, 1_\sigma \prod_{i = 1}^n g_i(\mu(X)_i)\right] = n! \prod_{i = 1}^n \int_{\vb{x} \in \Omega} f_{X_1}(g_i(\mu(X(\vb{x}))_i)) P(\vb{x} = \sigma(\vb{x})) \dd \vb{x} = \prod_{i = 1}^n \mathbb{E}[g_i(\mu(\sigma(X))_i] 
+\] 
+Hence the $\mu(\sigma(X))$ are independent. Notice that in the first equality we used question 3, in the second equality we used the independence of $\mu(X)$ and in the third we simply used that $P(\vb{x} = \sigma(\vb{x})) = \frac{1}{n!}$ and then recontract the integral into an expectancy.
+Then we have that $X_{(1)} = \min_i X_i$ hence:
+\[
+F_{X_{(1)}}(x) = 1 - \prod_{i = 1}^n P(X_i > x) = 1 - \prod_{i = 1}^n e^{- \alpha x} = 1 - e^{- \alpha n x}
+\]
+So $X_{(1)}$ follows an exponential law of parameter $n \alpha$. 
+
+\item 
 
 \end{enumerate}
 
