@@ -1,0 +1,369 @@
+\documentclass[10pt,a4paper]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{stmaryrd}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{physics}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\author{Marco Biroli, Alessandro Pacco}
+\title{Probability}
+
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\newtheorem*{remark}{Remark}
+\newtheorem*{notation}{Notation}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+
+\begin{document}
+\maketitle
+\tableofcontents
+\chapter{Probabilistic model}
+\section{Definitions}
+
+\begin{definition}[Universe]
+We consider a random experiment, then the set of all possible outcomes of the experiment is denoted by $\Omega$ and is called the universe.
+\end{definition}
+
+\begin{definition}[Event]
+An event $E$ associated to the experiment is a set of results for which we can compute the probability.
+\end{definition}
+
+\begin{definition}[Collection]
+The collection of all events is denoted by $\mathcal{F}$. Hence $\mathcal{F} \subseteq \mathcal{P}(\Omega)$, the collection of all subsets of $\Omega$.
+\end{definition}
+
+\begin{definition}[Disjoint Events]
+Two events $A, B \in \mathcal{F}$ are disjoint or incompatible if they cannot occur simultaneously. In other words if $A \cap B = \emptyset$ (the null or impossible event).
+\end{definition}
+
+\begin{remark}
+We require that the collection $\mathcal{F}$ of the events is an algebra of sets.
+\end{remark}
+
+\begin{definition}[Algebra of Sets]
+The collection $\mathcal{F}$ is called an algebra of sets if $\mathcal{F} \neq \emptyset$ (i.e. it is a non-empty collection of sets) and:
+\begin{enumerate}
+\item $A \in \mathcal{F} \Rightarrow A^c \in \mathcal{F}$ (\text{stability under complement})
+\item $A, B \in \mathcal{F} \Rightarrow A \cup B \in \mathcal{F}$ (\text{stability under union})
+\end{enumerate}
+\end{definition}
+
+\begin{remark}
+For the scope of this course we further require that $\mathcal{F}$ is stable under countable unions. In other words the second condition (2) above is replaced by (2'):
+\[
+(A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N} \Rightarrow \bigcup_{n \in \mathbb{N}} A_n \in \mathcal{F}
+\]
+\end{remark}
+
+\begin{definition}[$\sigma$-algebra]
+A $\sigma$-algebra is an algebra of sets where the second condition is replaced by the stronger condition requiring stability under countable union.
+\end{definition}
+\section{Probability}
+Let us consider an event $E\in\mathcal{F}$. The probability $P(E)$ of $E$ is the theoretical value for the proportion of experiments in which $E$ occurs. Thus the probability is a function from $\mathcal{F}$ to $[0,1]$ such that 
+\begin{enumerate}
+\item $P(\Omega) = 1$.
+\item $A, B \in \mathcal{F}, A \cap B = \emptyset \Rightarrow P(A \cup B) = P(A) + P(B)$.
+\end{enumerate}
+In other words, $P$ is an additive set function from $\mathcal{F}$ to $[0,1]$. 
+
+\begin{remark}
+This definition however is not very well suited to infinite event sets. Then modern probability theory adds a condition to the above.
+\end{remark}
+Modern probability is built with the stronger condition (2') instead of (2):
+\[
+(A_n)_{n \in \mathbb{N}} \in \mathcal{F}^\mathbb{N}\,\,\text{s.t.}\,\, \left(\forall n, m \in \mathbb{N}, n \neq m \Rightarrow A_n \cap A_m = \emptyset\right) \Rightarrow P\left(\bigcup_{n \in \mathbb{N}} A_n \right) = \sum_{n \in \mathbb{N}} P(A_n)
+\]
+A priori, (2') does not collide with intuition. Moreover, this condition allows to prove much more interesting limit theorems. Conclusion:
+
+\begin{definition}[Probability Space]
+A probability space is a triple $(\Omega, \mathcal{F}, P)$. Where:
+\begin{itemize}
+\item $\Omega$ is a set, the universe of all possible results
+\item $\mathcal{F}$ is a $\sigma$-algebra on $\Omega$
+\item $P$ is a probability function $\mathcal{F}\to[0,1]$ satisfying $(1)$ and (2')
+\end{itemize}
+\end{definition}
+
+\begin{remark}
+The mathematical framework which defines probability theory actually comes from another mathematical framework called measure theory. This is why the elements of the $\sigma$-field are sometimes called the measurable sets and the probability function is sometimes called a probability measure.
+\end{remark}
+
+\section{Finite Spaces}
+We consider the case where $\Omega$ is a finite set, we write $\Omega = \{x_1, \ldots, x_n\}$. The natural $\sigma$-algebra on $\Omega$ is $\mathcal{P}(\Omega)$. It is the only $\sigma$-algebra which contains the singletons. Then let $P$ be a probability on $\Omega$ and let us set $\forall i \in \llbracket 1, n\rrbracket, p_i = P(\{x_i\})$. Then the numbers $p_i$ satisfy:
+\begin{equation}
+\left( \forall i \in \llbracket 1, n\rrbracket, 0 \leq p_i \leq 1\right) \land \sum_{i = 1}^n p_i = 1
+\end{equation}
+Then for any $A \subset \Omega$ we have by additivity that:
+\begin{equation}
+P(A) = \sum_{x \in A} P(\{x\}) = \sum_{i : x_i \in A} p_i
+\end{equation}
+Hence $P$ is completely determined by the numbers $p_i$.
+
+
+\begin{remark}
+Notice that conversely if we are given the numbers $p_i$ satisfying equation (1.1) we can define a probability $P$ on $\Omega$ by stating $P(\{x_i\}) = p_i$ and using equation (1.2). $P$ will indeed be a probability measure.
+\end{remark}
+
+\section{Countable Spaces}
+We suppose that $\Omega$ is countable and we set $\Omega := \{ x_n , n \in \mathbb{N}\}$. The natural $\sigma$-field on $\Omega$ is again the power set of $\Omega$, i.e. $\mathcal{P}(\Omega)$. Let $P$ be a probability on $\Omega$ and let us set:
+$$\forall n\in\mathbb{N}, p_n=P(\{x_n\}).$$
+The sequence $(p_n)$ satisfies:
+$$\forall n,\,\, 0\leq p_n\leq 1\land \sum_{n\in\mathbb{N}}p_n=1$$
+If $A\in \Omega$ , we have again:
+$$P(A)=\sum_{x\in A}P(\{x\})=\sum_{n\in\mathbb{N},x_n\in A}p_n$$
+the solution is similar to the finite case.
+
+\section{Continuous Spaces}
+We consider here the more complicated situation where $\Omega$ is continuous. 
+If we take the simplest example of $\Omega = \mathbb{R}$ then the intuitive $\sigma$-field being the power set turns out to be too complicated to be useful. We will instead consider a simpler $\sigma$-field on $\mathbb{R}$. We will start with closed intervals $[a,b]$, $a<b\in\mathbb{R}$. We consider the smallest $\sigma$-field on $\mathbb{R}$ which contains these intervals. It can be proved that it exists and is well-defined. This $\sigma$-field is called the Borel field and denoted by $\mathcal{B}(\mathbb{R})$. What does it contain: closed intervals, open intervals, "semi-open" intervals, all possible countable unions of closed intervals ecc..
+It can be proved that $\mathcal{P}(\mathbb{R})\neq\mathcal{B}(\mathbb{R})$.
+
+\section{Random Variables}
+A random variable is known only after the realization of the experiment, hence it is random. So a random variable $X$ is a map from $\Omega$ to $\mathbb{R}$. We want to compute the probability that $X$ belongs to some interval of $\mathbb{R}$, that is why we ask it to be "measurable" (to be defined below).
+
+\begin{definition}[Random Variable]
+Let $(\Omega, \mathcal{F}, P)$ be a probability space. A random variable $X$ on $(\Omega, \mathcal{F}, P)$ is map from $\Omega$ to $\mathcal{F}$ which is measurable:
+\[
+\forall B \in \mathcal{B}(\mathbb{R}), X^{-1}(B) = \{ \omega \in \Omega : X(\omega) \in B \} \in \mathcal{F}
+\]
+\end{definition}
+
+\begin{remark}
+This definition is equivalent to: for all interval $I$ of $\mathbb{R}$ we have that $X^{-1}(I) \in \mathcal{F}$. The point is that, for any interval, $X^{-1}(I)$ is an event, and its probability is well defined. 
+\end{remark}
+
+\begin{notation}
+The event $X^{-1}(I)$ is denoted by $\{X \in I\}$ or even simply $X \in I$. Thus $P(X^{-1}(I))=P(X\in I)$. Secondly, random variables are denoted by capital letters typically $X, Y, U, V$ and their possible values are denoted by the corresponding lowercase letters $x,y,u,v$.
+\end{notation}
+
+\section{The law of a random variable}
+Let $(\Omega, \mathcal{F}, P)$ be a probability space and let $X$ be a random variable defined on $\Omega$.
+\begin{definition}[Law of a random variable]
+ The law of $X$ is the probability measure $P_X$ on $\mathbb{R}$ defined by:
+\[
+\forall B \in \mathcal{B}(\mathbb{R}), P_X(B) = P(X \in B)=P(X^{-1}(B))
+\]
+\end{definition}
+
+\begin{proof}
+Let us check that $P_X$ is indeed a probability measure. We have that:
+\[
+P_X(\mathbb{R}) = P(X \in \mathbb{R}) = 1.
+\]
+Furthermore let $(B_n)_{n \in \mathbb{N}} \in \mathcal{B}(\mathbb{R})^\mathbb{N}$ be a disjoint sequence of Borel sets. Then:
+\[
+P_X\left(\bigcup_{n \in \mathbb{N}} B_n\right) = P\left(X \in \bigcup_{n\in\mathbb{N}} B_n\right) = P\left( \bigcup_{n\in\mathbb{N}} \{ X \in B_n \} \right) = \sum_{n \in \mathbb{N}} P(X \in B_n) = \sum_{n \in \mathbb{N}} P_X(B_n)
+\]
+\end{proof}
+Let us insist on the fact that the law $P_X$ of $X$ is a probability measure on $\mathbb{R}$, and this whatever the set $\Omega$ is.
+\begin{notation}
+The law $P_X$ of $X$ is sometimes called the \textit{distribution} of $X$. We furthermore say that two variables $X, Y$ have the same law if $P_X = P_Y$. The object of primary interest for a random variable is its law. Indeed, we want to compute the probabilities of events associated to $X$, and this is done with the help of its law.
+\end{notation}
+"The law is fundamental"
+
+\section{Probability measures on $\mathbb{R}$}
+We start with $\mathbb{R}$ and the Borel $\sigma$-field $\mathcal{B}(\mathbb{R})$. Let $f$ be a non-negative function $\mathbb{R}\to\mathbb{R}$, which is integrable and such that $\int_{\mathbb{R}}f(x)dx=1$. We define next $\forall A\in\mathcal{B}(\mathbb{R})$, $$P(A)=\int_A f(x)dx.$$
+This formula defines a probability measure on $\mathbb{R}$, called the probability measure with density function $f$.
+The good definition of integral is the Lebesgue integral, which we will use all along the course. 
+
+\begin{definition}[Law]
+Let $f$ be a non-negative function $\mathbb{R} \to \mathbb{R}^+$ which is integrable and $\int_\mathbb{R} f(x) \dd x = 1$. We define next:
+\[
+\forall A \in \mathcal{B}(\mathbb{R}) \quad P(A) = \int_A f(x) \dd x
+\]
+This formula defines a probability measure on $\mathbb{R}$, called the probability measure with density function $f$.
+\end{definition}
+Other examples: the dirac mass. Any convex combination ($\frac{1}{2}(P_1+P_2)(A)=\frac{1}{2}(P_1(A)+P_2(A))$) is still a probability measure. There exist probability measure that do not belong to this catalog, but this is another story. 
+
+\section{Expectation}
+
+We say that the random variable $X$ has an expectation or that it is integrable if:
+\[
+\int_\mathbb{R} |x| \dd P_X(x) < +\infty
+\]
+Then the expectation is defined as:
+\[
+E(X) = \int_\mathbb{R} x \dd P_X(x) = \int_\Omega X \dd P = \int_{\omega \in \Omega} X(\omega)\dd P(\omega) = \int_\mathbb{R} \text{Id}_\mathbb{R} \dd P_X
+\]
+From this formula we see that the expectation is completely dependent on the law of the random variable.
+"Expectations depend on the laws".
+
+
+\chapter{Coin tossing games}
+
+
+\section{Model}
+We take a fair coin and we consider the experiment which consists in throwing n times the coin. If -1 denotes tail and +1 denotes head, then the result of the experiment is a sequence of 
+length n of signs -1,+1, that is an element of $$\Omega=\{-1,+1\}^n.$$The $\sigma$-algebra is already defined.
+By symmetry, all the sequences of signs have the same probability, thus we set:
+$$\forall w=(w_1,\ldots,w_n)\in\Omega,\,\,\\
+P(w)=\frac{1}{|\Omega|}=\frac{1}{2^n}.$$
+Let $X_k$ be the result of the $k$-th throw. Then $X_k$ is a random variable, defined by:
+$$X_k:w=(w_1,\ldots,w_n)\in\Omega\to X_k(w)=w_k$$
+
+
+\section{Graphical representation}
+To the sequence $X_1,\ldots,X_n,$ we associate the partial sums: $S_0=0,S_1=X_1,\ldots,S_n=X_1+\ldots X_n$. THe sequence $S_0,\ldots,S_n$ contains exactly the same information as the 
+initial sequence $X_1,\ldots X_n$. We can represent the result of the experiment by a poligonal line, the line which joins successively the points
+$$(0,S_0),\ldots, (n,S_n)$$
+disegno, with slope $=\pm 1$.
+Such as polygonal line, associated to a sequence of signs will be called a path. 
+
+
+\section{Interpretation of this model}
+There are more interpretations:
+\begin{enumerate}
+\item Coin tossing game. P and V play the following game: P throws a coin and V tries to guess the result. If V guesses correctly, then P gives 1 euro to V, otherwise V gives 1 euro to P.
+Here $S_n$ represents the algebraic gain of P after n turns.
+\item Random walk. A drunkard perfomrs a random walk on $\mathbb{Z}$ with the following mechanism:
+\begin{itemize}
+\item at time 0 he starts at 0
+\item at time 1, he tosses a coin. If the result is heads he goes to the right, if it is tail, he goes to the left. Picture
+\item he reiterates this procedure from this new position.
+\end{itemize}
+with this interpretatoin, $S_n$ represents the position of the drunkard after n steps.
+\end{enumerate}
+
+%
+\section{Distribution or law of $S_n$}
+\begin{proposition}
+The law of $S_n$ is the probability distribution on $\{-n,\ldots,n\}$ given by 
+$$\forall k\in \{-n,\ldots,n\}\,\,\,P(S_n=k)=\frac{1}{2^n}C_n^{\frac{n+k}{2}}$$
+\end{proposition}
+\proof
+By graphical representation, 
+$$P(S_n=k)=\frac{1}{2^n}\cdot |\{\text{Paths from (0,0) to (n,k)}\}|$$
+let us consider a path and let us denote by $\alpha$ the number of ascending steps (+1) in the path, and by $\beta$ the number of descending steps. We must have
+$$\begin{cases}
+\alpha+\beta=n\\
+\alpha-\beta=k
+\end{cases}
+$$
+then $\alpha=\frac{n+k}{2}$. To count the number of paths, I count the number of possible choices for the ascending steps. There are $C_n^{\alpha}=(n \alpha)$. Convention: $C_n^x=0$ if $x\notin \mathbb{Z}$
+$x<0,x>n$.
+
+
+\section{Equalization or return to 0}
+We say that there is an equalization or return to 0 at the time n if $S_n=0$. Since $n$ and $S_n$ have the same parity, this occurs only at even times, and 
+$$P(S_{2n}=0)=\frac{1}{2^{2n}}C_{2n}^n=\frac{1}{2^{2n}}\frac{(2n)!}{(n!)^2}.$$ We use Stirling formula:
+$$n!=(\frac{n}{2}\bigg)^n\sqrt{2\pi n}\bigg(1+\frac{1}{12n}+\frac{1}{288n^2}+o(1/n^2)$$
+We get 
+$$P(S_{2n}=0)\sim_{n\to +\infty}\frac{1}{\sqrt{\pi n}}$$ 
+This gives an excellent approximation, even for small values of $n$. For example:
+$$P(S_{10}=0)\text{true: 0,2461, approx: 0,2523}$$
+
+
+\section{The lamplighter walk}
+We consider an infinite street, equipped with laterns, one every meter, and a lamplighter, which lights the lanterns. He starts at 0, he lights the lantern, then he throws a coin to decide 
+whether he goes left or right, and he goes on this way. The positioin at time $n$ of the lamplighter is $S_n$. Picture. The process $(S_n)_{n\in \mathbb{N}}$ is the symmetric random walk on 
+$\mathbb{Z}$. What is the probability that the lamplighter comes back to the initial lantern? Notice that we prefer unions rather than existance symbols:
+$$P(\exists n\in\mathbb{N}^*|\,\,S_n=0)=P(\cup_{n\geq 1}\{S_{2n}=0\})$$ 
+here we are a bit stuck cause we cannot use the $\sigma$-additivity, since the events are not disjoint. Hence we "disjoint the union", in a standard procedure:
+$$=P(\{S_2=0\}\cup (\{S_4=0\}\backslash\{S_2=0\})\cup\ldots\cup(\{S_{2n}=0\}\backslash(\{S_2=0\}\cup\ldots\cup\{S_{2n-2}=0\}))....)$$
+$$=P(\cup_{n\geq 1}(\{S_{2n}=0\}\backslash(\{S_2=0\}\cup\ldots\cup\{S_{2n-2}=0\})))$$
+$$=P(\cup_{n\geq 1}\{S_2\neq 0,\ldots,S_{2n-2}\neq 0,S_{2n}= 0\})$$
+These events are disjoint, so, by $\sigma$- additivity, 
+$$=\sum_{n\geq 1}P(S_2\neq 0,\ldots S_{2n-2}\neq 0,S_{2n}= 0)$$
+but
+$$P(S_2\neq 0,\ldots,S_{2n-2}\neq 0,S_{2n}= 0)=P(S_1>0,\ldots S_{2n-1}>0,S_{2n}=0)+P(S_1<0,\ldots S_{2n-1}<0,S_{2n}=0)=2P(S_1>0,\ldots S_{2n-1}>0,S_{2n}=0)
+=\frac{2}{2^{2n}}\cdot |\text{paths from (1,1) to (2n-1,1) which do not touch the x-axis}|$$
+Picture. We then compute
+$$=\frac{2}{2^{2n}}(|\text{paths from (1,1) to (2n-1,1)}|-|\text{paths from (1,1) to (2n-1,1) which touch the x-axis}|)$$
+
+%
+\section{The reflection principle}(William Feller Intro to proba theory and applications)
+Let $A=(a,\alpha)$ and $B=(b,\beta)$ be two points with $0<a<b$, $\alpha,\beta>0$. Picture. To find the number of paths from $A$ to $B$ which touch the axis, we make a reflection of $A$ with respcet 
+to the x-axis, call it $A'=(a,-\alpha)$. Hence the number of paths from $A$ to $B$ which touch the axis is equal to the paths from $A'=(a,-\alpha)$ to $B$(without constraint).
+\proof 
+Let $s=(s_a=\alpha,s_{a+1},\ldots,s_b)$ be a path from $A$ to $B$ which touches the axis. Let $t$ be the first time it touches,
+$$t=\min\{i\geq a: s_i=0\}$$
+Let $T=(t,0)$. To the path $s$, we associate the path $\phi(s)$ obtained from $s$ by taking the reflection of the position $A$ with respect to the axis. I claim that $\phi$ is a one to one 
+map from the set of paths from $A$ to $B$ which touch the axis onto the set of paths from $A'$ to $B$. In fact, $\phi^2=Id$, whih we can infer by making again the symmetry.
+
+
+\section{The ballot theorem}
+Let $x,n>0$. THe number of paths from (0,0) to $(n,x)$, picture, which don't touch 0 after time 0 is equal to 
+$$\frac{x}{n} C_n^{\frac{n+x}{2}}$$.
+\proof
+$$|\text{paths from (0,0) to (n,x), no touch}|=|\text{paths from (1,1) to (n,x), no touch}|=|\text{(1,1) to (n,x)}|-|\text{(1,1) to (n,x) touch}|
+=_{reflection} |\{(1,1)\to(n,x)\}|-|\{(1,-1)\to (n,x)\}|$$
+for the first term we have
+$$\begin{cases}
+\alpha+\beta=n-1\\
+\alpha-\beta=x-1
+\end{cases}
+\Rightarrow \alpha=\frac{n+x}{2}-1
+$$
+and for the second term we have
+$$\begin{cases}
+\alpha-\beta=n-1\\
+\alpha-\beta=x+1
+\end{cases}
+\Rightarrow \alpha=\frac{n+x}{2}$$
+Finally we get
+$$=C_{n-1}^{\frac{n+x}{2}-1}-C_{n-1}^{\frac{n+x}{2}}=C_{n-1}^{\frac{n+x}{2}-1}-C_{n-1}^{\frac{n-x}{2}-1}=\frac{n+x}{2n}C_n^{\frac{n+x}{2}}-\frac{n-x}{2n}C_n^{\frac{n+x}{2}}=\frac{x}{n}C_n^{\frac{n+x}{2}}$$
+where we applied the two formulas $C_n^k=C_n^{n-k}$ and $\frac{k}{n}C_n^k=C_{n-1}^{k-1}$.
+Application: In an election, candidate $P$ scores $p$ votes, reps $Q$ scores $q$ votes, $p>q$. The probability that the winning candidate is always ahead during the reading of the votes is 
+$$\frac{p-q}{p+q}$$
+
+
+\section{End of the computation}
+THanks to the Ballot thereom we then get:
+$$P(S_2\neq 0,\ldots,S_{2n-2}\neq 0,S_{2n}=0)=\frac{2}{2^{2n}}|\text{paths from (0,0) to (2n-1,1) which stay positive}|=\frac{2}{2^{2n}}\frac{1}{2n-1}C_{2n-1}^n
+=\frac{2}{2^{2n}}\frac{1}{2n-1}C_{2n-1}^{n-1}=...$$.
+where at the end we applyed the two notorious formulae stated above.
+Thus
+$$P(S_2\neq 0,\ldots,S_{2n-2}\neq 0, S_{2n}=0)=\frac{1}{2n-1}P(S_{2n}=0)$$
+Hence 
+$$P(\text{lamplighter returns to 0})=\sum_{n\geq 1}\frac{1}{2n-1}P(S_{2n}=0)=\sum_{n\geq 1}\frac{1}{2n-1}\frac{1}{2^{2n}}\frac{(2n)!}{(n!)^2}
+$$
+Retry:
+$$\frac{1}{2n-1}P(S_{2n}=0)=\frac{1-2n+2n}{2n-1}P(S_{2n}=0)=\frac{2n}{2n-1}P(S_{2n}=0)-P(S_{2n}=0)$$
+but 
+$$\frac{2n}{2n-1}P(S_{2n}=0)=\frac{2n}{2n-1}\frac{1}{2^{2n}}C_{2n}^n=\frac{2n}{2n-1}....=\frac{2n}{2n-1}\frac{1}{2^{2n}}2\frac{2n-1}{n}C_{2n-2}^{n-1}=P(S_{2n-2}=0)
+=\sum_{n\geq 1}\frac{1}{2n-1}P(S_{2n}=0)=\sum_{n\geq 1}(P(S_{2n-2}=0)-P(S_{2n}=0))=P(S_0=0)=1$$
+
+
+\section{Fundamental lemma}
+we have obtained 
+$$P(S_2\neq 0,\ldots S_{2n-2}\neq 0,S_{2n}=0)=P(S_{2n-2}=0)-P(S_{2n}=0)$$
+
+
+yet
+$$P(S_2\neq0,\ldots,S_{2n-2}\neq 0,S_{2n}=0)=P(S_2\neq 0,\ldots,S_{2n-2}\neq 0)-P(S_2\neq 0,\ldots S_{2n}\neq 0)$$
+so for $n\geq 1$
+$$P(S_2\neq 0,\ldots, S_{2n-2}\neq 0)-P(S_2\neq 0,\ldots, S_{2n}\neq 0)=P(S_{2n-2}=0)-P(S_{2n}=0)$$
+moreover $P(S_2\neq 0)=1/2=P(S_2=0)$
+Fundamental Lemma:
+$$P(S_2\neq 0,\ldots,S_{2n}\neq 0)=P(S_{2n}=0)$$
+
+
+\section{Last tie}
+Consider a coin tossing game of length $2n$ and the time of the last tie before $2n$.
+$$T=\max\{k\leq 2n: S_k=0\}$$
+Intuition tells us that the winning player should change frequently during the game. What is the distribution of $T$? So we image that $T$ should be close to $2n$. But this is
+completely false. In fact, the law of $T$ is symmetric with respect to $n$:
+$$P(T<n)=P(T>n)$$
+hence,
+$$P(T\leq n)>\frac{1}{2}$$
+\begin{proposition}(Arcsinuns law for $T$)
+$$\forall k\in\{0,\ldots,n\}: P(T=k)=P(S_{2k}=0)P(S_{2n-2k}=0)$$
+\end{proposition}
+Example: coin tossing 1 toss each second for 1 year day and night. Proba =1/10 T occurs in 2 first days. 1/20 2,25 day. 1/100 2h 15 min. 
+
+
+
+
+
+\end{document}
