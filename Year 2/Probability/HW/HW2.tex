@@ -28,20 +28,48 @@ Where:
 J = \begin{vmatrix}
 \frac{y}{(x+y)^2} & -\frac{x}{(x+y)^2}\\
 1 & 1
-\end{vmatrix} = \frac{1}{x+y} =  v^{-1}
+\end{vmatrix} = \left|\frac{1}{x+y}\right| =  |v^{-1}|
 \]
 Then replacing in the definition and using the fact that $X$ and $Y$ are independent and hence we can split the joint law we get that:
 \begin{align*}
-f_{U,V}(u, v) &= \frac{uv^{k-1}}{(k-1)!} e^{-uv} 1_{\mathbb{R}^+}(uv) \frac{v^{k-1}(1 - u)^{k-1}}{(k - 1)!} e^{-v(1- u)} 1_{\mathbb{R}^+} (v(1 - u)) v\\
-&= \frac{e^{-v} \sqrt{v^2} \left((1-u) u
-   v^2\right)^{k-1}}{((k-1)!)^2} 1_{\mathbb{R}^+} (u v) 1_{\mathbb{R}^+}(v-u v)
+f_{U,V}(u, v) &= \frac{uv^{k-1}}{(k-1)!} e^{-uv} 1_{\mathbb{R}^+}(uv) \frac{v^{k-1}(1 - u)^{k-1}}{(k - 1)!} e^{-v(1- u)} 1_{\mathbb{R}^+} (v(1 - u)) |v|\\
+&= \left( \frac{u^{k-1} (1 - u)^{k-1}}{(k-1)!} \right)\left( \frac{v^{2k - 2} |v| e^{-v}}{(k-1)!} \right) 1_{\mathbb{R}^+}(uv) 1_{\mathbb{R}^+}(v(1 - u))
 \end{align*}
-Then integrating for $u$ on $\mathbb{R}$ gives:
+Now notice that:
 \[
-f(v) = ...
+\begin{cases}
+uv \geq 0\\
+v(1 - u) \geq 0
+\end{cases}
+\Leftrightarrow
+\begin{cases}
+u, v \geq 0 \lor u, v \leq 0\\
+v, (1 - u) \geq 0 \lor v, (1 - u) \leq 0
+\end{cases}
+\Leftrightarrow
+u, v \geq 0
+\]
+Hence we can rewrite the above as:
+\[
+f_{U,V}(u, v) = \left( \frac{u^{k-1} (1 - u)^{k-1}}{(k-1)!} 1_{\vb{R}^+}(u) \right)\left( \frac{v^{2k - 1}e^{-v}}{(k-1)!} 1_{\vb{R}^+}(v) \right)
+\]
+We can already see that $U, V$ are independent. The only thing left to compute is the normalization coefficient of at least one of the two laws. The law of $V$ normalizes obviously to $\Gamma(2k)$ from the definition of the $\Gamma$ function. Hence we can rewrite the above as:
+\[
+f_{U,V}(u, v) = \left( \frac{u^{k-1} (1 - u)^{k-1} \Gamma(2k)}{(k-1)!^2} 1_{\vb{R}^+}(u) \right)\left( \frac{v^{2k - 1}e^{-v}}{\Gamma(2k)} 1_{\vb{R}^+}(v) \right) = f_U(u) f_V(v)
 \]
 
-\item ...
+\item An immediate computation gives:
+\[
+E[X] = \int_\mathbb{R} t f(t) \dd t = \int_{\mathbb{R}^+} \frac{t^k}{(k-1)!} e^{-t} \dd t = \frac{\Gamma(k+1)}{\Gamma(k)} = k 
+\]
+Then $X, Y$ are identically distributed hence $E[Y] = E[X]$ and therefore:
+\[
+E[V] = E[X+Y] = E[X] + E[Y] = 2k
+\]
+Then we have that $X = UV$ and using the fact that $U, V$ are independent we get:
+\[
+E[X] = E[U]E[V] \Rightarrow E[U] = \frac{1}{2}
+\]
 
 \end{enumerate}
 
@@ -49,10 +77,10 @@ f(v) = ...
 
 \begin{enumerate}
 
-\item Let $(\Omega_i, \mathcal{F}_i, P_i)$ be the probability space of $X_i$ then define the product probability space as $(\Omega, \mathcal{F}, P)$. Let $(\Omega, \mathcal{F}, P)$ also be the probability space of $T$. Then we define:
+\item Let $(\Omega_i, \mathcal{F}_i, P_i)$ be the probability space of $X_i$ then define the product probability space as $(\Omega, \mathcal{F}, P)$ and $X$ as $(X_1, \cdots, X_n)$. Let $(\Omega, \mathcal{F}, P)$ also be the probability space of $T$. Then we define:
 \begin{align*}
 X_T : \Omega &\longrightarrow \mathbb{R}\\
-\vb{x} &\longmapsto \vb{x}_{T(\vb{x})}
+\vb{x} &\longmapsto X(\vb{x})_{T(\vb{x})}
 \end{align*}
 Then let $B \in \mathcal{B}(\mathbb{R})$ then we have that:
 \begin{align*}
@@ -60,18 +88,23 @@ Then let $B \in \mathcal{B}(\mathbb{R})$ then we have that:
 \end{align*}
 Where the belonging to $\mathcal{F}$ follows from the definition of the product $\sigma$-algebra. 
 
-\item I think that $(X_{(1)}, \cdots, X_{(n)})$ is ill-defined since there exists no clear order relation on functions which might not even come from the same space. I assume that what was meant was that:
-\[
-\forall \omega \in \Omega, \exists \sigma \in \mathfrak{S}_n, \sigma(X(\omega)) = \sigma\left(\left(X_1(\omega_1), \cdots, X_n(\omega_n)\right)\right) = (X_{\sigma(1)}(\omega_{\sigma(1)}), \cdots, X_{\sigma(n)}(\omega_{\sigma(n)})) \mbox{~~ is in increasing order.} 
-\]
-Since we have a finite list of real numbers we know from the constructions of the real numbers we can order it. Then we define the permutation $\sigma_\omega$ as the one which sets them in the right order and in case of parity the smaller index goes first. Then we have that $\sigma$ is a random variable defined as:
+\item In order to define $(X_{(1)}, \cdots, X_{(n)})$ properly we consider it as an r.v. on the space $(\Omega, \mathcal{F}, P)$ defined as:
+\begin{align*}
+(X_{(1)}, \cdots, X_{(n)}) : \Omega &\longrightarrow \mathbb{R}^n\\
+\vb{x} &\mapsto \sigma{\vb{x}}(X(\vb{x}))
+\end{align*}
+Where $\sigma_{\vb{x}}$ is the permutation that put $X(\vb{x})$ in increasing order. Since we have a finite list of real numbers we know from the constructions of the real numbers that such a $\sigma_{\vb{x}}$. Furthermore adding as a constraint that in case of parity the smaller index goes first then $\sigma_{\vb{x}}$ is also unique for every $\vb{x}$. Then we have that $\sigma$ is a random variable defined as:
 \begin{align*}
 \sigma : \Omega &\longrightarrow \mathfrak{S}_n\\
-\omega &\longmapsto \sigma_\omega
+\vb{x} &\longmapsto \sigma_{\vb{x}}
 \end{align*}
 We furthermore have that $\sigma$ is injective and therefore measurable. Hence $\sigma$ is a well-defined random variable. 
 
-\item From the previous question we write $(X_{(1)}, \cdots, X_{(n)}) = \sigma(X)$. Then notice that:
+\item From the previous question for shorthand we write $(X_{(1)}, \cdots, X_{(n)}) = \sigma(X)$ as an abuse of notation for: 
+\[
+(X_{(1)}, \cdots, X_{(n)})(\vb{x}) = \sigma_{\vb{x}}(X(\vb{x}))
+\]
+Then notice that:
 \[
 f_{\sigma(X)}(\vb{x}) \dd \vb{x} = \sum_{\mu \in \mathfrak{S}_n} f_X(\mu^{-1}(\vb{x})) \dd \vb{x} = \sum_{\mu \in \mathfrak{S}_n} f_X(\mu(\vb{x})) \dd \vb{x} = \sum_{\mu \in \mathfrak{S}_n} \prod_{i = 1}^n f_{X_i}(\mu(\vb{x})_i) \dd \vb{x}
 \]
@@ -81,27 +114,22 @@ Where on the last equality we used that the $X_i$ are independent. Then since th
 \]
 Where we are free to chose any $\mu \in \mathfrak{S}_n$ since the terms in the product commute. If we fix ourselves with the choice $\mu = \sigma$ we get:
 \[
-\sum_{\mu \in \mathfrak{S}_n} \prod_{i = 1}^n f_{X_i}(\mu(\vb{x})_i) \dd \vb{x} = n! f_X(\sigma(\vb{x})) = n! f_X(\vb{x'}) 1_{\vb{x'} = \sigma(\vb{x})} \dd \vb{x}
+\sum_{\mu \in \mathfrak{S}_n} \prod_{i = 1}^n f_{X_i}(\mu(\vb{x})_i) \dd \vb{x} = n! f_X(\sigma(\vb{x})) \dd \vb{x} = n! f_X(\vb{x'}) 1_{\vb{x'} = \sigma(\vb{x'})} \dd \vb{x'}
 \]
 Call $\mu$ the function that maps $X_1, \cdots, X_n$ to $X_1, \cdots, X_n - X_{n-1}$. Then plugging this in the definition of the expectancy we get:
 \begin{align*}
-E[\varphi(\mu(\sigma(X)))] &= \int_{\vb{x} \in \Omega} \varphi(\mu(\sigma(X(\vb{x})))) f_{\mu(\sigma(X))}(\mu(\vb{x})) \dd \vb{x} = n! \int_{\vb{x} \in \Omega} \varphi(\mu(\sigma(X(\vb{x})))) f_{X}(\vb{x'}) 1_{\vb{x'} = \sigma(\vb{x})} \dd \vb{x}\\
-&= n! \int_{\vb{x} \in \sigma(\Omega)} \varphi(\mu(X(\vb{x}))) f_{X}(\vb{x}) \dd \vb{x} = n! \mathbb{E}[\mu(\varphi(X)) 1_{\sigma}] \mbox{~~where~~} 1_\sigma(\vb{x}) = \begin{cases}
+E[\varphi(\mu(\sigma(X)))] &= \int_{\vb{x} \in \Omega} \varphi(\mu(\sigma(X(\vb{x})))) f_{\mu(\sigma(X))}(\mu(\vb{x})) \dd \vb{x} = n! \int_{\vb{x} \in \Omega} \varphi(\mu(\sigma(X(\vb{x})))) f_{\mu(X)}(\mu(\vb{x'})) 1_{\mu(\vb{x'}) = \sigma(\mu(\vb{x'}))} \dd \vb{x}\\
+&= n! \int_{\vb{x} \in \Omega} \varphi(\mu(X(\vb{x'}))) f_{\mu(X)}(\mu(\vb{x'})) 1_{\mu(\vb{x'}) = \mu(\sigma(\vb{x'}))} \dd \vb{x'} = n! \mathbb{E}[\varphi(\mu(X)) 1_{\sigma}] \mbox{~~where~~} 1_\sigma(\vb{x}) = \begin{cases}
 1 \mbox{~~if~~} \vb{x} = \sigma(\vb{x})\\
 0 \mbox{~~otherwise.}
 \end{cases}
 \end{align*}
 
-\item From the Block grouping theorem we know that if $X_1, \cdots, X_n$ are independent then $X_1, X_2 - X_1, \cdots, X_{n} - X_{n-1}$ are independent. Hence taking $\varphi(\mu(\vb{x})) = \prod_{i = 1}^n g_i(\mu(\vb{x_i}))$ where all the $f_i$ are measurable we get that:
-\[
-\mathbb{E}\left[\prod_{i = 1}^n g_i(\mu(\sigma(X))_i)\right] = \mathbb{E}\left[ n!\, 1_\sigma \prod_{i = 1}^n g_i(\mu(X)_i)\right] = n! \prod_{i = 1}^n \int_{\vb{x} \in \Omega} f_{X_1}(g_i(\mu(X(\vb{x}))_i)) P(\vb{x} = \sigma(\vb{x})) \dd \vb{x} = \prod_{i = 1}^n \mathbb{E}[g_i(\mu(\sigma(X))_i] 
-\] 
-Hence the $\mu(\sigma(X))$ are independent. Notice that in the first equality we used question 3, in the second equality we used the independence of $\mu(X)$ and in the third we simply used that $P(\vb{x} = \sigma(\vb{x})) = \frac{1}{n!}$ and then recontract the integral into an expectancy.
-Then we have that $X_{(1)} = \min_i X_i$ hence:
+\item From the previous exercise and the fact that the $X_{i} - X_{i-1}$ are independent we immediately get that the $X_{(i)} - X_{(i-1)}$ are independent. Then we have that $X_{(1)} = \min_i X_i$ hence:
 \[
 F_{X_{(1)}}(x) = 1 - \prod_{i = 1}^n P(X_i > x) = 1 - \prod_{i = 1}^n e^{- \alpha x} = 1 - e^{- \alpha n x}
 \]
-So $X_{(1)}$ follows an exponential law of parameter $n \alpha$. Now consider $X_{(i+1)} - X_{(i)}$. We have that this can be re-written as:
+So $X_{(1)}$ follows an exponential law of parameter $n \alpha$. Now consider $X_{(i+1)} - X_{(i)}$. This can be re-written as:
 \[
 X_{(i+1)} - X_{(i)} = \min_{i \in \llbracket 1, n \rrbracket, X_i > X_{(i)}} X_i - X_{(i)}
 \]
@@ -115,7 +143,7 @@ X_{(i+1)} - X_{(i)} = \min_{i \in \llbracket 1, n - i\rrbracket} X_i \sim \mbox{
 \]
 
 
-\item It is well know that the expectancy of an exponential random variable of parameter $\alpha$ is given by $\frac{1}{\alpha}$. Hence from the previous question we have that:
+\item It is well known that the expectancy of an exponential random variable of parameter $\alpha$ is given by $\frac{1}{\alpha}$. Hence from the previous question we have that:
 \[
 \mathbb{E}[X_{(i+1)} - X_{(i)}] = \frac{1}{\alpha(n - i)} \mbox{~~and~~} \mathbb{E}[X_{(1)}] = \frac{1}{\alpha n }
 \]
@@ -123,29 +151,36 @@ Denote by $u_i = \mathbb{E}[X_{(i)}]$ then we have that:
 \[
 u_1 = \frac{1}{\alpha n} \mbox{~~and~~} u_{i+1} = u_i + \frac{1}{\alpha(n - i)} = \sum_{\ell = 0}^{i} \frac{1}{\alpha(n - \ell)}
 \]
-Now the sum can be written as:
-\[
-\sum_{\ell = 0}^i \frac{1}{\alpha(n - \ell)} = \frac{1}{\alpha}\left( \sum_{\ell = 0}^{n-1} \frac{1}{n - \ell} - \sum_{\ell = i + 1}^{n-1} \frac{1}{n - \ell} \right) = \frac{1}{\alpha} \left( \sum_{\ell = 1}^n \frac{1}{\ell} - \sum_{\ell = 1}^{n - i - 1} \frac{1}{\ell} \right) = \frac{1}{\alpha} \left( \sum_{\ell = 1}^n \frac{1}{\ell} - \gamma - (\sum_{\ell = 1}^{n - i - 1} \frac{1}{\ell} - \gamma) \right) 
-\]
-Now using the definition of the digamma function we have that:
-\[
-\sum_{\ell = 0}^i = \frac{1}{\alpha}\left( \frac{\Gamma'(n+1)}{\Gamma(n+1)} + \frac{\Gamma'(n-i)}{\Gamma(n-i)} \right)
-\]
 
 \item Notice that:
 \[
 f_{X_{(k)}} = f_{X_{(1)} + (X_{(2)} - X_{(1)}) + \cdots + (X_{(k)} - X_{(k-1)}} = f_{X_{(1)}} \star f_{X_{(2)} - X_{(1)}} \star \cdots \star f_{X_{(k)} - X_{(k-1)}}
 \]
-Or in other words if we denote by $Y_j$ exponential random variables of parameter $\alpha$ we have that:
+Or in other words if we denote by $(Y_j)$ independent exponential random variables of parameter $\alpha$ we have that:
 \[
 X_{(k)} = \sum_{i = 1}^{k-1} X_{(i)} - X_{(i-1)} 1_{i > 1} = \sum_{i = 1}^k \frac{Y_i}{n - i + 1}
 \]
 
 \item In general we have that:
 \[
-F_{X_{(k)}}(x) = P\left(\max_{i \in \mathcal{I}} X_i < x \land \min_{i \in \llbracket 1, n \rrbracket \setminus \mathcal{I}} X_i > x \big| |\mathcal{I}| = k\right) = \binom{n}{k} F_{X_1}(x)^k (1 - F_{X_1}(x))^{n - k}
+F_{X_{(k)}}(x) = P\left(\max_{i \in \mathcal{I}} X_i < x \land \min_{i \in \llbracket 1, n \rrbracket \setminus \mathcal{I}} X_i > x \big| |\mathcal{I}| \geq k\right) = \sum_{i = k}^n \binom{n}{i} F_{X_1}(x)^i (1 - F_{X_1}(x))^{n - i}
 \]
-
+Where this comes simply from choosing which $i$ elements will be smaller than $x$, and the fact that we need at least $k$ elements to be smaller than $x$. Now simply taking the derivative with respect to $x$ of the previous result we get that:
+\[
+f_{X_{(k)}}(x) = \dv{}{x} \sum_{i = k}^n \binom{n}{i} F_{X_1}(x)^i (1 - F_{X_1}(x))^{n - i}
+\]
+Now we denote:
+\[
+s_i = \dv{}{x} F_{X_1}(x)^i (1 - F_{X_1}(x))^{n - i} = f_{X_1}(x) i F_{X_1}(x)^{i - 1}(1 - F_{X_1}(x))^{n - i} - f_{X_1}(x) (n - i) F_{X_1}(x)^i (1 - F_{X_1}(x))^{n - i - 1} = \ell_i - r_i
+\]
+And notice that $\ell_{i+1} = r_i \frac{i + 1}{n - i}$. Hence we get:
+\[
+f_{X_{(k)}}(x) - \binom{n}{k} k f_{X_1}(x) F_{X_1}(x)^{k-1} (1 - F_{X_1}(x))^{n - k} = \sum_{i = k}^{n-1} \binom{n}{i + 1} (i + 1) \ell_{i + 1} - \binom{n}{i} r_i = 0
+\]
+We therefore get:
+\[
+f_{X_{(k)}}(x) = \binom{n}{k} k f_{X_1}(x) F_{X_1}(x)^{k-1} (1 - F_{X_1}(x))^{n - k}
+\]
 
 \end{enumerate}
 
