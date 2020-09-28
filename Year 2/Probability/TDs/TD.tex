@@ -407,4 +407,71 @@ From symmetry the law of $1/Z$ is identical.
 
 \end{enumerate}
 
+\chapter{TD 4}
+\section{Around the notion of independence.}
+\begin{enumerate}
+\item $A$ and $B$ are independent, $B$ and $C$ also and $A$ and $C$ also. However $A, B, C$ is not independent.
+
+\item $P(A) = P(A \cap A) = P(A)P(A) = P(A)^2$ then $P(A) = 0$ or $P(A) = 1$. Similarly $P(X = a) = P(X = a | X = b) = \delta_{ab}$. So $X$ must be single valued and have that value with probability 1.
+
+\item  We have that $E[X] = E[Y] = 0$. Since $X, Y$ are independent we also have that $E[Z] = E[XY] = E[X]E[Y] = 0$. Hence we have that:
+\[
+Cov[X, Z] = E[(X - E[X])(Z - E[Z])] = E[XZ] = E[X^2 Y] = E[X^2]E[Y] = E[X^2] \cdot 0 = 0
+\]
+$X$ and $Z$ are not independent because:
+\[
+P(Z = 0| X = 0) = 1 \neq P(Z = 0)
+\]
+
+\end{enumerate}
+
+\section{Convergence in probability of random variables.}
+\begin{enumerate}
+
+\item We have that:
+\[
+\forall \varepsilon > 0, \lim_{n \to +\infty} P(|X_n - X| > \varepsilon) = 0
+\]
+Now notice that:
+\[
+P(|YX_{n} - YX| > \varepsilon) = P(|Y||X_n - X| > \varepsilon)
+\]
+Since this must be true for all $\varepsilon$ it is equivalent to saying that:
+\[
+P(|X_n - X| > \varepsilon \land |Y| > \varepsilon) \leq P(|X_n - X|) 
+\]
+Which by hypothesis converges to 0.
+
+\item Fix $\varepsilon$ then:
+
+\end{enumerate}
+
+\section{Different modes of convergence of random variables.}
+\begin{enumerate}
+
+\item $(X_n)$ converges to $\delta_0$ almost surely from construction. Then we have that:
+\[
+E[|X_n - \delta_0|] = E[|X_n|] = 0 \cdot (1 - \frac{1}{n^2}) + n^2 \cdot \frac{1}{n^2} = 1
+\] 
+Hence it does not converge to $\delta_0$ in $L^1$. 
+
+\item 
+\begin{enumerate}
+
+\item We have that:
+\[
+E[X_n] = 0 (1- \frac{1}{n}) + 1 \cdot \frac{1}{n} = \frac{1}{n} \stackrel{n \to +\infty}{\longrightarrow} 0 
+\]
+Hence $X_n$ goes to $0$ in $L^1$ and therefore also in probability.
+
+\item We have that:
+\[
+P(\limsup A_n) = P(\bigcap_{m} \bigcup_{n \geq m} A_n) = P(\lim_{n \to +\infty} \exists m \geq n, X_m = 1)
+\]
+
+
+\end{enumerate}
+
+\end{enumerate}
+
 \end{document}

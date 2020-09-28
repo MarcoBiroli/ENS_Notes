@@ -643,4 +643,187 @@ Since this is true for any $n$ we also have that the $(X_n)$ are independent. We
 \section{An infinite sequence of i.i.d.r.v.}
 Often one wants to defined an infinite sequence of r.v. with any given law however the existence of such a structure is a difficult question. 
 
+
+\chapter{Transience and recurrence of random walks in $\mathbb{Z}^d$.}
+Throughout this chapter we consider a sequence $(X_n)_{n \in \mathbb{N}}$ of i.i.d. random variables with values in $\mathbb{Z}^d$ where $d \geq 1$. We study the associated random walk defined by $S_0 = \vb{0}$ and for any $n\geq 1$ we have $S_n = \sum_{i = 1}^n X_i$. 
+
+\section{Return to $\vb{0}$ and recurrence.}
+
+\begin{proposition}
+If the random walk returns to $\vb{0}$ with probability one then it will return to $\vb{0}$ infinitely many times with probability one. 
+\end{proposition}
+
+\begin{proof}
+We suppose that $P(\exists n \in \mathbb{N}^*, S_n = 0) = 1$. Let us introduce the time $R$ of the last visit to $\vb{0}$. Let $k \in \mathbb{N}$ and let us examine:
+\[
+P(R = k) = P(S_k = 0, \forall \ell > k, S_\ell \neq 0) = P(S_k = 0, \forall \ell > k, S_\ell - S_k \neq 0)
+\]
+Now we have that $S_k$ is independent from the sequence $S_\ell - S_k$ and hence from the block grouping theorem we can factorize this as:
+\[
+P(S_k = 0)P(\forall \ell > k, S_\ell - S_k \neq 0) = P(S_k = 0)P(\forall n \geq 1, S_n \neq 0) \leq 1 \cdot (1 - P(\exists n \in \mathbb{N}^*, S_n = 0)) = 0
+\]
+Now the probability that $S_n$ returns to $\vb{0}$ a finite number of times is given by the probability that $R < +\infty$ which from the above is 0.
+
+\end{proof}
+
+\begin{corollary}
+
+Equivalence:
+
+\begin{enumerate}
+
+\item $P(\exists n\in\mathbb{N}^*, S_n=0)=1$
+
+\item $P(S_n=0\text{ infinitely often})=1$
+
+\end{enumerate}
+
+\end{corollary}
+
+
+Often, it is easier to prove that something happens infinitely many times with probability one than to prove that it happens once with probability one!
+
+
+\begin{definition}
+
+The random walk $(S_n)_{n\in\mathbb{N}}$ is said to be recurrent if it returns to 0 infinitely many times with probability one, and transient otherwise. 
+
+\end{definition}
+
+
+\section{Borel-Cantelli Lemma}
+
+Let $(\Omega,\mathcal{F},P)$ be a probability space. Let $(A_n)_{n\in\mathbb{N}}$ be a sequence of events of $\mathcal{F}$. We define the event 
+
+$$\{A_n\text{ occurs infinitely often }\}=\{A_n:\,\,i.o.\}=\limsup_nA_n=\bigcap_{n\in\mathbb{N}}(\bigcup_{m\geq n}A_m)$$
+
+\begin{lemma}(Borel-Cantelli part 1) If the series $\sum_{n\geq 0}P(A_n)$ converges, then 
+
+$$P(A_n:\,\,i.o.)=0$$
+
+\end{lemma}
+
+
+
+\begin{lemma}(Borel-Cantelli part 2)If the series $\sum_{n\geq 0}P(A_n)$ diverges and if the events $(A_n)$ are independent, then 
+
+$$P(A_n:\,\,i.o)=1$$
+
+\end{lemma}
+
+\proof (part 1). We suppose that $\sum_{n\geq 0}P(A_n)<\infty$. We have that $P(A_n:\,\,i.o.)=P(\bigcap_{n\geq 0}(\bigcup_{m\geq n}A_m))=\lim_{n\to\infty}P(\bigcup_{m\geq n} A_m)\leq_{\sigma-subadditivity}\lim_{n\to\infty}\sum_{m\geq n}P(A_m)=0$
+
+
+\proof (part 2). We suppose that $\sum_{n\geq 0}P(A_n)=\infty$ and $(A_n)$ are independent, then
+
+$$P(\{A_n\,\,i.o.\}^C)=P(A_n\text{ occurs finitely many times})=P((\bigcap_{n\geq 0}\bigcup_{m\geq n} A_m)^C)=P(\bigcap_{n\geq 0}\bigcup_{m\geq n} A_m^C)\leq \sum_{n\geq 0}P(\bigcap_{m\geq n}A_m^C)$$
+
+$$=\lim_{N\to\infty}P(\bigcap_{n\leq m\leq N}A_m^C)=_{indep.}\lim_{N\to\infty}\prod_{n\leq m\leq N}P(A_m^C)=\lim_{N\to\infty}\prod_{n\leq m\leq N}(1-P(A_m))$$
+
+then we take the logarithm:
+
+$$\ln\lim_{N\to\infty}\prod_{n\leq m\leq N}(1-P(A_m))=\sum_{n\leq m\leq N}\ln(1-P(A_m))\leq -\sum_{n\leq m\leq N}P(A_m)\to_{N\to\infty}-\infty$$
+
+therefore $\ln\lim_{N\to\infty}\prod_{n\leq m\leq N}(1-P(A_m))\to-\infty$ hence $P(\bigcap_{m\geq n}A_m^C)$, $\forall n\in\mathbb{N}$.
+
+\begin{remark}
+An example of an application is the monkey and the typewriter statement. If you let a monkey type at a typewriter with probability one he will eventually work the entire works of Shakespeare. To simplify we resume the works to a binary alphabet then model the output by $(X_n)$ i.i.d.r.v. Bernouilli r.v. of parameter $p$. Then let $\varepsilon_1, \cdots, \varepsilon_\ell$ be the sequence representing the whole works of Shakespeare. Then:
+\[
+A_n = \{X_n = \varepsilon_1, \cdots, X_{n+\ell - 1} = \varepsilon_\ell \} \mbox{~~and~~} P(A_n) = \prod_{k = 1}^\ell p^{\varepsilon_k} (1 - p)^{1 - \varepsilon_k}
+\]
+We want to apply the Borel-Canterelli Lemma however the $A_n$ are not disjoint, however the $A_{\ell n}$ are disjoint. Then the lemma tells us the monkey will write infinetely many times the works of Shakespeare.
+\end{remark}
+
+\section{A criterion for recurrence.}
+
+Let $(\Omega, \mathcal{F}, P)$ a probability space. Let $(X_n)_{n \in \mathbb{N}^*}$ be a sequence of i.i.d. random variables with values in $\mathbb{Z}^d$ and let us set:
+\[
+S_0 = 0, \quad \forall n \geq 1, S_n = \sum_{i = 1}^{n} X_i
+\]
+
+\begin{proposition}
+We have equivalence between:
+\begin{enumerate}
+\item $\sum_{n \geq 0} P(S_n = 0) = +\infty$
+\item $P(\exists n \in \mathbb{N}^*, S_n = 0) = 1$
+\item $P(S_n = 0 \mbox{~~infinetly often}) = 1$. 
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+
+Let $T$ be the time of the first return to $\vb{0}$. Then:
+\[
+T = \inf \{ n \geq 1 : S_n = 0\} \mbox{~~where by convention~~} \inf \emptyset = +\infty
+\]
+Then let us define for $n\geq 1$:
+\[
+u_n = P(S_n = 0), \quad f_n = P(T = n)
+\]
+We have that for $n \geq 1$:
+\[
+u_n = P(S_n = 0) = P(S_n = 0, T \leq n) = \sum_{k = 1}^n P(S_n = 0, T = k) = \sum_{k = 1}^n P(T = k, S_n - S_k = 0)
+\]
+Now the two event $\{T = k\}$ and $\{S_n - S_k = 0\}$ are independent since they belong to two different $\sigma$-algebras: $\sigma(X_1, \cdots, X_k)$ and $\sigma(X_{k+1}, \cdots, X_n)$. The from the block grouping theorem we can write:
+\[
+u_n = \sum_{k = 1}^n P(T = k) P(S_n - S_k = 0) = \sum_{k = 1}^n P(T = k) P(S_{n - k} = 0) = \sum_{k = 1}^n f_k u_{n - k} = \sum_{k = 0}^n f_k u_{n-k}
+\]
+We introduce the generating functions of the sequences which are:
+\[
+U(s) = \sum_{n \geq 0} u_n s^n \mbox{~~and~~} F(s) = \sum_{n \geq 0} f_n s^n
+\]
+Then we have:
+\[
+U(s) - 1 = \sum_{n \geq 1} u_n s^n = \sum_{n \geq 1} \left(\sum_{k = 0}^n f_k s^k u_{n - k} s^{n - k}\right) = U(s)F(S)
+\]
+In the last equality we recognized the Cauchy product of the two series. Then these series are true for any $|s| < 1$. Then we can re-write the above as:
+\[
+\forall |s| < 1, U(s) (1 - F(s)) = 1
+\] 
+Then taking the limit as $s$ goes to 1 gives us that:
+\begin{align*}
+U(1) (1 - F(1)) = 1 &\Leftrightarrow \left( \sum_{n \geq 0} P(S_n = 0) \right) \left(1 - \sum_{n \geq 1} P(T = n)\right) = 1 \\
+&\Leftrightarrow \left( \sum_{n \geq 0} P(S_n = 0) \right) \left(1 - P(\exists n \in \mathbb{N}^*, S_n = 0) \right) = 1
+\end{align*}
+Thus we have that:
+\[
+\sum_{n \geq 0} P(S_n = 0) = +\infty \Leftrightarrow P(\exists n \in \mathbb{N}^*, S_n = 0) = 1
+\]
+\end{proof}
+
+\section{Random walk on $\mathbb{Z}$}
+Let $(X_n)$ be a sequence of Bernoulli random variables where $(X_n = -1) = 1- p$ and $P(X_n = 1) = p$. Now we saw that:
+\[
+P(S_{2n} = 0) = \binom{2n}{n} p^n (1 - p)^n \stackrel{n\to \infty}{\sim} \frac{[4 p(1- p)]^n}{\sqrt{\pi n}}
+\]
+Hence if $p\neq\frac{1}{2}$ the series is converging and therefore the walk is transient, if $p = \frac{1}{2}$ the series diverges and hence the walk is recurrent. 
+
+\section{Random walk on $\mathbb{Z}^2$.}
+We take $(X_n)$ i.i.d. random values in $\mathbb{Z}^2$. Then we start by considering the simplest symmetric random walk:
+\[
+P(X_n = (1, 0)) = P(X_n = (0, 1)) = P(X_n = (-1, 0)) = P(X_n = (0, -1)) = \frac{1}{4}
+\]
+Let us compute:
+\[
+P(S_{2n} = 0) = \sum_{u, d, \ell, r, u = d, \ell = r, u + d + \ell , r = 2n} \frac{1}{4^{2n}} \binom{2n}{u, d, \ell, r} = \sum_{u, \ell, u+\ell = n} \frac{1}{4^{2n}} \binom{2n}{u, u, \ell, \ell} = \sum_{u = 0}^n \frac{1}{4^{2n}} \frac{(2n)!}{n!^2} \left(\frac{n!}{u!(n-u)!}\right)^2 
+\]
+Now up to a rewriting we get:
+\[
+P(S_{2n} = 0) = \frac{1}{4^{2n}} \binom{2n}{n} \sum_{u = 0}^n \binom{n}{u} \binom{n}{n - u} = \frac{1}{4^{2n}} \binom{2n}{n} \binom{2n}{n} = P(S_{2n} = 0 \mbox{~~in one dimension})^2 \stackrel{n \to \infty}{\sim} = \frac{1}{\pi n}
+\]
+Hence in 2D the symmetric walk is recurrent. 
+
+
+\section{Random walk in $\mathbb{Z}^3$.}
+We take again the simplest symmetric random walk where we jump to each neighbor with probability $\frac{1}{6}$. Then identically as before we get that:
+\[
+P(S_{2n} = 0) = \sum_{i, j, k, i + j + k = n} \frac{1}{6^{2n}} \binom{2n}{i, i, j, j, k, k}
+\] 
+Then the $i!j!k!$ is smallest for $i = j = k$. Hence $i!j!k! \geq (\frac{n}{3})!^3$. Then we have the following upper bound:
+\[
+P(S_{2n} = 0) \leq \sum_{i, j, k, i+j+k = n} \frac{1}{6^{2n}} ... [\mbox{ale notes}] ...
+\]
+
+\section{Kolmogorov zero-one law}
+
 \end{document}

@@ -101,13 +101,37 @@ Then we have that $X_{(1)} = \min_i X_i$ hence:
 \[
 F_{X_{(1)}}(x) = 1 - \prod_{i = 1}^n P(X_i > x) = 1 - \prod_{i = 1}^n e^{- \alpha x} = 1 - e^{- \alpha n x}
 \]
-So $X_{(1)}$ follows an exponential law of parameter $n \alpha$. Now suppose $X_{(i)}$ follows an exponential law then:
-\begin{align*}
-F_{X_{(i + 1)}}(x) &= 1 - P(X_{(i+1)} > x) = 1 - \binom{n}{i+1} P(X_1 > x)^{i + 1} = 1 - \binom{n}{i} P(X_1 > x)^i \frac{n - i}{i + 1} P(X_1 > x)\\
-&= 1 - e^{-\lambda x}\frac{n - i}{i + 1}e^{-\alpha x} = 1 - e^{-(\lambda + \alpha)x}
-\end{align*}
+So $X_{(1)}$ follows an exponential law of parameter $n \alpha$. Now consider $X_{(i+1)} - X_{(i)}$. We have that this can be re-written as:
+\[
+X_{(i+1)} - X_{(i)} = \min_{i \in \llbracket 1, n \rrbracket, X_i > X_{(i)}} X_i - X_{(i)}
+\]
+However notice that:
+\[
+P(X_i = x + y | X_i > x) = \frac{P(X_i = x+ y \cap X_i > x)}{P(X_i > x)} = \frac{\alpha e^{-\alpha(x+y)}}{e^{-\alpha x}} = \alpha e^{-\alpha y} = P(X_i = y)
+\]
+Hence we get that:
+\[
+X_{(i+1)} - X_{(i)} = \min_{i \in \llbracket 1, n - i\rrbracket} X_i \sim \mbox{Exp}(\alpha(n - i))
+\]
 
-\item 
+
+\item It is well know that the expectancy of an exponential random variable of parameter $\alpha$ is given by $\frac{1}{\alpha}$. Hence from the previous question we have that:
+\[
+\mathbb{E}[X_{(i+1)} - X_{(i)}] = \frac{1}{\alpha(n - i)} \mbox{~~and~~} \mathbb{E}[X_{(1)}] = \frac{1}{\alpha n }
+\]
+Denote by $u_i = \mathbb{E}[X_{(i)}]$ then we have that:
+\[
+u_1 = \frac{1}{\alpha n} \mbox{~~and~~} u_{i+1} = u_i + \frac{1}{\alpha(n - i)} = \sum_{\ell = 0}^{i} \frac{1}{\alpha(n - \ell)}
+\]
+Now the sum can be written as:
+\[
+\sum_{\ell = 0}^i \frac{1}{\alpha(n - \ell)} = \frac{1}{\alpha}\left( \sum_{\ell = 0}^{n-1} \frac{1}{n - \ell} - \sum_{\ell = i + 1}^{n-1} \frac{1}{n - \ell} \right) = \frac{1}{\alpha} \left( \sum_{\ell = 1}^n \frac{1}{\ell} - \sum_{\ell = 1}^{n - i - 1} \frac{1}{\ell} \right) = \frac{1}{\alpha} \left( \sum_{\ell = 1}^n \frac{1}{\ell} - \gamma - (\sum_{\ell = 1}^{n - i - 1} \frac{1}{\ell} - \gamma) \right) 
+\]
+Now using the definition of the digamma function we have that:
+\[
+\sum_{\ell = 0}^i = \frac{1}{\alpha}\left( \frac{\Gamma'(n+1)}{\Gamma(n+1)} + \frac{\Gamma'(n-i)}{\Gamma(n-i)} \right)
+\]
+
 
 \end{enumerate}
 
