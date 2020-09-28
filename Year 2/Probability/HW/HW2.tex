@@ -132,6 +132,20 @@ Now using the definition of the digamma function we have that:
 \sum_{\ell = 0}^i = \frac{1}{\alpha}\left( \frac{\Gamma'(n+1)}{\Gamma(n+1)} + \frac{\Gamma'(n-i)}{\Gamma(n-i)} \right)
 \]
 
+\item Notice that:
+\[
+f_{X_{(k)}} = f_{X_{(1)} + (X_{(2)} - X_{(1)}) + \cdots + (X_{(k)} - X_{(k-1)}} = f_{X_{(1)}} \star f_{X_{(2)} - X_{(1)}} \star \cdots \star f_{X_{(k)} - X_{(k-1)}}
+\]
+Or in other words if we denote by $Y_j$ exponential random variables of parameter $\alpha$ we have that:
+\[
+X_{(k)} = \sum_{i = 1}^{k-1} X_{(i)} - X_{(i-1)} 1_{i > 1} = \sum_{i = 1}^k \frac{Y_i}{n - i + 1}
+\]
+
+\item In general we have that:
+\[
+F_{X_{(k)}}(x) = P\left(\max_{i \in \mathcal{I}} X_i < x \land \min_{i \in \llbracket 1, n \rrbracket \setminus \mathcal{I}} X_i > x \big| |\mathcal{I}| = k\right) = \binom{n}{k} F_{X_1}(x)^k (1 - F_{X_1}(x))^{n - k}
+\]
+
 
 \end{enumerate}
 
