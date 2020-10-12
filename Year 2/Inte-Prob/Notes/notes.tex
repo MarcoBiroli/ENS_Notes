@@ -392,5 +392,82 @@ A measure $m$ on $X$ is said to be finite if $m(X) < +\infty$ and it is said to 
 An application $f: (\Omega, \tau) \to (X, \mathcal{T})$ is said to be measurable if $\forall Y \in \mathcal{T}, f^{-1}(Y) \in \tau$ or in other words: $\mathcal{T} \subset f_\star \tau$ or $f^\star \mathcal{T} \subset \tau$. 
 \end{definition}
 
+\chapter{[...] Note Gap [...]}
+
+\chapter{Central limit theorem.}
+
+\section{[...] Note Gap [...]}
+
+\section{}
+
+\begin{lemma}
+We start with a Lemma which will be useful for proving the Hoeffding inequality. Let $\tilde{f}$ be a centered random variable (taking only a finite amount of values) then, for $\theta > 0$, we have:
+\[
+\mathbb{E}[e^{\theta \tilde{f}}] \leq e^{\frac{C \theta^2}{8}} \mbox{~~where~~} C = (\max \tilde{f} - \min \tilde{f})^2
+\]
+\end{lemma}
+
+\begin{proof}
+We take:
+\[
+g(\theta) := \ln(\mathbb{E}[e^{\theta \tilde{f}}])
+\]
+Then $g$ is a $C^\infty$ function. Notice the following properties:
+\[
+g(0) = 0 \mbox{~~and~~} g'(\theta) = \frac{\mathbb{E}[\tilde{f} e^{\theta \tilde{f}}]}{\mathbb{E}[e^{\theta \tilde{f}}]} \mbox{~~hence~~} g'(0) = E[\tilde{f}] = 0
+\]
+Hence we know that close to $\theta = 0$ we will have $g(\theta) \leq c \theta^2$ for some $c$. In order to get the value of the constant we need to compute the second derivative:
+\[
+g''(\theta) = \frac{\mathbb{E}[\tilde{f}^2 e^{\theta \tilde{f}}] \mathbb{E}[e^{\theta \tilde{f}}] - \mathbb{E}[\tilde{f} e^{\theta \tilde{f}}]^2}{\mathbb{E}[e^{\theta \tilde{f}}]^2} = \mathbb{E}\left[ \tilde{f}^2 \frac{e^{\theta \tilde{f}}}{\mathbb{E}[e^{\theta \tilde{f}}]} \right] - \mathbb{E}\left[ \tilde{f} \frac{e^{\theta \tilde{f}}}{\mathbb{E}[e^{\theta \tilde{f}}]} \right]^2
+\]
+Now the trick is to notice that this is the variance of a probability law on $\tilde{Y}$ given by:
+\[
+P_\theta(\tilde{y}) = \frac{P(\tilde{y}) e^{\theta \tilde{\tilde{y}}}}{\mathbb{E}[e^{\theta \tilde{f}}]}
+\]
+Which sums indeed to one and hence is a well defined probability. Now notice the trivial remark: $\text{Var}(X) = (\max X - \min X)^2/4$ for any random variable $X$ taking a finite amount of values. This follows from the fact that we can change the value of $X$ by a constant without changing the variance in order to get that $\max X = -\min X$ then we have that:
+\[
+\text{Var}[X] = \mathbb{E}[X^2] - \mathbb{E}[X]^2 \leq \mathbb{E}[X]^2 \leq (\max X)^2 = \left(\frac{\max X - \min X}{2}\right)^2
+\]
+Hence we get that $g''(\theta) \leq \frac{C}{4}$ which gives $g(\theta) \leq \frac{c}{8}\theta^2$. 
+\end{proof}
+
+\begin{theorem}[Inequality of Hoeffding]
+The inequality is stated as:
+\[
+P(|\tilde{S_n} | \geq a) \leq 2 \exp(-\frac{2 a^2}{C n}) \mbox{~~where~~} C = (\max f - \min f)^2
+\]
+\end{theorem}
+
+\begin{proof}
+To prove the Hoeffding inequality we use the Lemma stated above to evaluate (let $\theta > 0$):
+\[
+P(\tilde{S_n} \geq a) = P(e^{\theta \tilde{S_n}} \geq e^{\theta a}) \leq e^{-\theta a} \mathbb{E}[e^{\theta \tilde{S_n}}] = e^{-\theta a} \prod_{i = 1}^n \mathbb{E}[e^{\theta \tilde{f_i}}] = e^{-\theta a} \mathbb{E}[e^{\theta \tilde{f}}]^n \leq \exp(\frac{n C \theta^2}{8} - \theta a)
+\]
+Now the choice of $\theta$ is still free hence to make the bound as tight as possible we simply need to minimize the argument of the exponential. The minimum is obtained for:
+\[
+\theta = \theta_\star = \frac{4a}{nC}
+\]
+Then replacing up top we obtain the bound:
+\[
+P(\tilde{S_n} \geq a) \leq \exp( \frac{2a^2}{nC} - \frac{4a^2}{nC}) = \exp(-\frac{2a^2}{nC})
+\]
+The same reasoning applies for $P(\tilde{S_n} \leq -a)$ which gives the prefactor $2$ required. 
+\end{proof}
+
+\begin{proposition}
+The Hoeffding inequality gives another proof of the Central Limit Theorem.
+\end{proposition}
+
+\begin{proof}
+We write:
+\[
+P(|\tilde{S_n}| \geq \varepsilon n^\alpha) \leq 2 \exp(-\frac{2 \varepsilon^2}{C} n^{2 \alpha - 1})
+\]
+Then for $\varepsilon$ fixed the r.h.s. is the term of a convergent series in $n$. Hence from the first Borel-Cantorelli Lemma we have that almost surely all the l.h.s. is satisfied in other words:
+\[
+P(\tilde{S_n} \geq \varepsilon n^\alpha \mbox{~~ for an infinite amount of~~} n) = 0 \Rightarrow \frac{\tilde{S_n}}{n^\alpha} \stackrel{a.s}{\longrightarrow} 0
+\]
+\end{proof}
+
 
 \end{document}

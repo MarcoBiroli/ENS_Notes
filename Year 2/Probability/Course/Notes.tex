@@ -826,4 +826,229 @@ P(S_{2n} = 0) \leq \sum_{i, j, k, i+j+k = n} \frac{1}{6^{2n}} ... [\mbox{ale not
 
 \section{Kolmogorov zero-one law}
 
+\chapter{The law of large numbers.}
+
+\section{The Bienaymé-Chebyshev inequality.}
+
+\begin{theorem}[Markov inequality]
+Let $X$ be a real valued random variable on $(\Omega, \mathcal{F}, P)$. Then:
+\[
+\forall t \geq 0, P(|X| \geq t) \leq \frac{1}{t} E\big[|X|\big]
+\]
+\end{theorem}
+
+\begin{proof}
+
+We know that:
+\[
+E\big[|X|\big] = \int |X| \dd P = \int_{|X| < t} |X| \dd P + \int_{|X| \geq t} |X| \dd P \geq \int_{|X| \geq t} |X| \dd P \geq \int_{|X| \geq t} t \dd P = t P(|X| \geq t)
+\]
+
+\end{proof}
+
+\begin{theorem}[Bienaymé-Chebyshev inequality]
+Let $(\Omega, \mathcal{F}, P)$ be a probability space. Let $X$ be a real valued random variable on $(\Omega, \mathcal{F}, P)$, which admits a moment of order 2 i.e. $E[|X|^2] < +\infty$. Let us set $m = E[X]$ and $\sigma^2 = \text{Var}[X]$. Then the inequality is given by:
+\[
+\forall t \geq 0, P(|X - m| \geq t) \leq \frac{\sigma^2}{t^2}
+\]
+\end{theorem}
+
+\begin{proof}
+We start from the left hand side and use the Markov inequality:
+\[
+P(|X - m| \geq t) = P\left( (X - m)^2 \geq t^2 \right) \geq \frac{1}{t^2} E\left[ (X - m)^2 \right] = \frac{1}{t^2} \text{Var}[X]
+\]
+\end{proof}
+
+\section{The weak law of large numbers.}
+
+\begin{theorem}[Weak law of large numbers]
+Let $\mu$ be a probability distribution on $\mathbb{R}$ which is integrable, i.e., $\int |x| \dd \mu(x) < +\infty$. Let us set $m = \int x \dd \mu(x)$ and let, for $n \geq 1$, $X_1, \cdots, X_n$ be $n$ independent and identically distributed random bariabls with law $\mu$ then:
+\[
+\forall \varepsilon > 0, \quad \lim_{n \to +\infty} P\left[ \left|\frac{X_1 + \cdots + X_n}{n} - m \right| > \varepsilon \right] = 0
+\]
+\end{theorem}
+
+\begin{remark}
+Notice that we have:
+\[
+P\left[ \left|\frac{X_1 + \cdots + X_n}{n} - m \right| > \varepsilon \right] = \mu^{\otimes n} \left( \left\{ \left( x_1, \cdots, x_n \right) : \left| \frac{x_1 + \cdots + x_n}{n} - m \right| > \varepsilon \right\} \right)
+\]
+Thus the weak law does not really involve an infinite sequence of independent identically distributed random variables, rather it is an asymptotic statement on the sequence of probability distributions $(\mu^{\otimes n})_{n \geq 1}$. 
+\end{remark}
+
+\begin{proof}
+
+We first suppose that $\mu$ admits a moment of order 2, then we write:
+\[
+P\left[ \left|\frac{X_1 + \cdots + X_n}{n} - m \right| > \varepsilon \right] \leq \frac{1}{\varepsilon^2} \text{Var}\left[ \frac{X_1 + \cdots + X_n}{n} - m \right] \leq \frac{1}{\varepsilon^2} \text{Var}\left[ \frac{X_1 + \cdots + X_n}{n}\right] \leq \frac{1}{\varepsilon^2 n^2} \text{Var}\left[X_1 + \cdots + X_n \right]
+\]
+Now using the fact that the variables are independent we can say that the variance of the sum is the sum of the variance hence:
+\[
+P\left[ \left|\frac{X_1 + \cdots + X_n}{n} - m \right| > \varepsilon \right] \leq  \frac{1}{\varepsilon^2 n^2} (\text{Var}[X_1] + \cdots + \text{Var}[X_n]) = \frac{1}{\varepsilon^2 n^2} n \text{Var}[X_1] = \frac{\text{Var}[X_1]}{\varepsilon^2 n} \stackrel{n \to \infty}{\longrightarrow} 0
+\]
+Some extra work is needed to generalize to when the law is only integrable and not necessarily has a moment of order 2. However we will not do it here since it will be done in the next section during the proof of the strong law of large numbers.
+\end{proof}
+
+\section{The strong law of large numbers.}
+
+\begin{theorem}[Strong law of large numbers]
+Let $(X_n)_{n \geq 1}$ be a sequence of independent identically distributed random variables which admit a moment of order 1 i.e. $E[|X_1|] < +\infty$. Then the strong law of large numbers states that:
+\[
+\frac{X_1 + \cdots + X_n}{n} \stackrel{a.s.}{\longrightarrow} E[X_1]
+\]
+\end{theorem}
+
+\begin{proof}
+
+The first step consists in centering the variables. We replace $X_n$ by $X'_n = X_n - m$ where $m = E[X_1]$. Now we need to prove the following modified statement:
+\[
+\frac{X'_1 + \cdots + X'_n}{n} = \frac{X_1 + \cdots + X_n}{n} - m \stackrel{a.s.}{\longrightarrow} 0
+\]
+However now in order to continue with the proof we need to introduce a few more concepts. Which we will do now.
+\end{proof}
+
+\section{A maximal inequality}
+
+\begin{theorem}[Maximal inequality]
+
+Consider $(X_1, \cdots, X_n)$ to be $n$ independent centered random variables and we let $S_k = X_1 + \cdots + X_k$ for $k \in \llbracket 1, n \rrbracket$. Then we have:
+\[
+\forall \alpha \geq 0, \quad P(\max_{1 \leq k \leq n} |S_k| \geq \alpha) \leq \frac{1}{\alpha^2} E[S_n^2]
+\] 
+
+\end{theorem}
+
+\begin{proof}
+
+Let us set for $k \in \llbracket 1, n \rrbracket$, $A_k = \{ |S_k| \geq \alpha, S_1 < \alpha, \cdots, |S_{k-1}| < \alpha\}$. Then we have that:
+\[
+E[S_n^2] = \int S_n^2 \dd P \geq \int_{\bigcup_{k = 1}^n A_k} S_n^2 \dd P = \sum_{k = 1}^n \int_{A_k} S_n^2 \dd P 
+\]
+However now notice that $A_k$ depends only on $S_1, \cdots, S_k$ and hence we get the intuition of introducing $S_k$ to generate two independent events and we write:
+\begin{align*}
+\int_{A_k} S_n^2 \dd P &= \int_{A_k} (S_n - S_k + S_k)^2 \dd P = \int_{A_k} (S_n - S_k)^2 \dd P + 2 \int_{A_k} (S_n - S_k) S_k \dd P + \int_{A_k} S_k^2 \dd P\\
+&\geq 0 + 2 E\left[ (S_n - S_k) S_k 1_{A_k} \right] + \int_{A_k} S_k^2 \dd P 
+\end{align*}
+Now using the independence of the two terms in the expectancy we can split it and we get:
+\[
+2 E\left[ (S_n - S_k) S_k 1_{A_k} \right] = 2 E\left[ (S_n - S_k) \right]E \left[ S_k 1_{A_k} \right] = 0 
+\]
+So we have:
+\[
+E[S_n^2] \geq \sum_{k = 1}^n \int_{A_k} S_k^2 \dd P \geq \sum_{k = 1}^n \int_{A_k} \alpha^2 \dd P = \sum_{k = 1}^n \alpha^2 P(A_k) = \alpha^2 P(\bigcup_{k = 1}^n A_k) = \alpha^2 P(\max_{1 \leq k \leq n} |S_k| \geq \alpha)
+\]
+\end{proof}
+
+\section{Kolmogorov's criterion.}
+
+\begin{theorem}[Kolmogorov's criterion]
+Let $(X_n)$ be a sequence of centered independent random variables. If the series $\sum_{n \geq 1} \frac{1}{n^2} E[X_n^2]$ converges then:
+\[
+\frac{X_1 + \cdots + X_n}{n} \stackrel{a.s.}\longrightarrow 0
+\]
+\end{theorem}
+
+\begin{proof}
+Let $\varepsilon > 0$ and let us introduce the event:
+\[
+B_k = \{ \exists n \in \{2^k, \cdots, 2^{k+1} - 1\}, |S_n| > n \varepsilon\}
+\]
+We now estimate the probability of this event:
+\[
+P(B_k) \leq P(\exists n \in \{2^k, \cdots, 2^{k+1} - 1\}, |S_n| > 2^k \varepsilon) = P(\max_{2^k \leq n < 2^{k+1}} |S_n| > 2^k \varepsilon) \leq P(\max_{1 \leq n \leq 2^{k + 1}} |S_n| > 2^k \varepsilon)
+\]
+Now using the maximal inequality we can bound this from above as:
+\[
+P(B_k) \leq \frac{1}{2^{2k} \varepsilon^2} E[S_{2^{k+1}}^2] = \frac{1}{2^{2k} \varepsilon^2} \sum_{n = 1}^{2^{2k + 1}} E[X_n^2]
+\]
+Hence we have:
+\[
+\sum_{k \geq 1} P(B_k) \leq \sum_{k \geq 1} \frac{1}{2^{2k} \varepsilon^2} \sum_{n = 1}^{2^{2k + 1}} E[X_n^2] = \sum_{n \geq 1} \sum_{k : 2^{k + 1} \geq n} \frac{1}{2^{2k} \varepsilon^2} E[X_n^2] = \sum_{n \geq 1} \frac{1}{\varepsilon^2} E[X_n^2] \sum_{k : 2^{k+1} \geq n} \frac{1}{2^{2k}}
+\]
+Now the second sum gives:
+\[
+\sum_{k : 2^{k+1} \geq n} \frac{1}{2^{2k}} = \sum_{k \geq K} \frac{1}{2^{2k}} = \frac{\frac{1}{2^{2K}}}{1 - \frac{1}{2^2}} = \frac{4}{3 \cdot 2^{2K}} = \frac{16}{3 \cdot 2^{2(K+1)}} \leq \frac{16}{3 n^2}
+\]
+Thus:
+\[
+\sum_{k \geq 1} P(B_k) \leq \frac{16}{3 \varepsilon^2} \sum_{n \geq 1} E[X_n]^2 \leq \frac{16}{3 \varepsilon^2} M \mbox{~~by hypothesis.}
+\]
+Hence from the Borel-Cantelli lemmma part 1 we now that:
+\[
+P(B_k \mbox{~~occurs finitely often~~}) = 0
+\]
+Hence the complement has probability 1 or in other words:
+\[
+P(B_k \mbox{~~occurs finitely many times}) = 1
+\]
+Which can be re-written as:
+\[
+P(\exists K, \forall k \geq K, \forall n \in \{ 2^k, \cdots, 2^{k+1} - 1\}, |S_n| \leq n\varepsilon) = 1
+\]
+Or in other words:
+\[
+\forall \varepsilon > 0, P(\exists N, \forall n \geq N, |S_n| \leq n\varepsilon) = 1
+\]
+However we still have a small problem which is that the $\forall \varepsilon > 0$ should be inside the probability and not outside. In order to put it inside we simply can choose $\varepsilon \in \mathbb{Q}$ and then the countable intersection of events of probability 1 has probability 1 hence:
+\[
+P(\forall \varepsilon > 0, \varepsilon \in\mathbb{Q}, \exists N, \forall n \geq N, |S_n| \leq n \varepsilon) = 1
+\]
+\end{proof}
+
+\section{Truncature.}
+We truncate the variables $(X_n)$ and we defined a sequence $(Y_n)$ by setting:
+\[
+\forall k \geq 1, Y_k = \begin{cases} X_k &\mbox{~~if~~} |X_k| \leq k\\ 0 &\mbox{~~otherwise}\end{cases}
+\]
+Now we claim that $P(X_k \neq Y_k \mbox{~~infinitely often}) = 0$. Now we look at:
+\[
+P(X_k \neq Y_k) = P(|X_k| > k) = P(|X_1| > k)
+\]
+Then we have that:
+\[
+\sum_{k \geq 1} P(X_k \neq Y_k) = \sum_{k \geq 1} P(|X_1| > k) = \sum_{k \geq 1} \int_{k -1}^k P(|X_1| > k) \dd t \leq \sum_{k \geq 1} \int_{k - 1}^k P(|X_1| > t) \dd t = \int_0^{\infty} P(|X_1| > t) \dd t = E[|X_1|]
+\]
+Thus by B.C. we know that $P(X_k \neq Y_k \mbox{~~i.o.}) = 0$. Now we set for $n \geq 1$, $Z_n = Y_n - E[Y_n]$ and we write:
+\[
+\frac{X_1 + \cdots + X_n}{n} = \frac{(X_1 - Y_1) + \cdots + (X_n - Y_n)}{n} + \frac{Z_1 + \cdots + Z_n}{n} + \frac{E[Y_1] + \cdots + E[Y_n]}{n}
+\]
+Now we know that the first term goes to 0 almost surely since there are only finitely many $X_k - Y_k$ which are non-zero. Then we have that:
+\[
+E[Y_n] = \int Y_n \dd P = \int_{|X_n| \leq n} X_n \dd P = E[X_n 1_{|X_n| \leq n} = E[X_1 1_{|X_1| \leq n}] \stackrel{n \to \infty}{\longrightarrow} E[X_1]
+\]
+Hence we have (from Cesaro) that:
+\[
+\frac{E[Y_1] + \cdots + E[Y_n]}{n} \stackrel{n \to \infty}{\longrightarrow} E[X_1]
+\]
+It remains to prove that $\frac{Z_1 + \cdots Z_n}{n} \stackrel{a.s.}\longrightarrow 0$. We will use Kolmogorov's criterion for this. $Z_1, \cdots, Z_n$ are independent and centered from definition. Hence to apply Kolmogorov we need to show that $\sum_{n \geq 1} \frac{E[Z_n^2]}{n^2} < \infty$. Now notice that:
+\[
+E[Z_n^2] = E[(Y_n - E[Y_n])^2) = \text{Var}(Y_n) \leq E[Y_n^2]
+\]
+Then we have:
+\[
+E[Y_n^2] = \int_{|X_n| \leq n} X_n^2 
+\]
+Hence we have:
+\[
+\sum_{n \geq 1} \frac{E[Z_n^2]}{n^2} \leq \sum_{n \geq 1} \frac{E[Y_n^2]}{n^2} \leq \sum_{n \geq 1} \frac{1}{n^2} \int_{|X_n| \leq n} X_n^2 \dd P = \sum_{n \geq 1} \frac{1}{n^2} \sum_{i = 1}^n \int_{i - 1 < |X_1| \leq i} X_1^2 \dd P \leq \sum_{i \geq 1} (\sum_{n \geq i} \frac{1}{n^2}) \int_{i - 1 < |X_1| \leq i} X_1^2 \dd P 
+\]
+Now the sum simplifies to:
+\[
+\sum_{n \geq i} \frac{1}{n^2} = \frac{1}{i^2} + \sum_{n \geq i + 1} \frac{1}{n^2} \leq \frac{1}{i^2} + \sum_{n \geq i+1} \int_{n - 1}^n \frac{\dd t}{t^2}\leq \frac{1}{i^2} + \int_i^{+\infty} \frac{\dd t}{t^2} \leq \frac{1}{i^2} + \frac{1}{i} \leq \frac{2}{i}
+\]
+Hence plugging it back on top we obtain:
+\[
+\sum_{n \geq 1} \frac{1}{n^2} E[Z_n^2] \leq \sum_{i \geq 1} \frac{2}{i} \int_{i - 1< |X_1| \leq i} X_1^2 \dd P \leq \sum_{i \geq 1} \frac{2}{i} \int_{i - 1 | X_1| \leq i} i |X_1| \dd P = 2 \int |X_1| \dd P = 2E[|X_1|] < \infty
+\]
+Hence we can conclude with the help of the Kolmogorov criterion.
+
+\section{Discussion}
+
+We have 2 laws of large numbers:
+\[
+\frac{X_1 + \cdots + X_n}{n} \stackrel{P}{\longrightarrow} E[X_1] \mbox{~~and~~} \frac{X_1 + \cdots + X_n}{n} \stackrel{a.s.}{\longrightarrow} E[X_1]
+\]
+We can immediately see that the strong law implies the weak law, so why do we keep the weak law ? The weak law does not require the construction of an infinite family of random variables while the strong one does. Furthermore the strong law provides almost no new information with respect to the weak law and hence it amounts simply to a lot of work for little reward.
+
 \end{document}

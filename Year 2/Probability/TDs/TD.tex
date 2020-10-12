@@ -474,4 +474,87 @@ P(\limsup A_n) = P(\bigcap_{m} \bigcup_{n \geq m} A_n) = P(\lim_{n \to +\infty} 
 
 \end{enumerate}
 
+\chapter{}
+\section{Cauchy random variables}
+\begin{enumerate}
+
+\item We pass by the characteristic function:
+\[
+\varphi_X(k) = E[e^{ikX}] = \int_{-\infty}^{+\infty} \frac{a e^{i k x}}{\pi(x^2 + a^2)} \dd x
+\]
+Then from the residue theorem we get that:
+\[
+\varphi_X(k) = e^{-a |k|}
+\]
+Then:
+\[
+\varphi_{X+Y}(k) = E[e^{ik X} e^{ik Y}) = E[e^{ik X}]E[e^{ik Y}] = \varphi_X(k) \varphi_Y(k) = e^{-(a+b)|k|}
+\]
+Hence $X + Y \sim \text{Cauchy}(a+b)$. 
+Then:
+\[
+f_{X/\lambda}(u) = f_X(\lambda u)\lambda = \frac{a}{\pi(\lambda^2 u^2 + a^2)} \lambda = \frac{a/\lambda}{\pi(u^2 + a^2/\lambda^2)} = \text{Cauchy}(a/\lambda)
+\]
+
+\item Generalizing the previous result we have that $S_n \sim \text{Cauchy}(na)$ and hence $S_n/n \sim \text{Cauchy}(a)$. Hence it does not converge to a constant. There is no contradiction because the strong law requires that the expectancy is defined, which is not the case of Cauchy random variables.
+
+\end{enumerate}
+
+\section{Almost sure convergence}
+
+From the B.C lemma we know that $P(|X_{n+1} - X_n| > a_n \mbox{~~i.o.}) = 0$. Hence we have that $P(|X_{n+1} - X_n| \leq a_n \mbox{~~i.o}) = 1.$ Now since the series $\sum_n a_n < \infty$ we must have that $a_n \to 0$ and hence $(X_n(\omega))_{n \geq 1}$ is a Cauchy sequence and since it is real valued and the reals are complete is converges. 
+
+\section{A version of the strong law of large numbers}
+
+\begin{enumerate}
+
+\item We have that:
+\[
+E(|\frac{S_n}{n}|^4) = E((\frac{S_n}{n})^4) = \frac{1}{n^4} E((\sum_{i = 1}^n X_i)^4) = \frac{1}{n^4} (E(\sum_{i = 1}^n X_i^4) + E( \sum_{i, j = 1}^n X_i^2 X_j^2 ) + E(\sum_{i, j, k} X_i^2 X_j X_k) + E(\sum_{i,j ,k,\ell} X_i X_j X_k X_\ell))
+\]
+Which simplifies to:
+\[
+\frac{1}{n^4}(n E[X^4] + n(n-1) (4 E(X^3) E(X) + 3 E(X^2)E(X^2)) + 6 n(n-1)(n-2) E(X^2)E(X)^2 + n(n-1)(n-2)(n-3) E(X)^4) 
+\]
+Now using the fact that $E[X] = 0$ hence it simplifies to:
+\[
+\frac{1}{n^2}((3(1 - \frac{1}{n})E[X^2]^2 + \frac{1}{n^3} E[X^4])
+\]
+
+\item We have from the Chebyshev inequality that:
+\[
+P(|\frac{S_n}{n}| \geq \varepsilon) = P(|\frac{S_n}{n}|^4 \geq \varepsilon^4) \leq \frac{1}{\varepsilon^4} E[|\frac{S_n}{n}|^4] = a_n
+\]
+Then notice that:
+\[
+\sum_{n} a_n = \frac{1}{\varepsilon^4}\sum_n E[|\frac{S_n}{n}|^4] < +\infty
+\]
+From the previous question since every term converges. 
+
+\item From the dominated convergence theorem we can apply B.C lemma and we know that only finitely often will the sequence diverge. Hence it will almost surely converge.
+
+\item Up to centering the variables this follows immediately. 
+
+\end{enumerate}
+
+\section{Bernstein Polynomials}
+
+\begin{enumerate}
+
+\item We know that $S_n \sim \text{Binomial}(n, x)$ then $E[S_n] = nx$. Then we have:
+\[
+E[f(S_n/n)] = \sum_{k = 0}^n f(\frac{k}{n}) \binom{n}{k} x^k (1 - x)^{n - k} = P_n(x) 
+\]
+
+\item Since $E[|S_n/n|] < +\infty$ we can apply the strong law of large numbers and we know that $S_n/n \to x$ almost surely and consequently we know that $f(S_n/n) \to f(x)$ almost surely. Hence we have that $E[f(S_n/n)] \to E[f(x)] = f(x)$ almost surely and hence $P_n(x) \to f(x)$ for every $x$ almost surely. 
+
+\item The variance of $S_n$ is given by $\text{Var}(S_n) = nx(1 - x) \leq \frac{n}{4}$. 
+
+\item We have that:
+\[
+P(|S_n - nx| \geq n \varepsilon) \leq \frac{\text{Var}(S_n)}{n^2 \varepsilon^2} = \frac{1}{4n\varepsilon}
+\]
+
+\end{enumerate}
+
 \end{document}
