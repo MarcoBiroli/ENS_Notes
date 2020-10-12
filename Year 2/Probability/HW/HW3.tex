@@ -1,0 +1,162 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{physics}
+\usepackage{tikz}
+\usepackage{stmaryrd}
+
+\usepackage[left=1cm,right=1cm,top=2cm,bottom=2cm]{geometry}
+\author{Marco Biroli}
+\title{HW3 - Probability}
+
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+
+\item From the law of total probability we have that:
+\[
+P(S_n = \vb{s}) = \sum_{\vb{s}' \in \mathbb{Z}^d} P(S_n = \vb{s} | S_{n - 1} = \vb{s}') P(S_{n - 1} = \vb{s}')
+\]
+Furthermore we have that (call $B = \{\vb{e^{(1)}}, -\vb{e^{(1)}}, \cdots, \vb{e^{(d)}}, -\vb{e^{(d)}}\}$)
+\[
+P(S_n = \vb{s} | S_{n - 1} = \vb{s}') = \frac{1}{2d} 1_{(\vb{s} - \vb{s}') \in B}
+\]
+Hence the sum reduces to:
+\[
+P(S_n = \vb{s}) = \sum_{\vb{n} \in B} \frac{1}{2d} P(S_{n - 1} = \vb{s} - \vb{n})
+\]
+We therefore have that:
+\[
+p( \vb{s}, n+1) = \frac{1}{2d}\sum_{\vb{n} \in B} p(\vb{s} - \vb{n}, n)
+\]
+Then the Fourier transform is given by:
+\[
+\tilde{p}(\vb{k}, n) = \sum_{\vb{s} \in \mathbb{Z}^d} p(\vb{s}, n) e^{- i \vb{k} \cdot \vb{s}} = \sum_{\vb{s} \in \mathbb{Z}^d} \left( \frac{1}{2d} \sum_{\vb{n} \in B} p(\vb{s} - \vb{n}, n - 1) \right) e^{- i \vb{k} \cdot \vb{s}} = \frac{1}{2d} \sum_{\vb{s} \in \mathbb{Z}^d} \sum_{\vb{n} \in B} p(\vb{s} - \vb{n}, n-1) e^{-i \vb{k}\cdot \vb{s}}
+\]
+Now since all the sums converge we can switch them and we get:
+\[
+\tilde{p}(\vb{k}, n) = \frac{1}{2d} \sum_{\vb{n} \in B} \sum_{\vb{s} \in \mathbb{Z}^d} p(\vb{s} - \vb{n}, n-1) e^{-i \vb{k}\cdot \vb{s}} = \frac{1}{2d} \sum_{\vb{n} \in B} \sum_{\vb{s} \in \mathbb{Z}^d} p(\vb{s}, n-1) e^{-i \vb{k}\cdot(\vb{s} + \vb{n})} = \frac{ \tilde{p}(\vb{k}, n - 1) }{2d} \sum_{\vb{n} \in B} e^{- i \vb{k} \cdot \vb{n}} = a(\vb{k}) \tilde{p}(\vb{k}, n-1)
+\]
+Where we took $a(\vb{k}) = \frac{1}{2d} \sum_{\vb{n} \in B} e^{- i \vb{k} \cdot \vb{n}}$. Now we know that:
+\[
+p(\vb{s}, 0) = \delta_{\vb{s}} \mbox{~~and hence~~} \tilde{p}(\vb{k}, 0) = \sum_{s \in \mathbb{Z}^d} \delta_{\vb{s}} e^{- i \vb{k} \cdot \vb{s}} = 1 
+\]
+We therefore have that:
+\[
+\tilde{p}(\vb{k}, n) = a(\vb{k})^n = \left(\frac{1}{2d} \sum_{\vb{n} \in B} e^{- i \vb{k} \cdot \vb{n} }\right)^n
+\]
+Inversing the Fourier transform gives:
+\[
+p(\vb{s}, n) = \int_{BZ} \frac{\dd \vb{k}}{(2 \pi)^d} \tilde{p}(\vb{k}, n) e^{i \vb{k} \cdot \vb{s}} = \int_{BZ} \frac{\dd \vb{k}}{(2 \pi)^d} \left(\frac{1}{2d} \sum_{\vb{n} \in B} e^{- i \vb{k} \cdot \vb{n} }\right)^n e^{i \vb{k} \cdot \vb{s}}
+\]
+
+\item We have the following (remembering $B = \{\vb{e_x}, -\vb{e_x}, \vb{e_y}, -\vb{e_y}\}$ and writing $B' = \{\vb{e_x} + \vb{e_y}, \vb{e_x} - \vb{e_y}, \vb{e_y} - \vb{e_x}, -\vb{e_x} - \vb{e_y}\}$):
+\begin{center}
+\begin{tabular}{c | c | c |}
+$n$ & $p(\vb{s}, n)$ & $p_1(\vb{s}, n)$\\
+\hline
+1 & $\frac{1}{4}\delta_{\vb{s} \in B}$ & $\frac{1}{4} \delta_{\vb{s} \in B}$ \\
+\hline
+2 & $\frac{1}{4} \delta_{\vb{s}} + \frac{1}{16} \delta_{\vb{s} \in 2 B} + \frac{1}{8} \delta_{\vb{s} \in B'}$ & $\frac{1}{4} \delta_{\vb{s}} + \frac{1}{16} \delta_{\vb{s} \in 2B} + \frac{1}{8} \delta_{\vb{s} \in B'}$ \\
+\hline
+3 & $ \frac{1}{64} \delta_{\vb{s} \in 3 B} + \frac{9}{64} \delta_{\vb{s} \in B} + \frac{3}{64} \delta_{||\vb{s}||^2 = 5} $ & $\frac{1}{64} \delta_{\vb{s} \in 3B} + \frac{3}{64} \delta_{||\vb{s}||^2 =  5} + \frac{5}{64} \delta_{\vb{s} \in B}$  
+\end{tabular}
+\end{center}
+
+\item We have that:
+\begin{align*}
+P(\vb{S_{n'}} = \vb{s'} | \vb{S_n} = \vb{s}) &= P(\sum_{i = 1}^{n'} \vb{X_i} = \vb{s'} | \sum_{i = 1}^n \vb{X_i} = \vb{s}) = P(\sum_{i = 1}^{n} \vb{X_i} + \sum_{i = n +1}^{n'} \vb{X_i} = \vb{s'} | \sum_{i = 1}^n \vb{X_i} = \vb{s})\\
+&= P(\vb{s} + \sum_{i = n+1}^{n'} \vb{X_i} = \vb{s'} | \sum_{i = 1}^n \vb{X_i} = \vb{s}) = P(\vb{s} + \sum_{i = n+1}^{n'} \vb{X_i} = \vb{s'} )\\
+&= P(\sum_{i = n+1}^{n'} \vb{X_i} = \vb{s'} - \vb{s}) = P(\sum_{i = 1}^{n' - n} \vb{X_i} = \vb{s'} - \vb{s})\\
+&= P(\vb{S_{n' - n}} = \vb{s'} - \vb{s})
+\end{align*}
+Where in the $4^{th}$ equality we used the fact that $(X_1, \cdots, X_n)$ is independent from $(X_{n+1}, \cdots, X_{n'})$ and in the $6^{th}$ equality we used the fact that the $X_i$ are identically distributed random variables. 
+
+\item We have that (we denote by $A_{\vb{s}, n} = \{\vb{S_1} \neq \vb{s}, \cdots, \vb{S_{n-1}} \neq \vb{s}, \vb{S_n} = \vb{s}\}$):
+\[
+P(\vb{S_n} = \vb{s}) = \sum_{k = 0}^n P(\vb{S_n} = \vb{s} | A_{\vb{s}, k}) P(A_{\vb{s}, k}) + \delta_{\vb{s}} \delta_n = \sum_{k = 0}^n P(\vb{S_{n - k}} = \vb{0}) p_1(\vb{s}, k) + \delta_{\vb{s}} \delta_n
+\]
+Hence re-writing it we obtain:
+\[
+p(\vb{s}, n) = \sum_{k = 0}^n p(\vb{0}, n - k) p_1(\vb{s}, k) + \delta_{\vb{s}} \delta_n
+\]
+
+\item From the previous question we have that:
+\begin{align*}
+\hat{p}(\vb{s}, \lambda) = \sum_{n \in \mathbb{N}} p(\vb{s}, n) \lambda^n &= \sum_{n \in \mathbb{N}} \left(\sum_{k = 0}^n p(\vb{0}, n - k) p_1(\vb{s}, k) + \delta_{\vb{s}} \delta_n \right) \lambda^n = \delta_{\vb{s}} \lambda^0 + \sum_{k = 0}^{+\infty} \sum_{n = k}^{+\infty} p(\vb{0}, n - k) p_1(\vb{s}, k) \lambda^{n - k} \lambda^k\\
+&= \delta_{\vb{s}} + \left( \sum_{k \in \mathbb{N}} \lambda^k p_1(\vb{s}, k) \right)\left( \sum_{n \in \mathbb{N}} \lambda^n p(\vb{0}, n) \right) = \delta_{\vb{s}} + \hat{p}_1(\vb{s}, \lambda) \hat{p}(\vb{0}, \lambda)
+\end{align*}
+Where in the third equality we used Fubbini's theorem in order to exchange the summation. 
+
+\item Using Question 1 we get:
+\[
+\hat{p}(\vb{s}, \lambda) = \sum_{n \in \mathbb{N}} \left( \int_{BZ} \frac{\dd \vb{k}}{(2 \pi)^d} a(\vb{k})^n e^{i \vb{k} \cdot \vb{s}}  \right) \lambda^n = \int_{BZ} \frac{\dd \vb{k}}{(2 \pi)^d} e^{i \vb{k}\cdot \vb{s}} \sum_{n \in \mathbb{N}} (\lambda a(\vb{k}))^n = \int_{BZ} \frac{\dd \vb{k}}{(2 \pi)^d} \frac{e^{i \vb{k}\cdot \vb{s}}}{1 - \lambda a(\vb{k})}
+\]
+We are allowed to exchange the integral and the sum since from Question 5 we are assured of their convergence.
+
+\item Notice that:
+\[
+p_r = \sum_{n \in \mathbb{N}} p_1(\vb{0}, n) = \lim_{\lambda \to 1^-} \sum_{n \in\mathbb{N}} p_1(\vb{0}, n) \lambda^n = \lim_{\lambda \to 1^-} \hat{p}_1(\vb{0}, \lambda) = \lim_{\lambda \to 1^-} \frac{\hat{p}(\vb{0}, \lambda)}{\hat{p}(\vb{0}, \lambda)} - \delta_{\vb{0}} \frac{1}{\hat{p}(\vb{0}, \lambda)} = \lim_{\lambda \to 1^-} 1 - \frac{1}{\hat{p}(\vb{0}, \lambda)}
+\]
+Now replacing $\hat{p}(\vb{0}, \lambda)$ with the integral expression found in Question 6 and noticing that up to a re-writing of the exponentials we have that $a(\vb{k}) = \frac{1}{d} \sum_{i = 1}^d \cos(k_i)$ we get:
+\[
+p_r = \lim_{\lambda \to 1^-} 1 - \frac{1}{\int_{BZ} \frac{\dd \vb{k}}{(2 \pi)^d} \frac{1}{1 - \lambda a(\vb{k})}}
+\]
+Which is the desired result.
+
+\item 
+\begin{enumerate}
+\item In the case $d = 1$ the equation simplifies to:
+\[
+\hat{p}_1(\vb{0}, \lambda) = 1 - \frac{1}{\int_{-\pi}^\pi \frac{\dd k}{2 \pi} \frac{1}{1 - \lambda \cos(k)}} 
+\]	
+We now compute the integral:
+\[
+\int_{-\pi}^{\pi} \frac{\dd k}{1 - \lambda \cos(k)} = \int_{-\pi}^{\pi} \frac{\dd \theta}{1 - \lambda \left(\frac{e^{i \theta} + e^{-i\theta}}{2}\right)}
+\]
+Now by taking $z = e^{i \theta}$ meaning that $\dd z = i e^{i\theta} \dd \theta$ gives:
+\[
+\int_{-\pi}^{\pi} \frac{\dd \theta}{1 - \lambda \left(\frac{e^{i \theta} + e^{-i\theta}}{2}\right)} = -i\int_{S^1} \frac{2\dd z}{z(2 - \lambda (z + \frac{1}{z})) } = -i \int_{S^1}\frac{2 \dd z}{2z - \lambda z^2 - 1}
+\]
+Now the integrand admits two poles in:
+\[
+z_0^{\pm} = \frac{1 \pm \sqrt{1 - \lambda^2}}{\lambda}
+\]
+However since $0 \leq \lambda < 1$ the only pole inside the unit circle is $z_0 = z_0^-$.  Then from the residue theorem we have that:
+\[
+-i\int_{S^1} \frac{2 \dd z}{2 z - \lambda z^2 - 1} = 2 \pi  \text{Res}(\frac{2}{2 z - \lambda z^2 - 1}, z_0) = \frac{2\pi}{\sqrt{1 - \lambda^2}}  
+\]
+Plugging this back on top we get the desired result:
+\[
+\hat{p}_1(\vb{0}, \lambda) = 1 - \frac{1}{\frac{1}{\sqrt{1 - \lambda^2}}} = 1 - \sqrt{1 - \lambda^2}
+\]
+
+\item Notice that:
+\[
+\hat{p}_1(\vb{0}, \lambda) = \sum_{n = 0}^{+\infty} p_1(\vb{0}, n) \lambda^n \Rightarrow p_1(\vb{0}, n) = \frac{1}{n!} \dv[n]{}{\lambda} \hat{p}_1(\vb{0}, \lambda) \Big|_{\lambda = 0}
+\]
+Notice that this corresponds to the $n$-th term of the series expansion of $1 - \sqrt{1 - \lambda^2}$ around 0. Since it is even we already know that all the odd powers must vanish. More generally we have from the generalized binomial formula:
+\[
+1 - \sqrt{1 - \lambda^2} = 1 - \sum_{k = 0}^{+\infty} \frac{\frac{1}{2} (\frac{1}{2} - 1) \cdots (\frac{1}{2} - k + 1) }{k!}(-\lambda^2)^k = - \sum_{k = 1}^{+\infty} \frac{\frac{1}{2} (\frac{1}{2} - 1) \cdots (\frac{1}{2} - k + 1) }{k!}(-1)^k\lambda^{2k}
+\]
+Now we rework a bit the coefficient in front:
+\[
+\frac{1}{2^k} (-1)^{k+1} \frac{(1 - 2) \cdots (1 - 2k + 2)}{k!} = (-1)^{2k} \frac{1}{2^k} \frac{1 \cdot 3 \cdots (2k - 3)}{k!} =  \frac{1}{2^k} \frac{1\cdot3\cdots(2k -3) k!}{(2k)!} \binom{2k}{k} 
+\]
+Which when simplified gives:
+\[
+= \frac{1}{2^k} \frac{1}{2k - 1} \frac{1}{2 \cdot 4 \cdots (2k - 2) \cdot 2k} k! \binom{2k}{k} = \frac{1}{2^{2k}} \frac{1}{2k - 1} \frac{1}{1 \cdot 2 \cdots (k - 1) \cdot k} k! \binom{2k}{k} = \frac{1}{2^{2k}} \frac{1}{2k - 1} \binom{2k}{k}
+\]
+
+\item From definition since the $q_{2n}$ are the coefficients in the series expansion of $1 - \sqrt{1 - \lambda^2}$ around 0 it must be that $q_{2n} \to 0$ as $n \to +\infty$. Now furthermore notice that $E[p_1(\vb{0}, n)] = \dv{}{\lambda} \hat{p}_1(0,\lambda) \Big|_{\lambda = 1} = +\infty$ so the average time of first return to the origin is undefined. 
+\end{enumerate}
+
+\end{enumerate}
+
+
+\end{document}
