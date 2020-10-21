@@ -475,9 +475,77 @@ P(\tilde{S_n} \geq \varepsilon n^\alpha \mbox{~~ for an infinite amount of~~} n)
 We have that $P(S_n \mbox{~~bounded~}) = 0$, supposing that the law of $f$ is non-trivial.
 \end{theorem}
 
+\begin{proof}
+We fix $a \neq 0$ such that $P(a) > 0$. Then we want to show that $\forall k, \exists n, s.t. f_{n+1} = a, \cdots, f_{n+k} = a$. Denote by $B_n = \{f_{n+1} = a, \cdots, f_{n + k} = a\}$ then we have from independence that $P(B_n) = P(f = a)^k$. The events $B_n$ themselves though are not independent however the events $A_{n} = B_{kn}$ are. Hence from the second Borel Cantelli lemma we have that $P(A_n \mbox{~~i.o.}) = 1$ which tells us that $P(\bigcup_n A_n) = 1$.  
+\end{proof}
+
+\begin{lemma}
+For $a \in \text{Im} f$ such that $P(f = a) > 0$ and $T$ the first time for which $f_T = a$ then $\mathbb{E}[T] = \frac{1}{P(f = a)}$.  
+\end{lemma}
+
+\begin{proof}
+This is simply the expectancy of a geometric law.
+\end{proof}
+
+\begin{proposition}
+We have that $\forall A >0, \exists \delta > 0, s.t. \forall n, P(\tilde{S_n} \geq A \sqrt{n}) \geq \delta$.
+\end{proposition}
+
+\begin{proof}
+
+We prove the proposition only in the simplest case where $Y = \{0, 1\}$ and $P(f = 1) = \rho$ however the reasoning can be generalized. Then we start by proving the following result:
+\[
+P_\rho(S_n = k) \geq \frac{1}{C \sqrt{n}} \exp(- n C |\frac{k}{n}  - \rho|^2)
+\]
+If we look at:
+\[
+\frac{P_\rho (S_n = k)}{P_{\frac{k}{n}}(S_n = k)} = \frac{\rho^k (1 - \rho)^{n-k}}{(\frac{k}{n})^k (1 - \frac{k}{n})^{n-k}} = \exp(- n h(\frac{k}{n}, \rho)) \mbox{~~where~~} h(s, \rho) = s\ln\frac{s}{\rho} + (1 - s) \ln \frac{1 - s}{1 - \rho}
+\]
+Then one can notice that:
+\[
+h(s, \rho) \leq C |s - \rho|^2 \mbox{~~where~~} C \mbox{~~can depend on~~} \rho
+\]
+Then plugging this back on top we get:
+\[
+P_\rho (S_n = k) \geq P_{\frac{k}{n}} (S_n = k) \exp(-nC | \frac{k}{n} - \rho|^2 )
+\]
+Now using the Stirling formula we can bound the prefactor as desired and it gives the desired result. Then using this result we get that:
+\[
+P(\tilde{S}_n \geq A \sqrt{n}) = \sum_{k \geq n \rho - A \sqrt{n}} P(S_n = k) \geq \sum_{n\rho + A \sqrt{n} \leq k \leq n\rho + (A +\frac{1}{2})\sqrt{n}} P(S_n = k) \mbox{~~where~~} \tilde{S}_n = S_n - n\rho
+\]
+Then in the sum we have $\sqrt{n}$ terms and we can minorate each term with the previous result which gives:
+\[
+P(\tilde{S}_n \geq A \sqrt{n}) \geq \sqrt{n} \left(\frac{1}{C \sqrt{n}} \exp( - n C \frac{(A + \frac{1}{2})^2}{n} ) \right) \geq \frac{1}{C} \exp(- C(A + \frac{1}{2})^2)
+\]
+
+\end{proof}
+
 \begin{theorem}
 We have that $P(\limsup_{n \to +\infty} \frac{\tilde{S_n}}{\sqrt{n}} = +\infty) = 1$. 
 \end{theorem}
+
+\begin{proof}
+We take $A \geq - \min f$. We consider the subsequence $n_k$ such that $n_1 = 1$ and $n_{k+1} = n_k + 4 n_k^2$. Then we have that:
+\[
+P(|\tilde{S}_{n_{k+1}} - \tilde{S}_{n_k}| \geq a) = P(|\tilde{S}_{n_{k+1} - n_k}| \geq a)
+\] 
+Then we consider the events:
+\[
+B_k = \{ \tilde{S}_{n_{k + 1}} - \tilde{S}_{n_k} \geq A \sqrt{n_{k+1} - n_k} \} = \{ \tilde{S}_{4 n_k} \geq 2 A n_k \}
+\]
+Now notice that the $B_k$ are independent and from the proposition above we have that $P(B_k) \geq \delta$. Hence the second Borel Cantorelli Lemma tells us that $P(B_k \mbox{~~i.o.}) = 1$. Therefore the exists an infinite amount of $k$ such that:
+\[
+\tilde{S}_{n_{k+1}} \geq \tilde{S}_{n_k} + 2 A n_k \geq n_k (2 A + \min f) \geq n_k A \mbox{~~since~~} A \geq - \min f
+\]
+Furthermore we have that $n_{k + 1} \leq 16 n_k^4$ hence $n_k \leq \frac{\sqrt{n_{k+1}}}{4}$. Therefore we get that:
+\[
+\tilde{S}_{n_{k+1}} \geq \frac{A}{4} \sqrt{n_{k+1}} \mbox{~~and so~~} \limsup_{n \to +\infty} \forall A > 0, a.s., \frac{\tilde{S}_n}{\sqrt{n}} \geq \frac{A}{4}
+\]
+Hence taking the intersection on discretized sequence of $A$ we get that:
+\[
+a.s. \limsup_{n \to +\infty} \frac{\tilde{S}_n}{\sqrt{n}} = +\infty
+\]
+\end{proof}
 
 \begin{theorem}
 For general culture know that:
@@ -486,5 +554,86 @@ For general culture know that:
 \]
 \end{theorem}
 
+\section{Remarks on $\sigma$-algebras.}
+
+\begin{definition}[Generated tribe] Let $B \in \mathcal{P}(X)$ we call the generated tribe by $B$ the smallest tribe containing $B$. 
+\end{definition}
+
+\begin{lemma}
+Such a tribe always exists since an intersection of tribes is a tribe.
+\end{lemma}
+
+\begin{proof}
+Let $\mathcal{A}_i$ for $i \in \mathcal{I}$ be tribes on $X$. Then $\mathcal{A} = \cap_{i \in \mathcal{I}} \mathcal{A}_i$ is a tribe since: $\forall A_n \in \mathcal{A}, \forall i \in \mathcal{I}, A_n \in A_i \Rightarrow \cup_n A_n \in \mathcal{A}_i$ and hence $\cup_n A_n \in \cap_i \mathcal{A}_i$. 
+\end{proof}
+
+\begin{theorem}
+Let $\mathcal{A}$ be an algebra of parts of $X$ and $m$ an additive probability measure on $\mathcal{A}$, which is also a $\sigma$-additive algebra. Then there exists a unique probability measure $m$ on $\tau$ the generated tribe from $\mathcal{A}$. 
+\end{theorem}
+
+\begin{proposition}
+Let $f: (\Omega, \tau) \to (X, \mathcal{T})$ an application and let $\mathcal{B} \subset \mathcal{T}$ generating $\mathcal{T}$. If $f^{-1}(B) \in \tau, \forall B \in \mathcal{B}$, then $f$ is measurable.
+\end{proposition}
+
+\begin{proof}
+We consider the set $\mathcal{E}$ of parts of $X$ such that the preimage of $f$ is measurable: $\mathcal{E} = \{Y \in \mathcal{P}(X), f^{-1}(Y) \in \tau\}$. We have already shown that is a tribe (denoted by $f_\star \tau$). Then this tribe contains $B$ hence it contains $\mathcal{T}$. 
+\end{proof}
+
+\begin{proposition}
+The following part of $\mathbb{R}$ generate the same tribe (the Borel tribe):
+\begin{itemize}
+\item The intervals
+\item The closed intervals
+\item The open intervals
+\item The open sets
+\item The closed sets
+\item The intervals $]-\infty, a]$ where $a \in \mathbb{D}$ (the decimals).
+\end{itemize}
+\end{proposition}
+
+\begin{proposition}
+On $[0,1[$ the following are the same tribes:
+\begin{itemize}
+\item The tribe generated from the intervals
+\item The tribe generated from $[0, a]$ for $a \in \mathcal{D} \cap [0, 1[$. 
+\item The tribe $\{B \cap [0, 1[, B \in \mathcal{B}(\mathbb{R})\} = i^\star \mathcal{B}$. Where $i : [0, 1[ \to \mathbb{R}$ is the inclusion.  
+\end{itemize}
+\end{proposition}
+
+\section{Product tribes}
+
+\begin{definition}
+
+Let $f_i : \Omega \to (X_i, \mathcal{T}_i)$ for $i \in \mathcal{I}$ a family of applications. The tribe generated by the $f_i$ is the tribe of $\Omega$ generated by $\cup_{i \in \mathcal{I}} f_i^\star (\mathcal{T}_i)$.  It is the smallest tribe for which all the functions $f_i$ are measurable.
+
+\end{definition}
+
+\begin{definition}[Product tribe]
+Let $(X_i, \mathcal{T}_i)$ be measurable spaces for $i \in \mathcal{I}$. The product tribe on $\Omega = \prod_{i \in \mathcal{I}} X_i$ is the tribe generated by the projections: $\pi_i : \Omega \to X_i$.
+\end{definition}
+
+\begin{remark}
+If $\mathcal{I}$ is finite or countable the product tribe is the tribe generated by the products $\prod_i Z_i$.
+\end{remark}
+
+\begin{proposition}
+\begin{itemize}
+\item Take $f_i : \Omega \to (X_i, \mathcal{T}_i)$ and $F : \Omega \to (\prod X_i ,\prod \mathcal{T}_i)$ the application which coordinates are given by the $f_i$ then the tribe generated by the $f_i$ is $F^\star (\prod \mathcal{T}_i)$. 
+\item The application $F$ is measurable if and only if its coordinates are.
+\end{itemize}
+\end{proposition}
+
+\begin{proposition} [Tribes of $\mathbb{R}^d$.] 
+The following tribes are identical:
+\begin{itemize}
+
+\item The tribe generated by the open sets
+\item The tribe generated by the closed sets
+\item The product of the Borelian tribes
+\item The tribe generated by the product of intervals
+\item The tribe generated by the products $]-\infty, a_1] \times \cdots \times ]-\infty, a_d]$ where $a_i \in \mathbb{D}$.
+
+\end{itemize}
+\end{proposition}
 
 \end{document}

@@ -403,6 +403,143 @@ P J^{\gamma \sigma}
 \chapter{The Klein-Gordon equation}
 
 \section{Basic properties.}
+\begin{enumerate}
+
+\item This reads:
+\[
+(\pdv[2]{}{t} - \laplacian + m^2) \phi = 0
+\]
+
+\item Simple chain rule gives the desired result.
+
+\item 
+
+\end{enumerate}
+
+\section{Potential barrier}
+
+\begin{enumerate}
+
+\item Then we get:
+\[
+((\pdv{}{t} + i q V)^2 - \laplacian + m^2) \phi = 0
+\]
+
+\item Plugging in the Ansatz simply transform the $\partial^0$ into an $E$.
+
+\item We have that:
+\[
+(-\laplacian + m^2) \varphi_-(x) = E^2 \varphi_- (x) \mbox{~~and~~} (-\laplacian + m^2) \varphi_+(x) = (E - qV_0)^2 \varphi_+(x)
+\]
+
+\item Plugging in the Ansatz we obtain:
+\[
+p'^2 + m^2 = E^2 \mbox{~~and~~} p^2 + m^2 = (E - q V_0)^2
+\]
+Hence we get:
+\[
+p = \pm \sqrt{E^2 - m^2} \mbox{~~and~~} p' = \sqrt{(E - qV_0)^2 - m^2}
+\]
+
+\item \begin{enumerate}
+
+\item $p'$ is purely imaginary for $E \in [m , q V_0 + m]$. Meaning that if we arrive with less than the energy needed to jump the barrier then the transmitted wave will be evanescent. 
+
+\item At high enough energies ($E \geq V_0 + m$) there is transmission and so everything is fine. If $E \in [q V_0 - m, q V_0 + m]$ we get reflected. However when $E \in [m, qV_0 - m]$ we still get transmitted ! This is very counter intuitive however the explanation comes from the fact that with a barrier potential this big there is enough energy to create new particles which means our analysis will break down. 
+
+\end{enumerate}
+
+\item Since the second derivative must be at least short of a $\delta$ then $\varphi$ must be continuous and the first derivative too. Hence:
+\[
+\begin{cases}
+1 + r = t\\
+ip(1 - r) = ip' t
+\end{cases} \Leftrightarrow
+\begin{cases}
+1 + r = t\\
+p(1 - r) = p' (1 + r) 
+\end{cases}
+\Leftrightarrow
+\begin{cases}
+t = \frac{2p}{p' + p}\\
+r = \frac{p - p'}{p' + p}
+\end{cases}
+\]
+
+\item The current is given by:
+\[
+j^\mu = - i(\phi^\star \partial^\mu \phi - (\partial^\mu \phi^\star) \phi)
+\]
+Which gives:
+\[
+j^0 = - i (e^{i E t} \varphi^\star(x) (-iE) e^{-iE t} \varphi(x) - (iE) e^{iEt}\varphi^\star(x) \varphi(x)) = - i( -i E|\varphi(x)|^2 + i E |\varphi(x)|^2 ) = 0
+\]
+And:
+\[
+j^x = - i ( t e^{i p' x}...
+\]
+
+\end{enumerate}
+
+\chapter{The Dirac equation}
+
+\section{The non-relativistic limit.}
+
+\begin{enumerate}
+
+\item Splitting the original equation we get:
+\[
+\gamma^0 \pdv{ \psi }{t} = (\gamma^i \partial_i + m)\psi  = ( - \gamma^i \cdot \grad + m ) \psi 
+\]
+Now multiplying left and right by $\gamma^0$ and using the fact that $(\gamma^0)^2 = - 1$ we get:
+\[
+-\pdv{\psi}{t} = (- \gamma^0 \gamma^{i} \grad + \gamma^0 m) \psi  \Rightarrow i \pdv{\psi}{t} = (\gamma^0 \gamma^i (- i \grad) + (-\gamma^0) m) \psi = H \psi
+\]
+Where $\beta = -\gamma^0$ and $\alpha^i = \gamma^0 \gamma^i$.
+
+\item The Hamiltonian operator will become:
+\[
+H = \vb{\alpha} \cdot (\vb{P} - q \vb{A}) + \beta m
+\]
+
+\item We have that:
+\[
+\{ \gamma^i, \gamma^j \} = \gamma^i \gamma^j + \gamma^j \gamma^i = - \begin{pmatrix}
+\sigma_i \sigma_j & 0\\
+0 & - \sigma_i \sigma_j
+\end{pmatrix} - \begin{pmatrix}
+\sigma_j \sigma_i & 0\\
+0 & - \sigma_j \sigma_i
+\end{pmatrix}  =  2 \eta^{ij}
+\]
+Trivially $\gamma^0\gamma^i + \gamma^i \gamma^0 = 0$, and finally:
+\[
+2 \gamma^0 \gamma^0 = - 2
+\]
+Then we have:
+\[
+\beta = \begin{pmatrix}
+Id & 0 \\
+0 & - Id
+\end{pmatrix}
+\mbox{~~and~~}
+\alpha^i = \begin{pmatrix}
+0 & \sigma_i\\
+\sigma_i & 0
+\end{pmatrix}
+\]
+
+\item We have:
+\[
+\begin{cases}
+
+- m \varphi = -(\vb{\sigma} \cdot \grad) \chi + i m \varphi\\
+
+-m \chi = - (\vb{\sigma} \cdot \grad) \varphi - im \chi 
+\end{cases}
+\]
+
+\end{enumerate}
 
 
 

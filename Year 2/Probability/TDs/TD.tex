@@ -557,4 +557,79 @@ P(|S_n - nx| \geq n \varepsilon) \leq \frac{\text{Var}(S_n)}{n^2 \varepsilon^2} 
 
 \end{enumerate}
 
+\chapter{[To Do]}
+
+\chapter{Extreme value distributions}
+
+\begin{enumerate}
+
+\item We have that:
+\[
+F_{M_n}(x) = P(M_n \leq x) = P(\max(X_1, \cdots, X_n) \leq x) = P(X_1 \leq x \land \cdots \land X_n \leq x) = P(X \leq x)^n = (F_X(x))^n
+\] 
+
+\item \begin{enumerate}
+\item 
+\item 
+\item 
+\end{enumerate}
+
+\item We have that $F_{R_X}(x) = 1_{x \geq R_x} = 1_{F_X(x) = 1}$ and from Question 1 we know that $F_{M_n}(x) = (F_X(x))^n \to 1_{F_X(x) = 1}$. Hence $M_n \stackrel{d}{\to} R_X$. 
+
+\item 
+\begin{enumerate}
+\item We have that:
+\[
+F_{\hat{M}_n}(\hat{x}) = F_{M_n}( b_n \hat{x} + a_n) = (F_X(b_n \hat{x} + a_n))^n
+\]
+
+\item Using the previous question and assuming the form of the $a_n$ and $b_n$ we have that:
+\[
+F_{\hat{M}_n}(\hat{x}) = \left( 1 - \frac{\gamma(\hat{x})}{n} + o\left(\frac{1}{n}\right)\right)^n \stackrel{n \to \infty}{\longrightarrow} e^{-\gamma(\hat{x})}
+\]
+
+\end{enumerate}
+
+\item We want:
+\[
+F_X(a_n + \hat{x} b_n) = 1 - \frac{e^{-\hat{x}}}{n} + o(\frac{1}{n})
+\]
+Notice that:
+\[
+F_X(a_n + \hat{x} b_n) = (1 - e^{- a_n - \hat{x} b_n })\delta_{a_n + \hat{x} b_n \geq 0} 
+\]
+Hence taking $b_n = 1$ and $a_n = \log n$ gives the desired result.  
+
+
+\item Again we get:
+\[
+F_X(a_n + \hat{x} b_n) = 1 - (1 - a_n - \hat{x} b_n)^\alpha \mbox{~~when~~} a_n + \hat{x} b_n \in [0, 1]
+\]
+Now taking $a_n = 1$ and $b_n = n^{-\frac{1}{\alpha}}$ we get indeed that:
+\[
+F_{M_n}(\hat{x}) \to e^{- (-\hat{x})^\alpha} \mbox{~~when~~} \hat{x} \leq 0
+\]
+And $a_n + \hat{x} b_n \geq 1 \Leftrightarrow \hat{x} \geq 0$ giving the second part. 
+
+\item Similarly:
+\[
+F_X(a_n + \hat{x} b_n) = 1 - (a_n + \hat{x} b_n)^{-\alpha}
+\]
+Then taking $a_n = 0$ and $b_n = n^{\frac{1}{\alpha}}$ we get the desired result.
+
+
+\item Again we have:
+\begin{align*}
+F_X(a_n + \hat{x} b_n) = 1 - \frac{1}{a_n + \hat{x} b_n} \frac{1}{\sqrt{2 \pi}} e^{- \frac{(a_n + \hat{x} b_n)^2}{2}} + O\left( \frac{e^{-\frac{(a_n + \hat{x} b_n)^2}{2}}}{x^3} \right)
+\end{align*}
+Now looking at this term by term notice that:
+\[
+e^{-\frac{(a_n + \hat{x} b_n)^2}{2}} = e^{- \ln n} \cdot e^{...} \cdot e^{- \frac{\hat{x}^2}{4 \ln n}} \cdot e^{- \hat{x} (1 + \frac{\ln\ln n + \ln 4 \pi}{4 \ln n})}
+\]
+Finishing the computations will give the desired result.
+
+\item Since $F_{\max(X_1, X_2)}(x) = F_X(x)^2$ then if $X_1, X_2$ reached $R_X$ with a power-law behavior (resp. inverse power-law and faster than power-law) then so will $\max(X_1, X_2)$ and therefore $\max(X_1, X_2)$ is in the same domain of attraction as $X_1$ and $X_2$. 
+
+\end{enumerate}
+
 \end{document}
