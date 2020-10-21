@@ -80,66 +80,30 @@ u_{\pm \vb{k}} = \begin{pmatrix}
 \varepsilon_x - i \varepsilon_y
 \end{pmatrix} = \begin{pmatrix}
 \pm \varepsilon\\
-e^{-i \theta}
-\end{pmatrix} = \begin{pmatrix}
-\pm \varepsilon e^{i \theta}\\
-1 
+\varepsilon e^{-i \theta}
+\end{pmatrix} \propto \begin{pmatrix}
+\pm e^{i \theta/2}\\
+e^{-i\theta/2}
 \end{pmatrix}
 \]
 Where we took:
 \[
 \cos \theta = \frac{\varepsilon_x}{\varepsilon} \mbox{~~and~~} \sin \theta = \frac{\varepsilon_y}{\varepsilon} \mbox{~~and~~} \varepsilon = \sqrt{\varepsilon_x^2 + \varepsilon_y^2}
 \]
-
-Hence we get:
+Now however notice that at the origin i.e. $\varepsilon_x = \varepsilon_y = 0$ we have that $\theta$ is not well defined. Now for the Berry connection we see that there is only an angular dependency hence we have:
 \[
-\mathcal{A}_{\pm x} = u_\mp^T \pdv{}{k_x} u_\pm = \begin{pmatrix}
-\mp \sqrt{\varepsilon_x^2 + \varepsilon_y^2} & \varepsilon_x - i \varepsilon_y 
-\end{pmatrix}  \begin{pmatrix}
-\pm \frac{\varepsilon_x}{\sqrt{\varepsilon_x^2 + \varepsilon_y^2}}\\
-\varepsilon_x + K_x
-\end{pmatrix} = - \varepsilon_x + (\varepsilon_x - i \varepsilon_y) (\varepsilon_x + K_x)
-\]
-Similarly we get:
-\[
-\mathcal{A}_{\pm y} = u_\mp^T \pdv{}{k_y} u_\pm = \begin{pmatrix}
-\mp \sqrt{\varepsilon_x^2 + \varepsilon_y^2} & \varepsilon_x - i \varepsilon_y 
-\end{pmatrix}  \begin{pmatrix}
-\pm \frac{\varepsilon_y}{\sqrt{\varepsilon_x^2 + \varepsilon_y^2}}\\
-- i \varepsilon_y
-\end{pmatrix} = - \varepsilon_y - \varepsilon_y (i\varepsilon_x + \varepsilon_y) = -\varepsilon_y(1 + i \varepsilon_x + \varepsilon_y)
-\]
-Taking $\varepsilon_x = \varepsilon \cos(\theta)$ and $\varepsilon_y = \varepsilon \sin(\theta)$ and replacing above we get:
-\[
-\mathcal{A}_\pm = \begin{pmatrix}
-\frac{\varepsilon}{2}(1 - e^{i\theta} + e^{-i\theta}(1 + 2 K_x) + e^{-2i\theta}\\ 
--\frac{\varepsilon}{2i}(e^{i \theta} - e^{-i\theta})(1 + \varepsilon e^{i \theta}) 
-\end{pmatrix}
+\mathcal{A}_{\pm} = i (u_{\pm}^T)^\star \pdv{}{\vb{}} u_{\pm} = \begin{pmatrix}
+1 & e^{i\theta}
+\end{pmatrix} \begin{pmatrix}
+0\\
+-i e^{-i \theta}
+\end{pmatrix} =  \frac{1}{\varepsilon} \vu{\theta} 
 \]
 
-\item We therefore get for the integral:
-\[
-\varphi_\mathcal{A} = \int_0^{2\pi} \mathcal{A}_{\pm} \cdot \begin{pmatrix}
-\cos\theta\\
-\sin\theta
-\end{pmatrix} \varepsilon  \dd \theta
-\]
+\item From an immediate application of the residue theorem we know that the Berry phase will be given by the residue of $\frac{1}{\varepsilon}$ at $\varepsilon = 0$ which is $1$ times $2 \pi i n$ where $n \in \mathbb{Z}$. The Berry phase around $\tilde{K}$ would be given by the conjugate of the one around $K$. 
 
-\section{draft}
-Now for simplicity we write $r e^{i \theta} =  \varepsilon_x + i \varepsilon_y$ where $r  = \sqrt{\varepsilon_x^2 + \varepsilon_y^2}$ and $\theta = \arctan(\varepsilon_y/\varepsilon_x)$. Then we can rewrite the above as:
-\[
-H = \frac{3 r dt }{4} \begin{pmatrix}
-0 & e^{i\theta}
-e^{- i \theta} & 0
-\end{pmatrix}
-\] 
-Which immediately tells us that:
-\[
-E_\pm = \pm \frac{3 r d t}{4} \mbox{~~and~~} u_{\pm} = \begin{pmatrix}
-\pm e^{i \theta}\\
-1
-\end{pmatrix}
-\]
+\item 
+
 
 
 \end{enumerate}
