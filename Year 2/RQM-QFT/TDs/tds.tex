@@ -499,7 +499,7 @@ Where $\beta = -\gamma^0$ and $\alpha^i = \gamma^0 \gamma^i$.
 
 \item The Hamiltonian operator will become:
 \[
-H = \vb{\alpha} \cdot (\vb{P} - q \vb{A}) + \beta m
+H = \vb{\alpha} \cdot (\vb{P} - q \vb{A}) + \beta m + qV 
 \]
 
 \item We have that:
@@ -532,15 +532,166 @@ Id & 0 \\
 \item We have:
 \[
 \begin{cases}
-
-- m \varphi = -(\vb{\sigma} \cdot \grad) \chi + i m \varphi\\
-
--m \chi = - (\vb{\sigma} \cdot \grad) \varphi - im \chi 
+i \dot{\varphi} = (\vb{\sigma}(\vb{P} - q \vb{A})) \chi + q V \varphi\\
+i \dot{\chi} = (\vb{\sigma}(\vb{P} - q \vb{A})) \varphi - 2m \chi + qV \chi
 \end{cases}
+\]
+
+\item When $m \to \infty$ the previous equation can be re-written as:
+\[
+\begin{cases}
+(2m + i \pdv{}{t} - qV) \chi = (\vb{\sigma} (\vb{P} - q \vb{A})) \varphi \Rightarrow \chi = \frac{1}{2m} (\vb{\sigma}(\vb{P} - q \vb{A})) \varphi
+\end{cases}
+\]
+
+\item We have that:
+\begin{align*}
+(\vb{\sigma}(\vb{P} - q \vb{A}))^2 &= \sigma_i(P_i - q A_i) \sigma_j (P_j - q A_j) = \sigma_i \sigma_j (P_i P_j - q P_i A_j - q A_i P_j + q^2 A_i A_j)\\
+&= (\delta_{ij} + i \varepsilon_{ijk}\sigma_k)(P_i P_j - q P_i A_j - q A_i P_j + q^2 A_i A_j)\\
+&= (\vb{P} - q \vb{A})^2 + i \varepsilon_{ijk} \sigma_k (P_i P_j - q P_i A_j - q A_i P_j + q^2 A_i A_j)\\
+&= (\vb{P} - q\vb{A})^2 - i q \varepsilon_{ijk} \sigma_k (P_i A_j + A_i P_j)\\
+&= (\vb{P} - q\vb{A})^2 - q \varepsilon_{ijk} \sigma_k (\pdv{}{x_i} A_j + A_i \pdv{x_j})\\
+&= (\vb{P} - q\vb{A})^2 - q \varepsilon_{ijk} \sigma_k (\pdv{}{x_i} A_j - A_j \pdv{x_i})\\
+&= (\vb{P} - q\vb{A})^2 - q \varepsilon_{ijk} \sigma_k \pdv{A_j}{x_i} \\
+&= (\vb{P} - q\vb{A})^2 - q \vb{\sigma} \cdot \vb{B}
+\end{align*}
+
+\item In the non relativistic limit we have:
+\[
+i \dot{\varphi} = \frac{1}{2m} (\vb{\sigma}(\vb{P} - q \vb{A}))^2 \varphi + q V \varphi \Leftrightarrow i \dot{\varphi} = \left(\frac{1}{2m} (\vb{P} - q \vb{A})^2 - \frac{q \vb{\sigma} \cdot \vb{B}}{2m}  + q V \right) \varphi
+\]
+Now writing:
+\[
+\varphi(t, \vb{x}) = \begin{pmatrix}
+\varphi_{\uparrow} (t, \vb{x})\\
+\varphi_{\downarrow} (t, \vb{x}) 
+\end{pmatrix}
+\]
+If $\vb{B} = 0$ then $\varphi_\uparrow$ and $\varphi_\downarrow$ are two independent solutions of the Schrodinger equation. However if $\vb{B} \neq 0$ and it is not perfectly aligned along $\vu{z}$ it will introduce some off-diagonal terms which couple $\varphi_\uparrow$ and $\varphi_\downarrow$. Notice that we can rewrite that term as:
+\[
+-\overbrace{2}^{g \text{~Lande}} \frac{q}{2m} \underbrace{\frac{\vb{\sigma}}{2}}_{\vb{\delta}} \cdot \vb{B}
 \]
 
 \end{enumerate}
 
+\section{The covariance of the Dirac equation}
+
+\subsection{Transformation of the Dirac equation}
+
+\begin{enumerate}
+
+\item We have:
+\[
+(\gamma^\mu \partial_\mu + m )\psi(x) = 0
+\]
+Then we have that:
+\[
+(\gamma^\mu \partial'_\mu + m) \psi'(x') = (\gamma^\mu \partial'_\mu + m) D(\Lambda) \psi(x') = (\gamma^\mu D(\Lambda) (\Lambda^{-1})^\nu_\mu \partial_\nu + m D(\Lambda) )\psi
+\]
+Which gives:
+\[
+(\gamma^\mu \partial'_\mu + m) \psi' = D(\Lambda) [D(\Lambda)^{-1} \gamma^\mu D(\Lambda) (\Lambda^{-1})^\nu_\mu \partial_\nu + m] \psi
+\]
+Now using $(6)$ we get:
+\[
+(\gamma^\mu \partial'_\mu + m) \psi' = D(\Lambda) [\Lambda^\mu_\nu \gamma^\nu (\Lambda^{-1})^{\nu}_\mu \partial_\nu + m] \psi = D(\Lambda)( \gamma^\nu \partial_\nu + m )\psi = 0
+\]
+
+\item We check the condition:
+\[
+D(\Lambda_1 \Lambda_2)^{-1} \gamma^\mu D(\Lambda_1 \Lambda_2) = D(\Lambda_2)^{-1} D({\Lambda_1})^{-1} \gamma^\mu D(\Lambda_1) D(\Lambda_2) = D(\Lambda_2)^{-1} (\Lambda_1)_{\nu}^\mu \gamma^\nu D(\Lambda_2) = (\Lambda_1)^\mu_\nu (\Lambda_2)^\nu_\delta \gamma^\delta 
+\]
+
+\item We have:
+\[
+D(\Lambda)^{-1} \gamma^\mu D(\Lambda) = (Id + \frac{1}{4} \omega_{\mu \nu} \gamma^\mu \gamma^\nu)^{-1} \gamma^\mu (Id + \frac{1}{4} \omega_{\mu \nu} \gamma^\mu \gamma^\nu) 
+\]
+Now using that:
+\[
+(Id + \varepsilon)^{-1} = Id - \varepsilon + \mathcal{O}(\varepsilon^2)
+\]
+We can simplify the above to:
+\[(Id - \frac{1}{4} \omega_{\mu \nu} \gamma^\mu \gamma^\nu) \gamma^\delta (Id + \frac{1}{4} \omega_{\mu \nu} \gamma^\mu \gamma^\nu) = \gamma^\mu - \frac{1}{4} \omega_{\rho \sigma} [\gamma^\rho \gamma^\sigma, \gamma^\mu] = \gamma^\mu - \frac{1}{4} \omega_{\rho \sigma} ( \gamma^\rho \{ \gamma^\sigma, \gamma^\mu \} - \{\gamma^\rho, \gamma^\mu\} \gamma^\sigma )
+\]
+Which using the anticommutator relation of the $\gamma$ matrices we can simplify to:
+\[
+\gamma^\mu - \frac{1}{4} \omega_{\rho \sigma} (\gamma^\rho 2 \eta^{\sigma \mu} - \gamma^\sigma 2 \eta^{\rho \mu})
+\]
+Now using that $\omega_{\rho \sigma}$ is antisymmetric we get:
+\[
+\gamma^\mu +  \omega_{\rho \sigma} \eta^{\rho \mu} \gamma^\sigma = \gamma^\mu + \omega^\mu_\sigma \gamma^\sigma = (\Lambda^\mu_\sigma)\gamma^\sigma
+\]
+
+\item We have that:
+\[
+\gamma^0 \gamma^j =  \begin{pmatrix}
+\sigma_j & 0\\
+0 & -\sigma_j
+\end{pmatrix} \mbox{~~and~~} 
+\gamma^i \gamma^j = - \begin{pmatrix}
+-\sigma_i \sigma_j & 0 \\
+0 & -\sigma_i \sigma_j
+\end{pmatrix} = \begin{pmatrix}
+\delta_{ij} + i \varepsilon_{ijk} \sigma_k & 0\\
+0 & \delta_{ij} + i \varepsilon_{ijk} \sigma_k
+\end{pmatrix}
+\]
+
+\end{enumerate}
+
+\section{The conserved current}
+
+\begin{enumerate}
+
+\item Since $H$ is Hermitian we have that:
+\[
+H = (H^T)^\star
+\]
+Hence $\beta$ must be Hermitian and we also have that:
+\[
+\alpha_j^T (-i \partial_j) = (\alpha_j^T (- i \partial_j))^\star = (\alpha_j^T)^\star i \partial_j 
+\]
+Hence the $\alpha_j$ matrices must be anti-hermitian.
+
+\item We have:
+\[
+i \pdv{\psi^\dagger}{t} = \psi^\dagger H^\dagger
+\]
+Hence:
+\[
+i\pdv{\psi^\dagger \psi}{t} = \psi^\dagger H^\dagger \psi + \psi^\dagger H \psi = (\psi^\dagger H \psi)^\dagger + \psi^\dagger H \psi = - i \div \psi^\dagger \vb{\alpha} \psi
+\]
+Which can be re-written as:
+\[
+\pdv{\rho}{t} + \div \vb{j} = 0
+\]
+
+\item We have that:
+\[
+\partial_0 j^0 = \partial_0 \psi^\dagger i \gamma^0 i \gamma^0 \psi = - \partial_0 \rho
+\]
+Similarly:
+\[
+\partial_\ell j^\ell = \partial_\ell \psi^\dagger i \gamma^0 i \gamma^\ell \psi = - \partial_\ell \psi^\dagger \alpha^\ell \psi 
+\]
+Hence we retrieve the expression required.
+
+\item Notice that $\gamma^0$ is anti-hermitian whilst the $\gamma^i$ are hermitian hence:
+\[
+D(\Lambda)^\dagger = Id + \frac{1}{4} \omega_{\mu \nu} (\gamma^\mu \gamma^\nu)^\dagger = 1 + \frac{1}{4} \omega_{\mu \nu} \gamma^0 \gamma^\nu \gamma^0 \gamma^0 \gamma^\mu \gamma^0 = (i \gamma^0) \underbrace{(1 + \frac{1}{4} \omega_{\mu \nu}\gamma^\nu \gamma^\mu)}_{D(\Lambda)^{-1}} (i\gamma^0)
+\]
+Hence we get that:
+\[
+\bar{\psi'}(x') = \psi^\dagger (i \gamma^0) D(\Lambda)^{-1} (i\gamma^0) (i\gamma^0) = \bar{\psi} D(\Lambda)^{-1}
+\]
+
+\item Hence we have that:
+\[
+j'^\mu(x') = \bar{\psi'} i \gamma^\mu \psi' = \bar{\psi} D^{-1}(\Lambda) i \gamma^\mu  D(\Lambda) \psi = \bar{\psi} i \Lambda^\mu_\nu \gamma^\nu \psi = \Lambda^\mu_\nu j^\nu
+\]
+Therefore $j$ is a 4-vector.
+
+\end{enumerate}
 
 
 \end{document}
