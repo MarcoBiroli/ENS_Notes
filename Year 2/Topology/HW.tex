@@ -102,9 +102,69 @@ Now however notice that at the origin i.e. $\varepsilon_x = \varepsilon_y = 0$ w
 
 \item From an immediate application of the residue theorem we know that the Berry phase will be given by the residue of $\frac{1}{\varepsilon}$ at $\varepsilon = 0$ which is $1$ times $2 \pi i n$ where $n \in \mathbb{Z}$. The Berry phase around $\tilde{K}$ would be given by the conjugate of the one around $K$. 
 
+\item We are now modifying $f_{\vb{k}}$ to:
+\[
+f'_{\vb{k}} = - t' e^{i \vb{k} \cdot \vb{\delta_1}} - t \sum_{i = 2}^3 e^{i \vb{k} \cdot \vb{\delta_i}}
+\]
+Which then gives for the energies:
+\[
+E'_\pm = \sqrt{2t^2 + t'^2 + 2t \left( t \cos(d k_x \sqrt{3}) + t'\left( \cos(\frac{d}{2} (k_x \sqrt{3} - 3 k_y)) + \cos(\frac{d}{2}(k_x\sqrt{3} + 3 k_y)) \right) \right)}
+\]
+
+\item Similarly as before by taking $\vb{k} = \vb{M} + \vb{\varepsilon}$ and making an expansion of $f'_{\vb{k}}$ we obtain:
+\[
+f'_{\vb{k}} \approx e^{i\frac{\pi}{6}} (2 i t - i t' + d(t + t')\varepsilon_y)
+\]
+Hence the Hamiltonian is given by:
+\[
+H = \begin{pmatrix}
+0 & e^{- i \frac{\pi}{6}} (i t' - 2 i t + d(t + t')\varepsilon_y)\\
+e^{i\frac{\pi}{6}} (2 i t - i t' + d(t + t')\varepsilon_y) & 0 
+\end{pmatrix}
+\]
+
+\item See Figure \ref{fkvfield} 
+\begin{figure} \label{fkvfield}
+\centering
+\includegraphics[width=0.5\textwidth]{fkvfield}
+\caption{Orientation of $f(\vb{k})$}
+\end{figure}
+
 \item 
 
+\end{enumerate}
 
+\section{The Haldane Model}
+
+\begin{enumerate}
+
+\item In the case of a crystal with one atom per unit cell the Hamiltonian can be written:
+\[
+...
+\]
+
+\item We have that the hoping term from an $A$ state to an $A$ state is given by:
+\[
+A = 2 \Re\left(t_2 e^{i \varphi} \sum_{j = 1}^d e^{i \vb{k} \cdot \vb{b_j}}\right)
+\]
+Similarly the one for $B$ is given by:
+\[
+B = 2\Re\left(t_2 e^{-i\varphi} \sum_{j = 1}^d e^{i \vb{k} \cdot \vb{b_j}}\right)
+\]
+Then we have that:
+\[
+H_{\vb{k}} = \begin{pmatrix}
+A + M & (f_{\vb{k}})^\star\\
+f_{\vb{k}} & B - M
+\end{pmatrix} = \begin{pmatrix}
+0 & (f_{\vb{k}})^\star\\
+f_{\vb{k}} & 0
+\end{pmatrix} + M \vb{\sigma_3} + 2 t_2 \left(\cos\varphi \sum_{j = 1}^3 \cos(\vb{k} \cdot \vb{b_j}) + i \left( \cos\varphi \sum_{j = 1}^3 \sin(\vb{k} \cdot \vb{b_j}) \right) 
+\right)\text{Id} = ...
+\]
+
+\item 
 
 \end{enumerate}
+
 \end{document}
