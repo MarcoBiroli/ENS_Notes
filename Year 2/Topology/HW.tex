@@ -92,12 +92,21 @@ Where we took:
 \]
 Now however notice that at the origin i.e. $\varepsilon_x = \varepsilon_y = 0$ we have that $\theta$ is not well defined. Now for the Berry connection we see that there is only an angular dependency hence we have:
 \[
-\mathcal{A}_{\pm} = i (u_{\pm}^T)^\star \cdot \grad u_{\pm} = \begin{pmatrix}
-1 & e^{i\theta}
+\mathcal{A}_{\pm} = i (u_{\pm})^\star \cdot \grad u_{\pm} = i \begin{pmatrix}
+1 & \pm e^{i \theta}
 \end{pmatrix} \begin{pmatrix}
-0\\
--i e^{-i \theta}
-\end{pmatrix} =  \frac{1}{\varepsilon} \vu{\theta} 
+\partial_{\varepsilon} \\
+\frac{1}{\varepsilon} \partial_\theta
+\end{pmatrix}
+\begin{pmatrix}
+1 & \pm e^{-i \theta}
+\end{pmatrix} = 
+i \begin{pmatrix}
+1 & \pm e^{i \theta}
+\end{pmatrix} \begin{pmatrix}
+0 & 0\\
+0 & \frac{\mp i}{\varepsilon}e^{-i\theta}
+\end{pmatrix} = \frac{1}{\varepsilon} \vu{\theta}
 \]
 
 \item We then have that the Berry phase is going to be given by:
@@ -258,10 +267,42 @@ Furthermore from the relation that we are given we have that:
 \[
 d_z(\vb{K}) = M + 3 t_2 \sin(\varphi)\sqrt{3}
 \]
+Hence we will have conduction only along the line (in the $(\sin\varphi, M)$ plane):
+\[
+M = - 3 t_2 \sqrt{3} \sin(\varphi)
+\]
 
-\item ...
+\item Notice that $d_3(\tilde{\vb{K}}) = d_3(-\vb{K}) = - d_3(\vb{K})$, furthermore $\vb{n}(\tilde{K}) = - \vu{z}$ hence the two opposite signs cancel and we get that:
+\[
+\nu = 2 \text{sign}(d_3(\vb{K}))
+\]
 
-\item 
+\item At the transition the gap will be close to the Dirac points hence:
+\[
+\Delta E_{\pm \vb{k}} = 2 || \vb{d}(\vb{k})|| = 2 | d_z(\vb{K}) |
+\]
+
+\item In order to linearize we can use the following simplification: $\cos(\vb{q} \cdot \vb{b_j}) = 1 + \mathcal{O}(||\vb{q}||^2)$ and $\sin(\vb{q} \cdot \vb{b_j}) = \vb{q} \cdot \vb{b_j} + \mathcal{O}(||\vb{q}||^3)$. Then we can re-write:
+\[
+\varepsilon_0(\vb{K} + \vb{q}) = 2\cos\varphi \sum_{j = 1}^3 \cos(\vb{K} \cdot \vb{b_j} + \vb{q} \cdot \vb{b_j}) = 2 \cos\varphi \sum_{j = 1}^3 \Big( \cos(\vb{K} \cdot \vb{b_j}) \cdot 1 - (\vb{q} \cdot \vb{b_j}) \sin(\vb{K} \cdot \vb{b_j})  \Big)
+\] 
+Now we can simplify this as follows:
+\[
+\varepsilon_0(\vb{K} + \vb{q}) = \underbrace{\varepsilon_0(\vb{K})}_{-3 \cos \varphi} + 3 \sqrt{3} (\vb{q} \cdot \vb{b_j})\cos\varphi 
+\]
+Similarly we get:
+\begin{align*}
+d_z(\vb{K} + \vb{q}) &= M - 2 t_2 \sin(\varphi) \sum_{j = 1}^3 (\vb{q} \cdot \vb{b_j})\cos(\vb{K} \cdot \vb{b_j}) + \sin(\vb{K} \cdot \vb{b_j}) \\
+&= d_z(\vb{K}) - 2 t_2 \sin(\varphi) \vb{q} \cdot \underbrace{\sum_{j = 1}^3 \vb{b_j} \cos(\vb{K} \cdot \vb{b_j})}_{= 0} = d_z(\vb{K})
+\end{align*}
+Then from the expression of $\vb{h}$ we have that:
+\[
+d_x(\vb{K} + \vb{q}) = \overbrace{d_x(\vb{K})}^{= 0} + t \vb{q} \cdot \underbrace{\sum_{j = 1}^3 \vb{\delta_j} \sin(\vb{K} \cdot \vb{\delta_j})}_{= 3d/2 \vu{x}}  \mbox{~~and~~} d_y(\vb{K} + \vb{q}) = \overbrace{d_y(\vb{K})}^{= 0} + t \vb{q} \cdot \underbrace{\sum_{j = 1}^3 \vb{\delta_j} \cos(\vb{K} \cdot \vb{\delta_j})}_{= 3d/2 \vu{y}}  \vb{\delta_j}) 
+\]
+So in total we obtain:
+\[
+..
+\]
 
 \end{enumerate}
 
