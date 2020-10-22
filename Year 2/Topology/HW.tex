@@ -47,10 +47,10 @@ Thus the eigenvalues of $H$ are given by:
 E_\pm = \pm t || \vb{h_{\vb{k}}} || = \pm t \sqrt{3 + 2 \cos(d k_x \sqrt{3}) + 2 \cos(\frac{d}{2} (k_x\sqrt{3} - 3 k_y)) + 2 \cos(\frac{d}{2}(k_x\sqrt{3} + 3k_y))}
 \]
 Notice that solving for $E_\pm = 0$ we get indeed the Dirac point $K$, as well as $-K$ or $(K_x, - K_y)$ for example. Plotting the energy spectrum we obtain Figure \ref{eigenplot}.
-\begin{figure} \label{eigenplot}
+\begin{figure}
 \centering
 \includegraphics[width = 0.5\textwidth]{energylevels}
-\caption{Plot of the positive energy levels for $k_x, k_y \in [-\frac{\pi}{d}, \frac{\pi}{d}]$.}
+\caption{Plot of the positive energy levels for $k_x, k_y \in [-\frac{\pi}{d}, \frac{\pi}{d}]$.} \label{eigenplot}
 \end{figure}
 
 \item We write $\vb{k} = \vb{K} + \vb{\varepsilon}$. Then we know that $H_{\vb{K}} = 0$ and $f_{\vb{K}} = 0$ hence we have that:
@@ -92,7 +92,7 @@ Where we took:
 \]
 Now however notice that at the origin i.e. $\varepsilon_x = \varepsilon_y = 0$ we have that $\theta$ is not well defined. Now for the Berry connection we see that there is only an angular dependency hence we have:
 \[
-\mathcal{A}_{\pm} = i (u_{\pm}^T)^\star \pdv{}{\vb{}} u_{\pm} = \begin{pmatrix}
+\mathcal{A}_{\pm} = i (u_{\pm}^T)^\star \cdot \grad u_{\pm} = \begin{pmatrix}
 1 & e^{i\theta}
 \end{pmatrix} \begin{pmatrix}
 0\\
@@ -100,7 +100,10 @@ Now however notice that at the origin i.e. $\varepsilon_x = \varepsilon_y = 0$ w
 \end{pmatrix} =  \frac{1}{\varepsilon} \vu{\theta} 
 \]
 
-\item From an immediate application of the residue theorem we know that the Berry phase will be given by the residue of $\frac{1}{\varepsilon}$ at $\varepsilon = 0$ which is $1$ times $2 \pi i n$ where $n \in \mathbb{Z}$. The Berry phase around $\tilde{K}$ would be given by the conjugate of the one around $K$. 
+\item We then have that the Berry phase is going to be given by:
+\[
+\varphi_\mathcal{A} = \int_\mathcal{C} \vb{\mathcal{A}_\pm} \dd \vb{l} = \int_\mathcal{C} \frac{1}{\varepsilon} \dd \theta = 2 \pi n \mbox{~~with~~} n \in \mathbb{Z}
+\]
 
 \item We are now modifying $f_{\vb{k}}$ to:
 \[
@@ -124,10 +127,10 @@ e^{i\frac{\pi}{6}} (2 i t - i t' + d(t + t')\varepsilon_y) & 0
 \]
 
 \item See Figure \ref{fkvfield} 
-\begin{figure} \label{fkvfield}
+\begin{figure} 
 \centering
 \includegraphics[width=0.5\textwidth]{fkvfield}
-\caption{Orientation of $f(\vb{k})$}
+\caption{Orientation of $f(\vb{k})$} \label{fkvfield}
 \end{figure}
 
 \item 
@@ -138,30 +141,125 @@ e^{i\frac{\pi}{6}} (2 i t - i t' + d(t + t')\varepsilon_y) & 0
 
 \begin{enumerate}
 
-\item In the case of a crystal with one atom per unit cell the Hamiltonian can be written:
+\item Cells can be indexed by two integers $(i, j)$ where the $i$ index corresponds to the horizontal position and the $j$ to the vertical position. Then we write the orbitals $\ket{i, j, A}$ and $\ket{i, j, B}$ for $A$ and $B$ respectively. Then the Hamiltonian is given by:
+\begin{align*}
+H = \sum_{i, j} &t\Big(\op{i, j, B}{i, j, A} + \op{i, j+1, B}{i, j, A} + \op{i+1, j, B}{i, j, A}\Big)\\
++ &t_2 e^{i\varphi}\Big(\op{i, j + 1, A}{i,j, A} + \op{i, j - 1, A}{i,j, A} + \op{i - 1, j, A}{i,j, A}\Big) + \frac{M}{2}\op{i, j, A}\\
++ &t_2 e^{-i\varphi}\Big(\op{i, j + 1, B}{i,j, B} + \op{i, j - 1, B}{i,j, B} + \op{i - 1, j, B}{i,j, B}\Big) - \frac{M}{2}\op{i, j, B}\\
++ &h.c.
+\end{align*}
+
+\item The first line and it's Hermitian conjugate of the above definition of the Hamiltonian corresponds to the one studied in part one and we will denote it by $H_0$ which we already know can be expressed as $H_0 = \vb{h} \cdot \vb{\sigma}$. Now we study the two remaining lines of the Hamiltonian. The first one (resp. second one) corresponds to the contribution from clock-wise hoping on $A-A$ terms plus the staggered potential (resp. $B-B$ terms with the staggered potential). Which we can re-write as:
 \[
-...
+\ket{i,j, A} \left(\frac{M}{2} + t_2 e^{i\varphi} \sum_{j = 1}^3 e^{i \vb{k} \cdot \vb{b_j}}\right) \bra{i, j, A} \mbox{~~and~~} \ket{i, j, B} \left(\frac{-M}{2} + t_2 e^{-i \varphi} \sum_{j = 1}^3 e^{i \vb{k} \cdot \vb{b_j}} \right)\bra{i, j, B}
+\]
+Then adding these with their conjugates will give:
+\[
+\begin{pmatrix}
+\ket{i, j, A} & \ket{i, j, B}
+\end{pmatrix} \begin{pmatrix}
+2 \Re\left( t_2 e^{i \varphi} \sum_{j = 1}^3 e^{i \vb{k} \cdot \vb{b_j}} \right) + M & 0\\
+0 & 2 \Re\left( t_2 e^{-i\varphi} \sum_{j = 1}^3 e^{i \vb{k} \cdot \vb{b_j}} \right) - M
+\end{pmatrix}
+\begin{pmatrix}
+\bra{i, j, A}\\
+\bra{i, j, B}
+\end{pmatrix}
+\]
+Now from the properties:
+\[
+\Re(a b) = \Re(a)\Re(b) - \Im(a)\Im(b) \mbox{~~and~~} \Re(a) = \Re(a^\star) \mbox{~~and~~} \Im(a) = -\Im(a^\star)
+\]
+We can simplify the above (calling $a = t_2e^{i \varphi}$ and $b$ the sum):
+\begin{align*}
+&\begin{pmatrix}
+\ket{i, j, A} & \ket{i, j, B}
+\end{pmatrix} \begin{pmatrix}
+2 \Re\left( ab \right) + M & 0\\
+0 & 2 \Re\left( a^\star b \right) - M
+\end{pmatrix}
+\begin{pmatrix}
+\bra{i, j, A}\\
+\bra{i, j, B}
+\end{pmatrix}
+\\
+=
+&\begin{pmatrix}
+\ket{i, j, A} & \ket{i, j, B}
+\end{pmatrix} \begin{pmatrix}
+2 \Re(a)\Re(b) - 2 \Im(a) \Im(b) + M & 0\\
+0 & 2 \Re(a^\star) \Re(b) - 2 \Im(a^\star) \Im(b) - M
+\end{pmatrix}
+\begin{pmatrix}
+\bra{i, j, A}\\
+\bra{i, j, B}
+\end{pmatrix}
+\\
+=
+&\begin{pmatrix}
+\ket{i, j, A} & \ket{i, j, B}
+\end{pmatrix} \begin{pmatrix}
+2 \Re(a)\Re(b) + (-2 \Im(a) \Im(b) + M)& 0\\
+0 & 2 \Re(a) \Re(b) - (-2 \Im(a) \Im(b) + M) 
+\end{pmatrix}
+\begin{pmatrix}
+\bra{i, j, A}\\
+\bra{i, j, B}
+\end{pmatrix}
+\\
+=
+&\begin{pmatrix}
+\ket{i, j, A} & \ket{i, j, B}
+\end{pmatrix} \Bigg(2 Re(a) Re(b) \text{Id} + \Big(M - 2 \Im(a) \Im(b) \Big) \sigma_z \Bigg)
+\begin{pmatrix}
+\bra{i, j, A}\\
+\bra{i, j, B}
+\end{pmatrix}
+\end{align*}
+Hence now we write:
+\[
+\varepsilon_0(\vb{k}) = 2 \Re(a) \Re(b) = 2 \cos\varphi \sum_{j = 1}^3 \cos(\vb{k} \cdot \vb{b_j})
+\]
+As well as:
+\[
+d_z(\vb{k}) = M - 2 \Im(a) \Im(b) = M - 2 t_2 \sin(\varphi) \sum_{j = 1}^3 \sin(\vb{k} \cdot \vb{b_j})
+\]
+Then we define:
+\[
+\vb{d}(\vb{k}) = \vb{h}(\vb{k}) + d_z(\vb{k}) \vu{z}
+\]
+Which allows us to re-write:
+\[
+H = \sum_{\vb{k}} \begin{pmatrix}
+\ket{\vb{k}, A} & \ket{\vb{k}, B}
+\end{pmatrix}
+\underbrace{\Big( \varepsilon_0(\vb{k}) \text{Id} + \vb{d}(\vb{k}) \cdot \vb{\sigma} \Big)}_{H_{\vb{k}}} \begin{pmatrix}
+\bra{\vb{k}, A}\\
+\bra{\vb{k}, B}
+\end{pmatrix}
 \]
 
-\item We have that the hoping term from an $A$ state to an $A$ state is given by:
+\item We have immediately that the eigenvalues of $H_{\vb{k}}$ are going to be given by:
 \[
-A = 2 \Re\left(t_2 e^{i \varphi} \sum_{j = 1}^d e^{i \vb{k} \cdot \vb{b_j}}\right)
+E_{\pm\vb{k}} = \varepsilon_0(\vb{k}) \pm ||\vb{d}(\vb{k})||
 \]
-Similarly the one for $B$ is given by:
+Hence we have that:
 \[
-B = 2\Re\left(t_2 e^{-i\varphi} \sum_{j = 1}^d e^{i \vb{k} \cdot \vb{b_j}}\right)
+\Delta E_{\pm \vb{k}} = E_{+\vb{k}} - E_{-\vb{k}} = 2 ||d(\vb{k})||
 \]
-Then we have that:
+Hence gaps close if and only if:
 \[
-H_{\vb{k}} = \begin{pmatrix}
-A + M & (f_{\vb{k}})^\star\\
-f_{\vb{k}} & B - M
-\end{pmatrix} = \begin{pmatrix}
-0 & (f_{\vb{k}})^\star\\
-f_{\vb{k}} & 0
-\end{pmatrix} + M \vb{\sigma_3} + 2 t_2 \left(\cos\varphi \sum_{j = 1}^3 \cos(\vb{k} \cdot \vb{b_j}) + i \left( \cos\varphi \sum_{j = 1}^3 \sin(\vb{k} \cdot \vb{b_j}) \right) 
-\right)\text{Id} = ...
+2||\vb{d}(\vb{k})|| = 0 \Leftrightarrow ||\vb{h}(\vb{k})||^2 + d_z(\vb{k})^2 = 0 \Leftrightarrow \begin{cases}
+||h(\vb{k})||^2 = 0\\
+d_z(\vb{k})^2 = 0
+\end{cases} \Rightarrow d_z(\vb{K}) = 0
 \]
+Furthermore from the relation that we are given we have that:
+\[
+d_z(\vb{K}) = M + 3 t_2 \sin(\varphi)\sqrt{3}
+\]
+
+\item ...
 
 \item 
 
