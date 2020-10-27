@@ -1,0 +1,243 @@
+\documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{geometry}
+\geometry{
+ a4paper,
+ total={170mm,237mm},
+ left=20mm,
+ top=20mm,
+ }
+
+%\geometry{landscape}                		% Activate for rotated page geometry
+%\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+								% TeX will automatically convert eps --> pdf in pdflatex		
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{dsfont}
+\usepackage{enumitem}
+
+\usepackage{physics}
+\usepackage{siunitx}
+
+\renewcommand\thesection{Exercise \arabic{section}: }
+
+\title{RQM and QFT: Midterm Homework}
+\author{Matteo Vilucchio}
+%\date{}							
+
+\begin{document}
+\maketitle
+
+\section{Some operator identities}
+
+\begin{enumerate}[label=\alph*)]
+
+\item To verify the identity is better to compute the derivatives of the function $F(t)$ which are, in general:
+\[
+	\eval{\dv[n]{F(t)}{t}}_0 = \eval{e^{tA} [A,...\comm{A}{\comm{A}{B}}...]e^{-tB}}_0 = [A,...\comm{A}{\comm{A}{B}}...]
+\]
+This relation can be proven simply by induction. For $n = 1$ we have the identity:
+\[
+	\eval{\dv{F(t)}{t}}_0 = \eval{e^{tA} \comm{A}{B} e^{-tB}}_0 = \comm{A}{B}
+\]
+and the inductive step can be verified as follows:
+\begin{align*}
+	\eval{\dv[n]{F(t)}{t}}_0 &= \eval{ \dv{t} \dv[n-1]{F(t)}{t} }_0 = \eval{ \dv{t}\qty( e^{tA} [A,...\comm{A}{\comm{A}{B}}...]e^{-tB} ) }_0 = \\
+	&= \eval{ e^{tA} A [A,...\comm{A}{\comm{A}{B}}...]e^{-tB}  - e^{tA} [A,...\comm{A}{\comm{A}{B}}...] B e^{-tB} }_0 = \\
+	&= \eval{ e^{tA} [A, [A,...\comm{A}{\comm{A}{B}}...]]e^{-tB}}_0 =  e^{tA} [A, [A,...\comm{A}{\comm{A}{B}}...]]e^{-tB}
+\end{align*}
+Then one can express $F(t)$ as his Taylor expansion:
+\[
+	F(t) = B + \sum_{n=1}^\infty \frac{1}{n!} [A,...\comm{A}{\comm{A}{B}}...] t^n
+\]
+and for $t = 1$ it is verified the given expression:
+\[
+	e^A B e^{-A} = B + \sum_{n=1}^\infty \frac{1}{n!} [A,...\comm{A}{\comm{A}{B}}...]  \label{eq:comm-relation} \tag{$\clubsuit$}
+\]
+
+\item In the following the commutator between $A$ and $B$ will be indicated as $C = \comm{A}{B}$. For proving the equivalence it is useful to consider the following functions for $\mathbb{R}$ to the operator space on which $A$, $B$ and $C$ live.
+\[
+	F(t) = e^{tA} \: e^{tB} \quad G(t) = e^{tA + tB} \: e^{\frac{t^2}{2}C} \quad D(t) = e^{\frac{t^2}{2}C + tA+tB}
+\]
+By considering the derivatives w.r.t. $t$ of each one of these operators we obtain:
+\begin{align*}
+	\dv{t} F(t) &= e^{tA} A e^{tB} + e^{tA} e^{tB} B =  e^{tA} e^{tB} e^{-tB} A e^{tB} + e^{tA} e^{tB} B = && \text{from (\ref{eq:comm-relation})} \\
+	&= e^{tA} e^{tB} \qty( A + t\comm{-B}{A} + B) = e^{tA} e^{tB} \qty(A + B + tC) =\\
+	&= F(t) \qty( A + B + tC ) \\
+	\dv{t} G(t) &= e^{tA + tB} (A + B) e^{\frac{t^2}{2}C} + e^{tA + tB}\: e^{\frac{t^2}{2}C} \:tC = \\
+	&= e^{tA + tB} \: e^{\frac{t^2}{2}C} \qty(A + B +tC) = G(t) \qty(A + B +tC) \\
+	\dv{t} D(t) &= e^{\frac{t^2}{2}C + tA+tB} \qty(tC+ A +B) = D(t) \qty(A + B + tC)
+\end{align*}
+Another thing that one should notice is that:
+\[
+	F(0) = \mathds{1} \quad G(0) = \mathds{1} \quad D(0) = \mathds{1}
+\]
+where $\mathds{1}$ stands for the identity operator on the image of these function. These three functions satisfy the same first order differential equation with the same first initial condition so by the Cauchy–Kowalevski theorem we have the unicity of the solution so the three functions are equal for every $t$. In particular for $t=1$ the relation states:
+\[
+	e^{A} \: e^{B} = e^{A + B} \: e^{\frac{1}{2}C} = e^{\frac{1}{2}C + A+B} \label{eq:exp-operator} \tag{$\spadesuit$}
+\]
+
+\item The first important relation to consider is:
+\[
+	\comm{F}{G^\dagger} = -\comm{G^\dagger}{F} = \sum_{i,j} f_i g_j^* \comm{a_i}{a_j^\dagger} =  \sum_{i,j} f_i g_j^* \delta_{i, j} = \sum_{i} f_i g_i^*
+\]
+The result (\ref{eq:exp-operator}) allows us to write for $G^\dagger$ and $F$:
+\[
+	e^{G^\dagger} e^{F} = e^{\frac{1}{2} \comm{G^\dagger}{F}} e^{G^\dagger + F} = e^{-\frac{1}{2} \sum_i f_i g_i^*} \:e^{G^\dagger + F}
+\]
+then by inverting the exponential of a number we obtain:
+\[
+	e^{\frac{1}{2} \sum_i f_i g_i^*} e^{G^\dagger} e^{F} = e^{G^\dagger} e^{F}
+\]
+
+\item One can define the following operators as integrals of the operators depending on a parameter:
+\[
+	F = \int \dd[3]{q} f(q) a(q) \quad G = \int \dd[3]{q} h(q) a^\dagger(q)
+\]
+then one can evaluate the commutator between $F$ and $G$:
+\begin{align*}
+	\comm{F}{G} &= \comm{\int \dd[3]{q} f(q) a(q) }{\int \dd[3]{q'} h(q') a^\dagger(q') } = \int \dd[3]{q} \int \dd[3]{q'} f(q) h(q')\comm{a(q)}{a^\dagger (q)} = \\
+	&= \int \dd[3]{q} \int \dd[3]{q'} f(q) h(q') \delta(q-q') = \int \dd[3]{q} f(q) h(q)
+\end{align*}
+then once again one can apply the relation (\ref{eq:exp-operator}) to find the desired result.
+
+\end{enumerate}
+
+\section{An example of an asymptotic series}
+
+\begin{enumerate}[label=\alph*)]
+
+\item The value of the integral is monotonically decreasing for $g > 0$ since we have that:
+\[
+	\forall x \in \mathbb{R} \quad \alpha < \beta \implies e^{-\alpha x^4} < e^{-\beta x^4}
+\]
+the values of the integral for different $g$s are:
+\begin{center}
+\begin{tabular}{ c | c c c }
+	$g$ & 0.01 & 0.1 & 1 \\ \hline
+	$f(g)$ & 0.992 & 0.944 & 0.772 
+\end{tabular}
+\end{center}
+
+\item If one expand the exponential and interchanges the sum and the integral one obtain:
+\[
+	\tilde{f}(g) = \sum_{n=0}^{\infty} \qty( \frac{(-1)}{n! \sqrt{\pi}}\int_{-\infty}^\infty x^{4n} e^{-x^2} \dd{x} ) g^n = \sum_{n=0}^{\infty} \frac{(-1)^n (4n - 1)!!}{n! \: 2^{2n}} g^n
+\]
+where the last passage is justified because one can rewrite the gaussian integral with the Gamma function:
+\[
+	\int_{-\infty}^\infty x^{2n} e^{-x^2} \dd{x} = 2 \int_{0}^\infty x^{2n} e^{-x^2} \dd{x} = \int_{0}^\infty t^{n- \frac{1}{2}} e^{-t} \dd{t} = \Gamma\qty(n + \frac{1}{2}) = \frac{(2n-1)!!}{2^{n}} \sqrt{\pi}
+\]
+where the change of variable is $t = x^2$. And by recalling the identity about double factorials $(2n - 1)!! = 2^n\: n!$ one has that the asymptotic series is:
+\[
+	\tilde{f}(g) = \sum_{n=0}^{\infty} f_n g^n = \sum_{n=0}^{\infty} \qty( (-1)^n\frac{(4n)!}{2^{4n}(n)!\:(2n)!} ) g^n
+\]
+A good estimation of the first five coefficients of the sum is obtained by the means of Stirling's formula:
+\[
+	(-1)^n\frac{(4n)!}{2^{4n}(n)!\:(2n)!} \simeq (-1)^{n} \frac{2^{2n}}{\sqrt{\pi n }} \qty(\frac{n}{e})^n
+\] 
+and then the approximated values are:
+\begin{center}
+\begin{tabular}{ c | c c c c c c }
+	$k$ & 0 & 1 & 2 & 3 & 4 & 5 \\ \hline
+	$f_k$ &  0 & -0.830 & 3.46 & \SI{-28} & \SI{3.39e2} & -5.44 $\times10^{3}$ \\
+\end{tabular}
+\end{center}
+
+\item The behaviour of the sum as $N$ grows is typical of an asymptotic series. The value of the sum fo ra fixed value of $g$ at first starts to approach the exact value but then it grows away from the exact value. For bigger values of $g$ the number of terms after which the sum grows exponentially decreases. A graphical confront between the sum of the series and the value of the function has been made in Figure \ref{fig:asymp}.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[scale=0.7]{imgs/Asymptotic.png} 
+   \caption{Confront between $f(g)$ and $\tilde{f}(g)$.}
+   \label{fig:asymp}
+\end{figure}
+
+\end{enumerate}
+
+\section{A relation between Dirac spinors}
+
+\begin{enumerate}[label=\alph*)]
+
+\item First it is necessary to recall the definition of the tensor $\omega_{\mu\nu}$ as:
+\[
+	\omega_{i j} = \epsilon_{ijk} \theta^k \quad \omega^{k0} = \xi^k \quad \omega_{\mu\nu} = 0 \text{ otherwise}
+\]
+where the first six $\omega$ coefficients are connected to spatial rotations while the last non vanishing three $\omega$ coefficients are connected to boost.
+One can start from writing the definition of $D(L(\va*{p}))$ inside the RHS of the given expression:
+\begin{align*}
+	i\gamma^0 \qty( D\qty(L(\va*{p}))) i\gamma^0 &= i\gamma^0 \qty(\sum_{n\ge0} \frac{1}{n!} \qty(\frac{i}{4} \omega_{\mu\nu})^n \qty(\gamma^\mu \gamma^\nu -\gamma^\nu \gamma^\mu)^n ) i \gamma^0 = \\
+	& = \sum_{n\ge0} \frac{1}{n!} \qty(\frac{i}{4} \omega_{\mu\nu})^ni\gamma^0 \qty(\gamma^\mu \gamma^\nu -\gamma^\nu \gamma^\mu)^n i \gamma^0
+\end{align*}
+In the following the analysis will be made for a generic term with index $n$. By inserting the identity operator and recalling that $(i\gamma^0)^2 = \mathds{1}$ one gets the following:
+\begin{align*}
+	i\gamma^0 \qty(\gamma^\mu \gamma^\nu -\gamma^\nu \gamma^\mu)^n i \gamma^0 &= \qty( i\gamma^0 \gamma^\mu \gamma^\nu i\gamma^0  - i\gamma^0 \gamma^\nu \gamma^\mu i\gamma^0 )^n = \qty( i\gamma^0 \gamma^\mu i\gamma^0 \: i\gamma^0 \gamma^\nu i\gamma^0  - i\gamma^0 \gamma^\nu i\gamma^0\: i\gamma^0 \gamma^\mu i\gamma^0 )^n \\
+	& = \qty( (-1)^2\qty(\gamma^\mu)^\dagger \qty(\gamma^\nu)^\dagger - (-1)^2\qty(\gamma^\nu)^\dagger \qty(\gamma^\mu)^\dagger )^n = \qty( \qty(\gamma^\mu)^\dagger \qty(\gamma^\nu)^\dagger - \qty(\gamma^\nu)^\dagger \qty(\gamma^\mu)^\dagger )^n
+\end{align*}
+Now one can check that for the Dirac and the Weyl representation the following relations hold:
+\[
+	\qty(\gamma^i)^\dagger = \gamma^i \quad \qty(\gamma^0)^\dagger = - \gamma^0
+\]
+We see that the operator for each term gets a factor of $(-1)^n$ every time one of the two matrices $\gamma^\mu$ or $\gamma^\nu$ is $\gamma^0$. Both matrices can't be simultaneously equal to $\gamma^0$ since $\omega_{00}$ is identically equal to zero.
+
+In the end this sum can be expressed in terms of a $\omega'$ with the opposite the boost components of $\omega$, which, once exponentiated, correspond to $D\qty(L(-\va*{p}))$.
+
+\item 
+
+\end{enumerate}
+
+\section{Some traces of products of $\gamma$-matrices}
+
+By considering the trace of the anti commutator one has:
+\begin{align*}
+	 2 \Tr \gamma_\mu \gamma_\nu &= \Tr \qty(\gamma_\mu \gamma_\nu + \gamma_\mu \gamma_\nu) = \Tr \qty(\gamma_\mu \gamma_\nu + \gamma_\nu \gamma_\mu) = \Tr \qty(\eta_{\mu\rho} \eta_{\nu\sigma} \qty(\gamma^\rho \gamma^\sigma + \gamma^\sigma \gamma^\rho) ) = \\
+	 &= \eta_{\mu\rho} \eta_{\nu\sigma} \Tr \qty(\gamma^\rho \gamma^\sigma + \gamma^\sigma \gamma^\rho) = \eta_{\mu\rho} \eta_{\nu\sigma} \Tr \acomm{\gamma^\rho}{\gamma^\sigma} = 2\eta_{\mu\rho} \eta_{\nu\sigma} \eta^{\rho\sigma} \Tr \mathds{1}
+\end{align*}
+and recognising that the $\eta_{\mu\rho} \eta_{\nu\sigma} \eta^{\rho\sigma} = \eta_{\mu\nu}$ this becomes the fist relation to prove.
+
+
+
+\section{Energy levels of a relativistic charged spin-0 particle in a harmonic electrostatic potential}
+
+\begin{enumerate}[label=\alph*)]
+
+\item
+
+\item
+
+\item
+
+\item
+
+\end{enumerate}
+
+\section{The axial current}
+
+\begin{enumerate}[label=\alph*)]
+
+\item
+
+\item
+
+\item
+
+\item
+
+\end{enumerate}
+
+\section{Supersymmetry}
+
+\begin{enumerate}[label=\alph*)]
+
+\item
+
+\item
+
+\item
+
+\item
+
+\end{enumerate}
+
+\end{document}  
