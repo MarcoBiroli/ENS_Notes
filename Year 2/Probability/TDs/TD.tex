@@ -557,7 +557,107 @@ P(|S_n - nx| \geq n \varepsilon) \leq \frac{\text{Var}(S_n)}{n^2 \varepsilon^2} 
 
 \end{enumerate}
 
-\chapter{[To Do]}
+\chapter{}
+\section{Characteristic functions}
+
+\begin{enumerate}
+
+\item The law of a Poisson random variable is given by:
+\[
+P(X = k) = \frac{a^k e^{-a}}{k!}
+\]
+Then the characteristic function is given by:
+\[
+\varphi_X(k) = E(e^{ikX}) = \sum_{n = 0}^{+\infty} e^{ikn} \frac{a^n e^{-a}}{n!} = e^{-a} \sum_{n = 0}^{+\infty} \frac{(e^{ik} a)^n}{n!} = e^{-a} e^{a e^{ik}} = e^{a(e^{ik} - 1)}
+\]
+
+\item Let $Y \sim \mbox{Poisson}(b)$. Then:
+\[
+\varphi_{X + Y}(k) = E(e^{ik(X+Y)}) = E(e^{ikX})E(e^{ikY}) = e^{a(e^{ik} - 1)} e^{b(e^{ik} - 1)} = e^{(a+b)(e^{ik} - 1)}
+\]
+Hence $X + Y \sim \mbox{Poisson}(a+b)$. 
+
+\end{enumerate}
+
+\section{A distributional equation.}
+
+\begin{enumerate}
+
+\item We have that:
+\[
+\varphi_X(k) = \int_S e^{ikx} P_X(x) \dd x \mbox{~~then~~} |\varphi_X(k)| \leq \int_S P_X(x) \dd x = 1
+\]
+And we have that:
+\[
+\varphi_X(k + \dd k)  = \int_S e^{i (k + \dd k) x} P_X(x) \dd x = \int_S e^{i x \dd k } e^{i k x} P_X(x) \dd x
+\]
+Now since (as seen above) the integral converges we can switch the limit and the integral and we get:
+\[
+\lim_{\dd k \to 0} \varphi_X(k + \dd k) = \int_S \lim_{\dd k \to 0} e^{i x \dd k }e^{i k x} P_X(x) \dd x = \varphi_X(k)
+\]
+Then notice that:
+\[
+\varphi_X(k) = (\varphi_X(-k))^\star 
+\]
+
+\item We saw from the previous question that:
+\[
+\varphi_X(k) = (\varphi_X(-k))^\star = \varphi_X(k)^\star \Rightarrow \varphi_X(k) \in \mathbb{R} \mbox{~~and~~} \varphi_X(k) = \varphi_X(-k)
+\]
+
+\item We have that $\varphi_X$ must be a real valued even function. Then furthermore we have that:
+\[
+\varphi_{\alpha X + \beta Y} = \varphi_{(\alpha + \beta)X} \Leftrightarrow \varphi_X(\alpha \cdot k) + \varphi_X(\beta \cdot k) = \varphi_X((\alpha + \beta) \cdot k )
+\]
+This is a case of Cauchy's functional equation which since $\varphi_X$ must be Lebesgue measurable admits only linear functions as solutions over $\mathbb{R}$. Then we have that:
+\[
+\varphi_X(k) = c k ???
+\]
+\end{enumerate}
+
+\section{Convergence in law}
+
+\begin{enumerate}
+
+\item We have that:
+\[
+\forall f \mbox{~~continous and bounded}, E[f(X_n)] \to E[f(X)] 
+\]
+Hence if $f$ is continuous we can define:
+\[
+\forall g \mbox{~~continous and bounded}, E[(g \circ f)(X_n)] = E[(g\circ f)(X)]
+\]
+Since $g \circ f$ is continuous and bounded.
+
+\item We want:
+\[
+\forall \varepsilon > 0, P(|X_n - c| > \varepsilon) = 0
+\]
+However from the Markov inequality we have that:
+\[
+P(|X_n - c| > \varepsilon) \leq \frac{1}{\varepsilon}E[|X_n - c|] = \frac{1}{\varepsilon}E[|X - c|] = 0
+\]
+Where we used the convergence in distribution in the first equality.
+
+\end{enumerate}
+
+\section{Stirling's formula}
+\begin{enumerate}
+
+\item 
+
+\item 
+
+\item From exercise 1 we know that $S_n \sim \mbox{Poisson}(n)$. Gaussian from law of large number.
+
+\item ...
+
+\item ... 
+
+\end{enumerate}
+
+
+
 
 \chapter{Extreme value distributions}
 

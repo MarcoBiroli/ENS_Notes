@@ -13,6 +13,9 @@
 \author{Marco Biroli}
 \title{Probability}
 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{corollary}{Corollary}[theorem]
@@ -813,18 +816,39 @@ P(S_{2n} = 0) = \frac{1}{4^{2n}} \binom{2n}{n} \sum_{u = 0}^n \binom{n}{u} \bino
 \]
 Hence in 2D the symmetric walk is recurrent. 
 
+\section{Random walk in $\Z^3$} (rivedi)
+$(X_n)$ such that $P\bigg(X_n=\begin{pmatrix}
+1\\ 0\\ 0
+\end{pmatrix}\bigg)=\ldots=P\bigg(X_n=\begin{pmatrix}
+0\\ 0\\ -1
+\end{pmatrix}\bigg)=\frac{1}{6}$. Then we have
+$$P(S_{2n}=0)=\sum_{i,j,k;\,\,i+j+k=n}\bigg(\frac{1}{6}\bigg)^{2n}\frac{(2n)!}{i!i!j!j!k!k!}$$
+where $i$ number of upward and downward steps, (1,0,0) and (-1,0,0),... Then notice that $i!j!k!$ is smallest when $i=j=k$. In particular $i+j+k=n\Rightarrow i!j!k!\geq \bigg(\frac{n}{3})\bigg)^3$. Hence we get
+$$P(S_{2n}=0)\leq \sum_{i,j,k;\,i+j+k=n}\bigg(\frac{1}{6}\bigg)^{2n}.....$$
+$$\leq \bigg(\frac{1}{6}\bigg)^{2n}\binom{2n}{n}\frac{n!}{(n/3)!^3}\sim_{n\to\infty} \frac{m}{n^{3/2}}( stirling )$$
+whence it follows
+$$\sum P(S_{2n}=0)<\infty$$ and $(S_n)$ is transient. A result was proven by Montrell:
+$$U_3=\frac{3}{(2\pi)^3}\int_{-\pi}^{\pi}\int_{-\pi}^{\pi}\int_{-\pi}^{\pi}\frac{dxdydz}{3-\cos(x)-\cos(y)-\cos(z)}=\frac{\sqrt{6}^3}{32\pi^3}\Gamma(1/24(\Gamma(5/25)\Gamma(7/24)\Gamma(11/24)$$
 
-\section{Random walk in $\mathbb{Z}^3$.}
-We take again the simplest symmetric random walk where we jump to each neighbor with probability $\frac{1}{6}$. Then identically as before we get that:
-\[
-P(S_{2n} = 0) = \sum_{i, j, k, i + j + k = n} \frac{1}{6^{2n}} \binom{2n}{i, i, j, j, k, k}
-\] 
-Then the $i!j!k!$ is smallest for $i = j = k$. Hence $i!j!k! \geq (\frac{n}{3})!^3$. Then we have the following upper bound:
-\[
-P(S_{2n} = 0) \leq \sum_{i, j, k, i+j+k = n} \frac{1}{6^{2n}} ... [\mbox{ale notes}] ...
-\]
+\section{Kolmogorov zero-one-law}
+Let $(X_n)$ a sequence of random variables on $(\Omega,\mathcal{F},P)$. The tail or asymptotic $\sigma-$field of $(X_n)$ is 
+$$\mathcal{J}=\bigcap_{n\geq 0}\sigma(X_n,X_{n+1},\ldots)$$
+"An event is in the tail $\sigma$-field if, for any n, it does not depent on $X_0,\ldots,X_n$."
+\begin{theorem}
+Let $(X_n)$ be a sequence of independent random variables. If $A$ is an asymptotic event for $(X_n)_{n\in\N}$, i.e., $A\in\mathcal{J}$, then $P(A)=0$ or $P(A)=1$. 
+\end{theorem}
 
-\section{Kolmogorov zero-one law}
+\section{Application to the random walk on $\Z$}
+$(X_n)$ such that $P(X_n=-1)=P(X_n=1)=\frac{1}{2}$. I want to prove that $P(S_n=0\,\,i.o)=1$. Be careul: $S_n=0$ i.o. is not asymptotic for $(X_n)$, it is asymptotic for $(S_n)$, but $(S_n)_n$ are not independent! 
+\proof Let $M>0$
+$$P(|S_n|\leq M)=\sum_{|k|\leq M}P(S_n=k)\leq (2M+1)P(S_n=0)\sim\frac{2M+1}{\sqrt{\pi n}}\to 0.$$
+Then
+$$P(\forall n, |S_n|\leq M)=0\,\,\,\,i.e.\,\,\,\, P((S_n)\text{ is bounded })=0$$
+$$P(-\infty<\liminf_n S_n\leq \limsup_n S_n<\infty)=0$$
+whence
+$$P(\liminf S_n=-\infty,+\infty\text{ or }\limsup S_n=-\infty,+\infty)=1$$
+then we use the trick: $\{\liminf S_n=-\infty\text{ or }+\infty\}$ is a tail event for $(X_n)$. By the 0-1 law, these events have probability 0 or 1, and at least one of them must have proba 1. $P(\liminf S_n=+\infty)=1\Rightarrow P(\limsup S_n=+\infty)$ yet $\limsup(S_n)=^{(d)}\limsup(-S_n)=-\liminf S_n=-\infty$.
+Only possibility: $\liminf S_n=-\infty$ and $\limsup S_n=+\infty$. 
 
 \chapter{The law of large numbers.}
 
@@ -1051,7 +1075,134 @@ We have 2 laws of large numbers:
 \]
 We can immediately see that the strong law implies the weak law, so why do we keep the weak law ? The weak law does not require the construction of an infinite family of random variables while the strong one does. Furthermore the strong law provides almost no new information with respect to the weak law and hence it amounts simply to a lot of work for little reward.
 
-\chapter{[Note gap]}
+\chapter{Central limit theorem}
+
+\section{Convergence in distribution (or in Law)}
+There are sequences of random variables that don't converge in any of the previously mentioned types of convergence, but whose law converges. For example consider $(\Omega,\mathcal{F},P)=([0,1],\mathcal{B}([0,1]),\lambda)$ and law of $X_n:$Bernoulli(1/2) converges in law but not $a.a$ or $L^1$ or $P$. 
+
+\begin{definition}
+The sequence $(X_n)_n$ of random variables converges in distribution or in law towards the random varibale $X$ if and only if: for any continuous bounded function $f:\R\to\R$ we have:
+$$\lim_{n\to\infty}E(f(X_n))=E(f(X))$$
+\end{definition}
+
+\begin{remark}
+Remark that $E(f(X_n))=\int f(X_n)dP=\int_{\R}f(x)dP_{X_n}(x)$ involves only the law of $X_n$. The convergence in distribution involves only the laws of the random variables $(X_n)_n$. It makes sense even if the random varibales are not defined on the same probability space.
+\end{remark}
+
+\begin{notation}
+This convergence is denoted: $X_n\xrightarrow[]{\mathcal{D}} X$ or $X_n \xrightarrow[]{\mathcal{l}} X$.
+\end{notation}
+
+\begin{proposition}
+$X_n\xrightarrow[]{\mathcal{D}} X$ if and only if for any function $f:\R\to\R$ continuous with compact support, we have
+$$\lim_{n\to\infty} E(f(X_n))=E(f(X))$$
+\end{proposition}
+\proof $\Rightarrow$ is obvious.\\
+$\Leftarrow$: suppose that for any function $f:\R\to\R$ continuous, compact support, $E(f(X_n))\to E(f(X))$ Let $f:\R\to\R$ be a continuous bounded function. Let $\epsilon>0$. I claim that $\exists M>0$, $P(X\in[-M,M])\geq 1-\epsilon$. In fact, $P(X\in\R)=1$ and $P(X\in\R)=P(\cup_{M>0}\{X\in[-M,M]\})=\lim_{M\to\infty}P(X\in[-M,M])$. Now, let $\phi$ be the function given by straight lines between $-M-1$ and $-M$ and $M$ and $M+1$ and constant in the middle. $\phi$ is continuous, bounded support and $1_{[-M,M]}\leq \phi\leq 1_{[-M-1,M+1]}$. $\phi$ has compact support , we have $\lim_{n\to\infty}E(\phi(X_n))=E(\phi(X))\geq P(X\in[-M,M])\geq 1-\epsilon$ so $\exists N$, $\forall n\geq N$, $E(\phi(X_n))\geq 1-2\epsilon$. Now, let $f:\R\to\R$ be a continuous and bounded, we have 
+$$E(f(X_n))-E(f(x))=E(f(X_n))-E(f\phi(X_n))+E(f\phi(X_n))-E(f\phi(X))+E(f\phi(X))-E(f(X))$$
+whence 
+\begin{align*}
+|E(f(X_n))-E(f(X))|&\leq E(|f|(1-\phi)(X_n))+|E(f\phi(X_n))-E(f\phi(X))|+E(|f|(1-\phi)(X)|\\
+&\leq ||f||_{\infty}(1-E(\phi(X_n))+|E(f\phi(X_n))-E(f\phi(X))|+||f||_{\infty}(1-E(\phi(X))\\
+&\leq ||f||_{\infty}(2\epsilon+\epsilon)+|E(f\phi(X_n))-E(f\phi(X))|
+\end{align*}
+Yet $f\phi$ has compact support, so $E(f\phi(X_n))\to E(f\phi(X))$. $\exists N'$, $\forall n\geq N'$, $|E(f\phi(X_n))-E(f\phi(X))|<\epsilon$. Thus, for $n\geq max(N.N')$, $|E(f(X_n))-E(f(X))|\leq ||f||_{\infty}3\epsilon+\epsilon$
+
+\section{Relationship with the other convergences} 
+\begin{proposition}
+If $X_n\xrightarrow[]{P} X$, then $X_n\xrightarrow[]{\mathcal{D}} X$.
+\end{proposition}
+\proof Let $f:\R\to\R$ continuous, compact support. Then $f$ is i nfact uniformly continuous:
+$$\forall\epsilon>0,\exists\delta>0,\forall x,y\in\R, |x-y|<\delta\Rightarrow |f(x)-f(y)|<\epsilon$$ 
+We rewrite
+\begin{align*}
+&E(f(X_n))-E(f(X))=\int_{\Omega}(f(X_n)-f(X))dP=\int_{|X_n-X|<\delta}(f(X_n)-f(X))dP+\int_{|X_n-X|\geq \delta}(f(X_n)-f(X))dP\\
+&\Rightarrow |E(f(X_n))-E(f(X))|\leq \epsilon+||f||_{\infty}P(|X_n-X|\geq \delta)
+\end{align*}
+Now $X_n\xrightarrow[]{P} X$. So $\exists N$, $\forall n\geq N$, $P(|X_n-X|\geq \delta)<\epsilon/||f||_{\infty}$. Whence, for $n\geq N$, $|E(f(X_n))-f(X)|\leq \epsilon+\epsilon=2\epsilon$.\\
+\begin{remark}
+Summary: $L^2\Rightarrow L^1\Rightarrow P\Rightarrow \mathcal{D}$ and $a.s\Rightarrow P$.
+\end{remark}
+
+\section{Characteristic functions}
+Let $\mu$ be a probability measure on $\R$. Its characteristic fucntion is the function $\varphi:\R\to\mathbb{C}$ defined by $\forall u\in\R$, $\varphi(u)=\int_{\R}e^{iux}d\mu(x)$. Let $X$ be a real valued random variable. Its characteristic function is the function $\varphi_X:\R\to\mathbb{C}$ defined by $\forall u\in\R$, $\varphi_X(u)=E(e^{iuX})$. In fact, $E(e^{iuX})=\int e^{iuX}dP=\int_{\R}e^{iux}dP_X(x)$. The characteristic function of $X$ is the Fourier tranform of its law $P_X$. Notice that $\varphi(0)=1$, $\varphi(-u)=\varphi(u)$, $\varphi$ is continuous. 
+
+\section{Moments}
+\begin{theorem}
+Let $X$ be a random variable which admits a moment of order $k\geq 1$. Then $\varphi_X$ is $k$ times differentiable at $0$ and moreover
+$$\varphi_X^{(k)}(0)=i^kE(X^k)$$
+\end{theorem}
+\proof $k=1$. Suppose $E(|X|)<\infty$. $\varphi_X(u)=\int_{\R}e^{iux}dP_X(x)$, then $\partial_u e^{iux}=ixe^{iux}$. Then $|\partial_ue^{iux}|\leq |x|$ (uniformly wrt $u$, integrable wrt $P_X$). Use a result on $\int$ depending on a parameter to conclude
+$$\varphi'_X(u)=\int ixe^{iux}dP_X(x)$$
+
+\section{Gaussian variables}
+A variable $X$ has a distribution which is gaussian with mean $m$ and variance $\sigma^2$ if its law has density
+$$\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{1}{2}\frac{(x-m)^2}{\sigma^2}}$$
+with respect to the Lebesgue measure. We denote this law by $\mathcal{N}(m,\sigma^2)$. Suppose $X\sim\mathcal{N}(m,\sigma^2)$ and let us compute $\varphi_X$:
+\begin{align*}
+\varphi_X(u&)=E(e^{iux})=\int_{\R}e^{iux}e^{-\frac{1}{2}\frac{(x-m)^2}{\sigma^2}}\frac{dx}{\sqrt{2\pi}\sigma}\,\,\,(y=\frac{x-m}{\sigma}, x=\sigma y+m)\\
+&=\int e^{iu\sigma y}e^{ium}e^{-\frac{1}{2}y^2}\frac{dy}{\sqrt{2\pi}}\\
+&=\frac{e^{ium}}{\sqrt{2\pi}}\int_{\R}e^{-\frac{1}{2}(y-iu\sigma)^2-\frac{\sigma^2 u^2}{2}}dy=\frac{1}{\sqrt{2\pi}}e^{ium-\frac{\sigma^2 u^2}{2}}\int_{\R}e^{-\frac{1}{2}(y-iu\sigma)^2}dy
+\end{align*}
+we apply the Residue Theorem to the function $e^{-\frac{z^2}{2}}$ (entire function) and the contour $\gamma_R$ (rettangolo tra $\R$ e $\R-iu\sigma$ di side lunghezza $R$). Hence we find
+$$\int_{\gamma_R}e^{-\frac{1}{2}z^2}dz=0=\int_{-R}^Re^{-\frac{1}{2}t^2}dt+\int_{t=0}^{-u\sigma}e^{-\frac{1}{2}(R*it)^2}idt(\to_{R\to\infty} 0)+\int_{R}^{-R} e^{....}+...$$
+so $\int_{\R-i\sigma u}e^{-\frac{1}{2}z^2}dz=\int_{\R}e^{-\frac{1}{2}z^2}dz=\sqrt{2\pi}=\frac{1}{\sqrt{2\pi}}e^{ium-\frac{\sigma^2 u^2}{2}}\int_{\R}e^{-\frac{1}{2}(y-iu\sigma)^2}dy$ thus $\varphi_X(u)=\exp(ium-\frac{\sigma^2u^2}{2})$. Let us denote $g_{\sigma}(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{1}{2}\frac{x^2}{\sigma^2}}$. We have 
+$$\int e^{iux}g_{\sigma}(x)dx=e^{-\sigma^2 u^2/2}=\frac{\sqrt{2\pi}}{\sigma}g_{1/\sigma}(u)$$
+the cool thing of the gaussia is that it is an eigenvalue of the Fourier transform.
+
+
+\section{Injectiveness}
+\begin{theorem}
+The map which associates to a probability measure on $\R$ its characteristic function is one to one. In other words, the characteristic function of a random variables $X$ characterizes its law.
+\end{theorem}
+\proof Let $X$ be a random variable, $\varphi_X$ its characteristic function. Let $Y$ be a random variable with distribution $\mathcal{N}(0,1)$, which is independent of $X$ and let us consider $X+\sigma Y$. I claim that $X+\sigma Y\xrightarrow[]{P} X$ as $\sigma \to 0$. Indeed $P(|X+\sigma Y-X|>\epsilon)=P(|\sigma Y|>\epsilon)=P(|Y|>\frac{\epsilon}{\sigma})\to_{\sigma\to 0} 0$. Let $f:\R\to\R$ continuous bounded, we have 
+\begin{align*}
+E(f(X+\sigma Y))&=\int\int f(x+\sigma y)dP_X(x)g_{\sigma}(y)dy\,\,\,\,(y\to \sigma y)\\
+&=\int\int f(x+y)dP_X(x)g_{\sigma}(y)dy\,\,\,\,(z=x+y)\\
+&=\int\int f(z)dP_X(x)g_{\sigma}(z-x)dz
+\end{align*}
+where we used that $g_{\sigma}(u)=\frac{1}{\sigma\sqrt{2\pi}}\int e^{iut}g_{1/\sigma}(t)dt$ and $\int e^{iut}g_{\sigma}(t)dt=\frac{\sqrt{2\pi}}{\sigma}g_{1/\sigma}(u)$. Hence 
+\begin{align*}
+E(f(X+\sigma Y))&=\int\int\int f(z)\frac{1}{\sigma\sqrt{2\pi}}e^{i(z-x)t}g_{1/\sigma}(t)dtdP_X(x)dz=_{Fubini}f(z)\bigg(\int_{x}e^{-ixt}dP_X(x)\bigg)g_{\/\sigma}(t)dtdz\\
+&=\int\int f(z)\varphi_X(-t)g_{1/\sigma}(t)dtdz\frac{1}{\sigma\sqrt{2\pi}}
+\end{align*}
+Now, $X+\sigma Y\xrightarrow[]{P} X$ so $X+\sigma Y\xrightarrow[]{\mathcal{D}} X$, thus 
+$$E(f(X))=\lim_{\sigma\to 0}E(f(X+\sigma Y))=\lim_{\sigma\to 0}\int\int f(z)\varphi_X(-t)g_{1/\sigma}(t)dtdz$$
+and thus $E(f(X))$ is completely determined by $\varphi_X$.
+
+\section{Paul Levy's theorem}
+Let $(X_n)_n$ be a sequence of random variables. Let $X$ be a random variable. Let us denote by $(\varphi_{X_n})$, $\varphi_X$ the associated characteristic functions.  
+\begin{theorem}(Paul Levy, weak form)
+We have equivalence between:
+\begin{enumerate}
+\item $X_n\xrightarrow[]{\mathcal{D}} X$
+\item $\forall u\in\R$, $\lim_{n\to\infty}\varphi_{X_n}(u)=\varphi_X(u)$.
+\end{enumerate}
+\end{theorem}
+\proof (1) implies (2) is easy because $f(x)=e^{iux}$ is continuous and bounded!\\
+(2) implies (1): let $f:\R\to \R$ continouous compact support. Let $\sigma >0$ and let $Y$ be a random variable, independent of $X_n,X$, with distribution $\mathcal{N}(0,1)$. We write 
+$$E(f(X_n))-E(f(X))=E(f(X_n)-E(f(X_n+\sigma Y))+E(f(X_n+\sigma Y))-E(f(X+\sigma Y))+E(f(X+\sigma Y))-E(f(X))$$
+hence 
+\begin{align*}|E(f(X_n))-E(f(X_n+\sigma Y))|&\leq \epsilon+||f||_{\infty}P(\sigma |Y|>\delta)\,\,\,\,(\text{uniform ocntinuity})\\
+|E(f(X)))-E(f(X+\sigma Y))|&\leq "
+\end{align*}
+so 
+\begin{align*}
+|E(f(X_n))-E(f(X))|&\leq 2\epsilon +2||f||_{\infty}P(|Y|>\frac{\delta}{\sigma})+|E(f(X_n+\sigma Y))-E(f(X+\sigma Y))|
+\end{align*}
+Let $\sigma$ small enough so $||f||_{\infty}P(|Y|>\frac{\delta}{\sigma})<\epsilon$. For this $\sigma $ fixed, we have
+$$|E(f(X_n))-E(f(X))|\leq 4\epsilon+|E(f(X_n+\sigma Y)-E(f(X+\sigma Y)|.$$
+I claim that $E(f(X_n+\sigma Y))\to_{n\to\infty}E(f(X+\sigma Y))$ where we can use the before last result from the previous section.
+
+
+\section{The central limit theorem} Let $(X_n)_n$ be a sequence of iid random variables which have a moment of order 2, i.e., $E(X_1^2)<\infty$. Let $m=E(X_1)$, $\sigma^2=Var(X_1)$, then 
+$$\frac{X_1+\ldots +X_n-nm}{\sqrt{n}}\xrightarrow[]{\mathcal{D}}\mathcal{N}(0,\sigma^2)$$
+
+\proof We center the variables by putting $X_i'=X_i-m$ and we set $Y_m=\frac{X_1'+\ldots+X_n'}{\sqrt{n}}$ and we compute $$\varphi_{Y_n}(u)=E(e^{iuY_n})=E(e^{iu\frac{X_1'+\ldots+X_n'}{\sqrt{n}}})=E(e^{iu\frac{X_1'}{\sqrt{n}}}\cdots e^{iu\frac{X_n'}{\sqrt{n}}}=E(e^{iu\frac{X_1'}{\sqrt{n}}})\cdots E(e^{iu\frac{X_n'}{\sqrt{n}}})$$
+$$=E(e^{iu\frac{X_1'}{\sqrt{n}}})^n$$
+where we used independence and same law for the $X_i'$. So $\varphi_{Y_n}(u)=\varphi_{X_1'}(\frac{u}{\sqrt{n}})^n$. Since $X_1'$ has a moment of order 2, $\varphi_{X_1'}$ is twice differentiable and $\varphi_{X_1'}(u)=1+iuE(X_1')-\frac{u^2}{2}E(X_1'^2)+o(u^2)_{u\to 0}$. Hence 
+$\varphi_{Y_n}(u)=(\varphi_{X_1'}(\frac{u}{\sqrt{n}}))^n=(1-\frac{u^2}{2n}\sigma^2+o(1/n))^n\to_{n\to\infty}e^{-\frac{\sigma^2u^2}{2}}$ which is the characteristic function of $\mathcal{N}(0,\sigma^2)$. The conclusion follows from Paul Levy.
+%
 
 \chapter{Percolation}
 
