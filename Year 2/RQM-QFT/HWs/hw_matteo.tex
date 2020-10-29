@@ -20,6 +20,7 @@
 
 \usepackage{physics}
 \usepackage{siunitx}
+\usepackage{slashed}
 
 \renewcommand\thesection{Exercise \arabic{section}: }
 
@@ -183,7 +184,43 @@ We see that the operator for each term gets a factor of $(-1)^n$ every time one 
 
 In the end this sum can be expressed in terms of a $\omega'$ with the opposite the boost components of $\omega$, which, once exponentiated, correspond to $D\qty(L(-\va*{p}))$.
 
-\item 
+\item To prove the relation it is useful to start form the relation at spatial moment equal to zero. The definition of the spinors $u(\va{p}, \sigma)$ and $v(\va{p}, \sigma)$ is the following. Give the Dirac equation:
+\[
+	\qty(\gamma^\mu \partial_\mu  + m) \psi_{\pm, \va{p}, \sigma} = 0 \label{eq:dirac} \tag{$\bullet$}
+\]
+where the subscripts on $\phi$ denote the "internal quantum numbers" of the state. We have that the free particle should satisfy the mass-energy relation and so for every moment $\va{p}$ there are two different solutions associated and for every one of the previous there is the spinor degree of freedom $\sigma$. By doing the rewriting of the solution as:
+\[
+	\psi_{+, \va{p}, \sigma} = u(\va{p}, \sigma) e^{ip_\mu x^\mu} \quad \psi_{-, \va{p}, \sigma} = v(\va{p}, \sigma) e^{-ip_\mu x^\mu}
+\]
+the two spinors should satisfy the following equations
+\[
+	\qty(i\gamma^\mu p_\mu + m)u(\va{p}, \sigma) = 0 \quad \qty(-i\gamma^\mu p_\mu + m)v(\va{p}, \sigma) = 0
+\]
+Considering first the particle at rest solution the equations become:
+\begin{align*}
+	\qty(-i\gamma^0 + \mathds{1}) u(\va{0}, \sigma) = 0 &\iff i\gamma^0 u(\va{0}, \sigma) =\mathds{1} u(\va{0}, \sigma) \\ 
+	\qty(i\gamma^0 + \mathds{1}) v(\va{0}, \sigma) = 0 &\iff i\gamma^0 v(\va{0}, \sigma) = -\mathds{1} v(\va{0}, \sigma)
+\end{align*}
+since $p_0 = -p^0 = -m$. Now to obtain the finite spatial momentum solution we can perform a boost in a reference frame where the particle has a momentum $\va{p}$. This is done with the action of the relative boost operator which is an operator inside the representation of the Lorentz group\footnote{In this case the particular representation we are working on is $\qty(\frac{1}{2},0) \otimes \qty(0, \frac{1}{2})$}.
+
+The change of frame of reference is, from the fact that $\psi$ is a scalar function:
+\[
+	\psi_{\pm, \va{p}, \sigma}\qty( x ) = D\qty(L\qty(\va{p})) \:\: \psi_{\pm, \va{0}, \sigma}\qty( \qty(L\qty(\va{p})^{-1}) x )
+\]
+The only dependance of $\psi$ from the coordinates is in the exponent. The actual calculation is simplified from the fact that the transformation goes from the rest frame with a particle momentum whose only non zero component is $p_0 = -m$. So we have for the pull-back:
+\[
+	\pm ip_0 \qty(L\qty(\va{p})^{-1})^{0}_{~\nu} x^\nu =  \pm i p_0 L\qty(\va{p})^{~0}_\nu x^{\nu} = \pm \qty(L(\va{p}) p)_\mu x^\mu
+\]
+so the exponent will remain coherent with the previous decomposition of $\psi$. In the end the $\psi$ function can be written as:
+\[
+	\psi_{+, \va{p}, \sigma} = e^{+ p_\mu x^\mu} D\qty(L\qty(\va{p})) u(\va{0}, \sigma) \quad \psi_{-, \va{p}, \sigma} = e^{- p_\mu x^\mu} D\qty(L\qty(\va{p})) v (\va{0}, \sigma)
+\]
+
+Then to obtain the desired result one can start from:
+\begin{align*}
+	i\gamma^0 u( \va{p}, \sigma) &= i \gamma^0D\qty(L\qty(\va{p})) u (\va{0}, \sigma) =  i\gamma^0 D\qty(L(\va{p})) i\gamma^0 \: i\gamma^0 u (\va{0}, \sigma) =  D\qty(L(-\va{p})) u (\va{0}, \sigma) = u(-\va{p}, \sigma) \\
+	i\gamma^0 v( \va{p}, \sigma) &= i \gamma^0D\qty(L\qty(\va{p})) v(\va{0}, \sigma) =  i\gamma^0 D\qty(L(\va{p})) i\gamma^0 \: i\gamma^0 v(\va{0}, \sigma) =  -D\qty(L(-\va{p})) v(\va{0}, \sigma) = -v(-\va{p}, \sigma)
+\end{align*}
 
 \end{enumerate}
 
@@ -196,15 +233,49 @@ By considering the trace of the anti commutator one has:
 \end{align*}
 and recognising that the $\eta_{\mu\rho} \eta_{\nu\sigma} \eta^{\rho\sigma} = \eta_{\mu\nu}$ this becomes the fist relation to prove.
 
+One result that will be useful in the following deduction is that the same commutation relations hold for the $\gamma$'s with lower indices.
+\[
+	\acomm{\gamma_\mu}{\gamma_\nu} = \acomm{\eta_{\mu\rho} \gamma^\rho}{\eta_{\nu\sigma} \gamma^{\sigma}} = \eta_{\mu\rho}\eta_{\nu\sigma} \acomm{\gamma^{\rho}}{\gamma^\sigma} = 2 \eta_{\mu\rho}\eta_{\nu\sigma} \eta^{\rho\sigma} \mathds{1} = 2 \eta_{\mu\nu} \mathds{1}
+\]
 
+Then by remembering the commutation relation of the $\gamma$'s one has:
+\begin{align*}
+	\Tr \qty( \gamma_\mu \gamma_\nu \gamma_\rho \gamma_\sigma ) &= \Tr \qty( \gamma_\nu \gamma_\rho \gamma_\sigma \gamma_\mu ) = \\ 
+	&= \Tr \qty( -\gamma_{\nu} \gamma_{\rho} \gamma_\mu \gamma_\sigma + 2 \eta_{\mu\sigma} \gamma_\nu \gamma_\rho) = \\
+	&= \Tr \qty( \gamma_{\nu} \gamma_\mu \gamma_\rho \gamma_\sigma - 2 \eta_{\mu\rho} \gamma_\nu \gamma_\sigma \mathds{1} + 2 \eta_{\mu\sigma} \gamma_\nu \gamma_\rho \mathds{1} ) = \\
+	&= \Tr \qty( -\gamma_\mu \gamma_\nu \gamma_\rho \gamma_\sigma + 2 \eta_{\mu\nu} \gamma_\rho \gamma_\sigma \mathds{1} - 2 \eta_{\mu\rho} \gamma_\nu \gamma_\sigma \mathds{1} + 2 \eta_{\mu\sigma} \gamma_\nu \gamma_\rho \mathds{1}  ) 
+\end{align*}
+From which one has:
+\[
+	\Tr \qty( \gamma_\mu \gamma_\nu \gamma_\rho \gamma_\sigma ) = \Tr \qty(\eta_{\mu\nu} \gamma_\rho \gamma_\sigma \mathds{1} - \eta_{\mu\rho} \gamma_\nu \gamma_\sigma \mathds{1} + \eta_{\mu\sigma} \gamma_\nu \gamma_\rho \mathds{1}) = 4\eta_{\mu\nu}\eta_{\rho\sigma} - 4\eta_{\mu\rho}\eta_{\nu\sigma} + 4\eta_{\mu\sigma}\eta_{\rho\nu}
+\]
+
+The last result that will be proven is that the trace of an odd collection of $\gamma$ matrices is always zero.
 
 \section{Energy levels of a relativistic charged spin-0 particle in a harmonic electrostatic potential}
 
 \begin{enumerate}[label=\alph*)]
 
-\item
+\item One should always remember that the operators $a$ and $a^\dagger$ don't commute. So for $n\ge2$:
+\begin{align*}
+	X^2 \ket{n} &= \frac{1}{2m\Omega} \qty(a^2 + (a^\dagger )^2 + a a^\dagger + a^\dagger a ) \ket{n} =  \\
+	&= \frac{1}{2m\Omega} \qty( \sqrt{n(n-1)}\ket{n-2} + \sqrt{(n+1)(n+2)} \ket{n+2} + (2n+1) \ket{n})
+\end{align*}
+while for the expected value of $X^4$:
+\[
+	\mel{n}{X^4}{n} =  \frac{1}{(2\pi \Omega)^2} 3 \qty(2n^2 + 2n +1)
+\]
+which can also be computed by the means of Wick's theorem.
 
-\item
+\item The free Klein Gordon equation is the following:
+\[
+	\qty(- \partial^\mu \partial_\mu + m^2) \Phi = 0
+\]
+which for the presence of a electrostatic field becomes:
+\begin{align*}
+	\qty(-\qty(\partial^t - i \frac{m}{2}\omega^2 x^2) \qty(\partial_t + i\frac{m}{2} \omega^2 x^2) + \laplacian + m^2) \Phi &= 0 \\
+	\qty(  )\Phi &= 0 
+\end{align*}
 
 \item
 
