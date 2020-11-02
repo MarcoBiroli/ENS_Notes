@@ -250,7 +250,20 @@ From which one has:
 	\Tr \qty( \gamma_\mu \gamma_\nu \gamma_\rho \gamma_\sigma ) = \Tr \qty(\eta_{\mu\nu} \gamma_\rho \gamma_\sigma \mathds{1} - \eta_{\mu\rho} \gamma_\nu \gamma_\sigma \mathds{1} + \eta_{\mu\sigma} \gamma_\nu \gamma_\rho \mathds{1}) = 4\eta_{\mu\nu}\eta_{\rho\sigma} - 4\eta_{\mu\rho}\eta_{\nu\sigma} + 4\eta_{\mu\sigma}\eta_{\rho\nu}
 \]
 
-The last result that will be proven is that the trace of an odd collection of $\gamma$ matrices is always zero.
+The last result that will be proven is that the trace of an odd collection of $\gamma$ matrices is always zero. To prove this result one should first verify a result given in the lecture notes, that:
+\[
+	\acomm{\gamma_5}{\gamma^{\mu}} = -i \qty( \gamma^0\gamma^1\gamma^2\gamma^3 \gamma^\mu  + \gamma^\mu \gamma^0\gamma^1\gamma^2\gamma^3) = -i\qty((-1)^3 \gamma^\mu \gamma^0\gamma^1\gamma^2\gamma^3 + \gamma^\mu \gamma^0\gamma^1\gamma^2\gamma^3) = 0 \label{eq:comm-gamma-5} \tag{$\star$}
+\]
+since for every two pair of different indices $\mu \neq \nu$ the anti commutator is $\acomm{\gamma^\mu}{\gamma^\nu} = 0$.
+
+Then:
+\begin{align*}
+	\Tr \qty( \gamma_{\mu_1} \dots \gamma_{\mu_{2n+1}}) &= \Tr \qty( \gamma_5 \gamma_5 \gamma_{\mu_1} \dots \gamma_{\mu_{2n+1}}) = \\
+	&= \Tr \qty( \gamma_5 \gamma_{\mu_1} \dots \gamma_{\mu_{2n+1}} \gamma_5) = \\
+	&= \Tr \qty( (-1)^{2n+1} \gamma_5 \gamma_5 \gamma_{\mu_1} \dots \gamma_{\mu_{2n+1}}) = \\
+	&= (-1) \Tr \qty( \gamma_{\mu_1} \dots \gamma_{\mu_{2n+1}})
+\end{align*}
+where the factor $(-1)^{2n+1}$ appears for the same reason that it has appeared in calculating the commutator between $\gamma_5$ and $\gamma_\mu$. Since the Trace we where looking for is equal to its inverse then it is necessarily equal to zero.
 
 \section{Energy levels of a relativistic charged spin-0 particle in a harmonic electrostatic potential}
 
@@ -287,14 +300,60 @@ which for the presence of a electrostatic field becomes:
 
 \begin{enumerate}[label=\alph*)]
 
-\item
+\item To fix notations the axial transformation acts as:
+\[
+	\psi \longmapsto \chi = e^{i \epsilon \gamma_5} \psi
+\]
+From the relation (\ref{eq:comm-gamma-5}) one has that:
+\[
+	e^{i\epsilon \gamma_5} \gamma^\mu = \qty( \sum_{n\ge0} \frac{(i\epsilon)^n}{n!} (\gamma_5)^n) \gamma^\mu = \gamma^\mu \qty( \sum_{n\ge0} \frac{(i\epsilon)^n}{n!} (-1)^n (\gamma_5)^n) = \gamma^\mu e^{-i\varepsilon \gamma_5}
+\]
+Another intermediate result, useful for later is that:
+\[
+	\qty(e^{i\epsilon \gamma_5})^\dagger = \qty( \sum_{n\ge0} \frac{(i\epsilon)^n}{n!} (\gamma_5)^n )^\dagger = \sum_{n\ge0} \frac{(-i\epsilon)^n}{n!} \qty(\gamma_5^\dagger)^n = \sum_{n\ge0} \frac{(-i\epsilon)^n}{n!} \qty(\gamma_5)^n = e^{-i\epsilon \gamma_5}
+\]
+Then after the symmetry $\overline{\psi}$ becomes:
+\[
+	\overline{\chi} = \chi^\dagger i \gamma^0 = \psi^\dagger e^{-i\epsilon \gamma_5} i\gamma^0 = \psi^\dagger i \gamma^0 e^{i\epsilon \gamma_5} = \overline{\psi} e^{i\epsilon \gamma_5}
+\]
 
-\item
+\item One has that:
+\begin{align*}
+	S[\chi] &= \int \dd[4]{x} \overline{\chi} \qty(- \slashed{\partial} + iq \slashed{A}(x) + m ) \chi = \int \dd[4]{x} \overline{\psi} e^{i\epsilon \gamma_5} \qty(- \slashed{\partial} + iq \slashed{A}(x) + m ) e^{i \epsilon \gamma_5} \psi = \\
+	&= \int \dd[4]{x} \overline{\psi} \qty( -\slashed{\partial} + iq \slashed{A} + m e^{i \epsilon \gamma_5} e^{i \epsilon \gamma_5} ) \psi = \int \dd[4]{x} \overline{\psi} \qty( -\slashed{\partial} + iq \slashed{A} + m e^{2i \epsilon \gamma_5} ) \psi = \\
+	&= S[\psi] + m \int \dd[4]{x} \overline{\psi} \qty( e^{2i \epsilon \gamma_5}  - 1 ) \psi
+\end{align*}
 
-\item
+The two actions are invariant under axial transformation if and only if $m=0$.
 
-\item
+For the case $m=0$ we have that the axial transformation is a symmetry of both the Action and the Lagrangian so there is an associated conserved current by Noether's theorem. 
+\[
+	J^\mu_5(x) = \pdv{\mathcal{L}}{\qty(\partial_\mu \psi)} \fdv{\psi}{\epsilon} = -i\overline{\psi} \gamma^\mu \gamma^5 \psi
+\]
 
+\item The two Dirac eqs. concerning $\psi$ is:
+\begin{align*}
+	\qty(\gamma^\mu \partial_\mu^L - i q \gamma^\mu A_\mu + m)\psi &= 0 
+\end{align*}
+to obtain the Dirac equation for $\overline{\psi}$ one should take the hermitian conjugate of the previous and multiply from the right with $i\gamma^0$ to obtain:
+\begin{align*}
+	0&=\psi^\dagger \qty(\gamma^\mu \partial_\mu^L - i q \gamma^\mu A_\mu + m)^\dagger i\gamma^0 = \psi^\dagger i \gamma^0 i\gamma^0 \qty(\partial_\mu^R (\gamma^\mu)^\dagger + i q A_\mu^* (\gamma^\mu)^\dagger  + m) i\gamma^0 = \\
+	&= \overline{\psi} \qty( \partial_\mu^R \overline{\gamma^\mu}  + iq A_\mu^* \overline{\gamma^\mu} + m) \\
+\end{align*}
+where the partial derivative operator acts on the right.
+
+To find the 
+
+From the Lagrangian:
+\[
+	\mathcal{L} = \overline{\psi} \qty( -\gamma^\mu \partial_\mu + i q\gamma^\mu A_\mu -m ) \psi
+\]
+the two Euler-Lagrange equations for $\overline{\psi}$ and $\psi$ become:
+\begin{align*}
+	\partial_\mu \qty(\pdv{\mathcal{L}}{\qty(\partial_\mu \psi)} ) - \pdv{\mathcal{L}}{\psi} &= -\qty(\partial_\mu \overline{\psi} ) \gamma^\mu - iq \overline{\psi} \gamma^\mu A_\mu + m \overline{\psi} \mathds{1} = 0 \\
+	\partial_\mu \qty(\pdv{\mathcal{L}}{\qty(\partial_\mu \overline{\psi})} ) - \pdv{\mathcal{L}}{\overline{\psi}} &= 0
+\end{align*}
+a
 \end{enumerate}
 
 \section{Supersymmetry}
@@ -305,9 +364,6 @@ which for the presence of a electrostatic field becomes:
 
 \item
 
-\item
-
-\item
 
 \end{enumerate}
 
