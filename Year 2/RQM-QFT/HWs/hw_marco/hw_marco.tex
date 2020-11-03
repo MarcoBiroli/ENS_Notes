@@ -20,13 +20,48 @@ Mid Term Homework}
 \section[Exercise]{Some operator identities : 6 points}
 
 \begin{enumerate}
-\item We have that:
-\[
-e^A B e^{-A} = \sum_{n = 0}^{\infty} \frac{A^n}{n!} B \sum_{n = 0}^{+\infty} \frac{(-A)^n}{n!} = \sum_{n, m = 0}^{+\infty} \frac{A^n B (-A)^m}{n!m!} = \sum_{n, m = 0}^{+\infty} (-1)^m \frac{A^n B A^m}{n! m!} = \sum_{n = 0}^{+\infty} \frac{A^n}{n!} \sum_{m = 0}^{+\infty} (-1)^m \frac{BA^m}{m!}
-\]
-...
 
-\item ...
+\item Consider $F(t) = e^{tA} B e^{-tA}$ then consider the following inductive hypothesis: 
+\[\mathcal{H}_n : " \dv[n]{F(t)}{t} = e^{tA} \underbrace{[A, [A, \cdots, [A, B]\cdots]}_{n \mbox{~commutators}} e^{-tA} "\]
+The base case $n= 1$ is trivially satisfied:
+\[
+\dv{F(t)}{t} = e^{tA} A B e^{-tA} + e^{tA} B (-A) e^{-tA} = e^{tA} (AB - BA) e^{-tA} = e^{tA}[A, B] e^{-tA}
+\]
+Then suppose $\mathcal{H}_n$ for $n \in \mathbb{N}$. Then we have that:
+\begin{align*}
+\dv[n+1]{F(t)}{t} &= \dv{}{t} \dv[n]{F(t)}{t} = \dv{}{t} e^{tA} \underbrace{[A, [A, \cdots, [A, B]\cdots]}_{n \mbox{~commutators}} e^{-t A } \\
+&= e^{tA} A \underbrace{[A, [A, \cdots, [A, B]\cdots]}_{n \mbox{~commutators}} e^{-tA} + e^{tA} \underbrace{[A, [A, \cdots, [A, B]\cdots]}_{n \mbox{~commutators}} (-A) e^{-tA}\\
+&= e^{tA} (A\underbrace{[A, [A, \cdots, [A, B]\cdots]}_{n \mbox{~commutators}} - \underbrace{[A, [A, \cdots, [A, B]\cdots]}_{n \mbox{~commutators}} A) e^{-tA}\\
+&= e^{tA} \underbrace{[A, [A, \cdots, [A, B]\cdots]}_{n + 1 \mbox{~commutators}} e^{-tA}
+\end{align*}
+Hence if $\mathcal{H}_n$ is true for $n \in \mathbb{N}$ so is $\mathcal{H}_{n+1}$ then by induction we can conclude that $\mathcal{H}_n$ is true for all $n \in \mathbb{N}$. Hence we have that:
+\[
+F(t) = F(0) + \sum_{n = 1}^{+\infty} \frac{t^n}{n!} \dv[n]{F(t)}{t}\Big|_{t = 0} = B + \sum_{n = 1}^{+\infty} \frac{t^n}{n!} \underbrace{[A, [A, \cdots, [A, B]\cdots]}_{n \mbox{~commutators}}
+\]
+Hence:
+\[
+e^{A} B e^{-A} = F(1) = B + \sum_{n=1}^{+\infty} \frac{1}{n!} \underbrace{[A, [A, \cdots, [A, B]\cdots]}_{n \mbox{~commutators}}
+\]
+
+\item Let $G(t) = e^{tA} e^{tB}$.  Then notice that:
+\begin{align*}
+\dv{G(t)}{t} &= A e^{tA} e^{t B} + e^{tA} e^{tB} B = A e^{tA} e^{tB} + e^{tA} B e^{-tA} e^{tA} e^{tB} = A e^{tA} e^{t B} + (B + t[A, B] + 0) e^{tA} e^{tB}\\
+&= (A + B + t[A, B]) e^{tA} e^{tB} = (A + B + t[A, B]) G(t) 
+\end{align*}
+Therefore $G$ is a solution to the differential equation:
+\[
+\partial_t f(t) = (A + B + t[A, B]) f(t)
+\]
+Now notice furthermore that:
+\[
+\partial_t e^{tA + tB + \frac{t^2}{2} [A, B]} = (A + B + t[A, B])e^{tA + tB + \frac{t^2}{2}[A, B]}
+\]
+And identically:
+\[
+\partial_t e^{\frac{t^2}{2}[A, B]} e^{tA + tB} = t[A, B] e^{\frac{t^2}{2}[A, B]} e^{t A + tB} + e^{\frac{t^2}{2}[A, B]} (A + B) e^{tA + tB} = (A + B + t[A, B])e^{\frac{t^2}{2}[A, B]} e^{tA + tB} 
+\]
+Hence all three functions are solution to the same differential equation and furthermore at $t = 0$ they are all equal to the identity hence they must be equal for all $t$. Then taking $t = 1$ gives the desired equalities.
+
 
 \item We have that:
 \[
@@ -93,7 +128,7 @@ Hence plugging it back up top we obtain:
 \[
 \tilde{f}(g) = \sum_{n = 0}^{+\infty} \left( \frac{(-1)^n(4n)!}{n! 2^{4n} (2n)!} \right) g^n
 \]
-Notice that the terms $f_n$ are monotonically increasing in norm and diverge hence the sum does not converge absolutely and $R = 0$ and it also does not converge conditionally. The order of magnitude of the first few terms is ...
+Notice that the terms $f_n$ are monotonically increasing in norm and diverge hence the sum does not converge absolutely and $R = 0$ and it also does not converge conditionally. 
 
 \item \begin{figure}
 \centering
@@ -102,6 +137,8 @@ Notice that the terms $f_n$ are monotonically increasing in norm and diverge hen
 \includegraphics[width=0.44 \textwidth]{error_series}
 \caption{Series approximations of $f(g)$ and their errors for $g \in [0.01, 1]$.}
 \end{figure}
+
+We can see that the speed of the divergence is very strongly related to the value of $g$ if $g \ll 1$ the divergence is negligible but as soon as $g \sim 1$ the divergence is clearly apparent. 
 
 \end{enumerate}
 
@@ -175,7 +212,23 @@ Hence adding on both side we obtain the desired equality:
 \]
 Similarly we have that:
 \[
-\tr \gamma_\mu \gamma_\nu \gamma_\rho \gamma_\sigma = ... 
+\tr \gamma_\mu \gamma_\nu \gamma_\rho \gamma_\sigma = \tr \gamma_\mu \gamma_\nu (2\eta_{\rho \sigma} I_4 - \gamma_\sigma \gamma_\rho) = 2\eta_{\rho \sigma} \tr \gamma_\mu \gamma_\nu - \tr \gamma_\mu \gamma_\nu \gamma_\sigma \gamma_\rho = 2 \eta_{\rho \sigma} 4 \eta_{\mu \nu} - \tr \gamma_\mu \gamma_\nu \gamma_\sigma \gamma_\rho 
+\]
+Now we can repeat the argument but instead of permuting the last two term we permute the two middle terms and then we permute the first two terms in such a way as to bring $\gamma_\sigma$ to the front of the queue. Then we have that:
+\[
+\tr \gamma_\mu \gamma_\nu \gamma_\rho \gamma_\sigma = 2 \eta_{\rho \sigma} 4 \eta_{\mu \nu} -  2 \eta_{\nu \sigma} 4 \eta_{\mu \rho} + 2 \eta_{\mu \sigma} 4 \eta_{\nu \rho} - \tr \gamma_\sigma \gamma_\mu \gamma_\nu \gamma_\rho
+\]
+Then from the cyclicity of the trace we can bring $\gamma_\sigma$ to the back again. Hence we obtain:
+\[
+\tr \gamma_\mu \gamma_\nu \gamma_\rho \gamma_\sigma = 4(\eta_{\rho \sigma} \eta_{\mu \nu} + \eta_{\nu \sigma} \eta_{\mu \rho} - \eta_{\mu \sigma} \eta_{\nu \rho})
+\]
+Now for the last trace property of the $\gamma$-matrices. We have that:
+\[
+\tr \gamma_{\mu_1} \cdots \gamma_{\mu_{2n+1}} = \tr \gamma_5 \gamma_5 \gamma_{\mu_1} \cdots \gamma_{\mu_{2n+1}} = (-1)^{2n+1}\tr \gamma_5 \gamma_{\mu_1}\cdots \gamma_{\mu_{2n + 1}} \gamma_5 = - \tr \gamma_{\mu_1} \cdots \gamma_{\mu_{2n + 1}}
+\]
+Where in the first equality we used that $\gamma_5^2 = 1$ and in the second that $\gamma_5 \gamma_\mu = - \gamma_\mu \gamma_5$. From the above we can then conclude that:
+\[
+\tr \gamma_{\mu_1} \cdots \gamma_{\mu_{2n+1}} = 0
 \]
 
 \section{Energy levels of a relativistic charged spin-0 particle in a harmonic electrostatic potential}
@@ -190,27 +243,75 @@ X^2 \ket{n} &= \frac{1}{2 m \Omega} \left( a^2 + (a^\dagger)^2 + \{a, a^\dagger\
 \end{align*}
 Hence we get that:
 \[
-\bra{n} X^4 \ket{n} = (\bra{n} X^2)(X^2 \ket{n}) = \frac{1}{(2 m \Omega)^2} (n^2 - n + n^2 + 3n + 2 + n + 1 + n) = \frac{2n^2 + 3n + 2}{(2m \Omega)^2}
+\bra{n} X^4 \ket{n} = (\bra{n} X^2)(X^2 \ket{n}) = \frac{6}{(2 m \Omega)^2} \left( n(n + 1) + \frac{1}{2} \right) 
 \]
 
 \item We have that:
 \[
-(D_\mu D^\mu + m^2) \Phi = 0 \mbox{~~where~~} D^\mu = \partial^\mu - i q A^\mu
+(-D_\mu D^\mu + m^2) \Phi = 0 \mbox{~~where~~} D^\mu = \partial^\mu - i q A^\mu
 \]
-Then taking $\Phi = e^{- i E t} \phi$ and plugging it in we get that:
+Expanding this slightly gives:
 \[
-e^{-iEt} (D_i D^i + m^2) \phi + D_0D^0 e^{-iE t} \phi = 0
+\left((\partial_t + i \frac{m}{2} \omega^2 x^2)^2 - \laplacian + m^2\right)\Phi = 0
 \]
-Looking now only at the second term we have that:
+Now inserting the Ansatz we are given: $\Phi = e^{-iEt} \phi$ this gives:
 \[
-D_0D^0 e^{-iE t} \phi = (\partial_0 + i\frac{m}{2}\omega^2 x^2)(\partial^0 - i \frac{m}{2} \omega^2 x^2) e^{- i E t}\phi = (\partial_0 \partial^0 + \frac{m}{2} \omega^2 x^2) e^{-i E t} \phi = 
+(\partial_t + i \frac{m}{2} \omega^2 x^2)^2 e^{-iE t} \phi +   e^{-iEt} (-\laplacian + m^2) \phi = 0
 \]
-Now looking at the time derivative we obtain:
+Hence to simplify we compute:
 \[
-\partial_0\partial^0 e^{-iE t}\phi = \partial_0 (-i E e^{-iEt}\phi + e^{-iEt}\partial^0\phi) = E^2 e^{-iEt} \phi - i E e^{-iEt} \partial^0 \phi + e^{-iEt}\partial_0\partial^0 \phi 
+e^{iEt}(\partial_t + i \frac{m}{2} \omega^2 x^2)^2 e^{-iEt} = e^{iEt}(\partial_t^2 + i m \omega^2 x^2 \partial_t - \frac{m^2}{4} \omega^4 x^4) e^{-i E t} = - E^2 + m \omega^2 x^2 E - \frac{m^2}{4} \omega^4 x^4
+\]
+Putting everything together we obtain:
+\[
+\left( E^2 - m\omega^2 x^2 E + \frac{m^2}{4} \omega^4 x^4 + \laplacian - m^2 \right) \phi = 0
 \]
 
-\item 
+\item We see from the above that the coefficients depend only on $x$ hence the equation is invariant for translations in $y$ and $z$. We therefore know that the solution can be written as:
+\[
+\phi(x, y, z) = e^{i k_y y} e^{i k_z z} f(x) 
+\]
+Plugging this in the equation on top we obtain:
+\[
+\left( E^2 - m \omega^2 x^2 E + \frac{m^2}{4} \omega^4 x^4 - k_y^2 - k_z^2 + \partial_x^2 - m^2 \right) f(x) = 0
+\]
+Hence reorganizing the terms we obtain:
+\[
+\left(-\frac{\partial_x^2}{2m} + \underbrace{\frac{\omega^2 E}{2}}_{\alpha} x^2 - \underbrace{\frac{m}{8} \omega^4}_{\beta} x^4 \right)f = \underbrace{\frac{1}{2m}\left(E^2 - k_y^2 - k_z^2 - m^2\right)}_{\varepsilon} f 
+\]
+Now if we consider the $x^4$ term as a perturbation the base energies are the ones of the harmonic oscillator which are given by:
+\[
+\varepsilon_n =  \Omega \left( n + \frac{1}{2} \right) = \omega \sqrt{\frac{E}{m}}\left(n + \frac{1}{2}\right)
+\]
+Now the first order corrections are given by:
+\[
+\varepsilon_n^1 = \bra{n} \beta x^4 \ket{n} = \frac{6 \beta}{(2 m \Omega)^2} \left( n(n + 1) + \frac{1}{2} \right)  = -\frac{ \omega^4 }{4 m \Omega^2} \left( n(n + 1) + \frac{1}{2} \right)
+\]
+Where in our equivalence we have that:
+\[
+\frac{m}{2}\Omega^2 = \alpha = \frac{\omega^2 E}{2} \Rightarrow \Omega^2 = \frac{\omega^2 E }{m} 
+\]
+Hence replacing above we obtain:
+\[
+\varepsilon_n^1 = -\frac{\omega^2}{4 E} \left( n(n + 1) + \frac{1}{2} \right)
+\]
+Now we know that our treatment makes sense only if $|\varepsilon_n^1| \ll |\varepsilon_n^0|$ or in other words:
+\[
+\frac{\omega^2 n^2}{E} \ll \omega n \sqrt{\frac{E}{m}} \Leftrightarrow \omega^2 n^2 m \ll E^3 
+\]
+
+\item We have seen that (where $k^2 = k_y^2 + k_z^2$):
+\[
+\varepsilon = \frac{1}{2m}(E^2 - k^2 - m^2)
+\]
+Hence inverting the equation we obtain:
+\[
+E = \sqrt{2m \varepsilon + k^2 + m^2}
+\]
+Then $\varepsilon = \varepsilon_n^0 + \varepsilon_n^1$ hence $\varepsilon$ is quantized by $n$. Furthermore if we assume the system bounded in $y$ and $z$ we will also retrieve a quantization $n_y$, $n_z$ for $k_y$ and $k_z$. In the non relativistic limit we have that $E = m + \eta + \frac{\xi}{m}$. Hence plugging it in we obtain:
+\[
+E = m + \omega \left( n + \frac{1}{2} \right) + \frac{4k^2 - \omega^2(2n(1 + n) + 1)}{8m} + \mathcal{O}(\frac{1}{m^2})
+\]
 
 \end{enumerate}
 
@@ -262,8 +363,67 @@ Then we have that:
 
 \begin{enumerate}
 
-\item 
+\item The transformations are given by:
+\[
+\psi \mapsto \psi + \delta \psi = \psi + (\slashed{\partial} - m) \phi \varepsilon \mbox{~~and~~} \phi \mapsto \phi + \delta \phi = \phi + \overline{\varepsilon} \psi
+\]
+Then we have that:
+\[
+\phi^\dagger \mapsto (\phi + \delta \phi)^\dagger = \phi^\dagger + \psi^\dagger\overline{\varepsilon}^\dagger = \phi^\dagger + \psi^\dagger (\varepsilon^\dagger i \gamma^0)^\dagger  = \phi^\dagger + \psi^\dagger (- (i \gamma^0)^\dagger \varepsilon) = \phi^\dagger + \overline{\psi} \varepsilon
+\]
+And similarly:
+\[
+\overline{\psi} \mapsto \overline{\psi + \delta \psi} = (\psi + (\slashed{\partial} - m) \phi \varepsilon)^\dagger i \gamma^0 = \overline{\psi} + \varepsilon^\dagger \phi^\dagger (\slashed{\partial} - m)^\dagger i \gamma^0 = \overline{\psi} - \overline{\varepsilon} \phi^\dagger(\overleftarrow{\slashed{\partial}} + m)
+\]
 
+\item The action is given by:
+\[
+S_i = \int \dd^4 x \left( - \overline{\psi} (\slashed{\partial} + m) \psi - (\partial_\mu \phi^\dagger) \partial^\mu \phi - m^2 \phi^\dagger \phi \right)
+\]
+Then after the transformation we get:
+\[
+S_f = S_i + \delta S
+\]
+Where:
+\begin{align*}
+\delta S = \int \dd^4 x \,\, &\overline{\varepsilon} \phi^\dagger (\overleftarrow{\slashed{\partial}} + m)(\slashed{\partial} + m)\psi +  \overline{\varepsilon} \phi^\dagger (\overleftarrow{\slashed{\partial}} + m)(\slashed{\partial} + m)(\slashed{\partial} - m)\phi \varepsilon - \overline{\psi}(\slashed{\partial} + m) (\slashed{\partial} - m) \phi \varepsilon \\
+&- (\partial_\mu \overline{\psi} \varepsilon) \partial^\mu \phi - (\partial_\mu \phi^\dagger) \partial^\mu \overline{\varepsilon} \psi - (\partial_\mu \overline{\psi} \varepsilon) \partial^\mu \overline{\varepsilon} \psi - m^2 \overline{\psi} \varepsilon \phi - m^2 \phi^\dagger \overline{\varepsilon} \psi - m^2 \overline{\psi} \varepsilon \overline{\varepsilon} \psi
+\end{align*}
+Now we start doing a few simplifications. Firstly since $\varepsilon$ is infinitesimal we neglect all second order terms. Which gives:
+\begin{align*}
+\delta S = \int \dd^4 x \,\, &\overline{\varepsilon} \phi^\dagger (\overleftarrow{\slashed{\partial}} \slashed{\partial} + \overleftarrow{\slashed{\partial}} m + m \slashed{\partial} + m^2)\psi - \overline{\psi}(\slashed{\partial}^2 - m^2) \phi \varepsilon \\
+&- (\partial_\mu \overline{\psi} \varepsilon) \partial^\mu \phi - (\partial_\mu \phi^\dagger) \partial^\mu \overline{\varepsilon} \psi - m^2 \overline{\psi} \varepsilon \phi - m^2 \phi^\dagger \overline{\varepsilon} \psi 
+\end{align*}
+Now developing and simplifying gives:
+\begin{align*}
+\delta S = \int \dd^4 x \,\, &\overline{\varepsilon}(\slashed{\partial} \phi^\dagger) \slashed{\partial} \psi + m \overline{\varepsilon} (\slashed{\partial} \phi^\dagger) \psi + m \overline{\varepsilon} \phi^\dagger \slashed{\partial} \psi + m^2 \overline{\varepsilon}\phi^\dagger \psi - \overline{\psi} \slashed{\partial}^2 \phi \varepsilon + m^2 \overline{\psi} \phi \varepsilon \\
+&- (\partial_\mu \overline{\psi})\partial^\mu \phi \varepsilon - \overline{\varepsilon} (\partial_\mu \phi^\dagger) \partial^\mu \psi - m^2 \overline{\psi} \varepsilon \phi - m^2 \phi^\dagger \overline{\varepsilon}\psi
+\end{align*}
+Now some terms simplify giving:
+\begin{align*}
+\delta S = \int \dd^4 x \,\, &\overline{\varepsilon}(\slashed{\partial} \phi^\dagger) \slashed{\partial} \psi + m \overline{\varepsilon} \slashed{\partial} (\phi^\dagger \psi) - \overline{\psi} \slashed{\partial}^2 \phi \varepsilon  - (\partial_\mu \overline{\psi})(\partial^\mu \phi) \varepsilon - \overline{\varepsilon} (\partial_\mu \phi^\dagger) \partial^\mu \psi
+\end{align*}
+Now notice that we can write:
+\[
+(\slashed{\partial} \phi^\dagger ) (\slashed{\partial} \psi) = (\gamma^\mu \partial_\mu \phi^\dagger)(\gamma^\mu \partial_\mu \psi) = (\partial_\mu \phi^\dagger)( \gamma^\mu \gamma^\mu \partial_\mu \psi) = (\partial_\mu \phi^\dagger)(\partial^\mu \psi)
+\]
+Hence we can further simplify the expression to:
+\[
+\delta S = \int \dd^4 x \,\, m \overline{\varepsilon} \slashed{\partial}( \phi^\dagger \psi) - \overline{\psi} (\slashed{\partial}^2 \phi) \varepsilon - (\partial_\mu \overline{\psi}) (\partial^\mu \phi)\varepsilon
+\]
+Applying the same reasoning again on the $\slashed{\partial}^2$ we can further simplify to:
+\[
+\delta S = \int \dd^4 x \,\, m \overline{\varepsilon} \slashed{\partial} (\phi^\dagger \psi) - \overline{\psi} \partial_\mu  \partial^\mu \phi \varepsilon - (\partial_\mu \overline{\psi}) (\partial^\mu \phi) \varepsilon
+\]
+Which we can factorize as:
+\[
+\delta S = \int \dd^4 x \,\, m \overline{\varepsilon} \slashed{\partial} (\phi^\dagger \psi) - \partial_\mu(\overline{\psi} \partial^\mu \phi) \varepsilon
+\]
+Now the integral is easy to compute:
+\[
+\delta S = m \overline{\varepsilon} \gamma^\mu \Big[\phi^\dagger \psi \Big]_{\mbox{bounds}} - \Big[ \overline{\psi} \partial^\mu \phi \Big]_{\mbox{bounds}} \varepsilon
+\]
+Furthermore we know that all fields vanish outside of a compact region of space time and or decay to 0. Hence the above simplifies to 0 and we have proved that the action is conserved.
 \end{enumerate}
 
 \end{document}
