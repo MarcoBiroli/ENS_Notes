@@ -282,17 +282,47 @@ which can also be computed by the means of Wick's theorem.
 
 \item The free Klein Gordon equation is the following:
 \[
-	\qty(- \partial^\mu \partial_\mu + m^2) \Phi = 0
+	\qty(- D^\mu D_\mu + m^2) \Phi = 0
 \]
-which for the presence of a electrostatic field becomes:
+where the operators are the "covariant derivatives" with the four potential $D_{\mu} = \partial_\mu - iqA_\mu$. Then the Klein Gordon equation in the presence of a electrostatic field becomes:
 \begin{align*}
-	\qty(-\qty(\partial^t - i \frac{m}{2}\omega^2 x^2) \qty(\partial_t + i\frac{m}{2} \omega^2 x^2) + \laplacian + m^2) \Phi &= 0 \\
-	\qty(  )\Phi &= 0 
+	\qty(-\qty(\partial^t - i \frac{m}{2}\omega^2 x^2) \qty(\partial_t + i\frac{m}{2} \omega^2 x^2) - \laplacian + m^2) \Phi &= 0 \\
+	\qty( \qty(\partial_t + i\frac{m}{2} \omega^2 x^2) \qty(\partial_t + i\frac{m}{2} \omega^2 x^2) - \laplacian + m^2 )\Phi &= 0 \\
+	\partial^2_t \Phi + i m\omega^2 x^2 \partial_t \Phi - \frac{m^2}{4} \omega^4x^4 \Phi - \laplacian \Phi + m^2 \Phi&= 0
 \end{align*}
+Because $A_0$ is stationary. This general equation can be simplified with the given ansatz as follows:
+\[
+	-\laplacian \phi + \qty(m\omega^2 E x^2 - \frac{m^2\omega^4}{4} x^4 - E^2 + m^2)\phi = 0  
+\]
+where $\phi = \phi(x,y,z)$.
 
-\item
+\item In the previous equation the coefficients of the term with $\phi$ depend only on the spatial direction $x$. To simplify the expression one could say that in the other spatial directions the wave function is the same as the one for a free particle so the following ansatz can be justified:
+\[
+	\phi (x, y, z) = e^{i p_z z} e^{i p_y y} u(x)
+\]
+Plugging it inside the equation gives:
+\[
+	\dv[2]{u(x)}{x} + \qty( m\omega^2 E x^2 - \frac{m^2\omega^4}{4} x^4 - E^2 + m^2 + p_z^2 + p_y^2) u(x) = 0
+\]
+To simplify the equation even more one can also redefine the "zero" of the energy to be exactly the value of the constant term and obtain:
+\[
+	\dv[2]{u}{x} + \qty(\alpha x^2 + \beta x^4)u = 0  \quad \alpha = m\omega^2 E \quad \beta = - \frac{m^2\omega^4}{4}
+\]
+The fact that $\beta$ means that no matter how small it is the state that one will find with perturbation theory will never be an exact eigenstate of the hamiltonian but only a metastable state. This mean that no matter how small the parameter $\beta$ the series never converges. By forgetting all of this one can do perturbation theory anyway and find that the un-perturbed energy levels of an harmonic oscillators are:
+\[
+	\epsilon_n = \alpha \qty(n + \frac{1}{2})
+\]
+and to calculate the first order correction to the energy one needs to find firstly the eigenfunctions, which for the $n$-th level are:
+\[
+	u_n(x) = \frac{\sqrt[4]{\alpha}}{\sqrt[4]{\pi}}\frac{1}{\sqrt{2^n n !}} H_n\qty(\sqrt{\alpha} x) e^{-\frac{1}{2}\alpha x^2}
+\]
+Then the correction is given by:
+\[
+	\epsilon^1_n = \frac{1}{\sqrt{\pi}} \frac{1}{2^n n!} \frac{\beta}{\alpha^2} \int_{-\infty}^\infty t^4 H_n^2(t) e^{-t^2} \dd{t}
+ \]
+This criterion should be justified if $\abs{\beta} \ll \abs{\alpha}$ which means that $m \ll E$.
 
-\item
+\item 
 
 \end{enumerate}
 
@@ -331,39 +361,88 @@ For the case $m=0$ we have that the axial transformation is a symmetry of both t
 	J^\mu_5(x) = \pdv{\mathcal{L}}{\qty(\partial_\mu \psi)} \fdv{\psi}{\epsilon} = -i\overline{\psi} \gamma^\mu \gamma^5 \psi
 \]
 
-\item The two Dirac eqs. concerning $\psi$ is:
+\item The two Dirac eqs. concerning $\psi$ are:
 \begin{align*}
-	\qty(\gamma^\mu \partial_\mu^L - i q \gamma^\mu A_\mu + m)\psi &= 0 
+	\qty(\gamma^\mu \partial_\mu^R - i q \gamma^\mu A_\mu + m)\psi &= 0 
 \end{align*}
 to obtain the Dirac equation for $\overline{\psi}$ one should take the hermitian conjugate of the previous and multiply from the right with $i\gamma^0$ to obtain:
 \begin{align*}
-	0&=\psi^\dagger \qty(\gamma^\mu \partial_\mu^L - i q \gamma^\mu A_\mu + m)^\dagger i\gamma^0 = \psi^\dagger i \gamma^0 i\gamma^0 \qty(\partial_\mu^R (\gamma^\mu)^\dagger + i q A_\mu^* (\gamma^\mu)^\dagger  + m) i\gamma^0 = \\
-	&= \overline{\psi} \qty( \partial_\mu^R \overline{\gamma^\mu}  + iq A_\mu^* \overline{\gamma^\mu} + m) \\
+	0&=\psi^\dagger \qty(\gamma^\mu \partial_\mu^R - i q \gamma^\mu A_\mu + m)^\dagger i\gamma^0 = \psi^\dagger i \gamma^0 i\gamma^0 \qty(\partial_\mu^L (\gamma^\mu)^\dagger + i q A_\mu (\gamma^\mu)^\dagger  + m) i\gamma^0 = \\
+	&= \overline{\psi} \qty( \partial_\mu^L \overline{\gamma^\mu}  + iq A_\mu \overline{\gamma^\mu} + m) = \overline{\psi} \qty( - \gamma^\mu \partial_\mu^L - iq\gamma^\mu A_\mu + m)
 \end{align*}
 where the partial derivative operator acts on the right.
-
-To find the 
-
-From the Lagrangian:
+The equations of motions could have been found from the Lagrangian instead. From the given Lagrangian is easy to find the Dirac equation correspondent to the Dirac adjoint:
 \[
-	\mathcal{L} = \overline{\psi} \qty( -\gamma^\mu \partial_\mu + i q\gamma^\mu A_\mu -m ) \psi
+	\partial_\mu \qty(\pdv{\mathcal{L}}{\qty(\partial_\mu \psi)} ) - \pdv{\mathcal{L}}{\psi} = -\qty(\partial_\mu \overline{\psi} ) \gamma^\mu - iq \overline{\psi} \gamma^\mu A_\mu + m \overline{\psi} \mathds{1} = \overline{\psi} \qty( - \gamma^\mu \partial_\mu^L - iq\gamma^\mu A_\mu + m) = 0 
 \]
-the two Euler-Lagrange equations for $\overline{\psi}$ and $\psi$ become:
+while to find the equation for the actual Dirac spinor it is not completely clear what is the meaning of the derivative of the Lagrangian w.r.t. $\partial_\mu\overline{\psi}$. To make it more clear one can integrate by parts the lagrangian and suppose that the boundary conditions permit to eliminate the non-integral term to obtain an equivalent lagrangian:
+\[
+	\mathcal{L} = \overline{\psi} \qty( -\gamma^\mu \partial_\mu^R + i q\gamma^\mu A_\mu -m ) \psi \sim \overline{\psi} \qty( \gamma^\mu \partial_\mu^L + i q\gamma^\mu A_\mu -m ) \psi
+\]
+It is important to notice the change of sign of the first term. Then the Euler-Lagrange equation become:
+\[
+	\partial_\mu \qty(\pdv{\mathcal{L}}{\qty(\partial_\mu \overline{\psi})} ) - \pdv{\mathcal{L}}{\overline{\psi}} = \qty(\gamma^\mu \partial_\mu^R - iq\gamma^\mu A_\mu + m)\psi = 0
+\]
+which is the same result as above.
+Now to check the explicit derivative of the axial current:
 \begin{align*}
-	\partial_\mu \qty(\pdv{\mathcal{L}}{\qty(\partial_\mu \psi)} ) - \pdv{\mathcal{L}}{\psi} &= -\qty(\partial_\mu \overline{\psi} ) \gamma^\mu - iq \overline{\psi} \gamma^\mu A_\mu + m \overline{\psi} \mathds{1} = 0 \\
-	\partial_\mu \qty(\pdv{\mathcal{L}}{\qty(\partial_\mu \overline{\psi})} ) - \pdv{\mathcal{L}}{\overline{\psi}} &= 0
+	\partial_\mu J^\mu_5 &= -i \partial_\mu \qty( \overline{\psi} \gamma^\mu \gamma^5 \psi ) = -i \qty( \partial_\mu \overline{\psi}) \gamma^\mu \gamma^5 \psi + i \overline{\psi} \gamma^5 \gamma^\mu \qty( \partial_\mu \psi) = \\
+	&= -q \overline{\psi} \gamma^\mu \gamma^5 A_\mu \psi - im\overline{\psi} \gamma^5 \psi -q \overline{\psi} \gamma^5 \gamma^\mu A_\mu \psi - im\overline{\psi} \gamma^5 \psi = \\
+	&= -q \overline{\psi} \gamma^\mu \gamma^5 A_\mu \psi - im\overline{\psi} \gamma^5 \psi +q \overline{\psi} \gamma^\mu \gamma^5 A_\mu \psi - im\overline{\psi} \gamma^5 \psi = -2im \overline{\psi} \gamma^5 \psi
 \end{align*}
-a
+
+
 \end{enumerate}
 
 \section{Supersymmetry}
 
 \begin{enumerate}[label=\alph*)]
 
-\item
+\item The Lagrangian defined in the problem is:
+\[
+	\mathcal{L}=-\bar{\psi}(\gamma^\mu\partial_\mu+m) \psi-\left(\partial_{\mu} \phi^{\dagger}\right) \partial^{\mu} \phi-m^{2} \phi^{\dagger} \phi
+\]
+The symmetry defined in the problem acts as follows:
+\[
+\begin{cases}
+	\psi \longrightarrow \psi + \delta \psi = \psi + (\gamma^\mu \partial_\mu - m) \phi \epsilon \\
+	\phi \longrightarrow \phi + \delta \phi = \phi + \overline{\epsilon} \psi
+\end{cases}
+\]
+Then by looking at the action of these transformation and by the definition of adjoint one has that:
+\[
+\begin{cases}
+	\overline{\psi} \longrightarrow \qty(\psi + (\gamma^\mu \partial_\mu - m) \phi \epsilon)^\dagger i\gamma^0 = \overline{\psi} - \overline{\epsilon} \qty( \gamma^\mu \partial_\mu + m) \phi^\dagger\\
+	\phi^\dagger \longrightarrow \qty(\phi + \overline{\epsilon} \psi)^\dagger = \phi^\dagger + \overline{\psi}\epsilon
+\end{cases}
+\]
+and one can find the from the second term in both expression the infinitesimal variation for the last two quantities.
 
-\item
+\item The verification that this change is actually a symmetry of the action comes from substituting the above found relationships in the action.
 
+Of course one will find the previous action and additional terms that should be proven to be zero. The additional terms, to be intended as integrated are the following.
+\begin{align*}
+& -\bar{\epsilon}\left(\gamma^{\mu} \partial_{\mu} \phi^{\dagger}\right)\left(\gamma^{\mu} \partial_{\mu} \psi\right)-\bar{\epsilon}\left(\gamma^{\mu} \partial_{\mu} \phi^{\dagger}\right) m \psi-\bar{\epsilon} m \phi^{\dagger}\left(\gamma^{\mu} \partial_{\mu} \psi\right)-\bar{\epsilon} m^{2} \varphi \phi^{\dagger} \\
+& -\bar{\psi}\gamma^{\mu} \partial_{\mu}\left(\gamma^{\mu} \partial_{\mu}(\phi \epsilon )\right) + m \bar{\psi} \gamma^\mu \partial_\mu (\phi \epsilon) - m\bar{\psi} \gamma^\mu \partial_\mu(\phi \epsilon) + m^2 \bar{\psi} \phi \epsilon \\
+&-\bar{\epsilon}\left(\gamma^{\mu} \partial_{\mu} \phi^{\dagger}+ m \phi^{\dagger}\right)\left[\gamma^{\mu} \partial_{\mu}\left(\gamma^{\mu} \partial_{\mu}(\phi \epsilon)\right) -m \gamma^{\mu} \partial_{\mu}(\phi \epsilon)+m  \gamma^{\mu} \partial_{\mu}(\phi \epsilon)-m^{2} \phi \epsilon \right] \\
+& -\left(\partial_{\mu} \phi^{+}\right)\left(\partial^{\mu} \bar{\epsilon} \varphi\right)-\left(\partial_{\mu} \bar{\varphi}\right) \partial^{\mu} \phi-\left(\partial_{\mu} \bar{\psi} \epsilon\right)\left(\partial^{\mu} \bar{\epsilon} \psi\right) + m^{2} \phi^{\dagger} \bar{\epsilon} \varphi- m^{2} \bar{\varphi} \epsilon \phi - m^2 \bar{\psi} \epsilon\bar{\epsilon} \psi
+\end{align*}
+Since $\epsilon$ is as infinitesimal spinor one only needs to prove that the first order in $\epsilon$ is zero, so the remaining terms are:
+\begin{align*}
+	& -\bar{\epsilon}\left(\gamma^{\mu} \partial_{\mu} \phi^{\dagger}\right)\left(\gamma^{\mu} \partial_{\mu} \psi\right)-\bar{\epsilon}\left(\gamma^{\mu} \partial_{\mu} \phi^{\dagger}\right) m \psi-\bar{\epsilon} m \phi^{\dagger}\left(\gamma^{\mu} \partial_{\mu} \psi\right)- \underset{\simeq}{\bar{\epsilon} m^{2} \varphi \phi^{\dagger}} \\
+	& -\bar{\psi}\gamma^{\mu} \partial_{\mu}\left(\gamma^{\mu} \partial_{\mu}(\phi \epsilon )\right) + \underset{- }{m \bar{\psi} \gamma^\mu \partial_\mu (\phi \epsilon)} - \underset{-}{m\bar{\psi} \gamma^\mu \partial_\mu(\phi \epsilon)} + \underset{\sim}{m^2 \bar{\psi} \phi \epsilon} \\
+	& -\left(\partial_{\mu} \phi^{\dagger}\right)\left(\partial^{\mu} \bar{\epsilon} \psi\right)-\left(\partial_{\mu} \bar{\psi}\right) \partial^{\mu} \phi \epsilon + \underset{\simeq}{m^{2} \phi^{\dagger} \bar{\epsilon} \psi} - \underset{\sim}{m^{2} \bar{\psi} \epsilon \phi}
+\end{align*}
+Where the terms that cancels are marked similarly. One can rewrite some of the terms and obtain:
+\begin{align*}
+	= & -\bar{\epsilon}\left(\gamma^{\mu} \partial_{\mu} \phi^{\dagger}\right)\left(\gamma^{\mu} \partial_{\mu} \psi\right)-\bar{\epsilon}\left(\gamma^{\mu} \partial_{\mu} \phi^{\dagger}\right) m \psi-\bar{\epsilon} m \phi^{\dagger}\left(\gamma^{\mu} \partial_{\mu} \psi\right) -\bar{\psi}\gamma^{\mu} \partial_{\mu}\left(\gamma^{\mu} \partial_{\mu}\phi\right) \epsilon +\\
+	& \qquad \qquad -\bar{\epsilon} \left(\partial_{\mu} \phi^{\dagger}\right)\left(\partial^{\mu} \psi\right)-\left(\partial_{\mu} \bar{\psi}\right) \partial^{\mu} \phi \epsilon  \\
+	= & -\bar{\epsilon}\left(\gamma^{\mu} \partial_{\mu} \phi^{\dagger}\right)\left(\gamma^{\mu} \partial_{\mu} \psi\right) - m \bar{\epsilon} \gamma^\mu \partial_\mu \qty(\phi^\dagger \psi) -\bar{\psi}\gamma^{\mu} \partial_{\mu}\left(\gamma^{\mu} \partial_{\mu}\phi\right) \epsilon -\bar{\epsilon} \left(\partial_{\mu} \phi^{\dagger}\right)\left(\partial^{\mu} \psi\right)-\left(\partial_{\mu} \bar{\psi}\right) \partial^{\mu} \phi \epsilon \\
+	= & -\bar{\epsilon}\left(\gamma^{\mu} \partial_{\mu} \phi^{\dagger}\right)\left(\gamma^{\mu} \partial_{\mu} \psi\right) - m \bar{\epsilon} \gamma^\mu \partial_\mu \qty(\phi^\dagger \psi) -\bar{\psi}\gamma^{\mu} \partial_{\mu}\left(\gamma^{\mu} \partial_{\mu}\phi\right) \epsilon + \\
+	& \qquad \qquad -\bar{\epsilon} \left(\gamma^\mu\partial_{\mu} \phi^{\dagger}\right)\left(\gamma^\mu \partial_{\mu} \psi\right)-\left(\gamma^\mu\partial_{\mu} \bar{\psi}\right) \qty(\gamma^\mu \partial_{\mu} \phi) \epsilon \\
+	=& - m \bar{\epsilon} \gamma^\mu \partial_\mu \qty(\phi^\dagger \psi) - \gamma^\mu \qty( \bar{\psi} \gamma^\mu \partial_\mu \phi ) \epsilon
+\end{align*}
+where the most important relation used is that $\partial^\mu = \gamma^\mu \gamma^\mu \partial_\mu$. The only terms remaining are terms that can be directly integrated and yield a null result. So in the end the two actions are the same.
 
 \end{enumerate}
 
