@@ -2,8 +2,8 @@
 \usepackage{geometry}
 \geometry{
  a4paper,
- total={170mm,237mm},
- left=20mm,
+ total={175mm,243mm},
+ left=17mm,
  top=20mm,
  }
 
@@ -276,7 +276,7 @@ where the factor $(-1)^{2n+1}$ appears for the same reason that it has appeared 
 \end{align*}
 while for the expected value of $X^4$:
 \[
-	\mel{n}{X^4}{n} =  \frac{1}{(2\pi \Omega)^2} 3 \qty(2n^2 + 2n +1)
+	\mel{n}{X^4}{n} =  \frac{1}{(2\pi \Omega)^2} \qty(2n^2 + 3n +2)
 \]
 which can also be computed by the means of Wick's theorem.
 
@@ -284,7 +284,7 @@ which can also be computed by the means of Wick's theorem.
 \[
 	\qty(- D^\mu D_\mu + m^2) \Phi = 0
 \]
-where the operators are the "covariant derivatives" with the four potential $D_{\mu} = \partial_\mu - iqA_\mu$. Then the Klein Gordon equation in the presence of a electrostatic field becomes:
+where the operators are the "covariant derivatives" with the 4-potential $D_{\mu} = \partial_\mu - iqA_\mu$. Then the Klein Gordon equation in the presence of a electrostatic field becomes:
 \begin{align*}
 	\qty(-\qty(\partial^t - i \frac{m}{2}\omega^2 x^2) \qty(\partial_t + i\frac{m}{2} \omega^2 x^2) - \laplacian + m^2) \Phi &= 0 \\
 	\qty( \qty(\partial_t + i\frac{m}{2} \omega^2 x^2) \qty(\partial_t + i\frac{m}{2} \omega^2 x^2) - \laplacian + m^2 )\Phi &= 0 \\
@@ -302,28 +302,32 @@ where $\phi = \phi(x,y,z)$.
 \]
 Plugging it inside the equation gives:
 \[
-	\dv[2]{u(x)}{x} + \qty( m\omega^2 E x^2 - \frac{m^2\omega^4}{4} x^4 - E^2 + m^2 + p_z^2 + p_y^2) u(x) = 0
+	-\dv[2]{u(x)}{x} + \qty( m\omega^2 E x^2 - \frac{m^2\omega^4}{4} x^4 - E^2 + m^2 + p_z^2 + p_y^2) u(x) = 0
 \]
 To simplify the equation even more one can also redefine the "zero" of the energy to be exactly the value of the constant term and obtain:
 \[
-	\dv[2]{u}{x} + \qty(\alpha x^2 + \beta x^4)u = 0  \quad \alpha = m\omega^2 E \quad \beta = - \frac{m^2\omega^4}{4}
+	-\dv[2]{u}{x} + \qty(\alpha x^2 + \beta x^4)u = \epsilon u  \quad \alpha = m\omega^2 E \quad \beta = - \frac{m^2\omega^4}{4}
 \]
-The fact that $\beta$ means that no matter how small it is the state that one will find with perturbation theory will never be an exact eigenstate of the hamiltonian but only a metastable state. This mean that no matter how small the parameter $\beta$ the series never converges. By forgetting all of this one can do perturbation theory anyway and find that the un-perturbed energy levels of an harmonic oscillators are:
+The fact that $\beta$ means that no matter how small it is the state that one will find with perturbation theory will never be an exact eigenstate of the hamiltonian but only a metastable state. This mean that no matter how small the parameter $\beta$ the series never converges. By forgetting all of this one can do perturbation theory anyway. The equation that we have found is like a Schr\"odinger equation for a simple harmonic oscillator with mass equal to one and a frequency which is $\omega = \sqrt{\alpha}$. The energy levels are readily given by:
 \[
-	\epsilon_n = \alpha \qty(n + \frac{1}{2})
+	\epsilon_n^0 = \alpha \qty(n + \frac{1}{2})
 \]
-and to calculate the first order correction to the energy one needs to find firstly the eigenfunctions, which for the $n$-th level are:
+where obviously $\hbar = 1$. To calculate the first order correction to the energy one needs to find firstly the eigenfunctions, which for the $n$-th level are:
 \[
 	u_n(x) = \frac{\sqrt[4]{\alpha}}{\sqrt[4]{\pi}}\frac{1}{\sqrt{2^n n !}} H_n\qty(\sqrt{\alpha} x) e^{-\frac{1}{2}\alpha x^2}
 \]
 Then the correction is given by:
 \[
-	\epsilon^1_n = \frac{1}{\sqrt{\pi}} \frac{1}{2^n n!} \frac{\beta}{\alpha^2} \int_{-\infty}^\infty t^4 H_n^2(t) e^{-t^2} \dd{t}
- \]
-This criterion should be justified if $\abs{\beta} \ll \abs{\alpha}$ which means that $m \ll E$.
+	\epsilon^1_n = \frac{1}{\sqrt{\pi}} \frac{1}{2^n n!} \frac{\beta}{\alpha^2} \int_{-\infty}^\infty t^4 H_n^2(t) e^{-t^2} \dd{t} = \frac{1}{\sqrt{\pi}} \frac{1}{2^n n!} \frac{\beta}{\alpha^2} \mathcal{I}_n
+\]
+In the last relation all of the dimensional quantities have been removed form the integral, which is a number depending on $n$ and it will be indicated in the following as $\mathcal{I}_n$.
+The application of perturbation theory should be justified if $\abs{\beta} \ll \abs{\alpha}$ which means in the regime with $m \ll E$.
 
-\item 
-
+\item In the end, considering all of the simplification done to rewrite the problem as an harmonic oscillator the equation that gives $E$ is the following:
+\[
+	m\omega^2 E\qty(n+\frac{1}{2}) - \frac{1}{\sqrt{\pi}} \frac{1}{2^n n!} \frac{1}{4E^2} \mathcal{I}_n = E^2 - m^2 - p_z^2 - p_y^2
+\]
+The energy $E$ depends on the other parameters $n$, $p_z$, $p_y$, $\omega$ and $m$. The non-relativistic limit corresponds to the Taylor expansion of the energy as $E \sim m  + p^2 / 2m$. To obtain the first relativistic correction one should also keep terms of higher order.
 \end{enumerate}
 
 \section{The axial current}
@@ -391,7 +395,6 @@ Now to check the explicit derivative of the axial current:
 	&= -q \overline{\psi} \gamma^\mu \gamma^5 A_\mu \psi - im\overline{\psi} \gamma^5 \psi +q \overline{\psi} \gamma^\mu \gamma^5 A_\mu \psi - im\overline{\psi} \gamma^5 \psi = -2im \overline{\psi} \gamma^5 \psi
 \end{align*}
 
-
 \end{enumerate}
 
 \section{Supersymmetry}
@@ -420,29 +423,29 @@ and one can find the from the second term in both expression the infinitesimal v
 
 \item The verification that this change is actually a symmetry of the action comes from substituting the above found relationships in the action.
 
-Of course one will find the previous action and additional terms that should be proven to be zero. The additional terms, to be intended as integrated are the following.
+The remaining term integrated from the first term in the lagrangian are:
 \begin{align*}
-& -\bar{\epsilon}\left(\gamma^{\mu} \partial_{\mu} \phi^{\dagger}\right)\left(\gamma^{\mu} \partial_{\mu} \psi\right)-\bar{\epsilon}\left(\gamma^{\mu} \partial_{\mu} \phi^{\dagger}\right) m \psi-\bar{\epsilon} m \phi^{\dagger}\left(\gamma^{\mu} \partial_{\mu} \psi\right)-\bar{\epsilon} m^{2} \varphi \phi^{\dagger} \\
-& -\bar{\psi}\gamma^{\mu} \partial_{\mu}\left(\gamma^{\mu} \partial_{\mu}(\phi \epsilon )\right) + m \bar{\psi} \gamma^\mu \partial_\mu (\phi \epsilon) - m\bar{\psi} \gamma^\mu \partial_\mu(\phi \epsilon) + m^2 \bar{\psi} \phi \epsilon \\
-&-\bar{\epsilon}\left(\gamma^{\mu} \partial_{\mu} \phi^{\dagger}+ m \phi^{\dagger}\right)\left[\gamma^{\mu} \partial_{\mu}\left(\gamma^{\mu} \partial_{\mu}(\phi \epsilon)\right) -m \gamma^{\mu} \partial_{\mu}(\phi \epsilon)+m  \gamma^{\mu} \partial_{\mu}(\phi \epsilon)-m^{2} \phi \epsilon \right] \\
-& -\left(\partial_{\mu} \phi^{+}\right)\left(\partial^{\mu} \bar{\epsilon} \varphi\right)-\left(\partial_{\mu} \bar{\varphi}\right) \partial^{\mu} \phi-\left(\partial_{\mu} \bar{\psi} \epsilon\right)\left(\partial^{\mu} \bar{\epsilon} \psi\right) + m^{2} \phi^{\dagger} \bar{\epsilon} \varphi- m^{2} \bar{\varphi} \epsilon \phi - m^2 \bar{\psi} \epsilon\bar{\epsilon} \psi
+	&-\bar{\psi} \gamma^\mu\partial_\mu\qty( \gamma^\mu\partial_\mu \phi \epsilon) - m \bar{\psi}\gamma^\mu\partial_\mu\phi \epsilon + m\bar{\psi} \gamma^\mu\partial_\mu \phi \epsilon + m^2 \bar{\psi} \phi \epsilon + \bar{\epsilon} \qty(\gamma^\mu\partial_\mu\phi^\dagger)\qty(\gamma^\mu\partial_\mu\psi) \\
+	&+m\bar{\epsilon} \qty( \gamma^\mu\partial_\mu\phi^\dagger) \psi+ m\bar{\epsilon} \phi^\dagger \gamma^\mu\partial_\mu\psi + m^2\bar{\epsilon} \phi^\dagger \psi
 \end{align*}
-Since $\epsilon$ is as infinitesimal spinor one only needs to prove that the first order in $\epsilon$ is zero, so the remaining terms are:
+For the second and the third term one should notice that $\partial^\mu = \gamma^\mu \gamma^\mu \partial_\mu$. After a small rewrite of the terms the second and the third term become:
 \begin{align*}
-	& -\bar{\epsilon}\left(\gamma^{\mu} \partial_{\mu} \phi^{\dagger}\right)\left(\gamma^{\mu} \partial_{\mu} \psi\right)-\bar{\epsilon}\left(\gamma^{\mu} \partial_{\mu} \phi^{\dagger}\right) m \psi-\bar{\epsilon} m \phi^{\dagger}\left(\gamma^{\mu} \partial_{\mu} \psi\right)- \underset{\simeq}{\bar{\epsilon} m^{2} \varphi \phi^{\dagger}} \\
-	& -\bar{\psi}\gamma^{\mu} \partial_{\mu}\left(\gamma^{\mu} \partial_{\mu}(\phi \epsilon )\right) + \underset{- }{m \bar{\psi} \gamma^\mu \partial_\mu (\phi \epsilon)} - \underset{-}{m\bar{\psi} \gamma^\mu \partial_\mu(\phi \epsilon)} + \underset{\sim}{m^2 \bar{\psi} \phi \epsilon} \\
-	& -\left(\partial_{\mu} \phi^{\dagger}\right)\left(\partial^{\mu} \bar{\epsilon} \psi\right)-\left(\partial_{\mu} \bar{\psi}\right) \partial^{\mu} \phi \epsilon + \underset{\simeq}{m^{2} \phi^{\dagger} \bar{\epsilon} \psi} - \underset{\sim}{m^{2} \bar{\psi} \epsilon \phi}
+	\qty(\gamma^\mu\partial_\mu\bar{\psi} ) \qty( \gamma^\mu\partial_\mu\phi ) \epsilon + \bar{\epsilon}  \qty(\gamma^\mu\partial_\mu \phi^\dagger) \qty(\gamma^\mu\partial_\mu \psi) -m^2 \bar{\psi} \epsilon \phi - m^2 \phi^\dagger \bar{\epsilon} \psi
 \end{align*}
-Where the terms that cancels are marked similarly. One can rewrite some of the terms and obtain:
+Then putting all together and removing the terms that cancel one obtains:
 \begin{align*}
-	= & -\bar{\epsilon}\left(\gamma^{\mu} \partial_{\mu} \phi^{\dagger}\right)\left(\gamma^{\mu} \partial_{\mu} \psi\right)-\bar{\epsilon}\left(\gamma^{\mu} \partial_{\mu} \phi^{\dagger}\right) m \psi-\bar{\epsilon} m \phi^{\dagger}\left(\gamma^{\mu} \partial_{\mu} \psi\right) -\bar{\psi}\gamma^{\mu} \partial_{\mu}\left(\gamma^{\mu} \partial_{\mu}\phi\right) \epsilon +\\
-	& \qquad \qquad -\bar{\epsilon} \left(\partial_{\mu} \phi^{\dagger}\right)\left(\partial^{\mu} \psi\right)-\left(\partial_{\mu} \bar{\psi}\right) \partial^{\mu} \phi \epsilon  \\
-	= & -\bar{\epsilon}\left(\gamma^{\mu} \partial_{\mu} \phi^{\dagger}\right)\left(\gamma^{\mu} \partial_{\mu} \psi\right) - m \bar{\epsilon} \gamma^\mu \partial_\mu \qty(\phi^\dagger \psi) -\bar{\psi}\gamma^{\mu} \partial_{\mu}\left(\gamma^{\mu} \partial_{\mu}\phi\right) \epsilon -\bar{\epsilon} \left(\partial_{\mu} \phi^{\dagger}\right)\left(\partial^{\mu} \psi\right)-\left(\partial_{\mu} \bar{\psi}\right) \partial^{\mu} \phi \epsilon \\
-	= & -\bar{\epsilon}\left(\gamma^{\mu} \partial_{\mu} \phi^{\dagger}\right)\left(\gamma^{\mu} \partial_{\mu} \psi\right) - m \bar{\epsilon} \gamma^\mu \partial_\mu \qty(\phi^\dagger \psi) -\bar{\psi}\gamma^{\mu} \partial_{\mu}\left(\gamma^{\mu} \partial_{\mu}\phi\right) \epsilon + \\
-	& \qquad \qquad -\bar{\epsilon} \left(\gamma^\mu\partial_{\mu} \phi^{\dagger}\right)\left(\gamma^\mu \partial_{\mu} \psi\right)-\left(\gamma^\mu\partial_{\mu} \bar{\psi}\right) \qty(\gamma^\mu \partial_{\mu} \phi) \epsilon \\
-	=& - m \bar{\epsilon} \gamma^\mu \partial_\mu \qty(\phi^\dagger \psi) - \gamma^\mu \qty( \bar{\psi} \gamma^\mu \partial_\mu \phi ) \epsilon
+	&-\bar{\psi} \gamma^\mu\partial_\mu\qty( \gamma^\mu\partial_\mu \phi \epsilon) + \bar{\epsilon} \qty(\gamma^\mu\partial_\mu\phi^\dagger)\qty(\gamma^\mu\partial_\mu\psi) +m\bar{\epsilon} \qty( \gamma^\mu\partial_\mu\phi^\dagger) \psi \\
+	&+ m\bar{\epsilon} \phi^\dagger \qty(\gamma^\mu\partial_\mu\psi) \qty(\gamma^\mu\partial_\mu\bar{\psi} ) \qty( \gamma^\mu\partial_\mu\phi ) \epsilon + \bar{\epsilon}  \qty(\gamma^\mu\partial_\mu \phi^\dagger) \qty(\gamma^\mu\partial_\mu \psi)
 \end{align*}
-where the most important relation used is that $\partial^\mu = \gamma^\mu \gamma^\mu \partial_\mu$. The only terms remaining are terms that can be directly integrated and yield a null result. So in the end the two actions are the same.
+Where this should be rewritten as something that, once integrated, vanishes. 
+\[
+	2\qty(\gamma^\mu \partial_\mu \bar{\psi}) \qty( \gamma^\mu \partial_\mu \phi ) \epsilon + 2 \bar{\epsilon} \qty( \gamma^\mu \partial_\mu \phi^\dagger ) \qty( \gamma^\mu \partial_\mu \psi ) + m\bar{\epsilon} \qty(\gamma^\mu \partial_\mu \phi^\dagger \psi)
+\]
+The first two terms can be rewritten to obtain:
+\[
+	-2 \bar{\psi} \gamma^\mu \partial_\mu \qty(\gamma^\mu \partial_\mu \phi)  -2 \bar{\epsilon} \phi^\dagger \gamma^\mu \partial_\mu \qty(\gamma^\mu \partial_\mu \psi) + m\bar{\epsilon} \qty(\gamma^\mu \partial_\mu \phi^\dagger \psi)
+\]
+and by the means of Green's First identity the term vanish.
 
 \end{enumerate}
 
