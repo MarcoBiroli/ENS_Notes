@@ -8,6 +8,7 @@
 \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
 \author{Marco Biroli}
 \usepackage{physics}
+\usepackage{slashed}
 \usepackage{stmaryrd}
 \title{Master ENS ICFP - First Year 2020/2021\\
 Relativistic Quantum Mechanics and Introduction to Quantum Field Theory\\
@@ -109,7 +110,6 @@ Notice that the terms $f_n$ are monotonically increasing in norm and diverge hen
 
 \begin{enumerate}
 
-
 \item Remember that up to a re-writing we have that:
 \[
 \omega_{ij} = \varepsilon_{i j k} \theta^k \mbox{~~and~~} \omega^{k0} = \nu^k \mbox{~~and~~} \omega_{\mu \nu} = 0 \mbox{~~otherwise.}
@@ -133,6 +133,31 @@ Hence now we take $\omega'_{\mu \nu} = \omega_{\mu \nu}(-1)^{\delta^\mu_0 + \del
 Hence we have that:
 \[
 i\gamma^0 D(L(\vb{p})) i \gamma^0 = D(L(-\vb{p}))
+\]
+
+\item We have that:
+\[
+(i p_\mu \gamma^\mu + m) u(\vb{p}, \sigma) = 0 \mbox{~~and~~} (-i p_\mu \gamma^\mu + m) v(\vb{p}, \sigma) = 0
+\]
+Hence if we take $\vb{p} = 0$ and $p_0 = -p^0 = -m$ for a particle at rest the above simplifies to:
+\[
+(-im \gamma^0 + m) u(\vb{0}, \sigma) = 0 \mbox{~~and~~} (i m \gamma^0 + m) v(\vb{0}, \sigma) = 0
+\]
+Which up to dividing by $m$ simplifies to:
+\[
+(-i \gamma^0 + \vb{1}) u(\vb{0}, \sigma) = 0 \mbox{~~and~~} (i\gamma^0 + \vb{1}) v(\vb{0}, \sigma) = 0
+\]
+Hence up to a re-writing we have that:
+\[
+i\gamma^0 u(\vb{0}, \sigma) = u(\vb{0}, \sigma) \mbox{~~and~~} i\gamma^0 v(\vb{0}, \sigma) = - v(\vb{0}, \sigma)
+\]
+Then from the definition of $u, v$ and $D(L(\vb{p}))$ we have that $u(\vb{p}, \sigma) = D(L(\vb{p})) u(\vb{0}, \sigma)$ and identically for $v$. Hence we have that:
+\[
+i \gamma^0 u(\vb{p}, \sigma) = i \gamma^0 D(L(\vb{p})) u(\vb{0}, \sigma) = i \gamma^0 D(L(\vb{p})) i \gamma^0 i \gamma^0 u(\vb{0}, \sigma) = D(L(-\vb{p})) u(\vb{0}, \sigma) = u(-\vb{p}, \sigma)
+\]
+And identically:
+\[
+i\gamma^0 v(\vb{p}, \sigma) = i\gamma^0 D(L(\vb{p})) v(\vb{0}, \sigma) = i \gamma^0 D(L(\vb{p})) i \gamma^0 i \gamma^0 v(\vb{0}, \sigma) = D(L(-\vb{p})) (-v(\vb{0}, \sigma)) = - v(-\vb{p}, \sigma) 
 \]
 
 \end{enumerate}
@@ -174,7 +199,15 @@ Hence we get that:
 \]
 Then taking $\Phi = e^{- i E t} \phi$ and plugging it in we get that:
 \[
-...
+e^{-iEt} (D_i D^i + m^2) \phi + D_0D^0 e^{-iE t} \phi = 0
+\]
+Looking now only at the second term we have that:
+\[
+D_0D^0 e^{-iE t} \phi = (\partial_0 + i\frac{m}{2}\omega^2 x^2)(\partial^0 - i \frac{m}{2} \omega^2 x^2) e^{- i E t}\phi = (\partial_0 \partial^0 + \frac{m}{2} \omega^2 x^2) e^{-i E t} \phi = 
+\]
+Now looking at the time derivative we obtain:
+\[
+\partial_0\partial^0 e^{-iE t}\phi = \partial_0 (-i E e^{-iEt}\phi + e^{-iEt}\partial^0\phi) = E^2 e^{-iEt} \phi - i E e^{-iEt} \partial^0 \phi + e^{-iEt}\partial_0\partial^0 \phi 
 \]
 
 \item 
@@ -183,6 +216,54 @@ Then taking $\Phi = e^{- i E t} \phi$ and plugging it in we get that:
 
 \section{The axial current}
 
+\begin{enumerate}
+
+\item We know that $\{\gamma_5, \gamma^\mu\} = 0$ and hence $\gamma_5 \gamma^\mu = - \gamma^\mu \gamma_5$. Then we have that:
+\[
+e^{i \varepsilon \gamma_5} \gamma^\mu = \sum_{n \in \mathbb{N}} \frac{1}{n!} (i \varepsilon \gamma_5)^n \gamma^\mu = \sum_{n \in \mathbb{N}} \frac{1}{n!} (-1)^n \gamma^\mu (i \varepsilon \gamma_5)^n  = \gamma^\mu \sum_{n \in \mathbb{N}} \frac{(-i \varepsilon \gamma_5)^n}{n!} = \gamma^\mu e^{- i \varepsilon \gamma_5}
+\]
+Notice also trivially that $(e^{i \varepsilon\gamma_5})^\dagger = e^{- i \varepsilon \gamma_5}$ since $\gamma_5 = \gamma_5^\dagger$. Hence the axial transformation gives:
+\[
+\overline{e^{i \varepsilon \gamma_5}\psi} = (e^{i\varepsilon \gamma_5} \psi)^\dagger i \gamma^0 = \psi^\dagger e^{- i \varepsilon \gamma_5} i \gamma^0 = \psi^\dagger i \gamma^0 e^{i\varepsilon \gamma_5} = \overline{\psi} e^{i \varepsilon \gamma_5}
+\]
+
+\item If we replace $\psi$ by the axial transformed $e^{i \varepsilon \gamma_5} \psi$ we also have to replace $\overline{\psi}$ by the axial transformed $\overline{\psi} e^{i \varepsilon \gamma_5}$. Hence we obtain:
+\[
+S = \int \dd^4 x \overline{\psi} e^{i \varepsilon\gamma_5} (- \slashed{\partial}  + i q \slashed{A} - m) e^{i\varepsilon\gamma_5} \psi
+\]
+Now notice that:
+\[
+e^{i\varepsilon\gamma_5} \slashed{a} e^{i\varepsilon \gamma_5} = e^{i\varepsilon \gamma_5} a_\mu \gamma^\mu e^{i\varepsilon \gamma_5} = (a_\mu e^{i\varepsilon \gamma_5} + [e^{i\varepsilon \gamma_5}, a_\mu]) \gamma^\mu e^{i\varepsilon \gamma_5} = a_\mu + [e^{i\varepsilon \gamma_5}, a_\mu] \gamma^\mu e^{i\varepsilon \gamma_5}
+\]
+Then since $[\partial_\mu, e^{i\varepsilon \gamma_5}] = 0$ and $[A_\mu, e^{i\varepsilon \gamma_5}] = 0$ we have that:
+\[
+S = \int \dd^4 x \overline{\psi}(-\slashed{\partial} + i q \slashed{A} - m e^{i2\varepsilon \gamma_5}) \psi
+\]
+Hence the action is left unchanged if and only if $m = 0$ or $\varepsilon = 0$. The second case corresponding to the trivial case of reducing the transformation to the identity can be discarded. Now assuming $m = 0$. The infinitesimal transformation corresponding to the axial transformation is given by:
+\[
+\psi \longmapsto e^{i \varepsilon \gamma_5} \psi = (1 + i \varepsilon \gamma_5) \psi = \psi + i\varepsilon \gamma_5 \psi
+\]
+Now this transformation conserves both the action and the Lagrangian hence from the formula (4.53) of the notes we have that the corresponding conserved current is given by:
+\[
+j_5^\mu = - \pdv{\mathcal{L}}{\partial_\mu \psi^a}\pdv{\psi^a}{\varepsilon} = - i \overline{\psi} \gamma^\mu  \gamma_5 \psi 
+\]
+
+\item The Dirac equations are given by:
+\[
+(\slashed{\partial} - i q \slashed{A} + m) \psi = 0 \mbox{~~and~~} \overline{\psi}(- \overleftarrow{\slashed{\partial}} + i q \slashed{A} + m) = 0 
+\] 
+Then we have that:
+\[
+\partial_\mu j_5^\mu = \partial_\mu (-i \overline{\psi} \gamma^\mu \gamma_5 \psi) = - \overline{\psi}( \slashed{\partial} + \overleftarrow{\slashed{\partial}} ) \gamma_5 \psi = - \overline{\psi}( i q \slashed{A} - m - i q \slashed{A} - m)\gamma_5 \psi = 2m \overline{\psi}\gamma_5 \psi \propto m 
+\]
+\end{enumerate}
+
 \section{Supersymmetry}
+
+\begin{enumerate}
+
+\item 
+
+\end{enumerate}
 
 \end{document}
