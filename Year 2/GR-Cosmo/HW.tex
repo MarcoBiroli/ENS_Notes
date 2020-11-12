@@ -1,0 +1,32 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{physics}
+\usepackage{stmaryrd}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\author{Marco Biroli}
+\title{Midterm homework problems}
+
+\begin{document}
+\maketitle
+
+\section{Divergence and Laplacian}
+
+\begin{enumerate}
+
+\item We have the definition of Christoffel symbols:
+\[
+\Gamma_{ij}^k = \pdv{\vb{e}_i}{x^j} \cdot \vb{e}^k
+\]
+Then we have that:
+\[
+\div \vb{V} = \partial_i ( V^j \vb{e_j})^i = \pdv{V^i}{x^i} + \Gamma^i_{i j} V^j = V^i_{, i} + \frac{1}{2} g^{im} ( g_{mi, j} + g_{mj, i} - g_{i j, m} ) V^j
+\]
+
+\end{enumerate}
+
+\end{document}
