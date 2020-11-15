@@ -1,0 +1,237 @@
+\documentclass[11pt, oneside]{article}
+\usepackage{geometry}
+\geometry{
+ a4paper,
+ total={175mm,243mm},
+ left=17mm,
+ top=20mm,
+ }
+
+\usepackage{graphicx}	
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{dsfont}
+\usepackage{enumitem}
+
+\usepackage{physics}
+\usepackage{siunitx}
+\usepackage{slashed}
+
+\usepackage{tensor}
+
+\newcommand{\G}{\Gamma}
+
+\renewcommand\thesection{Exercise \arabic{section}:}
+
+\title{ENS M1 General Relativity - Midterm Problems Solutions}
+\author{Matteo Vilucchio}					
+
+\begin{document}
+\maketitle
+
+\section{Divergence and Laplacian}
+\begin{enumerate}
+\item From the definition:
+\begin{align*}
+	\div{\va{V}} = \nabla_\mu V^\mu &= \partial_\mu V^\mu + \G_{\mu\gamma}^\mu V^\gamma = \partial_\mu V^\mu + \frac{1}{2} g^{\mu\nu}\qty( \partial_\mu g_{\nu\gamma} + \partial_\gamma g_{\nu\mu} - \partial_\nu g_{\mu\gamma})V^\gamma \\
+	&= \partial_\mu V^\mu + \frac{1}{2} g^{\mu\nu}\partial_\gamma g_{\mu\nu} V^\gamma
+\end{align*}
+
+\item (CHECK NEEDED) The metric transforms as a $(0,2)$ tensor and its inverse transforms as a $(2,0)$ tensor. Since the determinant of the matrix is a scalar conserved by any Lorentz transformation one can definitely say that the cofactor matrix transforms as a tensor.
+
+\item The determinant of a $4\times4$ matrix can be written as:
+\[
+	g = \epsilon^{\mu\nu\gamma\rho} g_{0\mu} g_{1\nu} g_{2\gamma} g_{3\sigma}
+\]
+and then by differentiating one gets the actual definition of a minor:
+\[
+	\pdv{g}{g_{\rho\sigma}} = \epsilon^{\sigma\nu\gamma\delta} g_{\tau \nu}g_{\eta \gamma} g_{\pi\delta} = c^{\rho\sigma} \quad \tau, \eta, \pi \neq \rho
+\]
+The indices $\tau$, $\eta$ and $\pi$ are not summed over.
+
+\item By applying the chain rule to the following:
+\[
+	\partial_\gamma g = \pdv{g}{g_{\mu\nu}} \partial_\gamma g_{\mu\nu} = g\: g^{\mu\nu}\:\partial_\gamma g_{\mu\nu}
+\]
+then by looking at the previous equation one can see that the only solution is the natural logarithm. So one obtains that:
+\[
+	g^{\mu\nu} \partial_\gamma g_{\mu\nu} = \partial_{\gamma}\qty( \ln \abs{g})
+\]
+
+\item The important notion to realise to make this point is that:
+\[
+	\frac{1}{\sqrt{\abs{g}}} \partial_\gamma \qty(\sqrt{\abs{g}}V^\gamma) = \frac{1}{\sqrt{\abs{g}}} \partial_\gamma \qty(\sqrt{\abs{g}}) V^\gamma + \frac{\sqrt{\abs{g}}}{\sqrt{\abs{g}}} \partial_\gamma V^\gamma = \frac{1}{2} \frac{1}{\abs{g}} \partial_\gamma g \: V^\gamma + \partial_\gamma V^\gamma = \frac{1}{2} \partial_{\gamma}\qty( \ln \abs{g}) + \partial_\gamma V^\gamma
+\]
+where the last part is exactly what has already been obtained in point 1. In the end one can read that:
+\[
+	\div \va{V}=\frac{1}{\sqrt{|g|}} \partial_{\gamma}\left(\sqrt{|g|} V^{\gamma}\right)
+\]
+
+\item This exercice is about writing the laplacian in a handy way. One can do it in two different ways:
+\[
+	\laplacian f = \div \grad f = \nabla_\mu \nabla^\mu \qty(f) = \nabla^\mu \nabla_\mu \qty(f)
+\]
+to apply the previous formula one has to choose the first proposition since the formula we have derived only applies to vectors. By recalling that the covariant derivative of a scalar function is just the partial derivative one can obtain:
+\[
+	\laplacian f = \frac{1}{\sqrt{|g|}} \partial_{\gamma}\qty(\sqrt{|g|} \partial^\gamma f) = \frac{1}{\sqrt{|g|}} \partial_{\gamma}\qty(\sqrt{|g|} g^{\gamma\mu}\partial_\mu f)
+\]
+
+\item In spherical coordinates the matrix associated with the metric is:
+\[
+	\qty[g_{\mu\nu}] = 
+	\begin{bmatrix} 
+	1 & 0 & 0 \\
+	0 & r^2 & 0 \\
+	0 & 0 & r^2 \sin^2 \theta
+	\end{bmatrix}
+\]
+where a choice of basis has been made. The choice of this basis is the standard one w.r.t. the cartesian basis. From this the determinant reads as:
+\[
+	g = r^4 \sin^2 \theta
+\]
+This determinant is non zero for $r>0$ and for $\theta \in \:]0, \pi[$. In this region one can find the inverse matrix which is:
+\[
+	\qty[g^{\mu\nu}] = 
+	\begin{bmatrix} 
+	1 & 0 & 0 \\
+	0 & \frac{1}{r^2} & 0 \\
+	0 & 0 & \frac{1}{r^2 \sin^2 \theta}
+	\end{bmatrix}
+\]
+then by applying the formulas obtained in point 6 one can directly have the expressions for the laplacian of a scalar function in spherical coordinates.
+\begin{align*}
+	\laplacian f &= \frac{1}{r^2\sin\theta} \partial_\gamma\qty( r^2\sin\theta  g^{\gamma\mu}\partial_\mu f) = \\
+	&= \frac{1}{r^2\sin\theta} \partial_r \qty(r^2\sin\theta g^{rr} \partial_r f) + \frac{1}{r^2\sin\theta} \partial_r \qty(r^2\sin\theta g^{\theta\theta} \partial_\theta f) + \frac{1}{r^2\sin\theta} \partial_\phi \qty(r^2\sin\theta g^{\phi\phi} \partial_\phi f) = \\
+	&= \frac{1}{r^2} \partial_r \qty( r^2 \:\partial_r f ) + \frac{1}{r^2 \sin\theta} \partial_\theta \qty( \sin\theta \:\partial_\theta f ) + \frac{1}{r^2\sin^2\theta}\partial_\phi^2 f
+\end{align*}
+
+\item In cylindrical coordinates one has that the metric and its inverse are:
+\[
+	\qty[g_{\mu\nu}] = 
+	\begin{bmatrix} 
+	1 & 0 & 0 \\
+	0 & r^2 & 0 \\
+	0 & 0 & 1
+	\end{bmatrix}
+	\qquad 
+	\qty[g^{\mu\nu}] = 
+	\begin{bmatrix} 
+	1 & 0 & 0 \\
+	0 & \frac{1}{r^2} & 0 \\
+	0 & 0 & 1
+	\end{bmatrix}
+	\qquad
+	g = r^2
+\]
+and the range of validity for the existence of the inverse matrix is $r>0$. Then the laplacian in cylindrical coordinates becomes:
+\[
+	\laplacian f = \frac{1}{r} \partial_r \qty( r \partial_r f) + \frac{1}{r^2} \partial_\phi^2 f + \partial_z^2 f
+\] 
+
+\end{enumerate}
+
+
+\section{Rotating coordinate frame}
+\begin{enumerate}
+\item Intuitively one can say that the change in frame will "mix up" the angular and temporal coordinates. By looking specifically at the change of variables one has that:
+\[
+	\begin{cases}
+		z = z' \\
+		r = r' \\
+		\phi = \phi' - \Omega t \\
+		t = t' \\ 
+	\end{cases}
+	\iff
+	\begin{cases}
+		\dd{z} = \dd{z'} \\
+		\dd{r} = \dd{r'} \\
+		\dd{\phi} = \dd{\phi'} - \Omega \dd{t} \\
+		\dd{t} = \dd{t'}
+	\end{cases}
+\]
+then by substituting the differentials inside the line element one obtains the expression for the invariant in the other frame of reference:
+\[
+	d s^2 = \qty(r^2\Omega^2 - c^2) \dd{t}^2 + 2\Omega r^2 \dd{t} \dd{\phi}+ r^2 \dd{\phi}^2 + \dd{r}^2 + \dd{z}^2
+\]
+and in matrix form the metric becomes:
+\[
+	\qty[g_{\mu\nu}] = 
+	\begin{bmatrix}
+		r^2\Omega^2 - c^2 & 0 &\Omega r^2 & 0 \\
+		0 & 1 & 0 & 0 \\
+		\Omega r^2 & 0 & r^2 & 0 \\
+		0 & 0 & 0 & 1 \\
+	\end{bmatrix}
+\]
+
+\item The inverse of this matrix becomes:
+\[
+	\qty[g^{\mu\nu}] = 
+	\begin{bmatrix}
+		-\frac{1}{c^{2}} & 0 & \frac{\Omega}{c^{2}} & 0 \\
+		0 & 1 & 0 & 0 \\
+		\frac{\Omega}{c^{2}} & 0 & \frac{1}{r^{2}} -\frac{\Omega^{2}}{c^{2}} & 0 \\
+		0 & 0 & 0 & 1
+	\end{bmatrix}
+\]
+
+\item The line element in the primed frame in cartesian coordinates is:
+\[
+	ds'^2 = -c^2\dd{t}'^2 + \dd{x}'^2 + \dd{y} '^2 + \dd{z}'^2
+\]
+and with the change of variable becomes:
+\[
+	a
+\]
+
+
+\item
+
+
+\item
+
+
+\end{enumerate}
+
+\section{Frame dragging by a moving rod}
+\begin{enumerate}
+\item
+
+
+\item
+
+
+\item
+
+
+\item
+
+
+\item
+
+
+\item
+
+
+\end{enumerate}
+
+\section{Frame-dragging inside a rotating cylinder}
+\begin{enumerate}
+\item
+
+
+\item
+
+
+\item
+
+
+\item
+
+
+\end{enumerate}
+
+
+\end{document}
