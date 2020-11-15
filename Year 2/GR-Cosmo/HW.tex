@@ -55,7 +55,164 @@ Hence:
 ...
 \]
 
-\item 
+\item We start from the end and we differentiate to obtain:
+\[
+\frac{1}{\sqrt{|g|}} \partial_\gamma (\sqrt{|g|} V^\gamma) = {V^\gamma}_{, \gamma} + \frac{1}{\sqrt{|g|}} V^\gamma \frac{1}{2 \sqrt{|g|}} \partial_\gamma |g| = {V^\mu}_{, \mu} + \frac{1}{2} V^\gamma \frac{\partial_\gamma |g|}{|g|} = {V^\mu}_{, \mu} + \frac{1}{2} V^\gamma \log|g|
+\]
+Now using question 4 we re-obtain the formula of question 1 and this concludes the proof.
+
+\item Using the above formula by replacing: $V_\gamma = f_{, \gamma}$ (hence $V^\gamma = g^{\gamma \mu} f_{,\mu}$) we obtain:
+\[
+\laplacian f = \frac{1}{\sqrt{|g|}} \partial_\gamma( \sqrt{|g|} f^{,\gamma} ) = \frac{1}{\sqrt{|g|}} \partial_\gamma( \sqrt{|g|} g^{\gamma \mu}f_{,\mu} )
+\] 
+
+\item In spherical coordinates we have that:
+\[
+[g_{\mu \nu}] = \begin{pmatrix}
+1 & 0 & 0\\
+0 & r^2 & 0 \\
+0 & 0 & r^2 \sin^2 \theta 
+\end{pmatrix}
+\]
+Then in order to apply the previous formula we need to compute $g$ and $[g^{\mu \nu}]$. We have quite simply:
+\[
+g = r^4 \sin^2 \theta \mbox{~~and~~} g^{\mu \mu} = \frac{1}{g_{\mu \mu}} \mbox{~~and~~} g^{\mu \nu} = 0 \mbox{~~otherwise.}
+\]
+Plugging this in the previous formula we obtain:
+\[
+\laplacian f = \frac{1}{r^2 \sin \theta} \partial_\gamma(r^2 \sin\theta g^{\gamma \mu} f_{, \mu}) = \frac{1}{r^2 \sin \theta} \left( \partial_r (r^2 \sin \theta f_{,r}) + \partial_\theta (\sin \theta f_{, \theta}) + \partial_\varphi (\frac{1}{\sin \theta} f_{,\varphi}) \right)
+\]
+Now simplifying the derivatives gives:
+\begin{align*}
+\laplacian f &= \frac{1}{r^2 \sin \theta} \left( \sin \theta \partial_r (r^2 f_{,r}) + \partial_{\theta} (\sin \theta f_{, \theta}) + \frac{1}{\sin \theta} \partial_\varphi f_{,\varphi}  \right) \\
+&= \frac{1}{r^2} \partial_r (r^2 f_{,r}) + \frac{1}{r^2 \sin \theta} \partial_\theta (\sin \theta f_{, \theta}) + \frac{1}{r^2 \sin^2 \theta}\partial_\varphi f_{,\varphi}
+\end{align*}
+
+\item Repeating an identical argument but using:
+\[
+[g_{\mu \nu}] = \begin{pmatrix}
+1 & 0 & 0\\
+0 & 1 & 0\\
+0 & 0 & r^2
+\end{pmatrix}
+\]
+Gives us immediately that:
+\[
+\laplacian f = \frac{1}{r} \partial_\gamma (r g^{\gamma \mu}f_{, \mu}) = r^{-1} ( \partial_z (r f_{,z} + \partial_{r} (r f_{,r}) + \partial_\phi (r^{-1} f_{,\phi})  ) = f_{,zz} + r^{-1} f_{,r} + f_{,rr} + r^{-2} f_{,\phi\phi}
+\]
+\end{enumerate}
+
+\section{Rotating coordinate frame.}
+
+\begin{enumerate}
+
+\item We have that:
+\[
+t = t \mbox{~~and~~} z = z' \mbox{~~and~~} r = r' \mbox{~~and~~} \phi = \phi' - \Omega t
+\]
+Hence we immediately get that:
+\[
+\dd t = \dd t \mbox{~~and~~} \dd z = \dd z' \mbox{~~and~~} \dd r = \dd r' \mbox{~~and~~} \dd \phi = \dd \phi' - t \dd \Omega  - \Omega \dd t = \dd \phi' - \Omega \dd t
+\]
+Where in the last equality we add the assumption that we place ourselves in a rotating frame at constant angular velocity. Now plugging this in the expression for a line element we obtain:
+\begin{align*}
+\dd s^2 &= -c^2 \dd t^2 + (\dd z')^2 + (\dd r')^2 + (r')^2 (\dd \phi')^2 = - c^2 \dd t^2 + \dd z^2 + \dd r^2 + r^2 (\dd \phi + \Omega \dd t)^2\\
+&= - c^2 \dd t^2 + \dd z^2 + \dd r^2 + r^2 \dd \phi^2 + r^2 \Omega^2 \dd t^2 + 2 r^2 \Omega \dd \phi \dd t\\
+&= (r^2 \Omega^2 - c^2) \dd t^2 + \dd z^2 + \dd r^2 + r^2 \dd \phi^2 + 2r^2 \Omega \dd t \dd \phi
+\end{align*}
+Hence we also get:
+\[
+[g_{\mu \nu}] = \begin{pmatrix}
+(r^2 \Omega^2 - c^2) & 0 & 0 & r^2 \Omega\\
+0 & 1 & 0 & 0\\
+0 & 0 & 1 & 0\\
+r^2 \Omega & 0 & 0 & r^2
+\end{pmatrix}
+\]
+
+\item The inverse can be immediately obtained through it's cofactor formulation and gives:
+\[
+[g^{\mu\nu}] = \left(
+\begin{array}{cccc}
+ -\frac{1}{c^2} & 0 & 0 & \frac{\Omega }{c^2} \\
+ 0 & 1 & 0 & 0 \\
+ 0 & 0 & 1 & 0 \\
+ \frac{\Omega }{c^2} & 0 & 0 & \frac{c^2 - r^2 \Omega ^2}{c^2 r^2} \\
+\end{array}
+\right) \mbox{~~and~~} g = -c^2 r^2 
+\]
+
+\item We have that:
+\[
+\begin{pmatrix}
+t'\\
+x'\\
+y'\\
+z'
+\end{pmatrix} = \begin{pmatrix}
+1 & 0 & 0 & 0\\
+0 & \cos \Omega t & \sin \Omega t & 0\\
+0 & - \sin \Omega t & \cos \Omega t & 0\\
+0 & 0 & 0 & 1
+\end{pmatrix} \begin{pmatrix}
+t\\
+x\\
+y\\
+z
+\end{pmatrix}
+\] 
+Now notice that the transition matrix is orthogonal hence we immediately have that:
+\[
+\begin{pmatrix}
+1 & 0 & 0 & 0\\
+0 & \cos \Omega t & -\sin \Omega t & 0\\
+0 & \sin \Omega t & \cos \Omega t & 0\\
+0 & 0 & 0 & 1
+\end{pmatrix}
+\begin{pmatrix}
+t'\\
+x'\\
+y'\\
+z'
+\end{pmatrix}
+= \begin{pmatrix}
+t\\
+x\\
+y\\
+z
+\end{pmatrix}
+\]
+Hence we obtain immediately that:
+\begin{align*}
+\dd s^2 &= - c^2 \dd t^2 + \dd x^2 + \dd y^2 + \dd z^2 = -c^2 \dd t^2 + (\dd (x' \cos \Omega t - y' \sin \Omega t))^2 + (\dd (x' \sin \Omega t + y' \cos \Omega t))^2 + (\dd z')^2\\
+&= - c^2 \dd t^2 + (\cos\Omega t \dd x' - x' \Omega \dd t \sin\Omega t  - \sin \Omega t \dd y' - y' \Omega \dd t \cos \Omega t)^2 = ...
+\end{align*}
+
+\item We have that:
+\[
+\begin{pmatrix}
+-1 + h_{00} & h_{01} & h_{02} & h_{03}\\
+h_{10} & 1 + h_{11} & h_{12} & h_{13}\\
+h_{2 0} & h_{21} & 1 + h_{22} & h_{23}\\
+h_{30} & h_{31} & h_{32} & 1 + h_{33}
+\end{pmatrix}
+= 
+\begin{pmatrix}
+-(1 - (x^2 + y^2) \Omega^2) & \Omega y & -\Omega x & 0\\
+\Omega y & 1 & 0 & 0\\
+-\Omega x & 0 & 1 & 0\\
+0 & 0 & 0 & 1
+\end{pmatrix}
+\]
+Hence we get:
+\[
+[h_{\mu \nu}] = \begin{pmatrix}
+(x^2 + y^2) \Omega^2 & \Omega y & - \Omega x & 0\\
+\Omega y & 0 & 0 & 0\\
+-\Omega x & 0 & 0 & 0\\
+0 & 0 & 0 & 0
+\end{pmatrix}
+\]
 
 \end{enumerate}
 
