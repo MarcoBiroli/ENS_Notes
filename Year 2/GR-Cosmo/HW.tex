@@ -376,43 +376,117 @@ This then gives the following plot for $z$:
 
 \begin{enumerate}
 
-\item From symmetry arguments we know that $\Phi$ is only a function of $x$ and $y$. Hence we have that:
+\item Consider $V$ to be a cylinder of height $H$ and radius $r$ around the origin. Then from Gauss's law we have that:
 \[
-\grad \Phi_{\mu \nu}(\vb{x}) = \kappa \int_{-h}^{h} \oint_C \dd z' \dd x' \dd y' T_{\mu \nu}(\vb{x}') (\vb{x} - \vb{x'})/|\vb{x} - \vb{x'}|^3 
+2 \pi r H \grad \Phi(r) = \oint_{\partial V} \grad \Phi \dd \vb{S} = \int_V \div \grad \Phi \dd V = \int_V \frac{4 \pi G_N}{c^2} \rho(\vb{x}) \dd V = \frac{4\pi G_N}{c^2} \dd \mu H  
 \]
-Now we use the well-know distribution formula:
+Hence up to re-writing we obtain:
 \[
-\div \left( \frac{\vb{r}}{|\vb{r}|^3} \right) = \delta(\vb{r})
-\]
-Which immediately gives us that:
-\[
-\laplacian \Phi_{\mu \nu}(\vb{x}) = \int T_{\mu \nu}(\vb{x'}) \delta(\vb{x} - \vb{x'}) \dd \vb{x'} = T_{\mu \nu}(\vb{x})
-\]
-This is the differential form of Gauss's Law for $\grad\Phi$. This also tells us that:
-\[
-H 2 \pi r \grad \Phi_{\mu \nu}(r) = \oint_{\partial V} \grad \Phi_{\mu \nu} \cdot \dd \vb{A} = \iiint_V \laplacian \Phi_{\mu \nu} \dd V = \iiint_V T_{\mu \nu}(\vb{x}) \dd V = T
-\]
-Hence in order to write this as similar to Gauss's Law for electromagnetism we can re-write this as:
-\[
-\grad \Phi_{\mu \nu}(r) = \frac{T}{2\pi r H}
-\]
-Hence we obtain that:
-\[
-\grad \Phi = \frac{\rho c^2}{2\pi r H} \begin{pmatrix}
-\pi r^2 H & 0 & \pi r^2 H \Omega & 0\\
-0 & 0 & 0 & 0\\
-\pi r^2 H \Omega & 0 & 0 & 0\\
-0 & 0 & 0 & 0
-\end{pmatrix} = \frac{\rho r c^2}{2} \begin{pmatrix}
-1 & 0 & \Omega & 0\\
-0 & 0 & 0 & 0\\
-\Omega & 0 & 0 & 0\\
-0 & 0 & 0 & 0
-\end{pmatrix}
+\grad \Phi(r) = \frac{2 G_N}{r c^2} \dd \mu \vu{r}
 \]
 
+\item Notice that we can re-write this as:
+\[
+\div (\grad \Phi_{\mu\nu}) = 4 \pi \kappa T_{\mu \nu} \Leftrightarrow \vb{L} \cdot \vb{u} = f
+\]
+Now the Green function for a needle pointing along the $z$-axis at position $\vb{x'} = (x, y)$ is given by:
+\[
+\div \vb{G(\vb{x}, \vb{x'})} = \delta(\vb{x} - \vb{x'}) \Rightarrow \vb{G}(\vb{x}, \vb{x'}) = \frac{1}{2\pi} \frac{\vb{x} - \vb{x'}}{|\vb{x} - \vb{x'}|^2}
+\]
+Hence we have that the solution $\vb{u} = \grad\Phi_{\mu\nu}$ to the equation $\vb{L} \cdot \vb{u} = f$ is given by:
+\[
+\grad \Phi_{\mu\nu} = \vb{u} = \int G(\vb{x}, \vb{x'}) f(\vb{x'}) \dd^2 \vb{x'} = \int \frac{\vb{x} - \vb{x'}}{|\vb{x} - \vb{x'}|^2} 2 \kappa T_{\mu\nu}(\vb{x'}) \dd^2 \vb{x'} 
+\]
+
+\item We have that (in cylindrical coordinates):
+\[
+[T_{\mu \nu}] = \rho c^2 \begin{bmatrix}
+1 & \vb{v}/c\\
+\vb{v}/c & 1
+\end{bmatrix} = \rho c^2 \begin{bmatrix}
+1 & 0 & \Omega R /c & 0\\
+0 & 0 & 0 & 0\\
+\Omega R/c & 0 & 0 & 0\\
+0 & 0 & 0 & 0
+\end{bmatrix}
+\]
+Then to get it in cartesian coordinates we simply have to compute:
+\begin{align*}
+[T_{\mu \nu}] &= \rho(\vb{r}) c^2 \begin{bmatrix}
+1 & 0 & 0 & 0\\
+0 & \cos \theta & -\sin\theta & 0\\
+0 & \sin \theta & \cos \theta & 0 \\
+0 & 0 & 0 & 1
+\end{bmatrix} \begin{bmatrix}
+1 & 0 & \Omega R /c & 0\\
+0 & 0 & 0 & 0\\
+\Omega R/c & 0 & 0 & 0\\
+0 & 0 & 0 & 0
+\end{bmatrix}\begin{bmatrix}
+1 & 0 & 0 & 0\\
+0 & \cos \theta & \sin\theta & 0\\
+0 & -\sin \theta & \cos \theta & 0 \\
+0 & 0 & 0 & 1
+\end{bmatrix}\\
+&= \rho(\vb{r}) c \Omega R \begin{bmatrix}
+\frac{c}{R \Omega} & -\sin\theta & \cos\theta & 0\\
+-\sin\theta & 0 & 0 & 0\\
+\cos\theta & 0 & 0 & 0\\
+0 & 0 &0 &0 
+\end{bmatrix}
+\end{align*}
+Now since we are dealing with a thin-walled cylinder we have that:
+\[
+\rho(\vb{r}) = \frac{\rho}{2\pi R} \delta(r - R) 
+\]
+Hence replacing up top we obtain:
+\[
+[T_{\mu\nu}] = \frac{c \rho \Omega \delta(r - R)}{2\pi} \begin{bmatrix}
+\frac{c}{R \Omega} & -\sin\theta & \cos\theta & 0\\
+-\sin\theta & 0 & 0 & 0\\
+\cos\theta & 0 & 0 & 0\\
+0 & 0 &0 &0 
+\end{bmatrix}
+\]
+Then using the equation of the previous question we obtain:
+\begin{align*}
+\grad \Phi_{0 1}(\vb{0}) &= 2 \kappa \int \dd^2 \vb{x'} T_{0 1}(\vb{x'}) \frac{\vb{0} - \vb{x'}}{|\vb{0} - \vb{x'}|^2} = -2 \kappa \int \dd^2 \vb{x'} \frac{c \rho \Omega \delta(x' - R)}{2 \pi} \sin \theta \frac{\vb{x} - \vb{x'}}{|\vb{x} - \vb{x'}|^2}\\
+&= \frac{2 \kappa c \rho \Omega}{2\pi R} \int_0^{2\pi} R \sin \theta \dd \theta = \frac{\kappa c \rho \Omega}{\pi} \int_0^{2\pi} \binom{\sin \theta \cos \theta}{\sin^2\theta} \dd \theta = \kappa c \rho \Omega \vu{y}
+\end{align*}
+Similarly we have that:
+\begin{align*}
+\grad \Phi_{02}(\vb{0}) = 2 \kappa \int \dd^2 \vb{x'} \frac{c \rho \Omega \delta(x' - R)}{2 \pi} \cos \theta \frac{\vu{r}}{|\vb{x'}|^2}= -\frac{\kappa c \rho \Omega}{\pi} \int_{0}^{2\pi} \binom{\cos^2\theta}{\sin\theta\cos\theta} \dd \theta = - \kappa c \rho \Omega \vu{x}
+\end{align*}
+
+\item \begin{enumerate}
+
+\item We have that:
+\[
+\Phi_{\mu\nu} = - \overline{h_{\mu\nu}}/4 
+\]
+From the previous question we also know that:
+\[
+[\Phi_{\mu\nu}(\vb{x})] = \kappa c \rho \Omega \begin{bmatrix}
+0 & y + \ell & - x + \ell' & 0\\
+y + \ell & 0 & 0 & 0\\
+-x + \ell' & 0 & 0 & 0\\
+0 & 0 & 0 & 0
+\end{bmatrix}
+\]
+Then for $[\Phi(\vb{0})] = \vb{0}$ we simply need to take $\ell = \ell' = 0$. Then we have that:
+\[
+[\overline{h_{\mu\nu}}(\vb{x})] = \frac{\kappa c \rho \Omega}{4} \begin{bmatrix}
+0 & - y & x & 0\\
+-y & 0 & 0 & 0\\
+x & 0 & 0& 0\\
+0& 0 & 0& 0
+\end{bmatrix}
+\]
+Then since $\overline{h}_{\mu\nu}$ is traceless we also have that $[h_{\mu\nu}] = [\overline{h}_{\mu\nu}]$. 
 
 \item 
+
+\end{enumerate}
 
 \end{enumerate}
 
