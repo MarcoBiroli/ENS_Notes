@@ -222,7 +222,7 @@ Hence we get:
 
 \item We have the equation:
 \[
-\laplacian \Phi = 4\pi (G_N/c^2)\rho 
+\laplacian \Phi = 4\pi (G_N/c^2) \rho \Theta(R - r)
 \]
 From symmetry arguments we know already that $\Phi$ will only be a function of $r$. Hence we have that by plugging the expression of the laplacian found in part 1 we obtain:
 \[
@@ -303,7 +303,7 @@ Similarly we get:
 
 \item We use the geodesic equation:
 \[
-\dv[2]{z}{\tau} = \Gamma^z_{\mu \nu} \dv{x^\mu}{\tau} \dv{x^\nu}{\tau}
+-\dv[2]{z}{\tau} = \Gamma^z_{\mu \nu} \dv{x^\mu}{\tau} \dv{x^\nu}{\tau}
 \]
 Then:
 \[
@@ -324,11 +324,47 @@ We start by computing the Christoffel symbols:
 \end{align*}
 Hence the geodesic equation becomes:
 \[
-\ddot{z} = \Gamma^z_{01} \dv{t}{\tau} \dv{x}{\tau} + \Gamma^z_{02} \dv{t}{\tau} \dv{y}{\tau} + \Gamma^z_{13} \dv{x}{\tau}\dv{z}{\tau} + \Gamma^z_{23} \dv{y}{\tau}\dv{z}{\tau}
+-\ddot{z} = \Gamma^z_{01} \dv{t}{\tau} \dv{x}{\tau} + \Gamma^z_{02} \dv{t}{\tau} \dv{y}{\tau} + \Gamma^z_{13} \dv{x}{\tau}\dv{z}{\tau} + \Gamma^z_{23} \dv{y}{\tau}\dv{z}{\tau}
 \]
 Plugging in the values we get:
 \[
-\ddot{z} = 2v/c( \partial_x \Phi(r) \gamma \dot{x} + \partial_y \Phi(r) \gamma \dot{y}) - \dot{z}( \dot{x} \partial_x \Phi(r)  + \dot{y}\partial_y \Phi(r)  )  = (\dot{\vb{x}} \cdot \grad \Phi) (\frac{2v}{c} \gamma - \dot{z})
+-\ddot{z} = 2v/c( \partial_x \Phi(r) \gamma \dot{x} + \partial_y \Phi(r) \dot{t} \dot{y}) - \dot{z}( \dot{x} \partial_x \Phi(r)  + \dot{y}\partial_y \Phi(r)  )  = (\dot{\vb{x}} \cdot \grad \Phi) (\frac{2v}{c} \gamma - \dot{z}) = \dot{x} \partial_x \Phi (\frac{2v}{c} \dot{t} - \dot{z})
+\]
+Where in the last equality we used the fact that $\dot{y} = y = 0$ and $\partial_z\Phi = 0$. Now a similar derivation for $\Gamma^t_{\mu \nu}$ and $\Gamma^x_{\mu \nu}$ yields:
+\[
+-\ddot{t} = \frac{2 v}{c} \dot{z} \dot{x} \partial_x \Phi \mbox{~~and~~}  -\ddot{x} = \partial_x \Phi (\dot{t}^2 - \dot{x}^2 + \dot{z}^2)
+\]
+Hence the final system of equation gives:
+\[
+\begin{cases}
+-\ddot{z} = \dot{x} \partial_x \Phi \left( \frac{2v}{c} \dot{t} - \dot{z} \right)\\
+-\ddot{t} = \frac{2v}{c} \dot{z}\dot{x} \partial_x \Phi\\
+-\ddot{x} = \partial_x\Phi (\dot{t}^2 - \dot{x}^2 + \dot{z}^2)
+\end{cases}
+\]
+Now we can also replace $\partial_x \Phi$ by its value: $\frac{2 G_N \pi \rho }{c^2 x}$ (outside of the cylinder) which gives:
+\[
+\begin{cases}
+-\ddot{z} = \dot{x} \frac{2 G_N \pi \rho}{c^2 x} \left( \frac{2v}{c} \dot{t} - \dot{z} \right)\\
+-\ddot{t} = \frac{2v}{c} \dot{z}\dot{x} \frac{2 G_N \pi \rho}{c^2 x}\\
+-\ddot{x} = \frac{2 G_N \pi \rho}{c^2 x} (\dot{t}^2 - \dot{x}^2 + \dot{z}^2)
+\end{cases}
+\]
+Now our physical intuition encourages us to try the Ansatz $t =  \tau$ and $x = v_x \tau$. Plugging this in the equation for $z$ gives:
+\[
+-\ddot{z} = \underbrace{\frac{2 G_N \pi \rho}{c^2}}_{\alpha} \tau^{-1} \left( \underbrace{\frac{2v}{c}}_{\beta} - \dot{z} \right) \Longleftrightarrow \ddot{z} = \alpha\tau^{-1}(\beta - \dot{z})
+\]
+Now solving the above 2nd order ODE gives directly:
+\[
+z(\tau) = \beta\left( \tau - \frac{\tau^{1 + \alpha}}{1 + \alpha} \right)
+\]
+Which also gives:
+\[
+\dot{z}(\tau) = \beta(1 - \tau^{\alpha})
+\]
+This then gives the following plot for $z$:
+\[
+...
 \]
 
 \end{enumerate}
@@ -374,6 +410,7 @@ Hence we obtain that:
 0 & 0 & 0 & 0
 \end{pmatrix}
 \]
+
 
 \item 
 
