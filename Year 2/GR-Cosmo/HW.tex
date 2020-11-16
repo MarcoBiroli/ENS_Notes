@@ -216,4 +216,167 @@ Hence we get:
 
 \end{enumerate}
 
+\section{Frame dragging by a moving rod.}
+
+\begin{enumerate}
+
+\item We have the equation:
+\[
+\laplacian \Phi = 4\pi (G_N/c^2)\rho 
+\]
+From symmetry arguments we know already that $\Phi$ will only be a function of $r$. Hence we have that by plugging the expression of the laplacian found in part 1 we obtain:
+\[
+\Phi_{,zz} + \Phi_{,rr} + \Phi_{,r}/r + \Phi_{,\phi\phi}/r^2 = \Phi_{,rr} + \Phi_{,r}/r =  4 \pi (G_N/c^2) \rho
+\]
+This can be re-written as:
+\[
+\partial_r(r \Phi_{,r}) = 4 \pi (G_N /c^2)\rho r \Rightarrow r \Phi_{,r} = 4\pi (G_N/c^2) \rho r^{2}/2 + c
+\]
+Which gives immediately through integration a solution of the form:
+\[
+\Phi(r) = \pi (G_N/c^2) \rho r^2  + c \log(r) + c'
+\]
+Now the condition $\Phi_{,r}(0) = 0$ ensures that $c = 0$ and the condition $\Phi(R) = 0$ ensures that $c' = - \pi (G_N/c^2) \rho R^2$ hence the final solution is given by:
+\[
+\Phi(r) = \pi(G_N/c^2)\rho(r^2 - R^2)
+\]
+
+\item We have that:
+\[
+\overline{h_{\mu \nu}} = -4 \Phi \delta^0_\mu \delta^0_\nu
+\]
+Hence we get that:
+\[
+h_{\mu \nu} - \frac{1}{2} \eta_{\mu \nu} h = - 4 \Phi \delta^0_\mu \delta^0_\nu
+\]
+Now we have that:
+\[
+\eta_{\mu\nu}(\overline{h}_{\mu\nu}) = h - \frac{1}{2} Tr(\eta) h = h - 2h = - h
+\]
+Which when plugged in the previous equation gives immediately that:
+\[
+-h = 4 \Phi \Leftrightarrow h = -4 \Phi
+\]
+Hence we obtain that:
+\[
+h_{\mu \nu}(r) = - 2 \Phi \delta_{\mu \nu}
+\]
+
+
+\item We have that:
+\[
+\dd s^2 = (1 - 2 \Phi) (\dd r^2 + r^2 \dd \phi^2)
+\]
+Now we apply the following transformations:
+\[
+r' = (1 + r \Phi_{,r})(1 - \Phi) r  \mbox{~~and~~} \phi' = (1 - \Phi_{,r}/r)\phi
+\]
+Using our previous results we can re-write this as:
+\[
+r' = (1 + 2\alpha r^2)(1 - \alpha(r^2 - R^2)) r \mbox{~~and~~} \phi' = (1 - 2\alpha) \phi 
+\]
+Hence we have that:
+\begin{align*}
+\dd r' &= \dd (r \Phi_{,r}) (1 - \Phi) r + (1 + r \Phi_{,r}) \dd(-\Phi) r + (1 + r \Phi_{,r})(1 - \Phi)\dd r\\
+&= 4\pi(G_N/c^2)\rho r \dd r (1 - \Phi) r - (1 + r \Phi_{,r}) \Phi_{,r} \dd r + (1 + r \Phi_{,r})(1 - \Phi)\dd r \\
+&= \dd r \left( \alpha r - \alpha r \Phi - \Phi_{,r} - r \Phi_{,r}^2 + 1 - \Phi + r \Phi_{,r} - r \Phi_{,r}^2 \right)
+\end{align*}
+Similarly we get:
+\[
+\dd \phi' = (1 - \Phi_{,r}/r)\dd \phi - (\dd \Phi_{,r})/r \Phi + \Phi_{,r}/r^2 \phi \dd r = (1 - \Phi_{,r}/r)\dd \phi - ()/r \Phi + \Phi_{,r}/r^2 \phi \dd r
+\]
+
+\item 
+
+\item Hence we obtain:
+\[
+[h_{\alpha' \beta'}] = 
+-2 \Phi(r')
+\begin{pmatrix}
+1 & & -2v/c\\
+ & \vb{I} & \\
+ -2v/c & & 1
+\end{pmatrix}
+\]
+
+\item \begin{enumerate}
+
+\item We use the geodesic equation:
+\[
+\dv[2]{z}{\tau} = \Gamma^z_{\mu \nu} \dv{x^\mu}{\tau} \dv{x^\nu}{\tau}
+\]
+Then:
+\[
+\Gamma^\nu_{\mu \lambda} = \frac{1}{2}\eta^{\nu \gamma}(\partial_\mu h_{\gamma \lambda} + \partial_{\lambda} h_{\gamma \mu} - \partial_\gamma h_{\lambda \mu})
+\]
+We start by computing the Christoffel symbols:
+\begin{align*}
+\Gamma^z_{00} &= \frac{1}{2} \eta^{z \gamma}( \partial_0 h_{\gamma 0} + \partial_0 h_{\gamma 0} - \partial_\gamma h_{00}) = \partial_0 h_{z 0} - \frac{1}{2} \partial_z h_{0 0} = \partial_0 4 \Phi(r) v /c + \partial_z \Phi(r) = 0\\
+\Gamma^z_{0 1} &= \frac{1}{2} \eta^{z \gamma} (\partial_0 h_{\gamma 1} + \partial_1 h_{\gamma 0} - \partial_\gamma h_{10}) = \frac{1}{2}(\partial_0 h_{z 1} + \partial_1 h_{z 0} - \partial_z h_{10}) = \frac{1}{2}(0 + \partial_x 4 \Phi(r) v /c + 0) = 2 v /c\,  \partial_x \Phi(r)\\
+\Gamma^z_{02} &= \frac{1}{2}(\partial_0 h_{z2} + \partial_2 h_{z0} - \partial_z h_{20}) = 2v/c\, \partial_y \Phi(r)\\
+\Gamma^z_{0 3} &= \frac{1}{2}(\partial_0 h_{z3} + \partial_3 h_{z3} - \partial_z h_{30} ) = \frac{1}{2}(-2\partial_z \Phi(r) - 4v/c \partial_z \Phi(r) ) = -(1 - 2v/c) \partial_z \Phi(r) = 0\\
+\Gamma^z_{11} &= \frac{1}{2} (\partial_1 h_{z 1} + \partial_1 h_{z 1} - \partial_z h_{11}) =  \partial_z \Phi(r) = 0 \\
+\Gamma^z_{12} &= \frac{1}{2}(\partial_1 h_{z 2} + \partial_2 h_{z 1} - \partial_z h_{21}) = 0\\
+\Gamma^z_{13} &= \frac{1}{2}( \partial_1 h_{z3} + \partial_3 h_{z1} - \partial_z h_{31} ) = - \partial_x \Phi(r)\\
+\Gamma^{z}_{22} &= \frac{1}{2}(\partial_2 h_{z2} + \partial_2 h_{z2} - \partial_z h_{22}) = \partial_z \Phi(r) = 0\\
+\Gamma^{z}_{23} &= \frac{1}{2}(\partial_2 h_{z 3} + \partial_3 h_{z2} - \partial_z h_{32}) = - \partial_y \Phi(r)\\
+\Gamma^z_{33} &= \frac{1}{2} (\partial_{3} h_{z3} + \partial_3 h_{z3} - \partial_z h_{33}) = 0
+\end{align*}
+Hence the geodesic equation becomes:
+\[
+\ddot{z} = \Gamma^z_{01} \dv{t}{\tau} \dv{x}{\tau} + \Gamma^z_{02} \dv{t}{\tau} \dv{y}{\tau} + \Gamma^z_{13} \dv{x}{\tau}\dv{z}{\tau} + \Gamma^z_{23} \dv{y}{\tau}\dv{z}{\tau}
+\]
+Plugging in the values we get:
+\[
+\ddot{z} = 2v/c( \partial_x \Phi(r) \gamma \dot{x} + \partial_y \Phi(r) \gamma \dot{y}) - \dot{z}( \dot{x} \partial_x \Phi(r)  + \dot{y}\partial_y \Phi(r)  )  = (\dot{\vb{x}} \cdot \grad \Phi) (\frac{2v}{c} \gamma - \dot{z})
+\]
+
+\end{enumerate}
+
+
+\end{enumerate}
+
+\section{Frame-dragging inside a rotating cylinder.}
+
+\begin{enumerate}
+
+\item From symmetry arguments we know that $\Phi$ is only a function of $x$ and $y$. Hence we have that:
+\[
+\grad \Phi_{\mu \nu}(\vb{x}) = \kappa \int_{-h}^{h} \oint_C \dd z' \dd x' \dd y' T_{\mu \nu}(\vb{x}') (\vb{x} - \vb{x'})/|\vb{x} - \vb{x'}|^3 
+\]
+Now we use the well-know distribution formula:
+\[
+\div \left( \frac{\vb{r}}{|\vb{r}|^3} \right) = \delta(\vb{r})
+\]
+Which immediately gives us that:
+\[
+\laplacian \Phi_{\mu \nu}(\vb{x}) = \int T_{\mu \nu}(\vb{x'}) \delta(\vb{x} - \vb{x'}) \dd \vb{x'} = T_{\mu \nu}(\vb{x})
+\]
+This is the differential form of Gauss's Law for $\grad\Phi$. This also tells us that:
+\[
+H 2 \pi r \grad \Phi_{\mu \nu}(r) = \oint_{\partial V} \grad \Phi_{\mu \nu} \cdot \dd \vb{A} = \iiint_V \laplacian \Phi_{\mu \nu} \dd V = \iiint_V T_{\mu \nu}(\vb{x}) \dd V = T
+\]
+Hence in order to write this as similar to Gauss's Law for electromagnetism we can re-write this as:
+\[
+\grad \Phi_{\mu \nu}(r) = \frac{T}{2\pi r H}
+\]
+Hence we obtain that:
+\[
+\grad \Phi = \frac{\rho c^2}{2\pi r H} \begin{pmatrix}
+\pi r^2 H & 0 & \pi r^2 H \Omega & 0\\
+0 & 0 & 0 & 0\\
+\pi r^2 H \Omega & 0 & 0 & 0\\
+0 & 0 & 0 & 0
+\end{pmatrix} = \frac{\rho r c^2}{2} \begin{pmatrix}
+1 & 0 & \Omega & 0\\
+0 & 0 & 0 & 0\\
+\Omega & 0 & 0 & 0\\
+0 & 0 & 0 & 0
+\end{pmatrix}
+\]
+
+\item 
+
+\end{enumerate}
+
 \end{document}
