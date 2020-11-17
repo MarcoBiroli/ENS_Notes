@@ -24,35 +24,31 @@
 \]
 Then we have that:
 \[
-\div \vb{V} = \partial_i ( V^j \vb{e_j})^i = \pdv{V^i}{x^i} + \Gamma^i_{i j} V^j = V^i_{, i} + \frac{1}{2} g^{im} ( g_{mi, j} + g_{mj, i} - g_{i j, m} ) V^j
-\]
-Then:
-\[
-...
+\div \vb{V} = \partial_i ( V^j \vb{e_j})^i = \pdv{V^i}{x^i} + \Gamma^i_{i j} V^j = V^i_{, i} + \frac{1}{2} g^{im} ( g_{mi, j} + g_{mj, i} - g_{i j, m} ) V^j = {V^i}_{,i} + \frac{1}{2} g^{\mu \nu} g_{\mu \nu, \gamma} V^\gamma
 \]
 
-\item Since the determinant is an invariant scalar of the matrix then from the relation: $g^{\mu\nu} = g^{-1} c^{\mu \nu}$ we know that $c$ transforms in the exact same way as $g$ does. Since $g$ is a tensor then so is $c$. 
+\item Since the determinant is not an invariant scalar the cofactor matrix does not transform as a tensor.
 
 \item We have that:
 \[
 g = \sum_\nu g_{\mu \nu} c^{\mu \nu} \mbox{~hence~} \pdv{g}{g_{\mu \nu}} = \pdv{}{g_{\mu \nu}} \sum_{\nu'} g_{\mu \nu'} c^{\mu \nu'} = c^{\mu \nu}
 \]
 
-\item We have that:
+\item Following the hint we have that:
 \[
-g^{\mu \nu} g_{\mu \nu, \gamma} = \partial_\gamma \log g 
+\partial_\gamma g = \pdv{g}{g_{\mu \nu}} \partial_\gamma g_{\mu \nu}
 \]
-We have that:
+Now using the previous questions we can replace this by:
 \[
-\partial_\gamma g (g_{\mu \nu}) = (\partial_\gamma g) g_{\mu \nu} + g \partial_\gamma g_{\mu \nu} 
+g g^{\mu \nu} g_{\mu \nu, \gamma}
 \]
-We have that:
+Then up to refactorizing we obtain:
 \[
-\partial_\gamma g = \pdv{}{g_{\mu \nu}} \pdv{g_{\mu \nu}}{\gamma} g = \pdv{}{g_{\mu \nu}} g_{\mu \nu, \gamma} g = g_{\mu \nu, \gamma} c^{\mu \nu}
+\frac{\partial_\gamma g}{g} = g^{\mu \nu} g_{\mu \nu, \gamma}
 \]
-Hence:
+Which using the definition of the logarithm gives:
 \[
-...
+\partial_\gamma \log |g| = g^{\mu \nu} g_{\mu \nu, \gamma}
 \]
 
 \item We start from the end and we differentiate to obtain:
@@ -142,51 +138,26 @@ r^2 \Omega & 0 & 0 & r^2
 \right) \mbox{~~and~~} g = -c^2 r^2 
 \]
 
-\item We have that:
+\item The line element is given by:
 \[
-\begin{pmatrix}
-t'\\
-x'\\
-y'\\
-z'
-\end{pmatrix} = \begin{pmatrix}
-1 & 0 & 0 & 0\\
-0 & \cos \Omega t & \sin \Omega t & 0\\
-0 & - \sin \Omega t & \cos \Omega t & 0\\
-0 & 0 & 0 & 1
-\end{pmatrix} \begin{pmatrix}
-t\\
-x\\
-y\\
-z
-\end{pmatrix}
-\] 
-Now notice that the transition matrix is orthogonal hence we immediately have that:
-\[
-\begin{pmatrix}
-1 & 0 & 0 & 0\\
-0 & \cos \Omega t & -\sin \Omega t & 0\\
-0 & \sin \Omega t & \cos \Omega t & 0\\
-0 & 0 & 0 & 1
-\end{pmatrix}
-\begin{pmatrix}
-t'\\
-x'\\
-y'\\
-z'
-\end{pmatrix}
-= \begin{pmatrix}
-t\\
-x\\
-y\\
-z
-\end{pmatrix}
+\dd s^2 = - c^2 \dd t^2 + \dd x^2 + \dd y^2 + \dd z^2 
 \]
-Hence we obtain immediately that:
-\begin{align*}
-\dd s^2 &= - c^2 \dd t^2 + \dd x^2 + \dd y^2 + \dd z^2 = -c^2 \dd t^2 + (\dd (x' \cos \Omega t - y' \sin \Omega t))^2 + (\dd (x' \sin \Omega t + y' \cos \Omega t))^2 + (\dd z')^2\\
-&= - c^2 \dd t^2 + (\cos\Omega t \dd x' - x' \Omega \dd t \sin\Omega t  - \sin \Omega t \dd y' - y' \Omega \dd t \cos \Omega t)^2 = ...
-\end{align*}
+Now as seen in exercise 1 we have that:
+\[
+\dd s^2 = - c^2 \dd t^2 + \dd r^2 + r^2 \dd \theta^2 + \dd z^2 
+\]
+Now we are making the change $\theta' = \theta + \Omega t$ hence we obtain:
+\[
+\dd s^2 = - c^2 \dd t^2 + \dd r^2 + r^2 \dd \theta^2 + r^2 \Omega^2 \dd t^2 + r^2 \Omega \dd \theta \dd t + \dd z^2 
+\]
+Now replacing back with:
+\[
+\dd r = \frac{2 \dd x + 2 \dd y}{2\sqrt{x^2 + y^2}} \mbox{~~and~~} \dd \theta = \frac{x\dd y - y \dd x}{x^2 + y^2}
+\]
+We obtain:
+\[
+\dd s^2 = -(c^2 - (x^2 + y^2)\Omega^2)\dd t^2 +  \Omega(y \dd x \dd t - x \dd y \dd t) + \dd x^2 + \dd y^2 + \dd z^2
+\]
 
 \item We have that:
 \[
@@ -207,11 +178,37 @@ h_{30} & h_{31} & h_{32} & 1 + h_{33}
 Hence we get:
 \[
 [h_{\mu \nu}] = \begin{pmatrix}
-(x^2 + y^2) \Omega^2 & \Omega y & - \Omega x & 0\\
-\Omega y & 0 & 0 & 0\\
--\Omega x & 0 & 0 & 0\\
+(x^2 + y^2) \Omega^2 & \Omega y/2 & - \Omega x/2 & 0\\
+\Omega y/2 & 0 & 0 & 0\\
+-\Omega x/2 & 0 & 0 & 0\\
 0 & 0 & 0 & 0
 \end{pmatrix}
+\]
+Then the Christoffel's symbols are given by:
+\[
+[\Gamma^x_{\mu \nu}] = \begin{pmatrix}
+- \Omega^2 x & 0 & \Omega/2 & 0\\
+0 & 0 & 0 & 0\\
+\Omega/2 & 0 & 0 & 0\\
+0 & 0 & 0 & 0
+\end{pmatrix} \mbox{~~and~~} [\Gamma^y_{\mu \nu}] = \begin{pmatrix}
+- \Omega^2 y & - \Omega/2 & 0 & 0\\
+- \Omega/2 & 0 & 0 & 0\\
+0& 0 & 0 & 0\\
+0 & 0 & 0 & 0
+\end{pmatrix}
+\]
+
+\item Then the equations of motions are given by the equation for a geodesic:
+\[
+\dv[2]{x^\mu}{\tau} + \Gamma^\mu_{\nu \gamma} \dv{x^\nu}{\tau} \dv{x^\gamma}{\tau} = 0
+\]
+Which when we plug in the values of the Christoffel's symbols we get:
+\[
+\begin{cases}
+\ddot{x} = \Omega (\Omega x -  \dot{y})\\
+\ddot{y} = \Omega(\Omega y +  \dot{x})
+\end{cases}
 \]
 
 \end{enumerate}
@@ -271,31 +268,70 @@ Now we apply the following transformations:
 \[
 r' = (1 + r \Phi_{,r})(1 - \Phi) r  \mbox{~~and~~} \phi' = (1 - \Phi_{,r}/r)\phi
 \]
-Using our previous results we can re-write this as:
+Now inserting the expression of $\Phi$ that we found above we get that:
 \[
-r' = (1 + 2\alpha r^2)(1 - \alpha(r^2 - R^2)) r \mbox{~~and~~} \phi' = (1 - 2\alpha) \phi 
+r' = r(\frac{1}{2} - \alpha/4)(2 - \alpha \log(r/R)) 
 \]
-Hence we have that:
-\begin{align*}
-\dd r' &= \dd (r \Phi_{,r}) (1 - \Phi) r + (1 + r \Phi_{,r}) \dd(-\Phi) r + (1 + r \Phi_{,r})(1 - \Phi)\dd r\\
-&= 4\pi(G_N/c^2)\rho r \dd r (1 - \Phi) r - (1 + r \Phi_{,r}) \Phi_{,r} \dd r + (1 + r \Phi_{,r})(1 - \Phi)\dd r \\
-&= \dd r \left( \alpha r - \alpha r \Phi - \Phi_{,r} - r \Phi_{,r}^2 + 1 - \Phi + r \Phi_{,r} - r \Phi_{,r}^2 \right)
-\end{align*}
-Similarly we get:
+Then inserting the differentials and linearizing to first order gives the desired result.
+
+\item
+\begin{enumerate}
+\item We have that:
+
 \[
-\dd \phi' = (1 - \Phi_{,r}/r)\dd \phi - (\dd \Phi_{,r})/r \Phi + \Phi_{,r}/r^2 \phi \dd r = (1 - \Phi_{,r}/r)\dd \phi - ()/r \Phi + \Phi_{,r}/r^2 \phi \dd r
+[\Lambda^\mu_{\nu}] = \begin{pmatrix}
+\gamma & 0 & 0 & \beta \gamma\\
+0 & 1 & 0 & 0\\
+0 & 0 & 1 & 0\\
+\beta \gamma & 0 & 0 & \gamma
+\end{pmatrix}
 \]
 
-\item 
-
-\item Hence we obtain:
+\item Consider a particle at rest then we have that:
 \[
-[h_{\alpha' \beta'}] = 
--2 \Phi(r')
-\begin{pmatrix}
-1 & & -2v/c\\
- & \vb{I} & \\
- -2v/c & & 1
+\vb{x} = (ct \quad 0 \quad 0 \quad 0)^T
+\]
+Applying the tensor above we get:
+\[
+[\Lambda^\mu_\nu x^\nu] = \begin{pmatrix}
+ct \gamma \\
+0 \\
+0 \\
+\beta \gamma c t 
+\end{pmatrix}
+\]
+
+\item We have that $t_{\alpha \beta}x^\alpha x^\beta$ is a scalar hence it is invariant under a Lorentz transformation. Therefore we can write:
+\[
+t_{\alpha \beta} x^\alpha x^\beta = t_{\alpha' \beta'} \Lambda^{\alpha'}_\alpha x^{\alpha} \Lambda^{\beta'}_\beta x^{\beta}
+\]
+Hence we immediately get that:
+\[
+t_{\alpha' \beta'} = (\Lambda^{-1})^{\alpha'}_{\alpha} (\Lambda^{-1})^{\beta'}_\beta t_{\alpha \beta}
+\]
+Where the inverse can be easily found since $L(\beta)^{-1} = L(-\beta)$. 
+
+\item Then the perturbation to the metric is expressed as :
+\[
+[h_{\alpha'\beta'}] = 4 \pi \frac{G_N}{c^2} \rho \log(\frac{r}{R}) \begin{pmatrix}
+\frac{c^2 + v^2}{c^2 - v^2} & 0 & 0 & -\frac{2 c v}{c^2 - v^2}\\
+0 & 1 & 0 & 0\\
+0 & 0 & 1 & 0\\
+-\frac{2 c v}{c^2 - v^2} & 0 & 0 & \frac{c^2 + v^2}{c^2 - v^2}
+\end{pmatrix}
+\]
+
+
+\end{enumerate}
+
+
+\item  A first order Taylor expansion in $\beta$ quickly yields:
+\[
+[h_{\alpha' \beta'}] = 4 \pi \frac{G_N}{c^2} \rho \log(\frac{r}{R}) \begin{pmatrix}
+1 & 0 & 0 & - 2 \beta\\
+0 & 1 & 0 & 0\\
+0 & 0 & 1 & 0\\
+-2 \beta & 0 & 0 & 1
 \end{pmatrix}
 \]
 
@@ -350,22 +386,13 @@ Now we can also replace $\partial_x \Phi$ by its value: $\frac{2 G_N \pi \rho }{
 -\ddot{x} = \frac{2 G_N \pi \rho}{c^2 x} (\dot{t}^2 - \dot{x}^2 + \dot{z}^2)
 \end{cases}
 \]
-Now our physical intuition encourages us to try the Ansatz $t =  \tau$ and $x = v_x \tau$. Plugging this in the equation for $z$ gives:
-\[
--\ddot{z} = \underbrace{\frac{2 G_N \pi \rho}{c^2}}_{\alpha} \tau^{-1} \left( \underbrace{\frac{2v}{c}}_{\beta} - \dot{z} \right) \Longleftrightarrow \ddot{z} = \alpha\tau^{-1}(\beta - \dot{z})
-\]
-Now solving the above 2nd order ODE gives directly:
-\[
-z(\tau) = \beta\left( \tau - \frac{\tau^{1 + \alpha}}{1 + \alpha} \right)
-\]
-Which also gives:
-\[
-\dot{z}(\tau) = \beta(1 - \tau^{\alpha})
-\]
-This then gives the following plot for $z$:
-\[
-...
-\]
+Which when solved numerically gives the figures plotted below.
+\begin{figure}[h!]
+\centering
+\includegraphics[width = 0.4\textwidth]{fig2}
+\includegraphics[width = 0.4\textwidth]{fig1}
+\caption{Plot of $x(\tau)$ on the left and $z(\tau)$ on the right.}
+\end{figure}
 
 \end{enumerate}
 
@@ -475,7 +502,7 @@ y + \ell & 0 & 0 & 0\\
 \]
 Then for $[\Phi(\vb{0})] = \vb{0}$ we simply need to take $\ell = \ell' = 0$. Then we have that:
 \[
-[\overline{h_{\mu\nu}}(\vb{x})] = \frac{\kappa c \rho \Omega}{4} \begin{bmatrix}
+[\overline{h_{\mu\nu}}(\vb{x})] = 4\kappa c \rho \Omega \begin{bmatrix}
 0 & - y & x & 0\\
 -y & 0 & 0 & 0\\
 x & 0 & 0& 0\\
@@ -484,7 +511,28 @@ x & 0 & 0& 0\\
 \]
 Then since $\overline{h}_{\mu\nu}$ is traceless we also have that $[h_{\mu\nu}] = [\overline{h}_{\mu\nu}]$. 
 
-\item 
+\item We have the following expression for the Christoffell symbols, derived similarly as in the 3rd part:
+\begin{align*}
+\Gamma^t_{\mu \nu} = 0 \mbox{~~and~~} \Gamma^x_{0 2} = -4 c \kappa \rho \Omega  \mbox{~~and~~} \Gamma^y_{0 1} = 4 c \kappa \rho \Omega \mbox{~~and~~} \Gamma^z_{\mu \nu} = 0
+\end{align*}
+Where the unmentioned values of $\Gamma^x$ and $\Gamma^y$ are zero (apart from the symmetric values). This gives the following equations:
+\[
+\begin{cases}
+\ddot{x} - 8 c \kappa \rho \Omega \dot{y} = 0\\
+\ddot{y} + 8 c \kappa \rho \Omega \dot{x} = 0
+\end{cases}
+\]
+Now for simplicity we call $\alpha = 8 c \kappa \rho \Omega$ then we have that the solutions are given by:
+\[
+x(\tau) = \frac{v_y - v_y  \cos(t\alpha) + v_x \sin(t\alpha)}{\alpha} \mbox{~~and~~} y(t) = \frac{v_x \cos(t\alpha) - v_x + v_y \sin(t \alpha)}{\alpha}
+\]
+Where $(v_x, v_y)$ are the initial velocities of the particle. We can see from the above equations that these are the parametric equations for a circle of center $c = (\frac{v_y}{\alpha}, -\frac{v_x}{\alpha})$ and of radius:
+\[
+r = \frac{\sqrt{v_x^2 + v_y^2} \sin(4 c t \kappa \rho \Omega)}{8 c \kappa \rho \Omega} = \frac{\sin(t \alpha/2)}{\alpha} \sqrt{v_x^2 + v_y^2}
+\]
+We hence will obtain a periodic opening and closing orbit around $c$. 
+
+\item Consider a second still object at an arbitrary position in space. Then if we change to a rotating frame the cylinder might have stopped spinning however the other object will have started spinning. 
 
 \end{enumerate}
 
