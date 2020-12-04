@@ -13,20 +13,21 @@ class Operators:
         self.dim = dim
         assert len(N) == self.dim, 'Dimensions of grid_points do not match dimension of the space.'
         self.N = N
-        self.M = np.prod(self.N)
+        self.M = np.prod(self.N) # Full size of the flattened vector
         if normalization is None:
-            self.normalization = [1 for _ in range(self.dim)]
+            self.normalization = [1 for _ in range(self.dim)] # If normalization (dx, dy, dz) is not given we take no normalization.
         else:
             assert len(normalization) == self.dim, 'Dimensions of normalization do not match dimension of the space.'
             self.normalization = normalization
         self.boundary_conditions = boundary_conditions
+        # Compute useful operators for future use.
         self.directional_grads = [self._computetwopointgrad(i) for i in range(self.dim)]
         self.grad = self._computegrad()
         self.laplacian = self._computelaplacian(stencil_type)
 
     def reindexing(self, point):
         '''
-        Computes the re-indexation from a 3D point array to a 1D array.
+        Computes the re-indexation from a N-dimensional point array to a 1D array.
         '''
         assert len(point) == self.dim, 'Point dimension invalid'
         if self.dim == 1:
