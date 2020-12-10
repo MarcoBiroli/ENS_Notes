@@ -12,7 +12,7 @@ dim = 2
 xmin, xmax, ymin, ymax = -5, 5, -5, 5
 bounds = [[xmin, xmax], [ymin, ymax]]
 tmin = 0
-tmax = 5
+tmax = 0
 dt = 0.01
 N = [100, 100]
 im_iters = 100
@@ -40,6 +40,8 @@ mutab, utab, jtab = GPE.full_solve()
 plt.plot(mutab)
 plt.show()
 
+'''
+
 # Plot the evolution of the wavefunction.
 ani = cplt.plot(utab, dim = 2)
 
@@ -49,3 +51,5 @@ y = np.linspace(ymin, ymax, N[1])
 xx, yy = np.meshgrid(x, y)
 
 ani2 = cplt.quiver(xx, yy, jtab, grain = 2)
+
+'''

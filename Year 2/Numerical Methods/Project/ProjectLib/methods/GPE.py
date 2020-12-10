@@ -76,7 +76,7 @@ class GPE_Solver:
         '''
         laplatianu = self.psi.laplacian(self.Ops).u
         out = np.sum(-self.hbar**2/(2*self.m) * laplatianu * np.conjugate(self.psi.u) + self.U * self.psi.normsq_pointwise \
-            + self.interC * self.psi.normsq_pointwise**2)
+            + self.interC/2 * self.psi.normsq_pointwise**2)
         return np.real(out)
 
     def update_wavefunction(self, A, Aprev):
