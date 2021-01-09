@@ -55,8 +55,8 @@ class Wavefunction:
         out = (np.conjugate(self.u) * gradu - self.u * graduconj) * np.prod(self.normalization)/1j
         normout = np.max(np.sqrt(out[:, 0]**2 + out[:, 1]**2))
         #print(normout)
-        #return 1/normout*np.real(out)
-        return fact*np.real(out)
+        return 1/normout*np.real(out)
+        #return fact*np.real(out)
 
     def update(self, new_u):
         '''
