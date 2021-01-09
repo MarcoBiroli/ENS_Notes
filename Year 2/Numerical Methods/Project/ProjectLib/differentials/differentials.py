@@ -87,7 +87,8 @@ class Operators:
             for i in range(self.dim):
                 dspl = self.reindexing([1 if j == i else 0 for j in range(self.dim)])
                 displacements += [dspl, -dspl]
-            return sparse.diags(diagonals, displacements, shape = (self.M, self.M), format='csr')
+            out = sparse.diags(diagonals, displacements, shape = (self.M, self.M), format='csr')
+            return out
 
     def _computelaplacian9point(self):
         raise ValueError('TBD.')

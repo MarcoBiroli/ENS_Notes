@@ -15,7 +15,7 @@ tmin = 0
 tmax = 5
 dt = 0.01
 N = [100, 100]
-im_iters = 100
+im_iters = 2000
 interC = 500
 boundary_conditions = 'periodic'
 alpha = 30
@@ -34,11 +34,16 @@ GPE = solver.GPE_Solver(dim, bounds, tmin, tmax, dt, N, im_iters, \
     lambda grids, t : vortex_potential(grids, t, alpha, beta, v, ymin, ymax), interC, boundary_conditions)
 
 # Solve the problem.
-mutab, utab, jtab = GPE.full_solve()
+#mutab, utab, jtab = GPE.full_solve(save=(True, 'vortex_pairs_init.csv'))
+
+GPE.load_init_state('vortex_pairs_init.csv')
+utab, jtab = GPE.real_time_evolution()
 
 # Plot the evolution of the chemical potential.
-plt.plot(mutab)
-plt.show()
+#plt.plot(mutab)
+#plt.show()
+
+#print(mutab[-1])
 
 # Plot the evolution of the wavefunction.
 ani = cplt.plot(utab, dim = 2)

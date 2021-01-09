@@ -40,11 +40,18 @@ class GPE_Solver:
         self.t = np.arange(self.tmin, self.tmax, self.dt)
         self.normalization = [self.spaces[i][1] - self.spaces[i][0] for i in range(self.dim)]
         # Define the wavefunction that we will use.
-        self.psi = wf.Wavefunction(np.ones(self.M)/np.sqrt(self.M), self.dim, self.N)
+        #self.psi = wf.Wavefunction(np.ones(self.M)/np.sqrt(self.M), self.dim, self.N, self.normalization)
+        self.psi = wf.Wavefunction((np.exp(-(self.grids[0]**2+self.grids[1]**2)/(2.0)) /np.sqrt(np.pi) ).ravel() , self.dim, self.N, self.normalization)
+        #self.phi = self.psi.copy()
+        #self.phi.update(np.absolute(self.phi.u))
         # Define the operators that we will use.
         self.Ops = df.Operators(self.dim, self.N, self.normalization, self.boundary_conditions, stencil_type = 5)
         self.U = potential(self.grids, self.tmin).reshape(self.M, 1) #Compute initial potential and flatten it.
         self.interC = interC
+        self.laplatianportion = - self.hbar**2 / (4 * self.m) * self.Ops.laplacian
+
+    def load_init_state(self, filename):
+        self.psi.update(np.loadtxt(filename, delimiter=','))
 
     def create_step_matrix(self, ImTime):
         '''
@@ -57,27 +64,31 @@ class GPE_Solver:
             fact = 1
         else:
             fact = 1j
-        # Laplatian portion of the equation. It is identical in A and Aprime.
-        laplatianportion = - fact* self.hbar**2 / (4 * self.m) * self.Ops.laplacian
         # Diagonal portion of A
         beta = (1/self.dt + \
-                fact/2*(self.U + self.interC * (self.psi.u * np.conjugate(self.psi.u)) ) )
+                fact/2*(self.U + self.interC * (np.absolute(self.psi.u)**2) ) )
         # Diagonal portion of Aprime
         betaprev = (1/self.dt - \
-                fact/2*(self.U + self.interC * (self.psi.u * np.conjugate(self.psi.u)) ) )
+                fact/2*(self.U + self.interC * (np.absolute(self.psi.u)**2) ) )
         # Building A and Aprime without their laplatian part.
-        A = sparse.diags([beta.flatten()], [0], shape=(self.M, self.M), format = 'csr')
-        Aprev = sparse.diags([betaprev.flatten()], [0], shape=(self.M, self.M), format = 'csr')
-        return A + laplatianportion, Aprev - laplatianportion # Return the full expression of A and Aprime.
+        A = sparse.diags([beta.ravel()], [0], shape=(self.M, self.M), format = 'csr')
+        Aprev = sparse.diags([betaprev.ravel()], [0], shape=(self.M, self.M), format = 'csr')
+        return A + fact*self.laplatianportion, Aprev - fact*self.laplatianportion # Return the full expression of A and Aprime.
 
     def compute_mu(self):
         '''
-        This function computes the chemical potential of the current wavefunction. 
+        # This function computes the chemical potential of the current wavefunction. 
         '''
         laplatianu = self.psi.laplacian(self.Ops).u
-        out = np.sum(-self.hbar**2/(2*self.m) * laplatianu * np.conjugate(self.psi.u) + self.U * self.psi.normsq_pointwise \
-            + self.interC/2 * self.psi.normsq_pointwise**2)
-        return np.real(out)
+        ekin = np.sum((-self.hbar**2/(2*self.m) * laplatianu * np.conjugate(self.psi.u))) * np.prod(self.normalization)
+        epot = np.sum(self.U * self.psi.normsq_pointwise ) * np.prod(self.normalization)
+        eint = self.interC * np.sum(self.psi.normsq_pointwise**2) * np.prod(self.normalization)
+        #print(ekin - ekin_K, epot - epot_K, eint - eint_K)
+        #out = np.sum((-self.hbar**2/(2*self.m) * laplatianu * np.conjugate(self.psi.u) + self.U * np.absolute(self.psi.u)**2 \
+        #    + self.interC/2 * np.absolute(self.psi.u)**4)*np.prod(self.normalization))
+        mu = ekin + epot + eint
+        energy = ekin + epot + 0.5*eint
+        return mu, energy
 
     def update_wavefunction(self, A, Aprev):
         '''
@@ -100,7 +111,9 @@ class GPE_Solver:
         print('\nStarting imaginary time convergence ...')
         for cnt in range(self.im_iters):
             # For each imaginary time iteration perform one step of the Crank Nicolson algorithm
-            bar.update(cnt)
+            if cnt%10 == 0:
+                bar.update(cnt)
+            #self.phi.update(2*self.psi.normsq_pointwise - self.phi.u)
             A, Aprev = self.create_step_matrix(True) # ImTime = True
             self.update_wavefunction(A, Aprev)
             mutab.append(self.compute_mu()) # Compute the chemical potential and append it to the list
@@ -122,6 +135,7 @@ class GPE_Solver:
             bar.update(bar_cnt)
             bar_cnt += 1
             self.U = self.potential(self.grids, cur_t).reshape(self.M, 1) #Compute the new potential and flatten it
+            #self.phi.update(2*self.psi.normsq_pointwise - self.phi.u)
             A, Aprev = self.create_step_matrix(False) # ImTime = False
             self.update_wavefunction(A, Aprev)
             utab.append(self.psi.copy()) # Append encountered wavefunction to the list
@@ -129,12 +143,14 @@ class GPE_Solver:
             jtab.append(j.copy())
         return utab, jtab # Return the list of states and currents.
 
-    def full_solve(self):
+    def full_solve(self, save = (False, '')):
         '''
         This function calls all the necessary functions one after the other and returns the evolution
         of the chemical potential during the imaginary time convergence, and the wavefunctions and currents
         encountered in the real time evolution.
         '''
         mutab = self.im_time_evolution()
+        if save[0]:
+            np.savetxt(save[1], self.psi.u, delimiter=',')
         utab, jtab = self.real_time_evolution()
-        return mutab, utab, jtab
+        return mutab, utab, jtab 
