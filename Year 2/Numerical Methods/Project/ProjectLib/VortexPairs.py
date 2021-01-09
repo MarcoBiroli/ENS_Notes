@@ -14,7 +14,7 @@ bounds = [[xmin, xmax], [ymin, ymax]]
 tmin = 0
 tmax = 5
 dt = 0.01
-N = [100, 100]
+N = [200, 200]
 im_iters = 2000
 interC = 500
 boundary_conditions = 'periodic'
@@ -38,6 +38,9 @@ GPE = solver.GPE_Solver(dim, bounds, tmin, tmax, dt, N, im_iters, \
 
 GPE.load_init_state('vortex_pairs_init.csv')
 utab, jtab = GPE.real_time_evolution()
+
+np.savetxt('utab.csv', utab, delimiter=',')
+np.savetxt('jtab.csv', jtab, delimiter=',')
 
 # Plot the evolution of the chemical potential.
 #plt.plot(mutab)
