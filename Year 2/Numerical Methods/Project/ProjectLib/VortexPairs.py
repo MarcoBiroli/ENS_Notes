@@ -13,15 +13,15 @@ xmin, xmax, ymin, ymax = -5, 5, -5, 5
 bounds = [[xmin, xmax], [ymin, ymax]]
 tmin = 0
 tmax = 5
-dt = 0.01
-N = [200, 200]
+dt = 0.001
+N = [300, 300]
 im_iters = 2000
 interC = 500
 boundary_conditions = 'periodic'
 alpha = 30
 beta = 3
 v = 2
-
+    
 def vortex_potential(grids, t, alpha, beta, v, ymin, ymax):
     '''
     Define the potential considered.
@@ -34,19 +34,27 @@ GPE = solver.GPE_Solver(dim, bounds, tmin, tmax, dt, N, im_iters, \
     lambda grids, t : vortex_potential(grids, t, alpha, beta, v, ymin, ymax), interC, boundary_conditions)
 
 # Solve the problem.
-#mutab, utab, jtab = GPE.full_solve(save=(True, 'vortex_pairs_init.csv'))
+mutab, utab, jtab = GPE.full_solve(save=(True, 'vortex_pairs_init.csv'))
 
-GPE.load_init_state('vortex_pairs_init.csv')
-utab, jtab = GPE.real_time_evolution()
+#GPE.load_init_state('vortex_pairs_init.csv')
+#utab, jtab = GPE.real_time_evolution()
 
-np.savetxt('utab.csv', utab, delimiter=',')
-np.savetxt('jtab.csv', jtab, delimiter=',')
+#realutab = [np.real(psi.u) for psi in utab]
+#realutab = np.array(realutab)
+
+#imutab = [np.imag(psi.u) for psi in utab]
+#imutab = np.array(imutab)
+
+#np.savetxt('Re(utab).csv', realutab, delimiter=',')
+#np.savetxt('Im(utab).csv', imutab, delimiter=',')
+#np.savetxt('jtab.csv', jtab, delimiter=',')
+
 
 # Plot the evolution of the chemical potential.
-#plt.plot(mutab)
-#plt.show()
+plt.plot(mutab)
+plt.show()
 
-#print(mutab[-1])
+print(mutab[-1])
 
 # Plot the evolution of the wavefunction.
 ani = cplt.plot(utab, dim = 2)

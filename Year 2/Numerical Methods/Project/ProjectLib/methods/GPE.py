@@ -154,3 +154,4 @@ class GPE_Solver:
             np.savetxt(save[1], self.psi.u, delimiter=',')
         utab, jtab = self.real_time_evolution()
         return mutab, utab, jtab 
+
