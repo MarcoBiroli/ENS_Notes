@@ -50,8 +50,15 @@ class GPE_Solver:
         self.interC = interC
         self.laplatianportion = - self.hbar**2 / (4 * self.m) * self.Ops.laplacian
 
-    def load_init_state(self, filename):
-        self.psi.update(np.loadtxt(filename, delimiter=','))
+    def load_init_state(self, filename, ImFilename = None):
+        load = np.loadtxt(filename, delimiter=',')
+        u = load
+        if ImFilename != None:
+            load2 = np.loadtxt(ImFilename, delimiter = ',')
+            u += 1j*load2
+        #print(load.shape)
+        self.psi.update(u)
+        
 
     def create_step_matrix(self, ImTime):
         '''
@@ -151,6 +158,47 @@ class GPE_Solver:
         '''
         mutab = self.im_time_evolution()
         if save[0]:
-            np.savetxt(save[1], self.psi.u, delimiter=',')
+            np.save(save[1], self.psi.u)
         utab, jtab = self.real_time_evolution()
         return mutab, utab, jtab 
+
+    def winding_number(self, point, rad):
+        j = self.psi.computeCurrent(self.Ops, fact = 1)
+        idx = []
+        radidx = []
+        for i in range(self.dim):
+            idx.append(  int((point[i] - self.bounds[i][0])/self.normalization[i])  )
+            radidx.append(   int(rad[i]/self.normalization[i])   )
+        integral = 0
+        if self.dim == 2:
+            j = j.reshape(self.N[0], self.N[1], 2)
+            pos = [(idx[0] - radidx[0])%self.N[0], (idx[1] - radidx[1])%self.N[1]]
+            path = [pos]
+            for _ in range(2*radidx[0]):
+                print(integral)
+                nextpos = [(pos[0] + 1)%self.N[0], pos[1]]
+                integral += (j[pos[0], pos[1], 0] + j[nextpos[0], nextpos[1], 0])*self.normalization[0]
+                pos = nextpos.copy()
+                path.append(pos)
+            for _ in range(2*radidx[1]):
+                print(integral)
+                nextpos = [pos[0], (pos[1] + 1)%self.N[1]]
+                integral += (j[pos[0], pos[1], 1] + j[nextpos[0], nextpos[1], 1])*self.normalization[1]
+                pos = nextpos.copy()
+                path.append(pos)
+            for _ in range(2*radidx[0]):
+                print(integral)
+                nextpos = [(pos[0] - 1)%self.N[0], pos[1]]
+                integral -= (j[pos[0], pos[1], 0] + j[nextpos[0], nextpos[1], 0])*self.normalization[0]
+                pos = nextpos.copy()
+                path.append(pos)
+            for _ in range(2*radidx[1]):
+                print(integral)
+                nextpos = [pos[0], (pos[1] - 1)%self.N[1]]
+                integral -= (j[pos[0], pos[1], 1] + j[nextpos[0], nextpos[1], 1])*self.normalization[1]
+                pos = nextpos.copy()
+                path.append(pos)
+            return integral, path
+        elif self.dim == 3:
+            raise NotImplementedError
+        
