@@ -13,15 +13,9 @@ dim = 2
 xmin, xmax, ymin, ymax = -5, 5, -5, 5
 bounds = [[xmin, xmax], [ymin, ymax]]
 tmin = 0
-<<<<<<< HEAD
 tmax = 3
 dt = 0.01
 N = [100, 100]
-=======
-tmax = 5
-dt = 0.001
-N = [300, 300]
->>>>>>> 4e141883a95b0eb9591673ea9f239e8b6b267e7d
 im_iters = 2000
 interC = 500
 boundary_conditions = 'periodic'
@@ -41,11 +35,11 @@ GPE = solver.GPE_Solver(dim, bounds, tmin, tmax, dt, N, im_iters, \
     lambda grids, t : vortex_potential(grids, t, alpha, beta, v, ymin, ymax), interC, boundary_conditions)
 
 # Solve the problem.
-#mutab, utab, jtab = GPE.full_solve(save=(True, './init_states/vortex_pairs_init.npy'))
+mutab, utab, jtab = GPE.full_solve(save=(True, './init_states/vortex_pairs_init.npy'))
 
-GPE.load_init_state('vortex_pairs_init.csv')
-mu, E = GPE.compute_mu()
-print("mu = {}, energy = {}".format(mu, E))
+#GPE.load_init_state('vortex_pairs_init.csv')
+#mu, E = GPE.compute_mu()
+#print("mu = {}, energy = {}".format(mu, E))
 
 #utab, jtab = GPE.real_time_evolution()
 
