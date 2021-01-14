@@ -113,7 +113,7 @@ class GPE_Solver:
         of the chemical potential.
         '''
         # initialize a progress bar for display purposes.
-        bar = progressbar.ProgressBar(max_value=self.im_iters)
+        bar = progressbar.ProgressBar(maxval=self.im_iters)
         mutab = []
         print('\nStarting imaginary time convergence ...')
         for cnt in range(self.im_iters):
@@ -134,7 +134,7 @@ class GPE_Solver:
         utab = []
         jtab = []
         # intialize a progress bar for display purposes
-        bar = progressbar.ProgressBar(max_value=len(self.t))
+        bar = progressbar.ProgressBar(maxval=len(self.t))
         bar_cnt = 0
         print('\nStarting real time evolution ...')
         for cur_t in self.t:

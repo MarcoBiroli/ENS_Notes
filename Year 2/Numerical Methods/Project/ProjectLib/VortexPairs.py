@@ -13,16 +13,22 @@ dim = 2
 xmin, xmax, ymin, ymax = -5, 5, -5, 5
 bounds = [[xmin, xmax], [ymin, ymax]]
 tmin = 0
+<<<<<<< HEAD
 tmax = 3
 dt = 0.01
 N = [100, 100]
+=======
+tmax = 5
+dt = 0.001
+N = [300, 300]
+>>>>>>> 4e141883a95b0eb9591673ea9f239e8b6b267e7d
 im_iters = 2000
 interC = 500
 boundary_conditions = 'periodic'
 alpha = 30
 beta = 3
 v = 2
-
+    
 def vortex_potential(grids, t, alpha, beta, v, ymin, ymax):
     '''
     Define the potential considered.
@@ -78,11 +84,12 @@ integral, path = GPE.winding_number([0, 0], [1, 1])
 
 cplt.plot_cur(GPE.psi, 2, bounds, path, GPE.normalization)
 
-# Plot the evolution of the chemical potential.
-#plt.plot(mutab)
-#plt.show()
 
-#print(mutab[-1])
+# Plot the evolution of the chemical potential.
+plt.plot(mutab)
+plt.show()
+
+print(mutab[-1])
 
 # Plot the evolution of the wavefunction.
 #ani = cplt.plot(utab, dim = 2)
