@@ -1,4 +1,4 @@
-This is a small python Library to solve any Gross Pitaevskii equation using the Crank Nicolson method. The files are organized as follows:
+This is a small python Library to solve any Gross Pitaevskii equation using the Crank Nicolson Semi Implicit Finite Difference method or Time Splitting Spectral Method. The files are organized as follows:
 
 	- Quant: Contains the basic Wavefunction class to represent any given wavefunction along with some helpful methods.
 	- methods: Contains for now only the Crank Nicolson solver method.
