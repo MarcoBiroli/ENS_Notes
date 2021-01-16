@@ -41,7 +41,10 @@ class GPE_Solver:
         self.normalization = [self.spaces[i][1] - self.spaces[i][0] for i in range(self.dim)]
         # Define the wavefunction that we will use.
         #self.psi = wf.Wavefunction(np.ones(self.M)/np.sqrt(self.M), self.dim, self.N, self.normalization)
-        self.psi = wf.Wavefunction((np.exp(-(self.grids[0]**2+self.grids[1]**2)/(2.0)) /np.sqrt(np.pi) ).ravel() , self.dim, self.N, self.normalization)
+        if self.dim == 1:
+            self.psi = wf.Wavefunction((np.exp(-self.grids**2/2)/np.sqrt(np.pi) ).ravel(), self.dim, self.N, self.normalization)
+        elif self.dim == 2:
+            self.psi = wf.Wavefunction((np.exp(-(self.grids[0]**2+self.grids[1]**2)/(2.0)) /np.sqrt(np.pi) ).ravel() , self.dim, self.N, self.normalization)
         #self.phi = self.psi.copy()
         #self.phi.update(np.absolute(self.phi.u))
         # Define the operators that we will use.
@@ -162,8 +165,11 @@ class GPE_Solver:
         utab, jtab = self.real_time_evolution()
         return mutab, utab, jtab 
 
-    def winding_number(self, point, rad):
-        j = self.psi.computeCurrent(self.Ops, fact = 1)
+    def winding_number(self, point, rad, psi = None):
+        if psi == None:
+            j = self.psi.computeCurrent(self.Ops, fact = 1)
+        else:
+            j = psi.computeCurrent(self.Ops, fact = 1)
         idx = []
         radidx = []
         for i in range(self.dim):
@@ -175,29 +181,34 @@ class GPE_Solver:
             pos = [(idx[0] - radidx[0])%self.N[0], (idx[1] - radidx[1])%self.N[1]]
             path = [pos]
             for _ in range(2*radidx[0]):
-                print(integral)
+                #print(pos[0], pos[1])
+                #print(integral, j[pos[1], pos[0]], self.grids[0][pos[1], pos[0]], self.grids[1][pos[1], pos[0]])
                 nextpos = [(pos[0] + 1)%self.N[0], pos[1]]
-                integral += (j[pos[0], pos[1], 0] + j[nextpos[0], nextpos[1], 0])*self.normalization[0]
+                integral += (j[pos[1], pos[0], 0] + j[nextpos[1], nextpos[0], 0])*self.normalization[0]/2
                 pos = nextpos.copy()
                 path.append(pos)
+            #input()
             for _ in range(2*radidx[1]):
-                print(integral)
+                #print(integral, j[pos[1], pos[0]], self.grids[0][pos[1], pos[0]], self.grids[1][pos[1], pos[0]])
                 nextpos = [pos[0], (pos[1] + 1)%self.N[1]]
-                integral += (j[pos[0], pos[1], 1] + j[nextpos[0], nextpos[1], 1])*self.normalization[1]
+                integral += (j[pos[1], pos[0], 1] + j[nextpos[1], nextpos[0], 1])*self.normalization[1]/2
                 pos = nextpos.copy()
                 path.append(pos)
+            #input()
             for _ in range(2*radidx[0]):
-                print(integral)
+                #print(integral, j[pos[1], pos[0]], self.grids[0][pos[1], pos[0]], self.grids[1][pos[1], pos[0]])
                 nextpos = [(pos[0] - 1)%self.N[0], pos[1]]
-                integral -= (j[pos[0], pos[1], 0] + j[nextpos[0], nextpos[1], 0])*self.normalization[0]
+                integral -= (j[pos[1], pos[0], 0] + j[nextpos[1], nextpos[0], 0])*self.normalization[0]/2
                 pos = nextpos.copy()
                 path.append(pos)
+            #input()
             for _ in range(2*radidx[1]):
-                print(integral)
+                #print(integral, j[pos[1], pos[0]], self.grids[0][pos[1], pos[0]], self.grids[1][pos[1], pos[0]])
                 nextpos = [pos[0], (pos[1] - 1)%self.N[1]]
-                integral -= (j[pos[0], pos[1], 1] + j[nextpos[0], nextpos[1], 1])*self.normalization[1]
+                integral -= (j[pos[1], pos[0], 1] + j[nextpos[1], nextpos[0], 1])*self.normalization[1]/2
                 pos = nextpos.copy()
                 path.append(pos)
+            #input()
             return integral, path
         elif self.dim == 3:
             raise NotImplementedError

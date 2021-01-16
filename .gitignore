@@ -20,3 +20,6 @@ Thumbs.db
 *.synctex.gz
 *.log
 *.toc
+
+#Numpy data files
+*.npy

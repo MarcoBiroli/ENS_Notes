@@ -47,6 +47,21 @@ class GPE_Solver:
         self.interC = interC
         self.laplatianportion = - self.hbar**2 / (4 * self.m) * self.Ops.laplacian
 
+        self.zero_threshold = 1e-10
+
+        mux = self.get_mu(self.N[0], self.bounds[0][1] - self.bounds[0][0])
+        muy = self.get_mu(self.N[1], self.bounds[1][0] - self.bounds[1][1])
+
+        Mux, Muy = np.meshgrid(mux, muy, sparse=False, indexing="ij")
+        self.Mu2 = Mux**2 + Muy**2
+        self.eps = 2
+
+    def get_mu(self, M, len):
+        arr = np.zeros((M,))
+        arr[0:int(M-np.floor(M/2))] = np.array(range(0, int(M-np.floor(M/2))))
+        arr[int(M-np.floor(M/2)):M] = np.array(range(0, int(np.floor(M/2)))) - np.floor(M/2)
+        return  np.pi * arr/len
+
     def load_init_state(self, filename, ImFilename = None):
         load = np.loadtxt(filename, delimiter=',')
         u = load
@@ -106,3 +121,61 @@ class GPE_Solver:
             return integral, path
         elif self.dim == 3:
             raise NotImplementedError
+
+    def zero_non_zero_step(self, psi):
+        k = self.dt/(2*self.eps)
+        expU = np.exp(- k * self.U)
+        return np.where(np.abs(self.U) > self.zero_threshold , np.sqrt( self.U * expU / ( self.U + self.interC * ( 1 - expU) * np.abs(psi)**2 ) ) * psi, \
+            psi/np.sqrt(1 + self.interC * k * np.abs(psi)**2) )
+
+    def time_step(self, psi):
+        return psi * np.exp(-1j * (self.U + self.interC * np.abs(psi)**2) * self.dt/(2*self.eps))
+
+    def compute_fft(self, psi, im = False):
+        if not im:
+            fact = -1j
+        else:
+            fact = -1
+        return fft.ifft2(np.exp(fact * self.eps * self.dt * self.Mu2 / 2) * fft.fft2(psi.reshape(self.N[0], self.N[1])) )
+
+    def im_step(self):
+        '''
+        psi_1 = self.compute_step(self.psi.u)
+        psi_2 = self.compute_fft(psi_1, im = True)
+        new_psi = self.compute_step(psi_2)
+        self.psi.update(new_psi)
+        '''
+        psi_1 = self.zero_non_zero_step(self.psi.u)
+        psi_2 = self.compute_fft(psi_1, True)
+        new_psi = self.zero_non_zero_step(psi_2.reshape(self.M, 1))
+        self.psi.update(new_psi)
+
+    def one_step(self):
+        psi_1 = self.time_step(self.psi.u)
+        #psi_1 = self.compute_step(self.psi.u)
+        psi_2 = self.compute_fft(psi_1, im = False)
+        new_psi = self.time_step(psi_2.reshape(self.M, 1))
+        #new_psi = self.compute_step(psi_2)
+        self.psi.update(new_psi)
+
+    def full_solve(self):
+        #Implement checks
+        utab = []
+        mutab = []
+        print('Ground state computation: \n')
+        bar1 = progressbar.ProgressBar(maxval=self.im_iters)
+        for i in range(self.im_iters):
+            bar1.update(i)
+            self.im_step()
+            mutab.append(self.compute_mu())
+        
+        print('Evolution computation: \n')
+        bar = progressbar.ProgressBar(maxval=len(self.t))
+        bar_cnt = 0
+        for cur_t in self.t:
+            bar_cnt += 1
+            bar.update(bar_cnt)
+            self.U = self.potential(self.grids, cur_t).reshape(self.M, 1) 
+            self.one_step()
+            utab.append(self.psi.copy())
+        return mutab, utab
