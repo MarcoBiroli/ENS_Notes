@@ -6,3 +6,4 @@ This is a small python Library to solve any Gross Pitaevskii equation using the 
 	- visualizer: Contains some basic plotting functions.
 	- VortexPairs.py: An example code for the 2D vortex pair problem using the library.
 	- HawkingRadiation.py: An example code for the 1D Hawking radiation problem using the library. 
+	- Analyser.py: A simple cumulation of plotting and utilities functions.
